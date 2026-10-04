@@ -15,7 +15,7 @@ information available after qualifying and before the race start**.
 | Primary metric | PR-AUC (ROC-AUC + F1@val-threshold secondary) |
 | Deliverable | One standalone notebook that runs end-to-end with Run All (Kaggle + local) |
 
-## Key decisions (evidence in notebook, full log in §13)
+## Key decisions (evidence in notebook, full log in `docs/decisions.md`)
 
 | Decision | Outcome |
 |---|---|
@@ -36,6 +36,7 @@ of the notebook. `data/f1.db` is a legacy local mirror and is **not used**.
 ```
 ├── README.md                        # this file
 ├── PLAN.md                          # living project plan with decision gates
+├── docs/                            # decisions, leakage spec, method + Phase-3 notes (moved out of the notebook)
 ├── environment.txt                  # pip requirements (Python 3.13, CPU torch)
 ├── notebooks/
 │   ├── f1_podium_prediction.ipynb   # THE deliverable: code + analysis + decisions
