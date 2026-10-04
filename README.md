@@ -68,8 +68,10 @@ so Internet must be **On**. Figures regenerate into `/kaggle/working/figures/`.
 | 1–4 | Setup, CSV loading + checksums, Lab-1 raw audit, Gates 1.A/1.B | Done |
 | 5–11 | PK/FK checks, grain analysis, typing inventory, coverage EDA, target, Q1–Q3 inputs, leakage rules | Done |
 | 12 | **Cleaning**: sentinels→NaN, semantic typing, R2 dedup, flags, status taxonomy, before/after EDA | Done |
-| 13–14 | Decision log, roadmap, raw-integrity guard | Done |
-| — | Q1–Q3 answers, modeling table, splits, models, XAI, inference, report | Next |
+| 13 | Decision log (Decisions 1–12) | Done |
+| 14 | **Data-Engineering Questions (Q1, Q2, Q3)**: multi-hop joins, Wilson CIs, stratified & logistic regressions, constructor reliability, Figures 8–15, Gates Q1.A, Q1.B, Q2.A, Q3.A | Done |
+| 15 | Updated roadmap, Decision Log (Decisions 13–16), raw-integrity guard | Done |
+| — | Modeling table, splits, preprocessing experiments, models, XAI, inference, report | Next |
 
 ## Toolkit
 
