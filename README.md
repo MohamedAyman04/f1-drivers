@@ -20,7 +20,7 @@ information available after qualifying and before the race start**.
 | Decision | Outcome |
 |---|---|
 | Dedup (85 shared-drive pairs, all pre-1979) | Keep the car the driver **started** in; fallback best `positionOrder` |
-| `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,563 non-starters excluded |
+| `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,566 non-starters excluded |
 | Status taxonomy | 6-class (`finished/mechanical/accident/driver/regulatory/ambiguous`), strict mechanical primary |
 | Qualifying coverage | q2/q3 structurally missing pre-2003 → window starts 2003 |
 | Indianapolis 500 (1950–60) | Flagged, excluded from home-race analysis |

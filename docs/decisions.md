@@ -54,7 +54,8 @@ Documented coverage limitation; needs era indicator or restricted window (§8).
 ## D10 — Split
 
 Per `f1.pdf` season boundaries on window 2003+: train 2003–2019 (6,831 rows / 963 podiums),
-val 2020–2021 (780 / 117), test 2022–2024 (1,359 / 204). Val is just under the ~1k/150 rule
+val 2020–2021 (780 / 117), test 2022–2024 (1,359 / 204) — counts re-verified when the Phase 4
+table is built. Val is just under the ~1k/150 rule
 of thumb → expanding-window CV inside train for tuning; the labs' random `train_test_split`
 kept as non-primary comparison (Gate 6.A).
 
