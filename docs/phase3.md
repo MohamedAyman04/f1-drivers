@@ -37,8 +37,8 @@ bin); Indy 500 excluded from the primary view (Gate Q2.A). Two methods:
 ## Q3 — Mechanical-retirement rate by constructor
 
 Denominator = starts (non-starters out); strict taxonomy primary (D7) + broad sensitivity
-(strict + ambiguous); `constructorId` primary + team-lineage secondary view; ≥30 starts
-(2014–21) / ≥15 (2022–24) filters.
+(strict + ambiguous); `constructorId` primary + team-lineage secondary view; ≥30 starts in both windows (verified:
+every 2022–24 constructor has ≥48 starts, so ≥30 vs ≥15 admits the same 12).
 
 - **Answer**: overall **9.5% → 5.9%** (−3.6pp) as hybrid units matured through the 2022
   chassis reset. Worst P1: **Caterham 23.5%**, Lotus F1 17.1%, Toro Rosso 16.1%, McLaren
