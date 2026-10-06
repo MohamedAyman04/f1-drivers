@@ -10,8 +10,8 @@ information available after qualifying and before the race start**.
 | Unit of analysis | One driver entering one race — `(raceId, driverId)` |
 | Target | `podium = positionOrder ≤ 3` (binary, ~12.7% positive) |
 | Prediction cutoff | After qualifying, before lights out (no race outcomes as features) |
-| Modeling window | 2003–2024 (full qualifying coverage; ~8,970 rows) |
-| Split (temporal, by season) | Train 2003–2019 / Validation 2020–2021 / Test 2022–2024 |
+| Modeling window | 1950–2024, `grid` as the only position feature, Indy 500 removed (decision M1) |
+| Split (temporal, by season) | Train 1950–2017 / Validation 2018–2021 / Test 2022–2024 (decision M2) |
 | Primary metric | PR-AUC (ROC-AUC + F1@val-threshold secondary) |
 | Deliverable | One standalone notebook that runs end-to-end with Run All (Kaggle + local) |
 
@@ -22,8 +22,9 @@ information available after qualifying and before the race start**.
 | Dedup (85 shared-drive pairs, all pre-1979) | Keep the car the driver **started** in; fallback best `positionOrder` |
 | `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,566 non-starters excluded |
 | Status taxonomy | 6-class (`finished/mechanical/accident/driver/regulatory/ambiguous`), strict mechanical primary |
-| Qualifying coverage | q2/q3 structurally missing pre-2003 → window starts 2003 |
-| Indianapolis 500 (1950–60) | Flagged, excluded from home-race analysis |
+| Qualifying coverage | Not used as features (absent pre-1994); `grid` + `field_size` + `grid_rel` instead. No era/year feature. 2003+ with quali is a late experiment |
+| Indianapolis 500 (1950–60) | Flagged; excluded from home-race analysis **and removed from the modeling table** (M1) |
+| Features | `grid`, `field_size`, `grid_rel`, lagged standings; driver/constructor/circuit as past-only target encoding (M3). No `pitlane_start`, no sprint, no era/year |
 
 ## Data
 

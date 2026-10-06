@@ -1,6 +1,65 @@
-# Decision log (moved out of the notebook; D1–D16)
+# Decision log (moved out of the notebook; D1–D16, then team-meeting decisions M1–)
 
 Evidence lives in `notebooks/f1_podium_prediction.ipynb`. Dates are 2026-10-03 unless noted.
+
+## Team-meeting decisions (2026-10-06) — these supersede D8 and the 2003+ parts of D1–D3/D10
+
+### M1 — Modeling window and position feature
+- **Window 1950–2024** (all starters), not 2003+. 1994 rejected: qualifying covers only 46% of
+  1994–2002 entries (22 of 373 starters in 2001) and q2/q3 do not exist there.
+- **`grid` is the only position feature** for every row. No `quali_pos`, no q1/q2/q3 times, no gap
+  to pole — they do not exist before 1994 and copying grid into a qualifying column would hide
+  noise (grid equals quali position in only 73% of 2003+ starters; within one place in 90%).
+- **No era flag and no year feature** (era options compared: none / raw year / coarse bucket;
+  none chosen). Known cost: pole→podium is ~50% pre-1990 vs ~80% since 2010 and starters
+  reaching the flag rise 50% → 86%, so the model blends eras. Revisit in the late experiment.
+- **Added features:** `field_size` (starters in the race) and `grid_rel = grid / field_size`.
+- **Indianapolis 500 (1950–60, 11 races) removed entirely** from modeling, not just flagged.
+- **Shared drives:** keep R2 — the car the driver started in (D1–D3 unchanged; 1950–1978 rows
+  are now in scope).
+- **Late experiment (end of project):** compare against 2003+ with qualifying features, same
+  models, validation only.
+- History/rolling features are feature engineering and are out of scope for this decision.
+
+### M2 — Split (replaces D10)
+Temporal split by season on the 1950–2024 window (24,724 starters, 3,344 podiums; Indy 500 out,
+R2 dedup):
+
+| Set | Seasons | Rows | Podiums | Podium rate |
+|---|---|---|---|---|
+| Train | 1950–2017 | 21,749 (88.0%) | 2,897 (86.6%) | 13.3% |
+| Validation | 2018–2021 | 1,619 (6.5%) | 243 (7.3%) | 15.0% |
+| Test (touched once) | 2022–2024 | 1,356 (5.5%) | 204 (6.1%) | 15.0% |
+
+Why B: validation holds twice the podiums of the 2020–21 option (243 vs 117) for steadier
+threshold/model choice, at the cost of 2018–19 (4% of rows) in training; test stays a clean
+"next regulation era". Rejected: A (2020–21 val, only 117 podiums), C (val 2014–18 / test
+2019–24: training would end before the hybrid era), and a per-era split (tests earlier eras
+with a model trained on later ones; not a forward test). Gate 6.B satisfied (val ≥ 1,000 rows
+and ≥ 150 podiums).
+- **Tuning:** single validation block (2018–2021) for hyperparameters and threshold; no CV
+  inside train (D10's CV was only needed because the old validation set was small; 243 podiums
+  is enough). Mention this in the report.
+- **No random `train_test_split` comparison** (team decision). Gate 6.A's optional random-split
+  experiment is dropped; the time-split rationale is argued in text only.
+
+### M3 — Pre-race feature list (2026-10-06)
+- **`pitlane_start`: dropped.** Only 72 rows in the whole history, and `grid = 0` cannot separate
+  pit-lane starts from non-starters without the post-race `laps`. The 72 rows stay in the data
+  (D4), just without the flag.
+- **`sprint_result`: excluded** (Gate 4.C closed). Exists only from 2021, so almost all rows
+  would be empty.
+- **Standings: used**, lagged by one round (`docs/leakage.md`). Built in the feature-engineering step.
+- **Identity (driver, constructor, circuit): target encoding, one numeric column each.** Raw
+  one-hot rejected: 689 drivers + 167 constructors + 77 circuits = 933 columns for ~21,700
+  training rows, and in the test seasons 42% of rows have a driver, 20% a constructor and 15% a
+  circuit never seen in training. Value = that entity's podium rate in races strictly before the
+  current one, smoothed towards the overall podium rate; unseen entities get the overall rate.
+  Computed from past races only — never fit on the full table or on val/test rows (leakage).
+  The smoothing strength is set in the feature-engineering step (tune on validation only).
+- **Overlap note:** this is the same quantity as `driver_prior_podium_rate`,
+  `constructor_prior_podium_rate` and `driver_circuit_prior_podium_rate` in notebook 02. Build
+  once in feature engineering and do not include both versions.
 
 ## D1 / D2 / D3 — Grain and dedup
 
@@ -46,12 +105,13 @@ plus a team-lineage secondary view.
 ## D8 — q2/q3 structural missingness pre-2003
 
 Documented coverage limitation; needs era indicator or restricted window (§8).
+**Superseded by M1:** quali features are dropped, so the limitation no longer applies.
 
 ## D9 — Leakage allow/deny lists
 
 §11 / `docs/leakage.md`. `sprint_results` excluded by default pending Gate 4.C.
 
-## D10 — Split
+## D10 — Split (superseded by M2 for the 1950+ window; text below is the old 2003+ plan)
 
 Per `f1.pdf` season boundaries on window 2003+: train 2003–2019 (6,831 rows / 963 podiums),
 val 2020–2021 (780 / 117), test 2022–2024 (1,359 / 204) — counts re-verified when the Phase 4

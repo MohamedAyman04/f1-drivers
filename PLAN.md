@@ -274,6 +274,8 @@ Joins: `results` ⨝ `status` ⨝ `constructors` ⨝ `races`.
 ## Phase 4: Modeling Window and Table Construction
 
 ### Gate 3.A: modeling start year (most important structural decision)
+
+> **Outcome (team meeting 2026-10-06, decision M1 in `docs/decisions.md`):** window **1950–2024**, `grid` as the only position feature (no qualifying features), no era/year feature, add `field_size` + `grid_rel`, Indy 500 removed, R2 dedup kept. The 2003+ table below is superseded; 2003+ with qualifying is a late comparison experiment.
 Evidence to produce first: (a) qualifying coverage % by year, (b) `grid` vs `qualifying.position` agreement by year, (c) podium base rate and field size by year, (d) dataset size per candidate window.
 
 | Option | When to choose |
@@ -362,11 +364,11 @@ For each candidate group, produce the evidence with the Lab 1 plots:
 
 **Default: temporal split by season, grouped by race** (no race straddles two sets; the future is never used to predict the past).
 
-| Set | Default seasons (window 2003–2024) |
+| Set | Seasons (window 1950–2024; **decided in meeting 2026-10-06, M2**) |
 |---|---|
-| Train | 2003–2018 |
-| Validation | 2019–2021 |
-| Test (unseen, touched once) | 2022–2024 |
+| Train | 1950–2017 (21,749 rows / 2,897 podiums) |
+| Validation | 2018–2021 (1,619 / 243) |
+| Test (unseen, touched once) | 2022–2024 (1,356 / 204) |
 
 **Why not the labs' `train_test_split(test_size=0.2, random_state=42)`?** It shuffles rows. That (1) splits one race's drivers across train and test, and (2) trains on future seasons to predict past ones. Both inflate scores, and neither is possible at real prediction time. We keep the labs' 3-way idea (Lab 3: train / validation / untouched test) but cut by **season**. Implemented with pandas boolean masks on `year`. **[beyond labs, justified]**
 - The **validation block** plays the role of Lab 3's `validation_split`. For the Keras NN, pass `validation_data=(X_val, y_val)` instead of `validation_split=0.3`, because `validation_split` takes the *last* 30% of rows, which isn't a clean season boundary.
@@ -376,7 +378,7 @@ For each candidate group, produce the evidence with the Lab 1 plots:
 | Outcome | Action |
 |---|---|
 | Validation performance much higher than test (ΔPR-AUC > ~0.1) | Don't tune on test. Report it as **era drift** (honest finding), and show per-season test metrics |
-| Want an alternative / to justify the split choice empirically | Secondary experiment: the **labs' random `train_test_split`** (stratified) on the same table, same model. Show its (inflated) scores beside the temporal split's, and clearly label it as non-primary. This is a before/after comparison justifying the split |
+| Want an alternative / to justify the split choice empirically | ~~Random `train_test_split` comparison~~ **Dropped (meeting 2026-10-06, M2).** Justify the temporal split in text only. Tuning uses the single validation block, no CV |
 
 **Gate 6.B: set sizes / class balance**
 | Outcome | Action |
