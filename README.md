@@ -24,7 +24,7 @@ information available after qualifying and before the race start**.
 | Status taxonomy | 6-class (`finished/mechanical/accident/driver/regulatory/ambiguous`), strict mechanical primary |
 | Qualifying coverage | Not used as features (absent pre-1994); `grid` + `field_size` + `grid_rel` instead. No era/year feature. 2003+ with quali is a late experiment |
 | Indianapolis 500 (1950–60) | Flagged; excluded from home-race analysis **and removed from the modeling table** (M1) |
-| Features | `grid`, `field_size`, `grid_rel`, lagged standings; driver/constructor/circuit as past-only target encoding (M3). No `pitlane_start`, no sprint, no era/year |
+| Features | `grid`, `field_size`, `grid_rel`, lagged standings; driver/constructor/circuit as past-only target encoding (M3; circuit = top-3-grid conversion there). No `pitlane_start`, no sprint, no era/year |
 
 ## Data
 

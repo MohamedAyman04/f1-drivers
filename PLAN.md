@@ -366,7 +366,7 @@ For each candidate group, produce the evidence with the Lab 1 plots:
 
 | Set | Seasons (window 1950–2024; **decided in meeting 2026-10-06, M2**) |
 |---|---|
-| Train | 1950–2017 (21,749 rows / 2,897 podiums) |
+| Train | 1950–2017 (21,749 rows / 2,895 podiums) |
 | Validation | 2018–2021 (1,619 / 243) |
 | Test (unseen, touched once) | 2022–2024 (1,356 / 204) |
 
@@ -391,6 +391,8 @@ For each candidate group, produce the evidence with the Lab 1 plots:
 ## Phase 7: Preprocessing and Preprocessing-Order Experiments
 
 Follow the Lab 3 rule: **fit on train, transform val/test.** Done explicitly, step by step, in separate cells so each one is visible and explainable:
+> **Team decision M4 (2026-10-06, `docs/decisions.md`):** one `StandardScaler` for every model, fit on train only. Missing values are **filled and flagged** (no row dropping): neutral fill value (target encodings → overall train podium rate; standings → fixed when the table is built) plus a `no_history` flag per affected group, all fit on train only. This overrides the median-imputer default in step 1 below for history-based columns.
+
 1. **Impute (Lab 1 choices):** `SimpleImputer(strategy='median')` for numeric features (robust to outliers, Lab 1's argument for `Age`). `strategy='most_frequent'` (mode) for categoricals. Add 0/1 "was missing" flags for features where missingness means something (e.g. rookie has no form history).
 2. **Encode (Lab 1 rule):** ordered categories → ordinal/label encoding (`OrdinalEncoder` with an explicit order, as in Labs 2–3). Unordered categories (e.g. era) → one-hot (`pd.get_dummies(drop_first=True)`, applied with the train columns reused for val/test). No raw IDs (driverId/constructorId) as features; form features carry that information instead.
 3. **Scale (Lab 3):** `StandardScaler().fit(X_train)` → `transform` train/val/test. Required for LR and the NN; harmless for trees, so the **same scaled matrix is fed to every model** (brief: same rows, same features).

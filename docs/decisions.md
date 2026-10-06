@@ -22,12 +22,12 @@ Evidence lives in `notebooks/f1_podium_prediction.ipynb`. Dates are 2026-10-03 u
 - History/rolling features are feature engineering and are out of scope for this decision.
 
 ### M2 — Split (replaces D10)
-Temporal split by season on the 1950–2024 window (24,724 starters, 3,344 podiums; Indy 500 out,
+Temporal split by season on the 1950–2024 window (24,724 starters, 3,342 podiums; counts from the notebook's R2 dedup; Indy 500 out,
 R2 dedup):
 
 | Set | Seasons | Rows | Podiums | Podium rate |
 |---|---|---|---|---|
-| Train | 1950–2017 | 21,749 (88.0%) | 2,897 (86.6%) | 13.3% |
+| Train | 1950–2017 | 21,749 (88.0%) | 2,895 (86.6%) | 13.3% |
 | Validation | 2018–2021 | 1,619 (6.5%) | 243 (7.3%) | 15.0% |
 | Test (touched once) | 2022–2024 | 1,356 (5.5%) | 204 (6.1%) | 15.0% |
 
@@ -60,6 +60,81 @@ and ≥ 150 podiums).
 - **Overlap note:** this is the same quantity as `driver_prior_podium_rate`,
   `constructor_prior_podium_rate` and `driver_circuit_prior_podium_rate` in notebook 02. Build
   once in feature engineering and do not include both versions.
+- **As built (notebook §15.3):**
+  - `driver_te`, `constructor_te`: `(past podiums + m·prior) / (past starts + m)`, prior = train
+    podium rate (0.133), m = `SMOOTH_M` = 10 (tune on validation only). A constructor's two cars
+    are aggregated per race, so teammates share one value and nothing from the same race leaks.
+  - **`circuit_te` deviates from the literal plan:** a plain circuit podium rate is ~3/field size
+    everywhere (std 0.0085 across 32 circuits, range 0.117–0.148), so it carries no signal. It is
+    the past podium rate of the **top-3-grid starters** at that circuit instead (std 0.087, range
+    0.333–0.704; prior = train top-3 conversion 0.533).
+  - **Lagged standings:** driver `drv_pos`, `drv_pts_share` (points ÷ leader's), `drv_wins`;
+    constructor `con_pos`, `con_pts_share`; all from the previous round of the same season (round 1
+    has none; constructor standings start in 1958). Indy 500 rounds count as rounds because they
+    carry championship points.
+  - **Entity history includes earlier val/test races** (those results are known before a later
+    race — walk-forward); only the priors, fill values, scaler and any tuned m use train/val.
+  - **Fills for no history:** target encodings → the prior; points share and wins → 0;
+    positions → train median (`drv_pos` 12, `con_pos` 6).
+  - Check: brute-force recompute of 150 random rows per encoding from earlier rows only matches.
+  - Known oddity: `drv_pos` reaches 102 (the 1950s standings list every Indy 500 entrant).
+  - Rows with no history: standings 12.8% of train vs ~5% of val/test; `circuit_te` 7.0% / 4.9% /
+    2.9%; `driver_te` 3.1% / 0.7% / 0.6%.
+
+### M4 — Preprocessing (2026-10-06)
+- **Scaling: one scaler for all models** (same inputs for every model keeps the comparison
+  fair; trees are unaffected). Fit on train only, then `transform` val/test (Lab 2 pattern).
+- **Missing values: fill and flag, no row dropping.** Where a feature has no history (first
+  race of a driver/team/circuit, first round for standings) fill with a neutral value
+  (target encodings → overall train podium rate, standings → 0 or last-place equivalent, to be
+  fixed when the table is built) and add a binary `no_history` flag per affected group.
+  Fill values and any imputer are fit on train only.
+- **Built in the notebook (§15–16):** modeling table, season split with pinned counts, history
+  features (§15.3, see M3 below), fill-and-flag helpers (toy self-check) and the train-only
+  `StandardScaler`: 16 model inputs = 11 scaled + 5 `no_history_*` flags. The scaler is fit on the
+  *filled* train data (fitting before the fill leaves train off mean 0 / std 1).
+- **Era drift visible after scaling:** `field_size` has a train mean of 23.0 but ~20 in val/test
+  (~1 SD below train) and `circuit_te` sits ~+0.9 SD above train in val/test (modern grids convert
+  better). Expected, and the consequence of choosing no era feature in M1.
+- **Run-All fixes made while testing (pre-existing, not decisions):** added the missing
+  `from scipy import stats` and `LogisticRegression` imports to the setup cell, and dropped the
+  duplicate `year` before the Q1/Q2/Q3 re-merges (they raised NameError / KeyError on a fresh
+  kernel). Full notebook now runs top to bottom with no errors.
+
+### M5 — Models and class imbalance (2026-10-06)
+- **Statistical models: logistic regression and random forest**, plus a shallow Keras NN still to
+  come (the brief needs ≥2 ML + 1 NN, same rows and the same 16 inputs). Baseline: score = −grid.
+- **Selection on validation PR-AUC only** (class weight none vs `balanced`, small grids: LR
+  C ∈ {0.01, 0.1, 1, 10}; RF depth {4, 6, 8} × min leaf {20, 50}, 300 trees). Threshold = the
+  F1-optimal one on validation. Test is **not** scored until the NN exists (scored once).
+- **Class imbalance: no class weights.** `balanced` did not help validation PR-AUC (LR 0.7203 vs
+  0.7250, RF 0.7355 vs 0.7370), so the plain models stay; the F1 threshold handles the 13% base rate.
+- **Selected:** LR C = 1 (val PR-AUC 0.725); RF depth 6, min leaf 20 (val PR-AUC 0.737).
+- **Validation metrics (train in notebook §17):**
+
+  | Model | PR-AUC | ROC-AUC | F1 | Precision | Recall |
+  |---|---|---|---|---|---|
+  | −grid baseline | 0.668 | 0.918 | 0.712 | 0.712 | 0.712 |
+  | Logistic regression | 0.725 | 0.932 | 0.727 | 0.674 | 0.790 |
+  | Random forest | 0.737 | 0.939 | 0.726 | 0.684 | 0.774 |
+
+- **Reading:** both models beat the baseline on PR-AUC (+0.06 / +0.07) but F1 barely moves
+  (0.712 → 0.727), and LR and RF are nearly tied. Validation PR-AUC (0.67–0.74) is above train
+  (0.49–0.60) because the modern era is easier to predict (podium rate 15% vs 13%; pole→podium
+  ~80% vs ~50% early on) — era drift, not a bug.
+
+### M6 — Shallow neural network (2026-10-06) — **written, not yet run**
+- Keras `Sequential`: `Dense(relu)` × 1–2 + `Dense(1, sigmoid)`, Adam (1e-3), binary
+  cross-entropy, batch 256, ≤200 epochs, `EarlyStopping(monitor="val_loss", patience=15,
+  restore_best_weights=True)`, `validation_data=(X_val, y_val)`, seeds via
+  `keras.utils.set_random_seed(42)`, no class weights (M5), same 16 inputs as LR/RF.
+- Candidates (16), (32), (32, 16); pick on validation PR-AUC; threshold F1-optimal on validation.
+- Notebook §18 adds it to the model comparison table and asserts it beats the `−grid` baseline.
+- **Status:** the cells were only syntax-checked. TensorFlow has no wheel for the project's
+  Python 3.14 `.venv`, so they have not been executed. Run the notebook on Kaggle (TensorFlow
+  preinstalled) or in a Python 3.12 environment with `tensorflow-cpu`. `environment.txt` was
+  deliberately left unchanged (team decision) and still lists only CPU torch.
+- The test set is still untouched: scoring all four models once on test is the next step.
 
 ## D1 / D2 / D3 — Grain and dedup
 
