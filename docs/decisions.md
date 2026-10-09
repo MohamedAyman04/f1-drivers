@@ -162,6 +162,7 @@ refutes the `f1.pdf` blanket claim that 0 means pit-lane start.
 
 Grid differs from qualifying position in a non-trivial share of entries (penalties), and the
 rate changes by era (§10.1) — so both columns feed the analysis instead of grid-as-proxy.
+**Superseded by D23** (grid only).
 
 ## D6 — Q2 mapping rules
 
@@ -233,3 +234,23 @@ logistic regression (OR 0.915, CI [0.785, 1.082]) agree: no home advantage.
 
 Strict excludes crashes/regulations; broad sensitivity check (strict + ambiguous) confirms
 rankings highly stable (Spearman ρ > 0.95).
+
+## D23 — Q1 uses `results.grid` only (2026-10-09; supersedes D5, D13)
+
+Front row = grid slot 1 or 2. Grid is where the car actually starts (after penalties) and
+exists for every race since 1950; qualifying is missing for most seasons before 2003. Results
+unchanged: 55.5% → 76.0%, 16 circuits ranked, Spearman ρ = −0.03.
+
+## D24 — Q3: unclear retirements count as mechanical, except Refuelling (2026-10-09; supersedes the strict/broad split in D7, D16)
+
+Punctures, tyre and wing failures, fire, safety belt, out of fuel and "Retired" (no reason)
+→ mechanical; Refuelling → other. One rate per period: **11.2% (2014–21) vs 6.9% (2022–24)**.
+Worst: Caterham 32% (34 starts), Lotus F1 24%, Toro Rosso 18% / Alfa Romeo 12.5%, Alpine 11%.
+The ≥30-starts rule for the per-team chart removes no team (smallest: Marussia, 31 starts).
+
+## D25 — One spelling per value, fixed during cleaning (2026-10-09; moves the D6 mapping)
+
+Cleaning step 3: Argentinian → Argentine, double nationalities → first part, East German →
+German (drivers and constructors); circuits United States → USA; `drivers.home_country` in the
+circuits' spelling with a 100%-coverage assert. Q2 numbers unchanged (−0.70pp; OR 0.915,
+95% range [0.785, 1.082]).

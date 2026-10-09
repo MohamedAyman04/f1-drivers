@@ -41,14 +41,17 @@ time-ordered (season) split, not a random shuffle.
 Brief requires one row per `(raceId, driverId)`; early-F1 shared drives break it. Rule: D3
 in `docs/decisions.md`.
 
-## Q1–Q3 backgrounds (§10)
+## Q1–Q3 backgrounds
 
-- **Q1**: `qualifying.position` (rank in qualifying) ≠ `results.grid` (slot after penalties);
-  quantify the gap per era, carry both columns.
-- **Q2**: `drivers.nationality` adjectives → `circuits.country`; mapping sketch in §10.2,
-  full rules D6.
-- **Q3**: 139 `status` labels → mechanical vs accident/driver/regulatory (+ ambiguous);
-  canonical sets in the §10.3 cell, final strict mapping in the §12 taxonomy cell, rules D7.
+(The old §10 raw-data preview of Q1–Q3 was removed on 2026-10-09; everything now runs on the
+cleaned data in §13.)
+
+- **Q1**: front row = `results.grid ∈ {1, 2}` only (D23). Grid is where the car actually starts
+  (after penalties) and exists for every race; qualifying is sparse before 2003.
+- **Q2**: nationality spellings unified and `drivers.home_country` added in cleaning step 3
+  (§11, D25); home race = `home_country == circuits.country`.
+- **Q3**: 139 `status` labels → finished / mechanical / accident / driver / regulatory / other
+  in cleaning step 8 (§11). Every unclear reason counts as mechanical except Refuelling (D24).
   Denominator = starts (non-starters excluded).
 
 ## Roadmap

@@ -67,13 +67,14 @@ so Internet must be **On**. Figures regenerate into `/kaggle/working/figures/`.
 
 | § | Contents | Status |
 |---|---|---|
-| 1–4 | Setup, CSV loading + checksums, Lab-1 raw audit, Gates 1.A/1.B | Done |
-| 5–11 | PK/FK checks, grain analysis, typing inventory, coverage EDA, target, Q1–Q3 inputs, leakage rules | Done |
-| 12 | **Cleaning**: sentinels→NaN, semantic typing, R2 dedup, flags, status taxonomy, before/after EDA | Done |
-| 13 | Decision log (Decisions 1–12) | Done |
-| 14 | **Data-Engineering Questions (Q1, Q2, Q3)**: multi-hop joins, Wilson CIs, stratified & logistic regressions, constructor reliability, Figures 8–15, Gates Q1.A, Q1.B, Q2.A, Q3.A | Done |
-| 15 | Updated roadmap, Decision Log (Decisions 13–16), raw-integrity guard | Done |
-| — | Modeling table, splits, preprocessing experiments, models, XAI, inference, report | Next |
+| 1–4 | Setup, CSV loading + checksums, raw audit, Gates 1.A/1.B | Done |
+| 5–10 | PK/FK checks, grain analysis, typing inventory, coverage EDA, target, leakage rules | Done |
+| 11 | **Cleaning**: sentinels→NaN, typing, one spelling per value + driver home country, R2 dedup, flags, status classes, before/after EDA | Done |
+| 12 | Decision log | Done |
+| 13 | **Data-Engineering Questions (Q1, Q2, Q3)** on the cleaned data: multi-hop joins, Wilson CIs, stratified & logistic regression, constructor reliability, Figures 8–15 | Done |
+| 14–17 | Modeling table + split, history features, preprocessing, baseline/LR/RF/NN on validation | Done |
+| 18 | Roadmap; raw-integrity guard | — |
+| — | Test evaluation, ablation, XAI, inference, report | Next |
 
 ## Toolkit
 
