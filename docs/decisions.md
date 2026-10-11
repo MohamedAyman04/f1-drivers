@@ -2,6 +2,44 @@
 
 Evidence lives in `notebooks/f1_podium_prediction.ipynb`. Dates are 2026-10-03 unless noted.
 
+## #26 — Features chosen by adding one group at a time (2026-10-11; supersedes the M3 feature list and `field_size`/`grid_rel` in M1)
+
+Notebook §14.4 (new candidates), §16 (selection), §17 (preparing the chosen set).
+
+- **Candidates (15)**, grouped by the team's four questions: start position (`grid`, `field_size`,
+  `grid_rel`); this season (driver and team standings after the previous round); career (`driver_te`,
+  `constructor_te`); circuit (`circuit_te`, new `drv_circuit_te` = driver's own smoothed past podium rate at
+  this track); recent races (new `drv_podium_last5`, `con_podium_last5`); rivals (new `rivals_ahead` = starters
+  in this race with more championship points after the previous round). All past-only; brute-force checks pass.
+- **Exploratory evidence (§16.1):** podium rate by fifth of each candidate + Spearman correlations (Lab 1).
+  `circuit_te` is flat (~13% in every fifth, ρ = 0.007); many candidates repeat each other (`grid`/`grid_rel`
+  0.97, driver position/points share 0.92, `rivals_ahead`/driver position 0.89).
+- **Empirical evidence (§16.2):** start from `grid`; add one group at a time; LR (C = 1) and RF (300 trees,
+  depth 6, leaf 20) with fixed settings. **Keep a group only if it improves validation PR-AUC of both models in
+  ≥ 80% of 500 redraws of the validation races** (bootstrap by race, [beyond labs]).
+
+  | Step | LR | RF | LR better in | RF better in | Kept |
+  |---|---|---|---|---|---|
+  | grid only (baseline) | 0.668 | 0.668 | – | – | yes |
+  | + field size | 0.669 | 0.671 | 61% | 91% | no |
+  | + driver standings | 0.717 | 0.724 | 100% | 100% | yes |
+  | + team standings | 0.713 | 0.714 | 15% | 6% | no |
+  | + career podium rates | 0.729 | 0.738 | 88% | 94% | yes |
+  | + circuit conversion | 0.727 | 0.736 | 18% | 39% | no |
+  | + driver at this circuit | 0.730 | 0.734 | 80% | 18% | no |
+  | + recent form (last 5) | 0.713 | 0.724 | 1% | 0% | no |
+  | + rivals ahead | 0.727 | 0.731 | 17% | 1% | no |
+
+  All 15 at once: LR 0.712 / RF 0.734, below the selected set.
+- **Chosen:** `grid`, `drv_pos`, `drv_pts_share`, `drv_wins`, `driver_te`, `constructor_te` + 3 `no_history`
+  flags = **9 model inputs** (was 16).
+- **Baseline changed** from the `−grid` ranking to **logistic regression on `grid` only** (the brief asks for a
+  statistical baseline; same validation PR-AUC 0.668).
+- **Validation after tuning (§18–19):** LR (C = 10) PR-AUC 0.729 / F1 0.719; RF (depth 8, leaf 20) 0.741 / 0.725;
+  NN (16) 0.736 / 0.724; baseline 0.668 / 0.712. Test still untouched.
+- Known limits: order-dependent, dropped groups not retried (the "all at once" row is a partial check); the
+  post-training ablation measures the kept groups again.
+
 ## Team-meeting decisions (2026-10-06) — these supersede D8 and the 2003+ parts of D1–D3/D10
 
 ### M1 — Modeling window and position feature
@@ -43,7 +81,7 @@ and ≥ 150 podiums).
 - **No random `train_test_split` comparison** (team decision). Gate 6.A's optional random-split
   experiment is dropped; the time-split rationale is argued in text only.
 
-### M3 — Pre-race feature list (2026-10-06)
+### M3 — Pre-race feature list (2026-10-06) — feature list superseded by #26
 - **`pitlane_start`: dropped.** Only 72 rows in the whole history, and `grid = 0` cannot separate
   pit-lane starts from non-starters without the post-race `laps`. The 72 rows stay in the data
   (D4), just without the flag.

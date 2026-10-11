@@ -24,7 +24,7 @@ information available after qualifying and before the race start**.
 | Status taxonomy | 6-class (`finished/mechanical/accident/driver/regulatory/ambiguous`), strict mechanical primary |
 | Qualifying coverage | Not used as features (absent pre-1994); `grid` + `field_size` + `grid_rel` instead. No era/year feature. 2003+ with quali is a late experiment |
 | Indianapolis 500 (1950–60) | Flagged; excluded from home-race analysis **and removed from the modeling table** (M1) |
-| Features | `grid`, `field_size`, `grid_rel`, lagged standings; driver/constructor/circuit as past-only target encoding (M3; circuit = top-3-grid conversion there). No `pitlane_start`, no sprint, no era/year |
+| Features | Chosen by adding one group at a time from 15 candidates (#26): `grid`, driver standings after the previous round (`drv_pos`, `drv_pts_share`, `drv_wins`), past-only career podium rates `driver_te` / `constructor_te`, + 3 `no_history` flags. No sprint, no era/year |
 
 ## Data
 
@@ -72,8 +72,11 @@ so Internet must be **On**. Figures regenerate into `/kaggle/working/figures/`.
 | 11 | **Cleaning**: sentinels→NaN, typing, one spelling per value + driver home country, R2 dedup, flags, status classes, before/after EDA | Done |
 | 12 | Decision log | Done |
 | 13 | **Data-Engineering Questions (Q1, Q2, Q3)** on the cleaned data: multi-hop joins, Wilson CIs, stratified & logistic regression, constructor reliability, Figures 8–15 | Done |
-| 14–17 | Modeling table + split, history features, preprocessing, baseline/LR/RF/NN on validation | Done |
-| 18 | Roadmap; raw-integrity guard | — |
+| 14 | Modeling table + split, 15 candidate features (past-only, brute-force checked) | Done |
+| 15 | Fill-and-flag + scaling helpers (`make_xy`, train-only) | Done |
+| 16 | **Feature selection**: per-feature plots + correlations, then add one group at a time (kept only if both LR and RF improve in ≥80% of validation redraws) | Done |
+| 17–19 | Chosen features prepared; baseline (LR on grid) / LR / RF / NN on validation | Done |
+| 20 | Roadmap; raw-integrity guard | — |
 | — | Test evaluation, ablation, XAI, inference, report | Next |
 
 ## Toolkit
