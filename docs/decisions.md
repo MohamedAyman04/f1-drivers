@@ -292,3 +292,71 @@ Cleaning step 3: Argentinian → Argentine, double nationalities → first part,
 German (drivers and constructors); circuits United States → USA; `drivers.home_country` in the
 circuits' spelling with a 100%-coverage assert. Q2 numbers unchanged (−0.70pp; OR 0.915,
 95% range [0.785, 1.082]).
+
+## D27 — XAI: permutation importance on all models, SHAP and LIME on the random forest (2026-10-12)
+
+Section 20 of the notebook. Permutation importance (PR-AUC drop, 10 shuffles) is computed for all four
+models. The detailed SHAP plots (`TreeExplainer`, exact), the local waterfalls and LIME use the random
+forest, which has the best validation PR-AUC (0.741 vs 0.737 NN, 0.729 LR: effectively tied). A
+cross-model SHAP (KernelExplainer, same 100 rows and background) compares LR, RF and NN, as PLAN Phase 11
+asked: all three put `grid` first, and they split the credit among the correlated standings columns
+differently. All explanations use the **validation rows (2018–2021)** so
+the test set stays unseen until the final scoring step. Features are displayed in original units
+(scaling undone for display only). Local rows are picked by rule, not by hand: the true podium the
+forest was most sure about (Hamilton, 2020 Bahrain GP, P = 0.86) and the one it was least sure about
+(Kvyat, 2019 German GP, grid 14, P = 0.007).
+
+Findings: `grid` dominates (permutation drop ≈ 0.30 PR-AUC, mean |SHAP| 0.088 vs 0.036 for the next
+input); the other inputs are small and their order is within the error bars. SHAP and LIME agree on
+direction and top input for both rows; LIME's local fit is poor on the miss row (R² 0.15). Explanations
+describe the model, not causes (stated in the notebook and for the report).
+
+Implementation note: permutation importance is a manual loop (same algorithm as
+`sklearn.inspection.permutation_importance`) because sklearn's function requires an object with `.fit`
+and would fail on the Keras network.
+
+## D28 — Simplification pass (2026-10-12; supersedes parts of D3, D19/M3, D20/M4, D26, D27)
+
+Team review: keep the simplest option that still meets the brief. The notebook was rebuilt (126 → 107 cells).
+
+- **Loading:** plain `pd.read_csv` with pandas' type guessing. The columns read as text because of `\N`
+  are the sentinel evidence; cleaning replaces `\N` with NaN and converts every text column whose
+  values are all numbers.
+- **Dedup:** only rule R2 (keep the car the driver started in; otherwise the better finish). The R1
+  comparison code was removed.
+- **Candidates:** `circuit_te`, `drv_circuit_te` and `rivals_ahead` were removed (never selected).
+  The team standings group now also has `con_wins`. 13 candidates in 6 groups.
+- **Selection rule:** keep a group if validation PR-AUC rises by ≥ 0.005 for both LR and RF. This
+  replaces the 500-redraw bootstrap / 80% rule. Same result: `grid`, `drv_pos`, `drv_pts_share`,
+  `drv_wins`, `driver_te`, `constructor_te`.
+- **Preprocessing:** `SimpleImputer(median)` + `StandardScaler`, fit on train only. The custom
+  fill values and the `no_history_*` flags were removed (their importance was ≈ 0).
+- **Q1–Q3:** Wilson intervals were kept. The Q2 bootstrap, the Q1 rank scatter and the Q3 lineage
+  heatmap were removed. Q2 conclusion: weighted gap −0.70pp, OR 0.915, and home/away intervals
+  overlap in every starting group.
+- **XAI:** the cross-model KernelSHAP and the LIME 5-seed stability check were removed.
+- **Decision log:** kept only in this file. The in-notebook DECISIONS cells, the SHA-256
+  fingerprint cells and the "Gate"/"M" labels were removed from the notebook.
+- **Added (brief items that were missing):** test-set scoring (once), confusion matrices,
+  feature-group ablation, two preprocessing-order experiments (fit-before-split, impute/scale order),
+  and an inference function demonstrated on a complete and a partially-missing record.
+- **Qualifying:** still grid only, 1950–2024. Qualifying times are a stated limitation (coverage drift).
+
+## D29 — Career podium rates removed (2026-10-13; supersedes the `driver_te` / `constructor_te` part of D19/M3, D26, D28)
+
+`driver_te` / `constructor_te` (smoothed past podium rates, m = 10) are removed from the candidates.
+The smoothing constant was never tuned, and the D28 ablation showed the group helped on validation
+(+0.013) but not on test (−0.026 LR, +0.002 RF). Recent form (`drv_podium_last5`, `con_podium_last5`)
+stays as the leakage-safe form candidate. 11 candidates; selection keeps `grid` + driver standings
+(`drv_pos`, `drv_pts_share`, `drv_wins`). `drv_wins` is kept with its group (team decision), although its
+own contribution is small for RF/LR (the network leans on it most).
+
+Results: validation PR-AUC LR 0.714, RF 0.726, NN 0.727 (baseline 0.668); test LR 0.708, RF 0.718,
+NN 0.699 (baseline 0.647). The final model is chosen on validation, so it is the NN (tied with RF).
+XAI stays on the RF (TreeExplainer exact). The chosen forest predicts single-threaded so a score that
+equals the threshold cannot flip between tables.
+
+Preprocessing-order significance (paired bootstrap over 2,000 redraws of the validation races, computed
+outside the notebook): leaky fit vs train-only, LR diff −0.00007 (95% CI [−0.00034, +0.00024], p = 0.69),
+RF −0.00040 ([−0.00120, +0.00032], p = 0.29); scale→impute vs impute→scale, LR +0.00002 (p = 0.99),
+RF 0 (p = 1). None is significant.

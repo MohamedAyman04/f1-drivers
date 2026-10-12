@@ -8,7 +8,7 @@ information available after qualifying and before the race start**.
 | Item | Value |
 |---|---|
 | Unit of analysis | One driver entering one race — `(raceId, driverId)` |
-| Target | `podium = positionOrder ≤ 3` (binary, ~12.7% positive) |
+| Target | `podium = positionOrder ≤ 3` (binary, ~13.5% of starts) |
 | Prediction cutoff | After qualifying, before lights out (no race outcomes as features) |
 | Modeling window | 1950–2024, `grid` as the only position feature, Indy 500 removed (decision M1) |
 | Split (temporal, by season) | Train 1950–2017 / Validation 2018–2021 / Test 2022–2024 (decision M2) |
@@ -21,16 +21,17 @@ information available after qualifying and before the race start**.
 |---|---|
 | Dedup (85 shared-drive pairs, all pre-1979) | Keep the car the driver **started** in; fallback best `positionOrder` |
 | `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,566 non-starters excluded |
-| Status taxonomy | 6-class (`finished/mechanical/accident/driver/regulatory/ambiguous`), strict mechanical primary |
-| Qualifying coverage | Not used as features (absent pre-1994); `grid` + `field_size` + `grid_rel` instead. No era/year feature. 2003+ with quali is a late experiment |
+| Status taxonomy | `finished/accident/driver/regulatory/other`; everything else (incl. unclear reasons) counts as mechanical (D24) |
+| Qualifying coverage | Qualifying times not used as features (absent pre-1994); `grid` is the qualifying result after penalties. No era/year feature |
 | Indianapolis 500 (1950–60) | Flagged; excluded from home-race analysis **and removed from the modeling table** (M1) |
-| Features | Chosen by adding one group at a time from 15 candidates (#26): `grid`, driver standings after the previous round (`drv_pos`, `drv_pts_share`, `drv_wins`), past-only career podium rates `driver_te` / `constructor_te`, + 3 `no_history` flags. No sprint, no era/year |
+| Features | Chosen by adding one group at a time from 11 candidates (kept if validation PR-AUC rises ≥ 0.005 for LR and RF, D28/D29): `grid` + driver standings after the previous round (`drv_pos`, `drv_pts_share`, `drv_wins`) |
+| Preprocessing | `SimpleImputer(median)` + `StandardScaler`, fit on train only |
+| Final model | Shallow NN (best validation PR-AUC 0.727, tied with RF 0.726). Test PR-AUC: RF 0.718, LR 0.708, NN 0.699, grid-only baseline 0.647 |
 
 ## Data
 
 The **only input** is the 14 raw CSVs (Formula 1 World Championship 1950–2024) in
-`data/raw/` — read-only, checksummed at load and re-verified by a guard cell at the end
-of the notebook. `data/f1.db` is a legacy local mirror and is **not used**.
+`data/raw/`: read-only; all cleaning happens on in-memory copies. `data/f1.db` is a legacy local mirror and is **not used**.
 
 ## Repository structure
 
@@ -60,24 +61,23 @@ jupyter lab notebooks/f1_podium_prediction.ipynb   # then: Restart & Run All
 ```
 
 On Kaggle, attach the 14 CSVs as a dataset under `/kaggle/input` — the notebook detects
-the path automatically. The first cell installs `shap lime missingno` (Lab 4 pattern),
+the path automatically. The first cell runs `%pip install shap lime missingno` (Lab 4 pattern),
 so Internet must be **On**. Figures regenerate into `/kaggle/working/figures/`.
 
 ## Notebook map
 
-| § | Contents | Status |
-|---|---|---|
-| 1–4 | Setup, CSV loading + checksums, raw audit, Gates 1.A/1.B | Done |
-| 5–10 | PK/FK checks, grain analysis, typing inventory, coverage EDA, target, leakage rules | Done |
-| 11 | **Cleaning**: sentinels→NaN, typing, one spelling per value + driver home country, R2 dedup, flags, status classes, before/after EDA | Done |
-| 12 | Decision log | Done |
-| 13 | **Data-Engineering Questions (Q1, Q2, Q3)** on the cleaned data: multi-hop joins, Wilson CIs, stratified & logistic regression, constructor reliability, Figures 8–15 | Done |
-| 14 | Modeling table + split, 15 candidate features (past-only, brute-force checked) | Done |
-| 15 | Fill-and-flag + scaling helpers (`make_xy`, train-only) | Done |
-| 16 | **Feature selection**: per-feature plots + correlations, then add one group at a time (kept only if both LR and RF improve in ≥80% of validation redraws) | Done |
-| 17–19 | Chosen features prepared; baseline (LR on grid) / LR / RF / NN on validation | Done |
-| 20 | Roadmap; raw-integrity guard | — |
-| — | Test evaluation, ablation, XAI, inference, report | Next |
+| § | Contents |
+|---|---|
+| 1–5 | Setup, loading, first look, missing values, key checks, duplicates (EDA before cleaning) |
+| 6–7 | Cleaning on copies + after-cleaning EDA; target and pre-race cutoff |
+| 8 | Data-engineering questions Q1–Q3 (multi-hop joins, Wilson intervals, logistic regression) |
+| 9–11 | Modeling table + split, 11 past-only candidates (leakage-checked), imputer/scaler, feature selection |
+| 12–14 | Baseline / LR / RF / shallow NN, tuned on validation; test scored once, confusion matrices |
+| 15 | Feature-group ablation; two preprocessing-order experiments |
+| 16 | XAI: permutation importance (all models), SHAP global + waterfall, LIME |
+| 17–18 | Inference function (complete + partial record); limitations |
+
+Still to do: the PDF report.
 
 ## Toolkit
 
