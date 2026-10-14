@@ -3,6 +3,11 @@
 Predict whether a driver finishes on the podium (`positionOrder ≤ 3`) using **only
 information available after qualifying and before the race start**.
 
+## Team resources
+
+- **Office-hours board** (questions for the instructor, out-of-scope list, shared comments and ticks; team members only): https://claude.ai/artifact/3hor4cmonHZQ4vhWBZWH8r
+- **Review plan:** `REVIEW_PLAN.md`
+
 ## Task framing
 
 | Item | Value |
@@ -39,7 +44,7 @@ The **only input** is the 14 raw CSVs (Formula 1 World Championship 1950–2024)
 ├── README.md                        # this file
 ├── PLAN.md                          # living project plan with decision gates
 ├── docs/                            # decisions, leakage spec, method + Phase-3 notes (moved out of the notebook)
-├── environment.txt                  # pip requirements (Python 3.13, CPU torch)
+├── environment.txt                  # pip requirements (Python 3.13, TensorFlow)
 ├── notebooks/
 │   ├── f1_podium_prediction.ipynb   # THE deliverable: code + analysis + decisions
 │   └── _working_local/              # regenerated figures (local run cache)
