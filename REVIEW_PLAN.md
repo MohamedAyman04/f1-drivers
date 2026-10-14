@@ -6,6 +6,20 @@ Cell references like `c75` are **0-based cell indices** in the notebook as of co
 
 This plan is separate from `PLAN.md`, which was the plan for *building* the notebook. This one is for **reviewing** it before submission and the oral evaluation.
 
+## Status (updated 2026-10-14, night)
+
+Everything in this plan except the instructor's answers has now been done. Results are in `REVIEW_FINDINGS.md` and `OUT_OF_SCOPE.md`; the board is the team's working copy.
+
+| Workstream | Status | Where |
+|---|---|---|
+| A. Out-of-scope audit | **Done.** 90 items (36 high priority, 38 required by the brief) from a name-level sweep of every call in the notebook plus a read of all cells, the README and the report | `OUT_OF_SCOPE.md`, `review/sweep_names.py`, board tab "Out of scope" |
+| B. Requirements traceability | **Done.** Every brief requirement and checklist box matched to a cell | `REVIEW_FINDINGS.md` |
+| C. Independent verification | **Done** except V3, which waits for office hours (question 10) | `review/verify.ipynb` (independent rebuild matches the notebook to four decimals) |
+| D. Metrics | **Done on the branch.** All six metrics plotted for validation and for train/validation/test, plus discussion and an "always no podium" reference row | notebook §12–14 |
+| Fixes | **Applied on branch `review-fixes`**, rebased onto the team's latest `main` (commit `294ceea`; not merged): V1, V4, V8, V9, V11, V12, N1, N2, X2 and §5. Every edit is a script, so it can be replayed on top of newer teammate changes | `review/apply_fixes.py`, `review/apply_fixes2.py` |
+| Report re-sync (N5) | **Done in `main.tex` and `report/figures/`** on the branch; `main.pdf` must be recompiled (no LaTeX on the machine used) | `report/` |
+| Still open | Office-hours answers to the 21 questions (board), V3 decision, merge `review-fixes`, run on Kaggle, N8 placeholders (team names/IDs, Kaggle link), make the repo accessible | board, `REVIEW_FINDINGS.md` |
+
 ## 0. Goals and ground rules
 
 **Goals**

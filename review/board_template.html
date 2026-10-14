@@ -1,0 +1,577 @@
+<title>Office Hours Board</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one centred column. A sticky tab bar (Questions / Out of scope / Wrap-up) over stacked cards,
+   each card holding its own status control, answer fields and comment thread. */
+:root{
+  --bg:#eef1f4; --surface:#ffffff; --surface2:#f5f7f9; --ink:#121c26; --muted:#566574; --line:#d6dde4;
+  --accent:#1f4fd8; --accent-ink:#ffffff; --star:#b87a00;
+  --ok:#17794a; --ok-bg:#e0f2e8; --warn:#8f5b00; --warn-bg:#fcefd0; --bad:#b3372b; --bad-bg:#fbe3e0; --info:#1f4fd8; --info-bg:#e4ebfb;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f161d; --surface:#17212b; --surface2:#1c2833; --ink:#e7edf2; --muted:#93a2b0; --line:#2b3947;
+  --accent:#8aa9ff; --accent-ink:#0b1220; --star:#f0b43a;
+  --ok:#62d19c; --ok-bg:#143325; --warn:#f0b43a; --warn-bg:#3a2d10; --bad:#ff9288; --bad-bg:#3d1b18; --info:#8aa9ff; --info-bg:#1b2b4d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f161d; --surface:#17212b; --surface2:#1c2833; --ink:#e7edf2; --muted:#93a2b0; --line:#2b3947;
+  --accent:#8aa9ff; --accent-ink:#0b1220; --star:#f0b43a;
+  --ok:#62d19c; --ok-bg:#143325; --warn:#f0b43a; --warn-bg:#3a2d10; --bad:#ff9288; --bad-bg:#3d1b18; --info:#8aa9ff; --info-bg:#1b2b4d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:860px;margin:0 auto}
+header{padding-block:28px 14px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font:700 clamp(28px,5vw,40px)/1.05 var(--display);font-stretch:85%;letter-spacing:-.01em;margin:8px 0 6px;text-wrap:balance}
+.sub{color:var(--muted);margin:0;max-width:62ch}
+.meters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 24px;margin-top:18px}
+.meter-t{display:flex;justify-content:space-between;gap:8px;font:500 12px/1.3 var(--mono);color:var(--muted);margin-bottom:5px}
+.meter-t b{color:var(--ink);font-weight:500}
+.bar{display:flex;height:8px;border-radius:2px;overflow:hidden;background:var(--line)}
+.bar i{display:block;height:100%}
+.bar .ok{background:var(--ok)} .bar .mid{background:var(--star)} .bar .info{background:var(--accent)} .bar .bad{background:var(--bad)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;border-bottom:1px solid var(--line);padding-top:6px;overflow-x:auto}
+nav.tabs button{font:600 14px/1 var(--body);padding:12px 14px;border:0;background:none;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+nav.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs .count{font:500 11px var(--mono);margin-left:6px;color:var(--muted)}
+button:focus-visible,textarea:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.banner{margin:14px 0 0;padding:10px 12px;border-radius:4px;background:var(--warn-bg);color:var(--warn);font-size:13px}
+.banner[hidden]{display:none}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 12.5px/1 var(--body);padding:7px 10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+input[type=search],select{font:14px var(--body);padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink);min-width:0}
+input[type=search]{flex:1 1 180px}
+.legend{font-size:13px;color:var(--muted);margin:8px 0 14px;max-width:70ch}
+.list{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card[hidden]{display:none}
+.card-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.num{font:700 20px/1 var(--display);font-stretch:80%;min-width:2.2ch}
+.tag{font:500 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 6px;border-radius:3px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.tag.req{background:var(--info-bg);color:var(--info);border-color:transparent}
+.tag.H{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.tag.M{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+.spacer{flex:1}
+.ghost{font:500 12.5px var(--body);padding:6px 9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;cursor:pointer}
+.ghost[aria-pressed=true]{border-color:var(--star);color:var(--star)}
+.ask{margin:0;font-weight:500;max-width:68ch}
+.why{margin:0;color:var(--muted);font-size:13.5px;max-width:68ch}
+.title{margin:0;font:600 16px/1.3 var(--body)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0;font-size:13.5px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.kv code,.cells{font:12.5px var(--mono)}
+.seg{display:flex;flex-wrap:wrap;gap:0}
+.seg button{font:500 13px/1 var(--body);padding:8px 12px;background:var(--surface2);color:var(--muted);border:1px solid var(--line);margin-left:-1px;cursor:pointer}
+.seg button:first-child{border-radius:4px 0 0 4px;margin-left:0}.seg button:last-child{border-radius:0 4px 4px 0}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);position:relative}
+.seg button[aria-pressed=true][data-s=asked]{background:var(--warn-bg);color:var(--warn);border-color:var(--warn)}
+.seg button[aria-pressed=true][data-s=answered],.seg button[aria-pressed=true][data-s=ok]{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
+.seg button[aria-pressed=true][data-s=study]{background:var(--info-bg);color:var(--info);border-color:var(--info)}
+.seg button[aria-pressed=true][data-s=help]{background:var(--bad-bg);color:var(--bad);border-color:var(--bad)}
+.seg button[aria-pressed=true][data-s=skip]{background:var(--surface2);color:var(--muted);border-color:var(--muted);text-decoration:line-through}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:620px){.fields{grid-template-columns:1fr}}
+label.f{display:flex;flex-direction:column;gap:4px;font:500 11.5px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);min-width:0}
+textarea{font:14px/1.45 var(--body);padding:8px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink);resize:vertical;min-height:58px;width:100%;text-transform:none;letter-spacing:0}
+.by{font:12px var(--mono);color:var(--muted)}
+details.cm{border-top:1px solid var(--line);padding-top:8px}
+details.cm summary{cursor:pointer;font:500 13px var(--body);color:var(--muted)}
+.cm-list{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.cm-item{background:var(--surface2);border-radius:4px;padding:8px 10px;font-size:14px}
+.cm-item .meta{font:12px var(--mono);color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2px}
+.cm-item p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.cm-new{display:flex;gap:8px;align-items:flex-end}
+.cm-new textarea{min-height:40px}
+.primary{font:600 13.5px var(--body);padding:9px 14px;border:0;border-radius:4px;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.primary:disabled{opacity:.5;cursor:default}
+.link{background:none;border:0;color:var(--muted);font:12px var(--mono);cursor:pointer;text-decoration:underline;padding:0}
+details.add{margin-top:16px;background:var(--surface);border:1px dashed var(--line);border-radius:6px;padding:10px 14px}
+details.add summary{cursor:pointer;font-weight:600;font-size:14px}
+details.add .fields{margin-top:10px;grid-template-columns:1fr}
+.wrap-sec{margin-top:22px}
+.wrap-sec h2{font:700 20px var(--display);font-stretch:85%;margin:0 0 8px}
+.wq{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin-bottom:8px}
+.wq h3{font:600 14.5px var(--body);margin:0 0 4px}
+.wq p{margin:2px 0;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.wq .lab{font:500 11px var(--mono);text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
+.empty{color:var(--muted);font-size:14px;padding:10px 0}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:9px 14px;border-radius:4px;font-size:13px;z-index:9;max-width:90vw}
+#toast[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}.card:hover{border-color:var(--muted)}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">CSEN903 · Milestone 1 · F1 podium prediction</div>
+  <h1>Office hours board</h1>
+  <p class="sub">Session with the instructor on 15 Oct 2026. Tick questions off as they are asked, write down what was said, and note what it changes. The Out of scope tab is the finished audit of the notebook (90 items) to study before the evaluation. The Findings tab lists what the independent review found and what was changed, for the team to agree or disagree with.</p>
+  <div class="meters">
+    <div><div class="meter-t"><span>Questions</span><b id="m-q-t"></b></div><div class="bar" id="m-q"></div></div>
+    <div><div class="meter-t"><span>Out-of-scope items</span><b id="m-o-t"></b></div><div class="bar" id="m-o"></div></div>
+    <div><div class="meter-t"><span>Findings reviewed</span><b id="m-f-t"></b></div><div class="bar" id="m-f"></div></div>
+  </div>
+  <div class="banner" id="banner" hidden></div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" id="t-q" aria-selected="true" aria-controls="p-q">Questions<span class="count" id="n-q"></span></button>
+  <button role="tab" id="t-o" aria-selected="false" aria-controls="p-o">Out of scope<span class="count" id="n-o"></span></button>
+  <button role="tab" id="t-f" aria-selected="false" aria-controls="p-f">Findings<span class="count" id="n-f"></span></button>
+  <button role="tab" id="t-w" aria-selected="false" aria-controls="p-w">Wrap-up</button>
+</nav>
+
+<section id="p-q" role="tabpanel" aria-labelledby="t-q">
+  <div class="tools">
+    <div class="chips" id="f-q-grp"></div>
+  </div>
+  <div class="tools">
+    <div class="chips" id="f-q-st"></div>
+    <input type="search" id="f-q-text" placeholder="Search questions and answers" aria-label="Search questions">
+  </div>
+  <p class="legend">Questions are worded as “is it fine if we…”, so the instructor can answer without being asked to design our solution. ★ marks the ones we should not leave without an answer.</p>
+  <div class="list" id="l-q"></div>
+  <details class="add"><summary>Add a question that came up</summary>
+    <div class="fields">
+      <label class="f" for="add-q-title">Question<textarea id="add-q-title" rows="2" placeholder="Is it fine if we…"></textarea></label>
+      <label class="f" for="add-q-note">Why we are asking (optional)<textarea id="add-q-note" rows="2"></textarea></label>
+      <div><button class="primary" id="add-q-btn" type="button">Add question</button></div>
+    </div>
+  </details>
+</section>
+
+<section id="p-o" role="tabpanel" aria-labelledby="t-o" hidden>
+  <div class="tools">
+    <select id="f-o-grp" aria-label="Group"></select>
+    <div class="chips" id="f-o-pri"></div>
+    <div class="chips" id="f-o-st"></div>
+  </div>
+  <div class="tools">
+    <div class="chips" id="f-o-req"></div>
+    <input type="search" id="f-o-text" placeholder="Search items" aria-label="Search out-of-scope items">
+  </div>
+  <p class="legend">Everything the notebook uses that Labs 1–4 and the three guide notebooks do not teach (the full audit is <span class="cells">OUT_OF_SCOPE.md</span> in the repo). <b>Priority</b>: H = likely to be asked, M = supporting detail, L = plumbing. <b>Required by brief</b> means the project text asks for it, but we still need to explain it. Take an item with “I’ll study this”, then write it up in your own words.</p>
+  <div class="list" id="l-o"></div>
+  <details class="add"><summary>Add an item we missed</summary>
+    <div class="fields">
+      <label class="f" for="add-o-title">Item<textarea id="add-o-title" rows="1" placeholder="e.g. pd.qcut"></textarea></label>
+      <label class="f" for="add-o-note">Where / what it is (optional)<textarea id="add-o-note" rows="2"></textarea></label>
+      <div><button class="primary" id="add-o-btn" type="button">Add item</button></div>
+    </div>
+  </details>
+</section>
+
+<section id="p-f" role="tabpanel" aria-labelledby="t-f" hidden>
+  <div class="tools">
+    <div class="chips" id="f-f-sev"></div>
+    <div class="chips" id="f-f-st"></div>
+  </div>
+  <div class="tools">
+    <div class="chips" id="f-f-my"></div>
+    <input type="search" id="f-f-text" placeholder="Search findings" aria-label="Search findings">
+  </div>
+  <p class="legend">Each finding was checked by rebuilding the numbers from the raw files with separate code (<span class="cells">review/verify.ipynb</span>). <b>Status</b> is what the review did: <i>fixed</i> on the branch <span class="cells">review-fixes</span>, <i>verified</i> (no change needed), <i>needs answer</i> (waits for office hours) or <i>resolved by team</i>. Use the buttons to record whether you agree.</p>
+  <div class="list" id="l-f"></div>
+</section>
+
+<section id="p-w" role="tabpanel" aria-labelledby="t-w" hidden>
+  <div class="tools"><button class="primary" id="copy-md" type="button">Copy as Markdown</button><span class="by" id="copy-msg"></span></div>
+  <div id="wrap-body"></div>
+</section>
+</div>
+<div id="toast" hidden></div>
+
+<script>
+const GRP = {A:"Ambiguities in the brief", B:"Methodology choices", C:"Deliverables and logistics", X:"Added by us"};
+const Q = [
+ {n:1,grp:"A",must:true,ask:"The deliverables ask for “all five metrics from Section 4”, but the Section 4 table lists three (ROC-AUC, PR-AUC, F1). Is it fine if we report those three plus precision, recall and accuracy, or were five specific metrics intended?",why:"We compute all six already. The answer decides what the comparison table and plots show."},
+ {n:2,grp:"A",ask:"Q1 says to “distinguish qualifying position from grid”. Is it enough to explain the difference and use grid?",why:"Already answered before 14 Oct: use grid positions only. In 2003+ the grid differs from the qualifying position in 27% of rows, and 36 drivers qualified on the front row but started further back. Decision D23 replaced the earlier plan to use both.",preset:{status:"answered",answer:"Use grid positions only (asked earlier, before 14 Oct).",action:"Say “grid only, confirmed” in one line of the notebook (c44) and in the report."}},
+ {n:3,grp:"A",must:true,ask:"The checklist says “leakage-safe form feature implemented”. Is it fine if the form feature is implemented and leakage-checked, but feature selection drops it from the final model because it does not improve validation scores?",why:"Form is built (c59) and checked on 150 rows (c60). Selection keeps only grid and the driver standings."},
+ {n:4,grp:"A",ask:"Deliverable 3 mentions form/standings/grid/qualifying features. Is it fine if grid (the qualifying result after penalties) is our only qualifying-related feature and we use no qualifying lap times?",why:"Qualifying times exist only from 1994, and Q2/Q3 only from 2003 and only for faster drivers."},
+ {n:5,grp:"A",must:true,ask:"Should the ablation remove each candidate feature group, or only the groups in the final model? Should it also be done for the neural network, and should we report the drop on validation, on test, or both?",why:"It originally covered only the 2 kept groups, for logistic regression and the forest, with test drops only. On the review branch it now covers the kept groups for all three models and every candidate group for LR and RF, on validation and test (V8); your answer tells us if that is the expected scope."},
+ {n:6,grp:"A",ask:"The checklist says “Local Explanation (LIME)” while the brief says “LIME and/or local SHAP”. Is having both, for the same two rows, the expected level?",why:"We show a SHAP waterfall and a LIME plot for a hit and a miss."},
+ {n:7,grp:"B",ask:"Are the models expected to improve on the baseline by a lot? Is logistic regression on grid alone a reasonable baseline, or would you also expect a simple rule such as “podium if grid ≤ 3”?",why:"Validation PR-AUC is 0.668 for the baseline and 0.714–0.728 for the models; on test 0.647 vs 0.704–0.721. That is about +0.06 to +0.07."},
+ {n:8,grp:"B",ask:"Is it fine if the three models perform about the same (within roughly 0.02), and we say so honestly instead of claiming one is clearly better?",why:"Forest and network are tied on validation (0.725 vs 0.728); the forest is best on test."},
+ {n:9,grp:"B",ask:"Is it fine to pick the final model by validation score even when a different model scores higher on test?",why:"We chose the neural network on validation. The forest scores higher on test (0.721 vs 0.704)."},
+ {n:10,grp:"B",must:true,ask:"Is it fine to run SHAP and LIME on the random forest when the final model is the neural network? Or should the explanations be for the final model?",why:"The brief does not say which model to explain, so we ask instead of changing it (review item V3). The forest is explainable with TreeExplainer exactly; the network is a tie on validation (0.725 vs 0.728)."},
+ {n:11,grp:"B",ask:"Is it fine to split by season (train 1950–2017, validation 2018–2021, test 2022–2024) and not use the random train_test_split from the labs? Is training on the 1950s–80s acceptable, or would you expect a modern-era restriction?",why:"A random split would put drivers from the same race on both sides."},
+ {n:12,grp:"B",ask:"Is it fine to use the same validation seasons for early stopping, hyperparameter choice and threshold choice?",why:"Validation scores are therefore optimistic; test is the honest number (review item V5)."},
+ {n:13,grp:"B",ask:"Is it fine if our preprocessing-order experiments show almost no difference (at most 0.0006 PR-AUC) as long as we explain why, or should we choose experiments where the order visibly matters?",why:"Leaky vs train-only fit and scale→impute vs impute→scale both move the score by about zero."},
+ {n:14,grp:"B",ask:"Does a hyperparameter grid (several C values, several forest depths, three network sizes) count toward the “at least three modeling attempts”?",why:"Beyond that we have the baseline, logistic regression, the forest and the network."},
+ {n:15,grp:"B",ask:"Is it fine to use methods not covered in the labs (Wilson confidence intervals, odds ratios, Spearman correlation, sklearn Pipeline/SimpleImputer, class_weight=\"balanced\", choosing the threshold with precision_recall_curve) as long as we can explain and justify them? Should they be marked as such in the notebook?",why:"See the Out of scope tab. The notebook no longer mentions labs at all, while the report still cites them (review item N3)."},
+ {n:16,grp:"B",ask:"Is it fine to count unclear statuses (for example “Retired” or “Puncture”) as mechanical as long as we document the rule? Or should we exclude unclear ones, or show both definitions?",why:"“Retired” is the second-largest ‘mechanical’ status since 2014 (50 rows after Engine, 80) although its cause is unknown. The brief excludes crashes, the driver and regulation decisions."},
+ {n:17,grp:"B",ask:"Is it fine to define a home race by the driver’s nationality (not where they live)? Is comparing 95% intervals enough for Q2, or is a formal significance test expected?",why:"Q2 answer: no home advantage (−0.70 percentage points, odds ratio 0.915)."},
+ {n:18,grp:"B",must:true,ask:"The brief’s unit is “one driver entering one race”. Is it fine to drop non-starters (did not qualify, withdrew) from the modeling table and from the Q2/Q3 rates, or should entrants who never started stay in with podium = 0?",why:"79 rows (61 “Withdrew”, 11 “Did not qualify”, 7 “107% Rule”) have a grid slot in the data but 0 laps and were counted as starters. The review branch now treats them as non-starters (V1, small effect on scores). Your answer decides whether entrants who never started should instead stay in with podium = 0."},
+ {n:19,grp:"C",ask:"Is there an expected structure or length for the PDF report? Should every notebook plot also be in the report (“all plots… included in both”)?",why:"The report draft has 29 image files covering all 26 notebook figures."},
+ {n:20,grp:"C",ask:"Is it fine for the first notebook cell to %pip install packages (so Internet must be on in Kaggle)? Is there a runtime limit?",why:"Our full run takes about 14 minutes on a 20-core CPU."},
+ {n:21,grp:"C",ask:"How deep should our explanations go in the evaluation: intuition, or the maths as well (how Shapley values are computed, backpropagation, the Wilson formula)?",why:"Sets how much of the out-of-scope list we must study in depth."}
+];
+Q.forEach(q=>q.id="q"+String(q.n).padStart(2,"0"));
+
+const O = /*OOS_JSON*/[];
+const FND = /*FND_JSON*/[];
+
+const QSTAT=[["todo","To ask"],["asked","Asked"],["answered","Answered"],["skip","Skip"]];
+const OSTAT=[["todo","Not started"],["study","Studying"],["ok","Can explain"],["help","Needs help"]];
+const FSTAT=[["todo","To review"],["ok","Agreed"],["dis","Disagree"]];
+const SEVCLS={"should fix":"M","blocker":"H","note":"","ok":""};
+
+/* ---------- helpers ---------- */
+function h(tag, props, ...kids){
+  const e=document.createElement(tag);
+  for(const [k,v] of Object.entries(props||{})){
+    if(k==="class") e.className=v; else if(k==="text") e.textContent=v;
+    else if(k.startsWith("on")) e.addEventListener(k.slice(2),v);
+    else if(v===true) e.setAttribute(k,""); else if(v!==false && v!=null) e.setAttribute(k,v);
+  }
+  for(const c of kids.flat()){ if(c==null||c===false) continue; e.append(c.nodeType?c:document.createTextNode(c)); }
+  return e;
+}
+const $=id=>document.getElementById(id);
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>t.hidden=true,4000); }
+function fmt(ts){ try{ return new Date(ts).toLocaleString([], {month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}); }catch(e){ return ""; } }
+
+/* ---------- state ---------- */
+const DEF={}; Q.forEach(d=>{d.kindK="q"; DEF[d.id]=d;}); O.forEach(d=>{d.kindK="o"; DEF[d.id]=d;});
+FND.forEach(d=>{d.kindK="f"; d.fid=d.id; d.id="f_"+d.fid; DEF[d.id]=d;});
+const isQ=d=>d.kindK==="q", isF=d=>d.kindK==="f";
+const S={items:{}, comments:[], extra:[]};
+const REF={}; const names={};
+let db=null, user=null, myId=null, readOnly=false, live=false;
+const chain={};
+
+function st(id){ const d=DEF[id]; return Object.assign({status:"todo", must:!!d.must, answer:"", action:"", note:"", owner:""}, d.preset||{}, S.items[id]||{}); }
+
+function save(id, patch){
+  if(readOnly){ toast("This board is read-only for you."); return; }
+  patch=Object.assign({}, patch, {updatedBy: myId||"", updatedAt: Date.now()});
+  S.items[id]=Object.assign({}, S.items[id]||{}, patch);
+  refresh(id); summary(); wrapUp();
+  if(!db) return;
+  chain[id]=(chain[id]||Promise.resolve()).then(async()=>{
+    const ref=db.doc("items/"+id);
+    try{ await ref.update(patch); }
+    catch(e){
+      if(e && e.code==="invalid_argument"){
+        try{ await ref.set(Object.assign({}, S.items[id])); }
+        catch(e2){ failed(e2); }
+      } else failed(e);
+    }
+  });
+}
+function failed(e){
+  if(e && e.code==="invalid_argument"){ readOnly=true; applyReadOnly(); toast("Saving was refused: you may only have view access."); }
+  else toast("Could not save: "+((e&&e.message)||"try again"));
+}
+
+/* ---------- cards ---------- */
+function seg(id, stats){
+  const wrap=h("div",{class:"seg",role:"group","aria-label":"Status"});
+  stats.forEach(([k,l])=>wrap.append(h("button",{type:"button","data-s":k,"aria-pressed":"false",text:l,onclick:()=>save(id,{status:k})})));
+  return wrap;
+}
+function field(id, key, label, rows){
+  const ta=h("textarea",{id:`${id}-${key}`,rows:rows||2});
+  let timer;
+  const flush=()=>{ clearTimeout(timer); if(ta.value!==(st(id)[key]||"")) save(id,{[key]:ta.value}); };
+  ta.addEventListener("input",()=>{ clearTimeout(timer); timer=setTimeout(flush,800); });
+  ta.addEventListener("blur",flush);
+  return {ta, el:h("label",{class:"f",for:`${id}-${key}`},label,ta)};
+}
+function comments(id){
+  const list=h("div",{class:"cm-list"});
+  const ta=h("textarea",{id:`${id}-cm`,rows:1,placeholder:"Add a comment"});
+  const btn=h("button",{class:"primary",type:"button",text:"Post",onclick:async()=>{
+    const text=ta.value.trim(); if(!text) return;
+    if(readOnly){ toast("This board is read-only for you."); return; }
+    btn.disabled=true;
+    const doc={item:id,uid:myId||"anon",text,ts:Date.now()};
+    try{
+      if(db) await db.collection("comments").add(doc);
+      else { S.comments.push(Object.assign({id:"l"+Date.now()},doc)); syncAll(); }
+      ta.value="";
+    }catch(e){ failed(e); }
+    btn.disabled=false;
+  }});
+  const count=h("span");
+  const el=h("details",{class:"cm"},h("summary",{},"Comments ",count),list,h("div",{class:"cm-new"},ta,btn));
+  return {el,list,count,ta,btn};
+}
+function card(d){
+  const q=isQ(d), fnd=isF(d); const id=d.id;
+  const must=h("button",{class:"ghost",type:"button","aria-pressed":"false",title:"Must ask before we leave",text:"★ Must ask",onclick:()=>save(id,{must:!st(id).must})});
+  const owner=h("button",{class:"ghost",type:"button",onclick:()=>{ const o=st(id).owner; save(id,{owner:o===myId?"":(myId||"anon")}); }});
+  const head=h("div",{class:"card-h"},
+    q?h("span",{class:"num",text:d.n}):null,
+    fnd?h("span",{class:"num",text:d.fid}):null,
+    q?h("span",{class:"tag",text:GRP[d.grp]}):h("span",{class:"tag",text:fnd?d.area:d.grp}),
+    fnd?h("span",{class:"tag "+(SEVCLS[d.sev]||""),text:d.sev}):null,
+    fnd?h("span",{class:"tag req",text:d.status}):null,
+    !q&&!fnd&&d.req?h("span",{class:"tag req",text:"Required by brief"}):null,
+    !q&&!fnd&&d.pri!=="?"?h("span",{class:"tag "+d.pri,text:"Priority "+d.pri}):null,
+    h("span",{class:"spacer"}), q?must:null, fnd?null:owner);
+  const r={el:null,must,owner,seg:seg(id,q?QSTAT:(fnd?FSTAT:OSTAT))};
+  let body;
+  if(q){
+    const a=field(id,"answer","What the instructor said",3), c=field(id,"action","What changes in our work",3);
+    r.fields=[[a.ta,"answer"],[c.ta,"action"]];
+    body=[h("p",{class:"ask",text:d.ask}), d.why?h("p",{class:"why",text:d.why}):null, r.seg, h("div",{class:"fields"},a.el,c.el)];
+  } else if(fnd){
+    const n=field(id,"note","Team notes",2);
+    r.fields=[[n.ta,"note"]];
+    const kv=h("dl",{class:"kv"},h("dt",{text:"What"}),h("dd",{text:d.what||""}),h("dt",{text:"Evidence"}),h("dd",{text:d.evidence||""}),h("dt",{text:"What was done"}),h("dd",{text:d.action||""}));
+    body=[h("p",{class:"title",text:d.title}), kv, r.seg, n.el];
+  } else {
+    const n=field(id,"note","Our explanation, in our own words",3);
+    r.fields=[[n.ta,"note"]];
+    const kv=h("dl",{class:"kv"},
+      h("dt",{text:"What it is"}),h("dd",{text:d.what||""}),
+      d.why?h("dt",{text:"Why we used it"}):null, d.why?h("dd",{text:d.why}):null,
+      d.cells?h("dt",{text:"Where"}):null, d.cells?h("dd",{},h("span",{class:"cells",text:d.cells})):null,
+      d.alt?h("dt",{text:"Lab alternative"}):null, d.alt?h("dd",{text:d.alt}):null,
+      d.kind?h("dt",{text:"Kind"}):null, d.kind?h("dd",{text:d.kind}):null);
+    body=[h("p",{class:"title",text:d.item}), kv, r.seg, n.el];
+  }
+  const cm=comments(id); r.cm=cm;
+  const by=h("div",{class:"by"}); r.by=by;
+  const rm = d.custom ? h("button",{class:"link",type:"button",text:"Remove",onclick:async()=>{ try{ if(db) await db.doc("extra/"+d.docId).delete(); else { S.extra=S.extra.filter(x=>x.id!==d.docId); syncAll(); } }catch(e){ failed(e);} }}) : null;
+  r.rm=rm;
+  const el=h("article",{class:"card",id:"c-"+id,"data-id":id}, head, body, by, rm, cm.el);
+  r.el=el; REF[id]=r; return el;
+}
+
+function refresh(id){
+  const r=REF[id]; if(!r) return; const d=DEF[id]; const s=st(id);
+  r.seg.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.s===s.status)));
+  r.el.dataset.status=s.status;
+  r.fields.forEach(([ta,key])=>{ if(document.activeElement!==ta) ta.value=s[key]||""; ta.readOnly=readOnly; });
+  if(r.must){ r.must.setAttribute("aria-pressed",String(!!s.must)); r.must.disabled=readOnly; }
+  const who=s.owner?(s.owner===myId?"you":(names[s.owner]||"Someone")):"";
+  const q=isQ(d);
+  if(!isF(d)){
+  r.owner.textContent = s.owner ? `${q?"Asking":"Studying"}: ${who} ✕` : (q?"I’ll ask this":"I’ll study this");
+  r.owner.title = s.owner ? (s.owner===myId?"Click to release":"Click to take over") : "";
+  r.owner.disabled=readOnly;}
+  r.by.textContent = s.updatedAt ? `Last change ${fmt(s.updatedAt)}${s.updatedBy?" by "+(s.updatedBy===myId?"you":(names[s.updatedBy]||"someone")):""}` : "";
+  // comments
+  const cs=S.comments.filter(c=>c.item===id).sort((a,b)=>a.ts-b.ts);
+  r.cm.count.textContent = cs.length?`(${cs.length})`:"";
+  r.cm.list.replaceChildren(...cs.map(c=>h("div",{class:"cm-item"},
+    h("div",{class:"meta"},h("span",{text:c.uid===myId?"You":(names[c.uid]||"Someone")}),h("span",{text:fmt(c.ts)}),
+      c.uid===myId?h("button",{class:"link",type:"button",text:"delete",onclick:async()=>{ try{ if(db) await db.doc("comments/"+c.id).delete(); else { S.comments=S.comments.filter(x=>x.id!==c.id); syncAll(); } }catch(e){failed(e);} }}):null),
+    h("p",{text:c.text}))));
+  if(r.rm) r.rm.hidden = !(DEF[id].by===myId || !db);
+}
+function refreshAll(){ Object.keys(REF).forEach(refresh); }
+
+/* ---------- filters ---------- */
+const F={q:{grp:"all",st:"all",must:false,text:""}, o:{grp:"all",pri:"all",st:"all",req:false,text:""}, f:{sev:"all",st:"all",my:"all",text:""}};
+function chipRow(host, opts, get, set){
+  host.replaceChildren(...opts.map(([k,l])=>{
+    const b=h("button",{class:"chip",type:"button","aria-pressed":String(get()===k),text:l,onclick:()=>{ set(k); chipRow(host,opts,get,set); applyFilters(); }});
+    return b;
+  }));
+}
+function applyFilters(){
+  for(const id in DEF){
+    const d=DEF[id], r=REF[id]; if(!r) continue; const s=st(id);
+    let show=true;
+    if(isF(d)){
+      const f=F.f;
+      if(f.sev!=="all" && d.sev!==f.sev) show=false;
+      if(f.my!=="all" && d.status!==f.my) show=false;
+      if(f.st!=="all" && s.status!==f.st) show=false;
+      if(f.text && !(d.title+" "+d.what+" "+d.evidence+" "+d.action+" "+s.note).toLowerCase().includes(f.text)) show=false;
+    } else if(isQ(d)){
+      const f=F.q;
+      if(f.grp!=="all" && d.grp!==f.grp) show=false;
+      if(f.st!=="all" && s.status!==f.st) show=false;
+      if(f.must && !s.must) show=false;
+      if(f.text && !(d.ask+" "+(d.why||"")+" "+s.answer+" "+s.action).toLowerCase().includes(f.text)) show=false;
+    } else {
+      const f=F.o;
+      if(f.grp!=="all" && d.grp!==f.grp) show=false;
+      if(f.pri!=="all" && d.pri!==f.pri) show=false;
+      if(f.st!=="all" && s.status!==f.st) show=false;
+      if(f.req && !d.req) show=false;
+      if(f.text && !(d.item+" "+d.what+" "+(d.cells||"")+" "+s.note).toLowerCase().includes(f.text)) show=false;
+    }
+    r.el.hidden=!show;
+  }
+}
+
+/* ---------- summary and wrap-up ---------- */
+function counts(list, keys){ const c={}; keys.forEach(k=>c[k]=0); list.forEach(d=>{ const s=st(d.id).status; if(s in c) c[s]++; }); return c; }
+function meter(host, parts){
+  const total=parts.reduce((a,p)=>a+p[1],0)||1;
+  host.replaceChildren(...parts.map(([cls,n])=>h("i",{class:cls,style:`width:${n/total*100}%`})));
+}
+function allQ(){ return Object.values(DEF).filter(isQ); }
+function allO(){ return Object.values(DEF).filter(d=>d.kindK==="o"); }
+function allF(){ return Object.values(DEF).filter(isF); }
+function summary(){
+  const qs=allQ(), os=allO();
+  const qc=counts(qs,["todo","asked","answered","skip"]), oc=counts(os,["todo","study","ok","help"]);
+  meter($("m-q"),[["ok",qc.answered],["mid",qc.asked],["",qc.todo+qc.skip]]);
+  $("m-q-t").textContent=`${qc.answered} answered · ${qc.asked} asked · ${qc.todo} to ask`;
+  meter($("m-o"),[["ok",oc.ok],["info",oc.study],["bad",oc.help],["",oc.todo]]);
+  $("m-o-t").textContent=`${oc.ok} of ${os.length} can explain`;
+  const fs=allF(), fc=counts(fs,["todo","ok","dis"]);
+  meter($("m-f"),[["ok",fc.ok],["bad",fc.dis],["",fc.todo]]);
+  $("m-f-t").textContent=`${fc.ok} agreed · ${fc.dis} disagree · ${fc.todo} to review`;
+  $("n-q").textContent=qs.length; $("n-o").textContent=os.length; $("n-f").textContent=fs.length;
+}
+function markdown(){
+  const qs=allQ().sort((a,b)=>String(a.n).localeCompare(String(b.n),undefined,{numeric:true}));
+  const L=["# Office hours, 2026-10-15",""];
+  const ans=qs.filter(d=>st(d.id).status==="answered");
+  L.push("## Answered ("+ans.length+")","");
+  ans.forEach(d=>{ const s=st(d.id); L.push(`### Q${d.n}. ${d.ask}`,"",`- **Answer:** ${s.answer||"(not written down)"}`,`- **What changes:** ${s.action||"(nothing yet)"}`,""); });
+  const open=qs.filter(d=>st(d.id).status!=="answered");
+  L.push("## Not answered ("+open.length+")","");
+  open.forEach(d=>{ const s=st(d.id); L.push(`- Q${d.n} [${s.status}]${s.must?" ★":""} ${d.ask}`); });
+  const help=allO().filter(d=>st(d.id).status==="help");
+  L.push("","## Out-of-scope items that need help ("+help.length+")","");
+  help.forEach(d=>L.push(`- ${d.item} (${d.cells||"-"}) ${st(d.id).note?"– "+st(d.id).note:""}`));
+  const dis=allF().filter(d=>st(d.id).status==="dis");
+  L.push("","## Findings the team disagrees with ("+dis.length+")","");
+  dis.forEach(d=>L.push(`- ${d.fid} ${d.title}${st(d.id).note?" – "+st(d.id).note:""}`));
+  return L.join("\n");
+}
+function wrapUp(){
+  const host=$("wrap-body"); if(!host) return;
+  const qs=allQ().sort((a,b)=>String(a.n).localeCompare(String(b.n),undefined,{numeric:true}));
+  const ans=qs.filter(d=>st(d.id).status==="answered"), open=qs.filter(d=>!["answered","skip"].includes(st(d.id).status));
+  const kids=[];
+  kids.push(h("div",{class:"wrap-sec"},h("h2",{text:`Answered (${ans.length})`}),
+    ans.length?ans.map(d=>{ const s=st(d.id); return h("div",{class:"wq"},h("h3",{text:`Q${d.n}. ${d.ask}`}),
+      h("div",{class:"lab",text:"Answer"}),h("p",{text:s.answer||"Not written down yet"}),
+      h("div",{class:"lab",text:"What changes"}),h("p",{text:s.action||"Nothing recorded yet"})); }):h("div",{class:"empty",text:"Nothing answered yet. Fill in the answer on each question card during the session."})));
+  kids.push(h("div",{class:"wrap-sec"},h("h2",{text:`Still open (${open.length})`}),
+    open.length?open.map(d=>h("div",{class:"wq"},h("h3",{text:`Q${d.n}${st(d.id).must?" ★":""}. ${d.ask}`}),h("div",{class:"lab",text:st(d.id).status}))):h("div",{class:"empty",text:"All questions are answered or skipped."})));
+  const help=allO().filter(d=>st(d.id).status==="help");
+  kids.push(h("div",{class:"wrap-sec"},h("h2",{text:`Out of scope, needs help (${help.length})`}),
+    help.length?help.map(d=>h("div",{class:"wq"},h("h3",{text:d.item}),h("p",{text:d.what}))):h("div",{class:"empty",text:"Nobody has marked an item as needing help."})));
+  const dis=allF().filter(d=>st(d.id).status==="dis");
+  kids.push(h("div",{class:"wrap-sec"},h("h2",{text:`Findings the team disagrees with (${dis.length})`}),
+    dis.length?dis.map(d=>h("div",{class:"wq"},h("h3",{text:`${d.fid}. ${d.title}`}),h("p",{text:st(d.id).note||"No note yet"}))):h("div",{class:"empty",text:"No disagreements recorded."})));
+  host.replaceChildren(...kids);
+}
+
+/* ---------- tabs, build ---------- */
+function showTab(k){
+  ["q","o","f","w"].forEach(x=>{ $("p-"+x).hidden=x!==k; $("t-"+x).setAttribute("aria-selected",String(x===k)); });
+  try{ localStorage.setItem("ohb-tab",k); }catch(e){}
+  if(k==="w") wrapUp();
+}
+function applyReadOnly(){
+  const b=$("banner");
+  if(readOnly){ b.textContent="You can read this board but not change it. Ask the owner to share it with you as a Contributor or Editor."; b.hidden=false; }
+  else if(!live){ b.textContent="Not connected to the shared store. Anything you change here stays in this tab only."; b.hidden=false; }
+  else b.hidden=true;
+  document.querySelectorAll("#add-q-btn,#add-o-btn").forEach(x=>x.disabled=readOnly);
+  refreshAll();
+}
+async function resolveNames(){
+  if(!user) return;
+  const ids=new Set();
+  S.comments.forEach(c=>ids.add(c.uid));
+  Object.values(S.items).forEach(i=>{ if(i.owner) ids.add(i.owner); if(i.updatedBy) ids.add(i.updatedBy); });
+  S.extra.forEach(x=>ids.add(x.by));
+  ids.delete("anon"); ids.delete(""); ids.delete(undefined);
+  if(!ids.size) return;
+  try{ const ps=await user.profiles([...ids]); for(const id in ps) names[id]=ps[id].name||"Someone"; }catch(e){}
+}
+let syncing=false, again=false;
+async function syncAll(){
+  if(syncing){ again=true; return; }
+  syncing=true;
+  do{ again=false; await resolveNames(); rebuildExtra(); refreshAll(); summary(); wrapUp(); applyFilters(); }while(again);
+  syncing=false;
+}
+let extraSig="";
+function rebuildExtra(){
+  const sig=JSON.stringify(S.extra.map(x=>x.id));
+  if(sig===extraSig) return; extraSig=sig;
+  Object.keys(DEF).filter(id=>DEF[id].custom).forEach(id=>{ REF[id]?.el.remove(); delete REF[id]; delete DEF[id]; });
+  let qi=0, oi=0;
+  S.extra.forEach(x=>{
+    const id="x_"+x.id;
+    if(x.kind==="q"){ qi++; DEF[id]={id,docId:x.id,custom:true,by:x.by,kindK:"q",n:"+"+qi,grp:"X",ask:x.title,why:x.note||""}; $("l-q").append(card(DEF[id])); }
+    else { oi++; DEF[id]={id,docId:x.id,custom:true,by:x.by,kindK:"o",grp:"Added by us",item:x.title,what:x.note||"",kind:"",cells:"",req:false,alt:"",pri:"?"}; $("l-o").append(card(DEF[id])); }
+  });
+}
+async function addExtra(kind, titleEl, noteEl){
+  const title=titleEl.value.trim(); if(!title) return;
+  if(readOnly){ toast("This board is read-only for you."); return; }
+  const doc={kind,title,note:noteEl.value.trim(),by:myId||"anon",ts:Date.now()};
+  try{
+    if(db) await db.collection("extra").add(doc);
+    else { S.extra.push(Object.assign({id:"l"+Date.now()},doc)); syncAll(); }
+    titleEl.value=""; noteEl.value="";
+    toast(kind==="q"?"Question added at the end of the list.":"Item added at the end of the list.");
+  }catch(e){ failed(e); }
+}
+
+function build(){
+  Q.forEach(d=>$("l-q").append(card(d)));
+  O.forEach(d=>$("l-o").append(card(d)));
+  FND.forEach(d=>$("l-f").append(card(d)));
+  const gq=[["all","All"],...Object.entries(GRP).filter(([k])=>k!=="X").map(([k,v])=>[k,v])];
+  chipRow($("f-q-grp"),gq,()=>F.q.grp,k=>F.q.grp=k);
+  const sq=[["all","Any status"],...QSTAT, ["must","★ Must ask"]];
+  const stq=$("f-q-st");
+  const drawSq=()=>stq.replaceChildren(...sq.map(([k,l])=>h("button",{class:"chip",type:"button","aria-pressed":String(k==="must"?F.q.must:(!F.q.must&&F.q.st===k)),text:l,onclick:()=>{
+    if(k==="must"){ F.q.must=!F.q.must; } else { F.q.st=k; F.q.must=false; }
+    drawSq(); applyFilters(); }})));
+  drawSq();
+  $("f-q-text").addEventListener("input",e=>{F.q.text=e.target.value.toLowerCase(); applyFilters();});
+  const groups=[...new Set(O.map(o=>o.grp))];
+  const sel=$("f-o-grp"); sel.append(h("option",{value:"all",text:"All groups"}),...groups.map(g=>h("option",{value:g,text:g})));
+  sel.addEventListener("change",()=>{F.o.grp=sel.value; applyFilters();});
+  chipRow($("f-o-pri"),[["all","Any priority"],["H","H"],["M","M"],["L","L"]],()=>F.o.pri,k=>F.o.pri=k);
+  chipRow($("f-o-st"),[["all","Any status"],...OSTAT],()=>F.o.st,k=>F.o.st=k);
+  const reqHost=$("f-o-req");
+  const drawReq=()=>reqHost.replaceChildren(h("button",{class:"chip",type:"button","aria-pressed":String(F.o.req),text:"Required by brief only",onclick:()=>{F.o.req=!F.o.req; drawReq(); applyFilters();}}));
+  drawReq();
+  $("f-o-text").addEventListener("input",e=>{F.o.text=e.target.value.toLowerCase(); applyFilters();});
+  chipRow($("f-f-sev"),[["all","Any severity"],["should fix","Should fix"],["note","Note"],["ok","OK"]],()=>F.f.sev,k=>F.f.sev=k);
+  chipRow($("f-f-st"),[["all","Any review status"],...FSTAT],()=>F.f.st,k=>F.f.st=k);
+  chipRow($("f-f-my"),[["all","Any outcome"],["fixed","Fixed"],["verified","Verified"],["needs answer","Needs answer"],["resolved by team","Resolved by team"],["open","Open"]],()=>F.f.my,k=>F.f.my=k);
+  $("f-f-text").addEventListener("input",e=>{F.f.text=e.target.value.toLowerCase(); applyFilters();});
+  ["q","o","f","w"].forEach(k=>$("t-"+k).addEventListener("click",()=>showTab(k)));
+  $("add-q-btn").addEventListener("click",()=>addExtra("q",$("add-q-title"),$("add-q-note")));
+  $("add-o-btn").addEventListener("click",()=>addExtra("o",$("add-o-title"),$("add-o-note")));
+  $("copy-md").addEventListener("click",async()=>{
+    const md=markdown(), msg=$("copy-msg");
+    try{ await navigator.clipboard.writeText(md); msg.textContent="Copied."; }
+    catch(e){ const ta=h("textarea",{rows:12,readonly:true}); ta.value=md; $("wrap-body").prepend(ta); ta.select(); msg.textContent="Select and copy the text below."; }
+  });
+  let tab="q"; try{ tab=localStorage.getItem("ohb-tab")||"q"; }catch(e){}
+  showTab(["q","o","f","w"].includes(tab)?tab:"q");
+  refreshAll(); summary(); wrapUp(); applyFilters(); applyReadOnly();
+}
+
+/* ---------- start ---------- */
+build();
+(async()=>{
+  try{
+    if(!window.claude||!claude.use) { applyReadOnly(); return; }
+    const [d,u]=await Promise.all([claude.use("db"), claude.use("user")]);
+    user=u; db=d;
+    if(user){ const me=await user.me(); myId=me.id; const cw=await user.can("data.write"); if(cw===false) readOnly=true; }
+    if(!db){ applyReadOnly(); return; }
+    live=true;
+    const onErr=e=>{ if(e&&e.code==="revoked"){ readOnly=true; applyReadOnly(); } else toast("Live updates stopped: "+((e&&e.message)||"reload the page")); };
+    db.collection("items").onSnapshot(s=>{ const m={}; s.docs.forEach(x=>m[x.id]=x.data()); S.items=m; syncAll(); },onErr);
+    db.collection("comments").orderBy("ts").onSnapshot(s=>{ S.comments=s.docs.map(x=>Object.assign({id:x.id},x.data())); syncAll(); },onErr);
+    db.collection("extra").orderBy("ts").onSnapshot(s=>{ S.extra=s.docs.map(x=>Object.assign({id:x.id},x.data())); syncAll(); },onErr);
+    applyReadOnly();
+  }catch(e){ applyReadOnly(); }
+})();
+</script>

@@ -1,0 +1,4068 @@
+[
+ {
+  "kind": "attr",
+  "name": "Adam",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "DataFrame",
+  "in_labs": true,
+  "cells": [
+   4,
+   16,
+   27,
+   28,
+   34,
+   38,
+   51,
+   65,
+   72,
+   74,
+   75,
+   80,
+   83,
+   85,
+   90,
+   93,
+   96,
+   98,
+   100,
+   103,
+   105,
+   108,
+   112,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "Dense",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "EarlyStopping",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "Explanation",
+  "in_labs": false,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "Input",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "PercentFormatter",
+  "in_labs": false,
+  "cells": [
+   48,
+   56
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "Rectangle",
+  "in_labs": false,
+  "cells": [
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "Sequential",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "Series",
+  "in_labs": false,
+  "cells": [
+   47,
+   87,
+   108,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "T",
+  "in_labs": false,
+  "cells": [
+   20,
+   63,
+   78,
+   85,
+   90,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "TreeExplainer",
+  "in_labs": true,
+  "cells": [
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "abs",
+  "in_labs": false,
+  "cells": [
+   69,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "add_prefix",
+  "in_labs": false,
+  "cells": [
+   20
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "agg",
+  "in_labs": false,
+  "cells": [
+   45,
+   48,
+   51,
+   55,
+   57,
+   60,
+   63,
+   78,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "all",
+  "in_labs": true,
+  "cells": [
+   27,
+   28,
+   35,
+   47
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "allclose",
+  "in_labs": false,
+  "cells": [
+   34,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "any",
+  "in_labs": true,
+  "cells": [
+   27,
+   33,
+   35,
+   47,
+   60,
+   78
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "api",
+  "in_labs": false,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "append",
+  "in_labs": false,
+  "cells": [
+   72,
+   74,
+   75,
+   80,
+   83,
+   93,
+   100,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "apply",
+  "in_labs": true,
+  "cells": [
+   87
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "arange",
+  "in_labs": false,
+  "cells": [
+   48,
+   52,
+   73
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "argmax",
+  "in_labs": false,
+  "cells": [
+   80,
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "argmin",
+  "in_labs": false,
+  "cells": [
+   83,
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "array",
+  "in_labs": true,
+  "cells": [
+   75,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "as_map",
+  "in_labs": false,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "as_pyplot_figure",
+  "in_labs": false,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "asarray",
+  "in_labs": false,
+  "cells": [
+   43
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "assign",
+  "in_labs": true,
+  "cells": [
+   30,
+   35,
+   40,
+   45,
+   87
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "astype",
+  "in_labs": true,
+  "cells": [
+   38,
+   40,
+   51,
+   60,
+   62,
+   65,
+   67,
+   69,
+   78,
+   80,
+   87,
+   103,
+   108,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "axes",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "axhline",
+  "in_labs": false,
+  "cells": [
+   67,
+   90,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "axis",
+  "in_labs": true,
+  "cells": [
+   67
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "axvline",
+  "in_labs": false,
+  "cells": [
+   48,
+   56,
+   83,
+   93,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "bar",
+  "in_labs": true,
+  "cells": [
+   52,
+   67,
+   85,
+   90
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "barh",
+  "in_labs": false,
+  "cells": [
+   48,
+   56,
+   93,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "base_values",
+  "in_labs": false,
+  "cells": [
+   108,
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "callbacks",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "choice",
+  "in_labs": true,
+  "cells": [
+   63
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "clip",
+  "in_labs": false,
+  "cells": [
+   38
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "close",
+  "in_labs": false,
+  "cells": [
+   108,
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "coef_",
+  "in_labs": false,
+  "cells": [
+   52
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "columns",
+  "in_labs": true,
+  "cells": [
+   16,
+   33,
+   38,
+   93,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "compile",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "concat",
+  "in_labs": false,
+  "cells": [
+   20,
+   57,
+   78
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "concatenate",
+  "in_labs": false,
+  "cells": [
+   75,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "contains",
+  "in_labs": true,
+  "cells": [
+   22,
+   35
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "copy",
+  "in_labs": false,
+  "cells": [
+   48,
+   60,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "corr",
+  "in_labs": false,
+  "cells": [
+   48,
+   69
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "corrwith",
+  "in_labs": false,
+  "cells": [
+   69
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "cut",
+  "in_labs": true,
+  "cells": [
+   51,
+   52,
+   60
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "cwd",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "default_rng",
+  "in_labs": false,
+  "cells": [
+   48,
+   63,
+   75,
+   100,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "dependence_plot",
+  "in_labs": false,
+  "cells": [
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "describe",
+  "in_labs": true,
+  "cells": [
+   13
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "div",
+  "in_labs": false,
+  "cells": [
+   40
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "drop",
+  "in_labs": true,
+  "cells": [
+   35,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "drop_duplicates",
+  "in_labs": true,
+  "cells": [
+   35
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "dropna",
+  "in_labs": false,
+  "cells": [
+   38,
+   67,
+   78,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "dtype",
+  "in_labs": false,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "dtypes",
+  "in_labs": false,
+  "cells": [
+   38
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "duplicated",
+  "in_labs": false,
+  "cells": [
+   27,
+   30,
+   35,
+   60
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "eq",
+  "in_labs": false,
+  "cells": [
+   20,
+   28
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "exp",
+  "in_labs": true,
+  "cells": [
+   52
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "explain_instance",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "fillna",
+  "in_labs": true,
+  "cells": [
+   48
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "filterwarnings",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "fit",
+  "in_labs": true,
+  "cells": [
+   52,
+   65,
+   72,
+   75,
+   80,
+   81,
+   83,
+   93,
+   96,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "gcf",
+  "in_labs": false,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "get_dummies",
+  "in_labs": true,
+  "cells": [
+   52
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "glob",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "groupby",
+  "in_labs": false,
+  "cells": [
+   20,
+   30,
+   35,
+   38,
+   40,
+   45,
+   47,
+   48,
+   51,
+   55,
+   56,
+   57,
+   60,
+   62,
+   63,
+   67,
+   75,
+   80,
+   87,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "head",
+  "in_labs": true,
+  "cells": [
+   6,
+   8,
+   11,
+   16,
+   30,
+   34,
+   36,
+   56,
+   57
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "heatmap",
+  "in_labs": true,
+  "cells": [
+   20,
+   48,
+   52,
+   69,
+   90
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "hist",
+  "in_labs": true,
+  "cells": [
+   24,
+   38,
+   78
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "history",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "hlines",
+  "in_labs": false,
+  "cells": [
+   85
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "idxmax",
+  "in_labs": false,
+  "cells": [
+   80,
+   83,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "iloc",
+  "in_labs": true,
+  "cells": [
+   48,
+   63,
+   96,
+   98,
+   111,
+   112,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "index",
+  "in_labs": true,
+  "cells": [
+   24,
+   36,
+   38,
+   47,
+   48,
+   52,
+   57,
+   62,
+   65,
+   67,
+   69,
+   103,
+   105,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "indices",
+  "in_labs": false,
+  "cells": [
+   75,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "info",
+  "in_labs": true,
+  "cells": [
+   9
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "integers",
+  "in_labs": false,
+  "cells": [
+   48,
+   75,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "inverse_transform",
+  "in_labs": false,
+  "cells": [
+   103
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "is_numeric_dtype",
+  "in_labs": false,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "isclose",
+  "in_labs": false,
+  "cells": [
+   63
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "isin",
+  "in_labs": false,
+  "cells": [
+   28,
+   35,
+   45,
+   48,
+   57
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "isna",
+  "in_labs": false,
+  "cells": [
+   16,
+   20,
+   34,
+   63,
+   78
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "items",
+  "in_labs": true,
+  "cells": [
+   4,
+   16,
+   27,
+   33,
+   36,
+   72,
+   74,
+   80,
+   85,
+   90,
+   93,
+   100,
+   105,
+   111,
+   112,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "join",
+  "in_labs": false,
+  "cells": [
+   27,
+   74
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "legend",
+  "in_labs": true,
+  "cells": [
+   38,
+   40,
+   48,
+   52,
+   56,
+   73,
+   83,
+   85,
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "loc",
+  "in_labs": false,
+  "cells": [
+   20,
+   36,
+   45,
+   48,
+   56,
+   57,
+   80,
+   83,
+   85,
+   90,
+   103,
+   105,
+   112,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "map",
+  "in_labs": true,
+  "cells": [
+   20,
+   24,
+   30,
+   34,
+   35,
+   36
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "matrix",
+  "in_labs": true,
+  "cells": [
+   18,
+   38
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "max",
+  "in_labs": false,
+  "cells": [
+   30
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "mean",
+  "in_labs": true,
+  "cells": [
+   20,
+   40,
+   51,
+   57,
+   62,
+   63,
+   67,
+   85,
+   87,
+   100,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "merge",
+  "in_labs": false,
+  "cells": [
+   6,
+   30,
+   35,
+   45,
+   47,
+   51,
+   55,
+   62
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "min",
+  "in_labs": false,
+  "cells": [
+   30,
+   48,
+   55
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "mkdir",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "name",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "nan",
+  "in_labs": true,
+  "cells": [
+   18,
+   33,
+   34,
+   35,
+   63
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "nanpercentile",
+  "in_labs": false,
+  "cells": [
+   48
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "ndim",
+  "in_labs": false,
+  "cells": [
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "ngroups",
+  "in_labs": false,
+  "cells": [
+   30
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "notna",
+  "in_labs": false,
+  "cells": [
+   27,
+   33,
+   35,
+   67
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "nunique",
+  "in_labs": false,
+  "cells": [
+   40,
+   47
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "optimizers",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "parent",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "percentile",
+  "in_labs": false,
+  "cells": [
+   75,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "permutation",
+  "in_labs": false,
+  "cells": [
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "permutations",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "pivot",
+  "in_labs": true,
+  "cells": [
+   48,
+   93
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "pivot_table",
+  "in_labs": true,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "plot",
+  "in_labs": true,
+  "cells": [
+   24,
+   38,
+   40,
+   56,
+   73,
+   83,
+   85,
+   90,
+   93,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "plots",
+  "in_labs": true,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "predict",
+  "in_labs": true,
+  "cells": [
+   83,
+   93
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "predict_proba",
+  "in_labs": true,
+  "cells": [
+   72,
+   75,
+   80,
+   81,
+   93,
+   96,
+   100,
+   108,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "qcut",
+  "in_labs": false,
+  "cells": [
+   67
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "query",
+  "in_labs": false,
+  "cells": [
+   6,
+   45,
+   51,
+   55,
+   60
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "random",
+  "in_labs": true,
+  "cells": [
+   2,
+   48,
+   63,
+   75,
+   100,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "rank",
+  "in_labs": true,
+  "cells": [
+   67,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "ravel",
+  "in_labs": false,
+  "cells": [
+   67,
+   83,
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "read_csv",
+  "in_labs": true,
+  "cells": [
+   4
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "reindex",
+  "in_labs": false,
+  "cells": [
+   20,
+   67,
+   69
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "rename",
+  "in_labs": false,
+  "cells": [
+   6,
+   22,
+   45,
+   47,
+   55,
+   57,
+   62
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "replace",
+  "in_labs": true,
+  "cells": [
+   18,
+   33,
+   35,
+   93
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "reset_index",
+  "in_labs": false,
+  "cells": [
+   48,
+   55,
+   57,
+   62,
+   75,
+   100
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "rolling",
+  "in_labs": false,
+  "cells": [
+   62
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "round",
+  "in_labs": false,
+  "cells": [
+   13,
+   16,
+   20,
+   45,
+   51,
+   55,
+   56,
+   57,
+   60,
+   63,
+   69,
+   72,
+   75,
+   78,
+   80,
+   83,
+   85,
+   87,
+   90,
+   93,
+   96,
+   98,
+   100,
+   105,
+   108,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "savefig",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "scatter",
+  "in_labs": true,
+  "cells": [
+   73
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "score",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "seed",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "select_dtypes",
+  "in_labs": false,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set",
+  "in_labs": true,
+  "cells": [
+   20,
+   24,
+   38,
+   40,
+   48,
+   52,
+   56,
+   73,
+   83,
+   90,
+   93,
+   105
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_index",
+  "in_labs": false,
+  "cells": [
+   20,
+   48,
+   103
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_major_formatter",
+  "in_labs": false,
+  "cells": [
+   48,
+   56
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_option",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_params",
+  "in_labs": false,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_random_seed",
+  "in_labs": false,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_seed",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_theme",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_title",
+  "in_labs": true,
+  "cells": [
+   67,
+   69,
+   78,
+   85,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_xticks",
+  "in_labs": false,
+  "cells": [
+   52,
+   73
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_ylabel",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "set_yticks",
+  "in_labs": false,
+  "cells": [
+   48
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "setdefault",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "shape",
+  "in_labs": true,
+  "cells": [
+   4
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "shift",
+  "in_labs": false,
+  "cells": [
+   62
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "show",
+  "in_labs": true,
+  "cells": [
+   18,
+   20,
+   24,
+   38,
+   40,
+   48,
+   52,
+   56,
+   67,
+   69,
+   73,
+   78,
+   83,
+   85,
+   90,
+   93,
+   105,
+   108,
+   111,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "sign",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "size",
+  "in_labs": true,
+  "cells": [
+   38,
+   40
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "sort_index",
+  "in_labs": false,
+  "cells": [
+   24,
+   35,
+   38
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "sort_values",
+  "in_labs": false,
+  "cells": [
+   4,
+   6,
+   16,
+   30,
+   35,
+   48,
+   56,
+   57,
+   62,
+   69,
+   105,
+   108,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "split",
+  "in_labs": true,
+  "cells": [
+   34
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "sqrt",
+  "in_labs": true,
+  "cells": [
+   43
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "startswith",
+  "in_labs": false,
+  "cells": [
+   35,
+   36
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "statistics_",
+  "in_labs": false,
+  "cells": [
+   78
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "str",
+  "in_labs": false,
+  "cells": [
+   22,
+   33,
+   35
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "strip",
+  "in_labs": false,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "subplots",
+  "in_labs": true,
+  "cells": [
+   20,
+   24,
+   38,
+   40,
+   48,
+   52,
+   56,
+   67,
+   69,
+   73,
+   78,
+   83,
+   90,
+   93,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "sum",
+  "in_labs": true,
+  "cells": [
+   16,
+   24,
+   28,
+   33,
+   35,
+   40,
+   47,
+   48,
+   51,
+   57,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "summary_plot",
+  "in_labs": true,
+  "cells": [
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "suptitle",
+  "in_labs": false,
+  "cells": [
+   56,
+   67,
+   90,
+   93,
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "tail",
+  "in_labs": false,
+  "cells": [
+   63
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "tick_params",
+  "in_labs": false,
+  "cells": [
+   67
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "ticker",
+  "in_labs": false,
+  "cells": [
+   48,
+   56
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "tight_layout",
+  "in_labs": true,
+  "cells": [
+   24,
+   38,
+   52,
+   56,
+   67,
+   78,
+   83,
+   90,
+   93,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "title",
+  "in_labs": true,
+  "cells": [
+   18,
+   38,
+   108
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "to_datetime",
+  "in_labs": false,
+  "cells": [
+   34
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "to_dict",
+  "in_labs": false,
+  "cells": [
+   55,
+   115
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "to_frame",
+  "in_labs": false,
+  "cells": [
+   47
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "to_numeric",
+  "in_labs": false,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "to_numpy",
+  "in_labs": false,
+  "cells": [
+   62,
+   75,
+   83,
+   93,
+   100,
+   103,
+   105,
+   111,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "to_string",
+  "in_labs": false,
+  "cells": [
+   36,
+   69
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "tolist",
+  "in_labs": false,
+  "cells": [
+   36
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "transform",
+  "in_labs": true,
+  "cells": [
+   35,
+   60,
+   62,
+   65,
+   103
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "types",
+  "in_labs": true,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "unstack",
+  "in_labs": false,
+  "cells": [
+   47,
+   51,
+   56,
+   90
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "upper",
+  "in_labs": false,
+  "cells": [
+   111,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "utils",
+  "in_labs": false,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "value_counts",
+  "in_labs": true,
+  "cells": [
+   11,
+   22,
+   24,
+   36,
+   38,
+   56
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "values",
+  "in_labs": true,
+  "cells": [
+   24,
+   33,
+   38,
+   63,
+   67,
+   74,
+   75,
+   93,
+   100,
+   108,
+   111,
+   112
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "waterfall",
+  "in_labs": true,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "where",
+  "in_labs": true,
+  "cells": [
+   35,
+   45,
+   47,
+   55,
+   62,
+   67,
+   111
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "xaxis",
+  "in_labs": false,
+  "cells": [
+   48,
+   56
+  ]
+ },
+ {
+  "kind": "attr",
+  "name": "xs",
+  "in_labs": false,
+  "cells": [
+   85,
+   115
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "LimeTabularExplainer",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "LogisticRegression",
+  "in_labs": true,
+  "cells": [
+   52,
+   72,
+   75,
+   80,
+   81
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "Path",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "RandomForestClassifier",
+  "in_labs": true,
+  "cells": [
+   72,
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "SimpleImputer",
+  "in_labs": false,
+  "cells": [
+   65,
+   98,
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "StandardScaler",
+  "in_labs": true,
+  "cells": [
+   65,
+   98,
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "_scores",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "accuracy_score",
+  "in_labs": true,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "all",
+  "in_labs": true,
+  "cells": [
+   72,
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "always_no",
+  "in_labs": false,
+  "cells": [
+   85,
+   90
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "any",
+  "in_labs": true,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "average_precision_score",
+  "in_labs": false,
+  "cells": [
+   72,
+   75,
+   80,
+   83,
+   87,
+   93,
+   96,
+   100,
+   105
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "best_f1_threshold",
+  "in_labs": false,
+  "cells": [
+   85
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "bool",
+  "in_labs": false,
+  "cells": [
+   27,
+   74,
+   115
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "build_nn",
+  "in_labs": false,
+  "cells": [
+   83,
+   93
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "clone",
+  "in_labs": false,
+  "cells": [
+   93,
+   96,
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "confusion_counts",
+  "in_labs": false,
+  "cells": [
+   90
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "confusion_matrix",
+  "in_labs": true,
+  "cells": [
+   90
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "dict",
+  "in_labs": false,
+  "cells": [
+   78
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "display",
+  "in_labs": false,
+  "cells": [
+   57,
+   78,
+   80,
+   83,
+   85,
+   90,
+   112
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "enumerate",
+  "in_labs": false,
+  "cells": [
+   48,
+   52,
+   93
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "f",
+  "in_labs": true,
+  "cells": [
+   85,
+   90,
+   105
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "f1_score",
+  "in_labs": true,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "float",
+  "in_labs": false,
+  "cells": [
+   34,
+   85,
+   108,
+   115
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "frozenset",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "int",
+  "in_labs": true,
+  "cells": [
+   16,
+   28,
+   35,
+   47,
+   48,
+   83,
+   111
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "is_missing",
+  "in_labs": false,
+  "cells": [
+   20
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "ladder_for",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "last5_rate",
+  "in_labs": false,
+  "cells": [
+   62
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "len",
+  "in_labs": true,
+  "cells": [
+   4,
+   16,
+   28,
+   30,
+   35,
+   40,
+   45,
+   47,
+   48,
+   51,
+   52,
+   63,
+   67,
+   72,
+   73,
+   74,
+   75,
+   83,
+   87,
+   93,
+   100,
+   111,
+   112
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "list",
+  "in_labs": false,
+  "cells": [
+   74,
+   75,
+   93,
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "make",
+  "in_labs": true,
+  "cells": [
+   72,
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "make_pipeline",
+  "in_labs": false,
+  "cells": [
+   65,
+   98,
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "metrics",
+  "in_labs": true,
+  "cells": [
+   85,
+   90
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "min",
+  "in_labs": false,
+  "cells": [
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "next",
+  "in_labs": true,
+  "cells": [
+   36
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "permutation_drop",
+  "in_labs": false,
+  "cells": [
+   105
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "precision_recall_curve",
+  "in_labs": false,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "precision_score",
+  "in_labs": true,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "predict_podium",
+  "in_labs": false,
+  "cells": [
+   115
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "prepare",
+  "in_labs": true,
+  "cells": [
+   72,
+   75,
+   78,
+   93,
+   96,
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "print",
+  "in_labs": true,
+  "cells": [
+   16,
+   22,
+   24,
+   28,
+   30,
+   33,
+   35,
+   36,
+   40,
+   47,
+   48,
+   51,
+   52,
+   55,
+   63,
+   69,
+   72,
+   74,
+   78,
+   85,
+   90,
+   108,
+   111,
+   112,
+   115
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "range",
+  "in_labs": true,
+  "cells": [
+   20,
+   24,
+   48,
+   75,
+   90,
+   100,
+   105
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "recall_score",
+  "in_labs": true,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "refit_scores",
+  "in_labs": false,
+  "cells": [
+   93
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "roc_auc_score",
+  "in_labs": false,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "round",
+  "in_labs": false,
+  "cells": [
+   85,
+   115
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "save",
+  "in_labs": false,
+  "cells": [
+   18,
+   20,
+   24,
+   38,
+   40,
+   48,
+   52,
+   56,
+   67,
+   69,
+   73,
+   78,
+   83,
+   85,
+   90,
+   93,
+   105,
+   108,
+   111,
+   112
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "set",
+  "in_labs": true,
+  "cells": [
+   93
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "sorted",
+  "in_labs": false,
+  "cells": [
+   47,
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "standings_before",
+  "in_labs": false,
+  "cells": [
+   62
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "str",
+  "in_labs": false,
+  "cells": [
+   34,
+   80,
+   83
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "sum",
+  "in_labs": true,
+  "cells": [
+   63,
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "to_raw",
+  "in_labs": false,
+  "cells": [
+   103,
+   112
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "to_scaled",
+  "in_labs": false,
+  "cells": [
+   112,
+   115
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "top3",
+  "in_labs": false,
+  "cells": [
+   57
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "tuple",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "val_pr_auc",
+  "in_labs": false,
+  "cells": [
+   72,
+   74
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "val_preds",
+  "in_labs": false,
+  "cells": [
+   100
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "val_scores",
+  "in_labs": false,
+  "cells": [
+   96,
+   98
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "wilson",
+  "in_labs": false,
+  "cells": [
+   45,
+   48,
+   52,
+   55
+  ]
+ },
+ {
+  "kind": "func",
+  "name": "zip",
+  "in_labs": false,
+  "cells": [
+   56,
+   67,
+   78,
+   83,
+   90,
+   108
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "glob",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "itertools",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "lime.lime_tabular.LimeTabularExplainer",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "matplotlib",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "matplotlib.pyplot",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "missingno",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "numpy",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "pandas",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "pathlib.Path",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "seaborn",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "shap",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.base.clone",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.ensemble.RandomForestClassifier",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.impute.SimpleImputer",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.linear_model.LogisticRegression",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.accuracy_score",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.average_precision_score",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.confusion_matrix",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.f1_score",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.precision_recall_curve",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.precision_score",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.recall_score",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.metrics.roc_auc_score",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.pipeline.make_pipeline",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "sklearn.preprocessing.StandardScaler",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "tensorflow",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "tensorflow.keras",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "tensorflow.keras.layers",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "import",
+  "name": "warnings",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "C",
+  "in_labs": false,
+  "cells": [
+   52
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "activation",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "alpha",
+  "in_labs": false,
+  "cells": [
+   73
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "annot",
+  "in_labs": true,
+  "cells": [
+   48,
+   52,
+   69,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "annot_kws",
+  "in_labs": false,
+  "cells": [
+   69
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "ascending",
+  "in_labs": false,
+  "cells": [
+   4,
+   16,
+   56,
+   57,
+   69,
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "atol",
+  "in_labs": false,
+  "cells": [
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "ax",
+  "in_labs": false,
+  "cells": [
+   20,
+   48,
+   52,
+   69,
+   90,
+   93,
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "axis",
+  "in_labs": true,
+  "cells": [
+   20,
+   47,
+   48,
+   67,
+   78,
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "base_values",
+  "in_labs": false,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "batch_size",
+  "in_labs": true,
+  "cells": [
+   83,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "bbox_inches",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "bbox_to_anchor",
+  "in_labs": false,
+  "cells": [
+   56,
+   85
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "bins",
+  "in_labs": true,
+  "cells": [
+   24,
+   38,
+   78
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "callbacks",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "capsize",
+  "in_labs": false,
+  "cells": [
+   48,
+   52,
+   56
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "category",
+  "in_labs": true,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "cbar",
+  "in_labs": false,
+  "cells": [
+   48,
+   52,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "cbar_kws",
+  "in_labs": false,
+  "cells": [
+   20
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "center",
+  "in_labs": true,
+  "cells": [
+   69
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "class_names",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "class_weight",
+  "in_labs": false,
+  "cells": [
+   80
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "cmap",
+  "in_labs": true,
+  "cells": [
+   20,
+   48,
+   52,
+   69,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "color",
+  "in_labs": true,
+  "cells": [
+   48,
+   52,
+   56,
+   67,
+   73,
+   78,
+   83,
+   85,
+   90,
+   93,
+   105,
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "columns",
+  "in_labs": true,
+  "cells": [
+   6,
+   16,
+   35,
+   45,
+   47,
+   48,
+   55,
+   57,
+   62,
+   65,
+   80,
+   93,
+   103,
+   112,
+   115
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "data",
+  "in_labs": true,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "decade",
+  "in_labs": false,
+  "cells": [
+   87
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "discretize_continuous",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "dpi",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "drop",
+  "in_labs": true,
+  "cells": [
+   62,
+   75,
+   100
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "drop_first",
+  "in_labs": true,
+  "cells": [
+   52
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "edgecolors",
+  "in_labs": false,
+  "cells": [
+   73
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "epochs",
+  "in_labs": true,
+  "cells": [
+   83,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "equal_nan",
+  "in_labs": false,
+  "cells": [
+   63
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "era",
+  "in_labs": false,
+  "cells": [
+   45
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "errors",
+  "in_labs": true,
+  "cells": [
+   33,
+   35
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "exclude",
+  "in_labs": false,
+  "cells": [
+   33
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "exist_ok",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "facecolors",
+  "in_labs": false,
+  "cells": [
+   73
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "feature_names",
+  "in_labs": true,
+  "cells": [
+   111,
+   112
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "figsize",
+  "in_labs": true,
+  "cells": [
+   18,
+   20,
+   24,
+   38,
+   40,
+   48,
+   52,
+   56,
+   67,
+   69,
+   73,
+   78,
+   83,
+   85,
+   90,
+   93,
+   105,
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "fill_value",
+  "in_labs": false,
+  "cells": [
+   47
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "fit_on",
+  "in_labs": false,
+  "cells": [
+   96,
+   100
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "fmt",
+  "in_labs": true,
+  "cells": [
+   48,
+   52,
+   69,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "fontsize",
+  "in_labs": true,
+  "cells": [
+   18,
+   38,
+   73
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "gridspec_kw",
+  "in_labs": false,
+  "cells": [
+   52
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "ha",
+  "in_labs": false,
+  "cells": [
+   73
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "height",
+  "in_labs": true,
+  "cells": [
+   48
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "how",
+  "in_labs": true,
+  "cells": [
+   35,
+   62
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "index",
+  "in_labs": true,
+  "cells": [
+   22,
+   48,
+   65,
+   80,
+   93,
+   103,
+   108,
+   112
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "interaction_index",
+  "in_labs": false,
+  "cells": [
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "keep",
+  "in_labs": true,
+  "cells": [
+   30
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "key",
+  "in_labs": false,
+  "cells": [
+   74
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "label",
+  "in_labs": true,
+  "cells": [
+   38,
+   40,
+   48,
+   52,
+   56,
+   73,
+   83,
+   85
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "labels",
+  "in_labs": true,
+  "cells": [
+   51,
+   52,
+   60,
+   67
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "labelsize",
+  "in_labs": false,
+  "cells": [
+   67
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "legend",
+  "in_labs": true,
+  "cells": [
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "level",
+  "in_labs": true,
+  "cells": [
+   85,
+   115
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "loc",
+  "in_labs": false,
+  "cells": [
+   48,
+   56,
+   73,
+   85,
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "loss",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "ls",
+  "in_labs": false,
+  "cells": [
+   40,
+   48,
+   56,
+   67,
+   83,
+   85,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "lw",
+  "in_labs": false,
+  "cells": [
+   48,
+   56,
+   67,
+   73,
+   83,
+   85,
+   90,
+   93,
+   105,
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "max_depth",
+  "in_labs": true,
+  "cells": [
+   72
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "max_display",
+  "in_labs": false,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "max_iter",
+  "in_labs": true,
+  "cells": [
+   52,
+   72,
+   75,
+   80,
+   81
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "message",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "method",
+  "in_labs": true,
+  "cells": [
+   48,
+   67,
+   69
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "min_periods",
+  "in_labs": false,
+  "cells": [
+   62
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "min_samples_leaf",
+  "in_labs": false,
+  "cells": [
+   72
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "monitor",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "n_estimators",
+  "in_labs": true,
+  "cells": [
+   72,
+   80
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "n_jobs",
+  "in_labs": false,
+  "cells": [
+   72,
+   80
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "na_position",
+  "in_labs": false,
+  "cells": [
+   35
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "name",
+  "in_labs": true,
+  "cells": [
+   47
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "ncol",
+  "in_labs": false,
+  "cells": [
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "normalize",
+  "in_labs": false,
+  "cells": [
+   56
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "num_features",
+  "in_labs": true,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "num_samples",
+  "in_labs": false,
+  "cells": [
+   112
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "observed",
+  "in_labs": false,
+  "cells": [
+   51,
+   60,
+   63
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "on",
+  "in_labs": true,
+  "cells": [
+   6,
+   30,
+   35,
+   45,
+   47,
+   51,
+   55,
+   62
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "optimizer",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "p",
+  "in_labs": false,
+  "cells": [
+   87
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "parents",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "patience",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "plot_type",
+  "in_labs": false,
+  "cells": [
+   108
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "podium",
+  "in_labs": false,
+  "cells": [
+   40,
+   45
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "podium_rate",
+  "in_labs": false,
+  "cells": [
+   60
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "podiums",
+  "in_labs": false,
+  "cells": [
+   60
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "random_state",
+  "in_labs": true,
+  "cells": [
+   72,
+   80,
+   112
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "rate",
+  "in_labs": true,
+  "cells": [
+   57
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "rect",
+  "in_labs": false,
+  "cells": [
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "recursive",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "replace",
+  "in_labs": true,
+  "cells": [
+   63
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "restore_best_weights",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "rot",
+  "in_labs": false,
+  "cells": [
+   85,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "rotation",
+  "in_labs": false,
+  "cells": [
+   73
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "rows",
+  "in_labs": true,
+  "cells": [
+   60
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "s",
+  "in_labs": true,
+  "cells": [
+   73
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "shape",
+  "in_labs": true,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "sharex",
+  "in_labs": false,
+  "cells": [
+   56,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "sharey",
+  "in_labs": false,
+  "cells": [
+   67,
+   83,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "show",
+  "in_labs": true,
+  "cells": [
+   108,
+   111
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "slot",
+  "in_labs": false,
+  "cells": [
+   35
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "sparkline",
+  "in_labs": false,
+  "cells": [
+   18,
+   38
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "stacked",
+  "in_labs": false,
+  "cells": [
+   56
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "starts",
+  "in_labs": true,
+  "cells": [
+   57
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "strategy",
+  "in_labs": true,
+  "cells": [
+   65,
+   98,
+   100
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "style",
+  "in_labs": false,
+  "cells": [
+   2
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "subset",
+  "in_labs": true,
+  "cells": [
+   115
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "suffixes",
+  "in_labs": false,
+  "cells": [
+   6
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "title",
+  "in_labs": true,
+  "cells": [
+   20,
+   24,
+   38,
+   40,
+   48,
+   52,
+   56,
+   73,
+   83,
+   90,
+   93,
+   105
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "upper",
+  "in_labs": false,
+  "cells": [
+   38
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "validate",
+  "in_labs": false,
+  "cells": [
+   62
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "validation_data",
+  "in_labs": false,
+  "cells": [
+   83
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "values",
+  "in_labs": true,
+  "cells": [
+   48,
+   80,
+   93,
+   111
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "verbose",
+  "in_labs": true,
+  "cells": [
+   83,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "vmax",
+  "in_labs": false,
+  "cells": [
+   69
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "vmin",
+  "in_labs": false,
+  "cells": [
+   69
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "width",
+  "in_labs": false,
+  "cells": [
+   52,
+   85,
+   90,
+   105
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "xerr",
+  "in_labs": false,
+  "cells": [
+   48,
+   56,
+   105
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "xlabel",
+  "in_labs": true,
+  "cells": [
+   20,
+   24,
+   38,
+   40,
+   48,
+   52,
+   56,
+   83,
+   90,
+   105
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "xticklabels",
+  "in_labs": false,
+  "cells": [
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "y",
+  "in_labs": true,
+  "cells": [
+   111
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "year",
+  "in_labs": false,
+  "cells": [
+   30
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "yerr",
+  "in_labs": false,
+  "cells": [
+   52
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "ylabel",
+  "in_labs": true,
+  "cells": [
+   24,
+   40,
+   48,
+   52,
+   56,
+   73,
+   90,
+   93
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "ylim",
+  "in_labs": false,
+  "cells": [
+   85,
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "yticklabels",
+  "in_labs": false,
+  "cells": [
+   90
+  ]
+ },
+ {
+  "kind": "kwarg",
+  "name": "zero_division",
+  "in_labs": false,
+  "cells": [
+   80
+  ]
+ }
+]

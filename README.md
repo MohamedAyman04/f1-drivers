@@ -6,7 +6,7 @@ information available after qualifying and before the race start**.
 ## Team resources
 
 - **Office-hours board** (questions for the instructor, out-of-scope list, shared comments and ticks; team members only): https://claude.ai/artifact/3hor4cmonHZQ4vhWBZWH8r
-- **Review plan:** `REVIEW_PLAN.md`
+- **Review of the notebook** (2026-10-14): `REVIEW_PLAN.md` (plan and status), `REVIEW_FINDINGS.md` (requirements check and verification results), `OUT_OF_SCOPE.md` (everything the notebook uses that Labs 1–4 do not teach), `review/` (independent re-computation and the scripts behind every fix)
 
 ## Task framing
 
@@ -25,13 +25,13 @@ information available after qualifying and before the race start**.
 | Decision | Outcome |
 |---|---|
 | Dedup (85 shared-drive pairs, all pre-1979) | Keep the car the driver **started** in; fallback best `positionOrder` |
-| `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,566 non-starters excluded |
+| `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,642 non-starters excluded (1,563 with grid 0 and 0 laps, plus 79 withdrawn / did-not-qualify / 107%-rule entries that still show a grid slot) |
 | Status taxonomy | `finished/accident/driver/regulatory/other`; everything else (incl. unclear reasons) counts as mechanical (D24) |
 | Qualifying coverage | Qualifying times not used as features (absent pre-1994); `grid` is the qualifying result after penalties. No era/year feature |
-| Indianapolis 500 (1950–60) | Flagged; excluded from home-race analysis **and removed from the modeling table** (M1) |
+| Indianapolis 500 (1950–60) | Flagged; excluded from Q1 and the home-race analysis **and removed from the modeling table** (M1) |
 | Features | Chosen by adding one group at a time from 11 candidates (kept if validation PR-AUC rises ≥ 0.005 for LR and RF, D28/D29): `grid` + driver standings after the previous round (`drv_pos`, `drv_pts_share`, `drv_wins`) |
 | Preprocessing | `SimpleImputer(median)` + `StandardScaler`, fit on train only |
-| Final model | Shallow NN (best validation PR-AUC 0.727, tied with RF 0.726). Test PR-AUC: RF 0.718, LR 0.708, NN 0.699, grid-only baseline 0.647 |
+| Final model | Shallow NN (best validation PR-AUC 0.728, tied with RF 0.725). Test PR-AUC: RF 0.721, LR 0.708, NN 0.704, grid-only baseline 0.647 |
 
 ## Data
 
@@ -78,16 +78,17 @@ so Internet must be **On**. Figures regenerate into `/kaggle/working/figures/`.
 | 8 | Data-engineering questions Q1–Q3 (multi-hop joins, Wilson intervals, logistic regression) |
 | 9–11 | Modeling table + split, 11 past-only candidates (leakage-checked), imputer/scaler, feature selection |
 | 12–14 | Baseline / LR / RF / shallow NN, tuned on validation; test scored once, confusion matrices |
-| 15 | Feature-group ablation; two preprocessing-order experiments |
+| 15 | Feature-group ablation (all three models; selected features and all 11 candidates); two preprocessing-order experiments with a paired bootstrap |
 | 16 | XAI: permutation importance (all models), SHAP global + waterfall, LIME |
 | 17–18 | Inference function (complete + partial record); limitations |
 
-Still to do: the PDF report.
+The report is `report/main.tex` (compile to `report/main.pdf`, for example on Overleaf).
 
 ## Toolkit
 
-Everything comes from course Labs 1–4 (`pandas/numpy/matplotlib/seaborn/missingno`,
-`scikit-learn`, `TensorFlow/Keras`, `shap`/`lime`). Anything beyond the labs is tagged
-**[beyond labs]** with a one-line justification. See `PLAN.md` §0.3 for the full mapping.
+The core stack is the course toolkit (`pandas/numpy/matplotlib/seaborn/missingno`, `scikit-learn`,
+`TensorFlow/Keras`, `shap`/`lime`). The notebook also uses methods and tools the labs do not teach (for example
+`merge`/`groupby`, Wilson intervals, PR-AUC/ROC-AUC, permutation importance, a paired bootstrap). They are listed with
+where they are used and why in `OUT_OF_SCOPE.md`.
 
 Deadline: **18 Oct 2026, 23:59** — Kaggle link + repo + PDF report.

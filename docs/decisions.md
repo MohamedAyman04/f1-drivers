@@ -360,3 +360,14 @@ Preprocessing-order significance (paired bootstrap over 2,000 redraws of the val
 cell added to notebook §15.2 on 2026-10-14): leaky fit vs train-only, LR diff −0.00007 (95% CI [−0.00034, +0.00024], p = 0.69),
 RF −0.00040 ([−0.00120, +0.00032], p = 0.29); scale→impute vs impute→scale, LR +0.00002 (p = 0.99),
 RF 0 (p = 1). None is significant.
+
+## Review addendum (2026-10-14): fixes from the independent review
+
+Details and evidence in `REVIEW_FINDINGS.md`; every notebook edit is replayable from `review/apply_fixes.py` and `review/apply_fixes2.py`.
+
+- **Supersedes the non-starter count in D4/M1.** Entries with status `Withdrew`, `Did not qualify`, `Did not prequalify` or `107% Rule` and 0 laps are now also non-starters even when the data shows a grid slot (79 more rows). The 1,566 / 1,563 figures above are historical.
+- **Q1 uses the same rows as the rest** (non-starters and the Indy 500 removed).
+- **Neural network:** epoch cap raised from 200 to 1,000 so early stopping (patience 15, validation loss) ends training.
+- **Ablation** now covers the kept groups for all three models and every candidate group for LR and RF, on validation and test.
+- **Feature selection:** all 120 group orders were tried; the selected set changes with the order, only "driver standings on top of grid" is stable (V9).
+- **Metrics:** all six metrics are plotted and discussed, with an "always no podium" reference row.
