@@ -1,42 +1,38 @@
 # CSEN903 Milestone 1 - Formula 1 Podium Prediction Companion
-# Pip requirements for a fresh virtualenv (tested on Python 3.13)
+# Pip requirements for a fresh virtualenv (tested on Python 3.13; TensorFlow does not support every new Python release)
 #
 # SETUP:
-#   python3 -m venv .venv
+#   python3.13 -m venv .venv
 #   source .venv/bin/activate          (Windows: .venv\Scripts\activate)
 #   python -m pip install --upgrade pip
 #   python -m pip install -r environment.txt
 #   python -m ipykernel install --user --name=csen903
 #
-# VERIFY:
-#   python scripts/build_db.py         (rebuilds data/f1.db from data/raw/*.csv)
+# RUN:
+#   jupyter lab notebooks/f1_podium_prediction.ipynb   (then Restart & Run All, ~20 min on CPU)
+#
+# Last verified 2026-10-14 (full Run All, 0 errors) with: numpy 2.5.4, pandas 3.0.6, scikit-learn 1.9.1,
+# tensorflow 2.21.0, shap 0.53.0, lime 0.2.0.1, missingno 0.5.2
 
-# --- Core data stack ---
+# --- Core data stack (Lab 1) ---
 numpy>=2.0
 pandas>=2.2
-scipy>=1.13
 
-# --- Visualization / EDA ---
+# --- Visualization / EDA (Lab 1) ---
 matplotlib>=3.9
 seaborn>=0.13
+missingno>=0.5
 
-# --- Classical ML ---
+# --- Classical ML (Labs 2, 4) ---
 scikit-learn>=1.5
 
-# --- Model interpretation (XAI) ---
+# --- Shallow neural network (Lab 3) ---
+tensorflow>=2.16
+
+# --- Model interpretation / XAI (Lab 4) ---
 shap>=0.46
 lime>=0.2.0.1
 
-# --- Notebook / tooling ---
+# --- Notebook tooling ---
 jupyterlab>=4.2
 ipykernel>=6.29
-pyarrow>=17.0
-
-# --- Misc ---
-pypdf>=6.0
-
-# --- Shallow neural network ---
-# The extra index serves CPU-only wheels (~200 MB instead of the ~900 MB CUDA build).
-# torch is pinned to a "+cpu" build so pip cannot silently pick the CUDA wheel from PyPI.
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.14.1+cpu
