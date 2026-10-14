@@ -356,7 +356,7 @@ NN 0.699 (baseline 0.647). The final model is chosen on validation, so it is the
 XAI stays on the RF (TreeExplainer exact). The chosen forest predicts single-threaded so a score that
 equals the threshold cannot flip between tables.
 
-Preprocessing-order significance (paired bootstrap over 2,000 redraws of the validation races, computed
-outside the notebook): leaky fit vs train-only, LR diff −0.00007 (95% CI [−0.00034, +0.00024], p = 0.69),
+Preprocessing-order significance (paired bootstrap over 2,000 redraws of the validation races, seed 0;
+cell added to notebook §15.2 on 2026-10-14): leaky fit vs train-only, LR diff −0.00007 (95% CI [−0.00034, +0.00024], p = 0.69),
 RF −0.00040 ([−0.00120, +0.00032], p = 0.29); scale→impute vs impute→scale, LR +0.00002 (p = 0.99),
 RF 0 (p = 1). None is significant.

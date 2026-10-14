@@ -1,0 +1,48 @@
+\begin{thebibliography}{1}
+
+\bibitem{breiman2001}
+Leo Breiman.
+\newblock Random forests.
+\newblock {\em Machine Learning}, 45(1):5--32, 2001.
+
+\bibitem{efron1993}
+Bradley Efron and Robert~J. Tibshirani.
+\newblock {\em An Introduction to the Bootstrap}.
+\newblock Chapman \& Hall, New York, 1993.
+
+\bibitem{lundberg2017}
+Scott~M. Lundberg and Su-In Lee.
+\newblock A unified approach to interpreting model predictions.
+\newblock In {\em Advances in Neural Information Processing Systems 30 (NeurIPS
+  2017)}, pages 4765--4774, 2017.
+
+\bibitem{sklearn}
+Fabian Pedregosa, Ga{\"e}l Varoquaux, Alexandre Gramfort, Vincent Michel,
+  Bertrand Thirion, Olivier Grisel, Mathieu Blondel, Peter Prettenhofer, Ron
+  Weiss, Vincent Dubourg, Jake Vanderplas, Alexandre Passos, David Cournapeau,
+  Matthieu Brucher, Matthieu Perrot, and {\'E}douard Duchesnay.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
+
+\bibitem{f1dataset}
+Rohan Rao.
+\newblock Formula 1 world championship (1950--2024).
+\newblock Kaggle dataset,
+  \url{https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020},
+  2024.
+\newblock Based on the Ergast Developer API.
+
+\bibitem{ribeiro2016}
+Marco~Tulio Ribeiro, Sameer Singh, and Carlos Guestrin.
+\newblock ``{W}hy should {I} trust you?'': Explaining the predictions of any
+  classifier.
+\newblock In {\em Proceedings of the 22nd ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, pages 1135--1144, 2016.
+
+\bibitem{wilson1927}
+Edwin~B. Wilson.
+\newblock Probable inference, the law of succession, and statistical inference.
+\newblock {\em Journal of the American Statistical Association},
+  22(158):209--212, 1927.
+
+\end{thebibliography}

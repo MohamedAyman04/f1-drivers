@@ -14,6 +14,7 @@
 \usepackage{amsmath}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\usepackage{url}
 \usepackage[hidelinks]{hyperref}
 
 \graphicspath{{figures/}}
@@ -56,11 +57,11 @@ Permutation importance, SHAP and LIME show that the models rely mostly on the st
 \paragraph{Task.} The unit of analysis is one driver entering one race, identified by \code{(raceId, driverId)}. The target is binary: \code{podium = 1} if \code{positionOrder} $\le 3$, otherwise 0.
 The prediction is made \textbf{after qualifying and before the race starts}. Anything that is only known during or after the race (finishing position, points, laps, race time, fastest lap, retirement status, standings after the race) is \emph{leakage} and is never used as an input.
 
-\paragraph{Dataset.} The Kaggle/Ergast \textit{Formula 1 World Championship (1950--2024)} dataset: 14 relational CSV tables.
+\paragraph{Dataset.} The Kaggle/Ergast \textit{Formula 1 World Championship (1950--2024)} dataset~\cite{f1dataset}: 14 relational CSV tables.
 \code{results} is the central table (one row per driver per race); its ID columns point to \code{races}, \code{drivers}, \code{constructors} (teams) and \code{status}, and \code{races} points to \code{circuits}.
 The raw files are never modified: every cleaning step works on in-memory copies.
 
-\paragraph{Tools.} Following the course labs: pandas, numpy, matplotlib, seaborn and missingno (Lab~1), scikit-learn (Lab~2), TensorFlow/Keras (Lab~3), shap and lime (Lab~4).
+\paragraph{Tools.} pandas, numpy, matplotlib, seaborn and missingno for data handling and plots; scikit-learn~\cite{sklearn} for the statistical models; TensorFlow/Keras for the neural network; shap and lime for the explanations.
 The notebook runs top to bottom with a single \textit{Run All}, on Kaggle or locally.
 
 %==============================================================================
@@ -68,7 +69,7 @@ The notebook runs top to bottom with a single \textit{Run All}, on Kaggle or loc
 
 \subsection{First look}
 Each table was loaded with a plain \code{pd.read\_csv}, letting pandas infer the column types.
-The Lab~1 routine (\code{head}, \code{info}, \code{describe}) on \code{results} immediately exposed the main data-quality issue: \code{position}, \code{milliseconds}, \code{fastestLap}, \code{rank} and \code{fastestLapSpeed} contain numbers but were read as text.
+A standard first inspection (\code{head}, \code{info}, \code{describe}) of \code{results} immediately exposed the main data-quality issue: \code{position}, \code{milliseconds}, \code{fastestLap}, \code{rank} and \code{fastestLapSpeed} contain numbers but were read as text.
 The reason is the sentinel \verb|\N|, which the dataset uses instead of an empty cell; \code{position} alone contains 10{,}953 of them.
 Because a sentinel is a real string, \code{isnull()} does not see it.
 
@@ -204,7 +205,7 @@ The \textbf{secondary metrics} are ROC-AUC (overall separation of the two classe
 %==============================================================================
 \section{Data-engineering questions}
 
-Each answer joins several tables. After every join the notebook asserts that the number of rows did not change, so no join duplicated rows. Rates are given with 95\% Wilson intervals, which stay sensible for small samples.
+Each answer joins several tables. After every join the notebook asserts that the number of rows did not change, so no join duplicated rows. Rates are given with 95\% Wilson intervals~\cite{wilson1927}, which stay sensible for small samples.
 
 \subsection{Q1: Which circuits convert a front-row start into a podium most often, and did that change after 2014?}
 
@@ -233,7 +234,7 @@ The ranking \textbf{changed completely}: the Spearman rank correlation between t
 \textbf{Grain:} one start (non-starters and the Indianapolis~500 excluded): 24{,}724 starts, 1{,}944 of them at home (7.9\%).
 \textbf{Missingness:} every driver has a home country (asserted).
 \textbf{Cutoff:} starting position and home status are known before the start.
-To control for starting position, podium rates are compared \emph{within} starting-position groups (pole, 2--3, 4--6, 7--10, 11+), and the home-minus-away gaps are averaged, weighted by home starts. A logistic regression (Lab~2) of podium on home, starting group and era gives the home effect as an odds ratio.
+To control for starting position, podium rates are compared \emph{within} starting-position groups (pole, 2--3, 4--6, 7--10, 11+), and the home-minus-away gaps are averaged, weighted by home starts. A logistic regression of podium on home, starting group and era gives the home effect as an odds ratio.
 
 \begin{table}[H]
 \centering\small
@@ -325,7 +326,7 @@ Test & 2022--2024 & 1{,}356 & 204 & 15.0\% & final scores, used once \\
 \end{tabular}
 \end{table}
 
-\paragraph{Why split by season.} The task is to predict future races. A random split (Lab~2's \code{train\_test\_split}) would put drivers from the same race on both sides, and the model would be trained on seasons later than the ones it is tested on. Both make scores look better than they are. Cutting by season mimics real use. The validation block (4 seasons, 243 podiums) is large enough to compare models, and the test block covers the newest regulations (2022--2024).
+\paragraph{Why split by season.} The task is to predict future races. A random split (\code{train\_test\_split}) would put drivers from the same race on both sides, and the model would be trained on seasons later than the ones it is tested on. Both make scores look better than they are. Cutting by season mimics real use. The validation block (4 seasons, 243 podiums) is large enough to compare models, and the test block covers the newest regulations (2022--2024).
 
 %==============================================================================
 \section{Feature engineering and selection}
@@ -412,8 +413,8 @@ A limitation of this method is that the result can depend on the order of the gr
 \section{Preprocessing}\label{sec:prep}
 
 \begin{enumerate}
-\item \textbf{Imputation (Lab~1):} missing values (round~1 standings, rookies) are filled with the \textbf{median} of the training rows (\code{SimpleImputer}). The median is robust to skewed columns such as wins. Fill values: grid 12, \code{drv\_pos} 12, \code{drv\_pts\_share} 0.077, \code{drv\_wins} 0.
-\item \textbf{Scaling (Lab~3):} \code{StandardScaler} gives each feature mean 0 and standard deviation 1, so large-valued features (grid 1--34, positions up to 102) do not dominate small ones (shares 0--1). Scaling matters for logistic regression and the neural network; the forest is unaffected, but every model receives identical inputs so the comparison is fair.
+\item \textbf{Imputation:} missing values (round~1 standings, rookies) are filled with the \textbf{median} of the training rows (\code{SimpleImputer}). The median is robust to skewed columns such as wins. Fill values: grid 12, \code{drv\_pos} 12, \code{drv\_pts\_share} 0.077, \code{drv\_wins} 0.
+\item \textbf{Scaling:} \code{StandardScaler} gives each feature mean 0 and standard deviation 1, so large-valued features (grid 1--34, positions up to 102) do not dominate small ones (shares 0--1). Scaling matters for logistic regression and the neural network; the forest is unaffected, but every model receives identical inputs so the comparison is fair.
 \end{enumerate}
 Both steps are fit on the \textbf{training seasons only} and then applied unchanged to validation and test. \fig{fig:scaling} shows the effect: scaling shifts and stretches the values but keeps the shape of the distribution (for example the spike at \code{drv\_pts\_share} = 0, when drivers have no points yet). Training data ends up with mean 0 and std 1; test does not (means between $-0.27$ and $+0.23$), which confirms the scaler was not refit on it.
 
@@ -431,9 +432,9 @@ All models use the same rows and the same four inputs, so their scores are direc
 
 \begin{itemize}
 \item \textbf{Baseline: logistic regression on \code{grid} only.} The simplest reasonable model. Any other model must beat it to justify its extra complexity.
-\item \textbf{Logistic regression} (Lab~2): a weighted sum of the inputs passed through a sigmoid, giving a probability. It is fast and interpretable, but it can only learn effects that keep going in one direction.
-\item \textbf{Random forest} (Lab~4): 300 decision trees, each trained on a random sample of rows and features; their votes are averaged. It learns curved effects and interactions, but it is harder to interpret and its probabilities are coarse.
-\item \textbf{Shallow neural network} (Lab~3, Keras): one or two hidden \code{Dense} ReLU layers and a single sigmoid output neuron, trained with binary cross-entropy and Adam. Early stopping on validation loss (patience 15, best weights restored) guards against overfitting. It is flexible but a black box, and it depends on scaling and random initialisation.
+\item \textbf{Logistic regression:} a weighted sum of the inputs passed through a sigmoid, giving a probability. It is fast and interpretable, but it can only learn effects that keep going in one direction.
+\item \textbf{Random forest}~\cite{breiman2001}\textbf{:} 300 decision trees, each trained on a random sample of rows and features; their votes are averaged. It learns curved effects and interactions, but it is harder to interpret and its probabilities are coarse.
+\item \textbf{Shallow neural network} (Keras): one or two hidden \code{Dense} ReLU layers and a single sigmoid output neuron, trained with binary cross-entropy and Adam. Early stopping on validation loss (patience 15, best weights restored) guards against overfitting. It is flexible but a black box, and it depends on scaling and random initialisation.
 \end{itemize}
 
 \paragraph{Tuning (validation only).} Each combination of class weighting (none / \code{balanced}) and model settings was trained, and the one with the best validation PR-AUC was kept (\tab{tab:tuning}). The decision threshold of each model is the one that maximises F1 on validation: baseline 0.427, logistic regression 0.399, random forest 0.431, network 0.329.
@@ -554,7 +555,7 @@ Only the preprocessing changes; the models and their settings are fixed. Scores 
 
 \begin{table}[H]
 \centering\small
-\caption{Preprocessing-order experiments (validation PR-AUC). $p$-values from a paired bootstrap over 2{,}000 redraws of the validation races.}
+\caption{Preprocessing-order experiments (validation PR-AUC). $p$-values from a paired bootstrap~\cite{efron1993} over 2{,}000 redraws of the validation races.}
 \label{tab:order}
 \begin{tabular}{llrrrr}
 \toprule
@@ -580,10 +581,10 @@ Experiment & Model & Used order & Alternative & Difference & $p$ \\
 \fbox{\parbox{0.92\linewidth}{\textbf{Explanations are not causal effects.} A feature being important to a model means the model \emph{relies on it to make predictions}. It is not evidence that the feature \emph{causes} podium finishes. For example, a front grid slot is mostly a sign of a fast car, and the fast car is what produces podiums. Correlated inputs (the three standings columns) share the credit, and how they share it depends on the method.}}
 \end{center}
 
-The explanations use the \textbf{validation rows} (2018--2021), so the test set stays unseen until final scoring. Inputs are shown in their original units (the scaling is undone for display only). The detailed SHAP and LIME plots use the \textbf{random forest}: it is tied for the best validation PR-AUC, and \code{TreeExplainer} (Lab~4) computes exact SHAP values for trees.
+The explanations use the \textbf{validation rows} (2018--2021), so the test set stays unseen until final scoring. Inputs are shown in their original units (the scaling is undone for display only). The detailed SHAP and LIME plots use the \textbf{random forest}: it is tied for the best validation PR-AUC, and \code{TreeExplainer} computes exact SHAP values for trees.
 
 \subsection{Global: permutation importance}
-One column of the validation rows is shuffled, which breaks its link to the target while keeping its distribution. The trained model is then rescored without retraining. The drop in validation PR-AUC, averaged over 10 shuffles, measures how much the model relies on that column.
+Permutation importance~\cite{breiman2001} shuffles one column of the validation rows, which breaks its link to the target while keeping its distribution. The trained model is then rescored without retraining. The drop in validation PR-AUC, averaged over 10 shuffles, measures how much the model relies on that column.
 
 \begin{table}[H]
 \centering\small
@@ -611,7 +612,7 @@ Feature & Baseline & Logistic regression & Random forest & Neural network \\
 \textbf{Interpretation.} The grid dominates for every model. Each model relies on a \emph{different} standings column: the forest on \code{drv\_pos}, logistic regression on \code{drv\_pts\_share}, and the network on \code{drv\_wins}. These columns all describe how the driver is doing this season, so a model can take that information from any of them. For the same reason, permutation importance understates correlated inputs: ``small'' means ``adds little beyond the other inputs'', not ``carries no information''.
 
 \subsection{Global: SHAP}
-For each prediction, SHAP splits \emph{prediction $-$ average prediction} into one contribution per input; the contributions add up exactly to the model's output (verified in the notebook). The base value (average predicted probability) is 0.133.
+For each prediction, SHAP~\cite{lundberg2017} splits \emph{prediction $-$ average prediction} into one contribution per input; the contributions add up exactly to the model's output (verified in the notebook). The base value (average predicted probability) is 0.133.
 
 \begin{figure}[H]
 \centering
@@ -632,7 +633,7 @@ For each prediction, SHAP splits \emph{prediction $-$ average prediction} into o
 SHAP and permutation importance rank the forest's features in the same order, although they measure different things: lost ranking quality vs.\ how far an input moves the probability.
 
 \subsection{Local: SHAP waterfall and LIME}
-Two validation rows were selected by rule rather than by hand: the true podium finisher the forest was most sure about (\emph{hit}) and the one it was least sure about (\emph{miss}). LIME (Lab~4) perturbs the row many times, asks the forest about each copy, and fits a small linear model around the row.
+Two validation rows were selected by rule rather than by hand: the true podium finisher the forest was most sure about (\emph{hit}) and the one it was least sure about (\emph{miss}). LIME~\cite{ribeiro2016} perturbs the row many times, asks the forest about each copy, and fits a small linear model around the row.
 
 \begin{figure}[H]
 \centering
@@ -707,8 +708,11 @@ The data-engineering questions show that front-row starts convert to podiums far
 For prediction, the starting grid plus the driver's championship standings before the race are enough: logistic regression, a random forest and a shallow neural network all clearly beat the grid-only baseline (test PR-AUC 0.70--0.72 vs.\ 0.647) and perform about the same.
 Ablation and XAI agree that the grid carries most of the signal, with the season standings adding a consistent but smaller contribution.
 
+\bibliographystyle{plain}
+\bibliography{references}
+
 \appendix
 \section{Reproducibility and decision log}
-The notebook runs top to bottom with \textit{Run All}; on Kaggle the CSV path is detected automatically, and the first cell installs \code{shap}, \code{lime} and \code{missingno}. All random seeds are fixed to 42. Every design decision, including the ones superseded during the project, is recorded with its date and evidence in \code{docs/decisions.md}. The $p$-values in \tab{tab:order} come from a supplementary paired-bootstrap run recorded there (D29).
+The notebook runs top to bottom with \textit{Run All}; on Kaggle the CSV path is detected automatically, and the first cell installs \code{shap}, \code{lime} and \code{missingno}. All random seeds are fixed (42 throughout; 0 for the bootstrap redraws). Every design decision, including the ones superseded during the project, is recorded with its date and evidence in \code{docs/decisions.md}. The $p$-values in \tab{tab:order} are computed in the notebook (Section~15.2) with a paired bootstrap over 2{,}000 redraws of the validation races.
 
 \end{document}
