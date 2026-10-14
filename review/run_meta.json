@@ -1,0 +1,5 @@
+{
+ "v17": "Four complete runs of the fixed notebook gave identical printed results in every shared cell: two started in parallel, a third later, and a fourth on the notebook rebased onto the team's latest commit (117 cells, about 14 minutes each); only process IDs in TensorFlow log lines differed. This is on one machine (CPU, TensorFlow 2.21); TensorFlow's oneDNN warns that other CPUs can change the last digits.",
+ "v17a": "None needed. Seeds are fixed for numpy, TensorFlow and every model; run it once on Kaggle before submitting.",
+ "runall": "Four full runs on 2026-10-14 completed with 0 errors in 57 code cells (about 14 min each on a 20-core CPU) with identical outputs."
+}
