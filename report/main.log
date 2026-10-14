@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.16)  14 OCT 2026 20:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.16)  14 OCT 2026 21:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -380,7 +380,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 \Hy@SectionHShift=\skip58
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 33.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 35.
  (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
@@ -389,24 +389,24 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -442,13 +442,13 @@ LaTeX Font Info:    ... okay on input line 33.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 33.
-Package microtype Info: Applying patch `item' on input line 33.
-Package microtype Info: Applying patch `toc' on input line 33.
-Package microtype Info: Applying patch `eqnum' on input line 33.
-Package microtype Info: Applying patch `footnote' on input line 33.
-Package microtype Info: Applying patch `verbatim' on input line 33.
-LaTeX Info: Redefining \microtypesetup on input line 33.
+LaTeX Info: Redefining \microtypecontext on input line 35.
+Package microtype Info: Applying patch `item' on input line 35.
+Package microtype Info: Applying patch `toc' on input line 35.
+Package microtype Info: Applying patch `eqnum' on input line 35.
+Package microtype Info: Applying patch `footnote' on input line 35.
+Package microtype Info: Applying patch `verbatim' on input line 35.
+LaTeX Info: Redefining \microtypesetup on input line 35.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -483,34 +483,34 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 33.
+Package hyperref Info: Link coloring OFF on input line 35.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 35.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 37.
  (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 35.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 37.
  (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 35.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 37.
  (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 35.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 37.
  (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 35.
+(Font)              <12> on input line 37.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 35.
+(Font)              <8> on input line 37.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 35.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 38.
+(Font)              <6> on input line 37.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 40.
  (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -519,11 +519,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 44.
+(Font)              <10> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 44.
+(Font)              <7> on input line 46.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 44.
+(Font)              <5> on input line 46.
  (main.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 6.
@@ -537,38 +537,38 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 <figures/fig_01_msno_before_results.png, id=178, 737.6358pt x 323.7696pt>
 File: figures/fig_01_msno_before_results.png Graphic file (type png)
 <use figures/fig_01_msno_before_results.png>
-Package pdftex.def Info: figures/fig_01_msno_before_results.png  used on input line 100.
+Package pdftex.def Info: figures/fig_01_msno_before_results.png  used on input line 102.
 (pdftex.def)             Requested size: 228.64882pt x 100.35765pt.
 <figures/fig_01_msno_before_qualifying.png, id=180, 727.0362pt x 311.7246pt>
 File: figures/fig_01_msno_before_qualifying.png Graphic file (type png)
 <use figures/fig_01_msno_before_qualifying.png>
-Package pdftex.def Info: figures/fig_01_msno_before_qualifying.png  used on input line 101.
+Package pdftex.def Info: figures/fig_01_msno_before_qualifying.png  used on input line 103.
 (pdftex.def)             Requested size: 228.64882pt x 98.03204pt.
  [3]
 <figures/fig_02_missing_by_season.png, id=193, 899.0388pt x 256.7994pt>
 File: figures/fig_02_missing_by_season.png Graphic file (type png)
 <use figures/fig_02_missing_by_season.png>
-Package pdftex.def Info: figures/fig_02_missing_by_season.png  used on input line 108.
+Package pdftex.def Info: figures/fig_02_missing_by_season.png  used on input line 110.
 (pdftex.def)             Requested size: 466.62503pt x 133.28568pt.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 115.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 117.
  (C:\Users\abdel\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 <figures/fig_03_grid_and_entries.png, id=195, 1002.144pt x 277.5168pt>
 File: figures/fig_03_grid_and_entries.png Graphic file (type png)
 <use figures/fig_03_grid_and_entries.png>
-Package pdftex.def Info: figures/fig_03_grid_and_entries.png  used on input line 124.
+Package pdftex.def Info: figures/fig_03_grid_and_entries.png  used on input line 126.
 (pdftex.def)             Requested size: 466.62503pt x 129.21759pt.
  [4{C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc} <./figures/fig_01_msno_before_results.png> <./figures/fig_01_msno_before_qualifying.png> <./figures/fig_02_missing_by_season.png>]
-Underfull \hbox (badness 1571) in paragraph at lines 132--133
+Underfull \hbox (badness 1571) in paragraph at lines 134--135
 []\T1/lmr/bx/n/10.95 (+20) Foreign keys. \T1/lmr/m/n/10.95 (+20) All 22 foreign-key re-la-tions rec-on-cile: ev-ery \T1/lmtt/m/n/10.95 raceId\T1/lmr/m/n/10.95 (+20) , \T1/lmtt/m/n/10.95 driverId\T1/lmr/m/n/10.95 (+20) ,
  []
 
 
-LaTeX Warning: \verb may be unreliable inside tabularx on input line 159.
+LaTeX Warning: \verb may be unreliable inside tabularx on input line 161.
 
 
-Underfull \hbox (badness 1371) in paragraph at lines 159--159
+Underfull \hbox (badness 1371) in paragraph at lines 161--161
 []|\T1/lmtt/m/n/10 races.date\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 drivers.dob $\OMS/lmsy/m/n/10 !$ \T1/lmr/m/n/10 (+20) date-time. Lap times and du-ra-tions
  []
 
@@ -576,154 +576,156 @@ Underfull \hbox (badness 1371) in paragraph at lines 159--159
 <figures/fig_04_msno_after_results.png, id=215, 737.6358pt x 323.7696pt>
 File: figures/fig_04_msno_after_results.png Graphic file (type png)
 <use figures/fig_04_msno_after_results.png>
-Package pdftex.def Info: figures/fig_04_msno_after_results.png  used on input line 166.
+Package pdftex.def Info: figures/fig_04_msno_after_results.png  used on input line 168.
 (pdftex.def)             Requested size: 349.96877pt x 153.60936pt.
 <figures/fig_05_after_cleaning.png, id=216, 1001.1804pt x 277.5168pt>
 File: figures/fig_05_after_cleaning.png Graphic file (type png)
 <use figures/fig_05_after_cleaning.png>
-Package pdftex.def Info: figures/fig_05_after_cleaning.png  used on input line 167.
+Package pdftex.def Info: figures/fig_05_after_cleaning.png  used on input line 169.
 (pdftex.def)             Requested size: 466.62503pt x 129.34462pt.
-<figures/fig_06_podium_rate.png, id=218, 732.8178pt x 259.2084pt>
+ [6 <./figures/fig_04_msno_after_results.png> <./figures/fig_05_after_cleaning.png>]
+<figures/fig_06_podium_rate.png, id=228, 732.8178pt x 259.2084pt>
 File: figures/fig_06_podium_rate.png Graphic file (type png)
 <use figures/fig_06_podium_rate.png>
-Package pdftex.def Info: figures/fig_06_podium_rate.png  used on input line 179.
+Package pdftex.def Info: figures/fig_06_podium_rate.png  used on input line 183.
 (pdftex.def)             Requested size: 419.95967pt x 148.5453pt.
- [6 <./figures/fig_04_msno_after_results.png> <./figures/fig_05_after_cleaning.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 197--197
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 []|\T1/lmtt/m/n/10 fastestLap\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 rank\T1/lmr/m/n/10 (+20) , \T1/lmtt/m/n/10 fastestLapTime\T1/lmr/m/n/10 (+20) ,
  []
 
 [7 <./figures/fig_06_podium_rate.png>]
-<figures/fig_07_q1_circuits.png, id=240, 752.5716pt x 509.7444pt>
+<figures/fig_07_q1_circuits.png, id=241, 752.5716pt x 509.7444pt>
 File: figures/fig_07_q1_circuits.png Graphic file (type png)
 <use figures/fig_07_q1_circuits.png>
-Package pdftex.def Info: figures/fig_07_q1_circuits.png  used on input line 221.
+Package pdftex.def Info: figures/fig_07_q1_circuits.png  used on input line 245.
 (pdftex.def)             Requested size: 289.30524pt x 195.95274pt.
-<figures/fig_08_q1_heatmap.png, id=241, 524.1984pt x 438.438pt>
+<figures/fig_08_q1_heatmap.png, id=242, 524.1984pt x 438.438pt>
 File: figures/fig_08_q1_heatmap.png Graphic file (type png)
 <use figures/fig_08_q1_heatmap.png>
-Package pdftex.def Info: figures/fig_08_q1_heatmap.png  used on input line 222.
+Package pdftex.def Info: figures/fig_08_q1_heatmap.png  used on input line 246.
 (pdftex.def)             Requested size: 167.98529pt x 140.50372pt.
-<figures/fig_09_q2_home.png, id=242, 1001.1804pt x 313.6518pt>
+ [8 <./figures/fig_07_q1_circuits.png> <./figures/fig_08_q1_heatmap.png>]
+<figures/fig_09_q2_home.png, id=253, 1001.1804pt x 313.6518pt>
 File: figures/fig_09_q2_home.png Graphic file (type png)
 <use figures/fig_09_q2_home.png>
-Package pdftex.def Info: figures/fig_09_q2_home.png  used on input line 258.
+Package pdftex.def Info: figures/fig_09_q2_home.png  used on input line 282.
 (pdftex.def)             Requested size: 466.62503pt x 146.18637pt.
- [8 <./figures/fig_07_q1_circuits.png> <./figures/fig_08_q1_heatmap.png>]
-<figures/fig_10_q3_teams.png, id=253, 1075.3776pt x 461.5644pt>
+<figures/fig_10_q3_teams.png, id=254, 1075.3776pt x 461.5644pt>
 File: figures/fig_10_q3_teams.png Graphic file (type png)
 <use figures/fig_10_q3_teams.png>
-Package pdftex.def Info: figures/fig_10_q3_teams.png  used on input line 276.
+Package pdftex.def Info: figures/fig_10_q3_teams.png  used on input line 300.
 (pdftex.def)             Requested size: 466.62503pt x 200.28589pt.
-<figures/fig_11_q3_outcomes.png, id=254, 802.197pt x 231.264pt>
+ [9 <./figures/fig_09_q2_home.png>]
+<figures/fig_11_q3_outcomes.png, id=265, 802.197pt x 231.264pt>
 File: figures/fig_11_q3_outcomes.png Graphic file (type png)
 <use figures/fig_11_q3_outcomes.png>
-Package pdftex.def Info: figures/fig_11_q3_outcomes.png  used on input line 283.
+Package pdftex.def Info: figures/fig_11_q3_outcomes.png  used on input line 307.
 (pdftex.def)             Requested size: 396.63411pt x 114.34369pt.
- [9 <./figures/fig_09_q2_home.png> <./figures/fig_10_q3_teams.png>] [10 <./figures/fig_11_q3_outcomes.png>]
-<figures/fig_12_feature_fifths.png, id=277, 1145.7204pt x 638.8668pt>
+ [10 <./figures/fig_10_q3_teams.png> <./figures/fig_11_q3_outcomes.png>]
+<figures/fig_12_feature_fifths.png, id=278, 1145.7204pt x 638.8668pt>
 File: figures/fig_12_feature_fifths.png Graphic file (type png)
 <use figures/fig_12_feature_fifths.png>
-Package pdftex.def Info: figures/fig_12_feature_fifths.png  used on input line 363.
+Package pdftex.def Info: figures/fig_12_feature_fifths.png  used on input line 387.
 (pdftex.def)             Requested size: 466.62503pt x 260.20187pt.
  [11]
-<figures/fig_13_feature_corr.png, id=285, 650.43pt x 574.7874pt>
+<figures/fig_13_feature_corr.png, id=288, 650.43pt x 574.7874pt>
 File: figures/fig_13_feature_corr.png Graphic file (type png)
 <use figures/fig_13_feature_corr.png>
-Package pdftex.def Info: figures/fig_13_feature_corr.png  used on input line 370.
+Package pdftex.def Info: figures/fig_13_feature_corr.png  used on input line 394.
 (pdftex.def)             Requested size: 335.97058pt x 296.90025pt.
 
-Underfull \hbox (badness 3919) in paragraph at lines 375--377
+Underfull \hbox (badness 3919) in paragraph at lines 399--401
 []\T1/lmr/m/n/10.95 (+20) Correlation with the tar-get (Spear-man, train): \T1/lmtt/m/n/10.95 grid $\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 (+20) 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 (+20) 449$\T1/lmr/m/n/10.95 (+20) , \T1/lmtt/m/n/10.95 grid_rel $\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 (+20) 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 (+20) 444$\T1/lmr/m/n/10.95 (+20) ,
  []
 
 
-Underfull \hbox (badness 5175) in paragraph at lines 375--377
+Underfull \hbox (badness 5175) in paragraph at lines 399--401
 \T1/lmtt/m/n/10.95 drv_podium_last5 $\OT1/lmr/m/n/10.95 (+20) 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 (+20) 434$\T1/lmr/m/n/10.95 (+20) , \T1/lmtt/m/n/10.95 con_podium_last5 $\OT1/lmr/m/n/10.95 (+20) 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 (+20) 414$\T1/lmr/m/n/10.95 (+20) , \T1/lmtt/m/n/10.95 drv_wins $\OT1/lmr/m/n/10.95 (+20) 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 (+20) 404$\T1/lmr/m/n/10.95 (+20) , \T1/lmtt/m/n/10.95 con_wins $\OT1/lmr/m/n/10.95 (+20) 0\OML/lmm/m/it/10.95 :\OT1/lmr/m/n/10.95 (+20) 402$\T1/lmr/m/n/10.95 (+20) ,
  []
 
 [12 <./figures/fig_12_feature_fifths.png> <./figures/fig_13_feature_corr.png>]
-<figures/fig_14_feature_ladder.png, id=292, 621.0402pt x 301.6068pt>
+<figures/fig_14_feature_ladder.png, id=295, 621.0402pt x 301.6068pt>
 File: figures/fig_14_feature_ladder.png Graphic file (type png)
 <use figures/fig_14_feature_ladder.png>
-Package pdftex.def Info: figures/fig_14_feature_ladder.png  used on input line 402.
+Package pdftex.def Info: figures/fig_14_feature_ladder.png  used on input line 426.
 (pdftex.def)             Requested size: 396.63411pt x 192.6227pt.
  [13 <./figures/fig_14_feature_ladder.png>]
-<figures/fig_15_scaling.png, id=306, 857.604pt x 219.7008pt>
+<figures/fig_15_scaling.png, id=309, 857.604pt x 219.7008pt>
 File: figures/fig_15_scaling.png Graphic file (type png)
 <use figures/fig_15_scaling.png>
-Package pdftex.def Info: figures/fig_15_scaling.png  used on input line 423.
+Package pdftex.def Info: figures/fig_15_scaling.png  used on input line 447.
 (pdftex.def)             Requested size: 396.63411pt x 101.61002pt.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 434.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 458.
  [14 <./figures/fig_15_scaling.png>]
-<figures/fig_16_nn_loss.png, id=320, 437.4744pt x 259.2084pt>
+<figures/fig_16_nn_loss.png, id=323, 437.4744pt x 259.2084pt>
 File: figures/fig_16_nn_loss.png Graphic file (type png)
 <use figures/fig_16_nn_loss.png>
-Package pdftex.def Info: figures/fig_16_nn_loss.png  used on input line 464.
+Package pdftex.def Info: figures/fig_16_nn_loss.png  used on input line 488.
 (pdftex.def)             Requested size: 279.97786pt x 165.88884pt.
-<figures/fig_17_models_val.png, id=321, 702.4644pt x 260.6538pt>
+<figures/fig_17_models_val.png, id=324, 702.4644pt x 260.6538pt>
 File: figures/fig_17_models_val.png Graphic file (type png)
 <use figures/fig_17_models_val.png>
-Package pdftex.def Info: figures/fig_17_models_val.png  used on input line 501.
+Package pdftex.def Info: figures/fig_17_models_val.png  used on input line 525.
 (pdftex.def)             Requested size: 228.64882pt x 84.83875pt.
-<figures/fig_18_pr_auc_splits.png, id=322, 671.6292pt x 260.6538pt>
+<figures/fig_18_pr_auc_splits.png, id=325, 671.6292pt x 260.6538pt>
 File: figures/fig_18_pr_auc_splits.png Graphic file (type png)
 <use figures/fig_18_pr_auc_splits.png>
-Package pdftex.def Info: figures/fig_18_pr_auc_splits.png  used on input line 502.
+Package pdftex.def Info: figures/fig_18_pr_auc_splits.png  used on input line 526.
 (pdftex.def)             Requested size: 228.64882pt x 88.73645pt.
-<figures/fig_19_confusion_test.png, id=323, 1289.2968pt x 256.3176pt>
+<figures/fig_19_confusion_test.png, id=326, 1289.2968pt x 256.3176pt>
 File: figures/fig_19_confusion_test.png Graphic file (type png)
 <use figures/fig_19_confusion_test.png>
-Package pdftex.def Info: figures/fig_19_confusion_test.png  used on input line 509.
+Package pdftex.def Info: figures/fig_19_confusion_test.png  used on input line 533.
 (pdftex.def)             Requested size: 466.62503pt x 92.76706pt.
  [15 <./figures/fig_16_nn_loss.png> <./figures/fig_17_models_val.png> <./figures/fig_18_pr_auc_splits.png>]
-<figures/fig_20_ablation.png, id=334, 607.5498pt x 242.3454pt>
+<figures/fig_20_ablation.png, id=337, 607.5498pt x 242.3454pt>
 File: figures/fig_20_ablation.png Graphic file (type png)
 <use figures/fig_20_ablation.png>
-Package pdftex.def Info: figures/fig_20_ablation.png  used on input line 546.
+Package pdftex.def Info: figures/fig_20_ablation.png  used on input line 570.
 (pdftex.def)             Requested size: 326.6361pt x 130.29509pt.
  [16 <./figures/fig_19_confusion_test.png>] [17 <./figures/fig_20_ablation.png>]
-<figures/fig_21_permutation_importance.png, id=356, 599.841pt x 342.5598pt>
+<figures/fig_21_permutation_importance.png, id=359, 599.841pt x 342.5598pt>
 File: figures/fig_21_permutation_importance.png Graphic file (type png)
 <use figures/fig_21_permutation_importance.png>
-Package pdftex.def Info: figures/fig_21_permutation_importance.png  used on input line 607.
+Package pdftex.def Info: figures/fig_21_permutation_importance.png  used on input line 631.
 (pdftex.def)             Requested size: 335.97058pt x 191.87398pt.
-<figures/fig_22_shap_beeswarm.png, id=358, 540.0978pt x 223.0734pt>
+<figures/fig_22_shap_beeswarm.png, id=361, 540.0978pt x 223.0734pt>
 File: figures/fig_22_shap_beeswarm.png Graphic file (type png)
 <use figures/fig_22_shap_beeswarm.png>
-Package pdftex.def Info: figures/fig_22_shap_beeswarm.png  used on input line 619.
+Package pdftex.def Info: figures/fig_22_shap_beeswarm.png  used on input line 643.
 (pdftex.def)             Requested size: 228.64882pt x 94.43562pt.
-<figures/fig_23_shap_bar.png, id=359, 567.5604pt x 226.9278pt>
+<figures/fig_23_shap_bar.png, id=362, 567.5604pt x 226.9278pt>
 File: figures/fig_23_shap_bar.png Graphic file (type png)
 <use figures/fig_23_shap_bar.png>
-Package pdftex.def Info: figures/fig_23_shap_bar.png  used on input line 620.
+Package pdftex.def Info: figures/fig_23_shap_bar.png  used on input line 644.
 (pdftex.def)             Requested size: 228.64882pt x 91.42047pt.
-<figures/fig_24_shap_dependence.png, id=360, 1072.9686pt x 277.5168pt>
+<figures/fig_24_shap_dependence.png, id=363, 1072.9686pt x 277.5168pt>
 File: figures/fig_24_shap_dependence.png Graphic file (type png)
 <use figures/fig_24_shap_dependence.png>
-Package pdftex.def Info: figures/fig_24_shap_dependence.png  used on input line 627.
+Package pdftex.def Info: figures/fig_24_shap_dependence.png  used on input line 651.
 (pdftex.def)             Requested size: 466.62503pt x 120.68918pt.
  [18 <./figures/fig_21_permutation_importance.png> <./figures/fig_22_shap_beeswarm.png> <./figures/fig_23_shap_bar.png>]
-<figures/fig_25_shap_waterfall_hit.png, id=373, 577.6782pt x 281.3712pt>
+<figures/fig_25_shap_waterfall_hit.png, id=376, 577.6782pt x 281.3712pt>
 File: figures/fig_25_shap_waterfall_hit.png Graphic file (type png)
 <use figures/fig_25_shap_waterfall_hit.png>
-Package pdftex.def Info: figures/fig_25_shap_waterfall_hit.png  used on input line 640.
+Package pdftex.def Info: figures/fig_25_shap_waterfall_hit.png  used on input line 664.
 (pdftex.def)             Requested size: 228.64882pt x 111.3658pt.
-<figures/fig_25_shap_waterfall_miss.png, id=374, 671.1474pt x 281.3712pt>
+<figures/fig_25_shap_waterfall_miss.png, id=377, 671.1474pt x 281.3712pt>
 File: figures/fig_25_shap_waterfall_miss.png Graphic file (type png)
 <use figures/fig_25_shap_waterfall_miss.png>
-Package pdftex.def Info: figures/fig_25_shap_waterfall_miss.png  used on input line 641.
+Package pdftex.def Info: figures/fig_25_shap_waterfall_miss.png  used on input line 665.
 (pdftex.def)             Requested size: 228.64882pt x 95.85814pt.
-<figures/fig_26_lime_hit.png, id=375, 487.5816pt x 316.0608pt>
+<figures/fig_26_lime_hit.png, id=378, 487.5816pt x 316.0608pt>
 File: figures/fig_26_lime_hit.png Graphic file (type png)
 <use figures/fig_26_lime_hit.png>
-Package pdftex.def Info: figures/fig_26_lime_hit.png  used on input line 642.
+Package pdftex.def Info: figures/fig_26_lime_hit.png  used on input line 666.
 (pdftex.def)             Requested size: 228.64882pt x 148.211pt.
-<figures/fig_26_lime_miss.png, id=376, 538.6524pt x 316.0608pt>
+<figures/fig_26_lime_miss.png, id=379, 538.6524pt x 316.0608pt>
 File: figures/fig_26_lime_miss.png Graphic file (type png)
 <use figures/fig_26_lime_miss.png>
-Package pdftex.def Info: figures/fig_26_lime_miss.png  used on input line 643.
+Package pdftex.def Info: figures/fig_26_lime_miss.png  used on input line 667.
 (pdftex.def)             Requested size: 228.64882pt x 134.16249pt.
  [19 <./figures/fig_24_shap_dependence.png> <./figures/fig_25_shap_waterfall_hit.png> <./figures/fig_25_shap_waterfall_miss.png> <./figures/fig_26_lime_hit.png> <./figures/fig_26_lime_miss.png>] [20] (main.bbl) [21] (main.aux)
  ***********
@@ -734,17 +736,17 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 26FF41D2466FF0F55555B410E6FA4DCB;6452.
  ) 
 Here is how much of TeX's memory you used:
- 15260 strings out of 467871
- 251410 string characters out of 5418376
- 704607 words of memory out of 5000000
- 43531 multiletter control sequences out of 15000+600000
- 729361 words of font info for 232 fonts, out of 8000000 for 9000
+ 15273 strings out of 467871
+ 251553 string characters out of 5418376
+ 704929 words of memory out of 5000000
+ 43533 multiletter control sequences out of 15000+600000
+ 729740 words of font info for 237 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,79p,1062b,639s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/abdel/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on main.pdf (21 pages, 2154551 bytes).
+Output written on main.pdf (21 pages, 2164667 bytes).
 PDF statistics:
- 502 PDF objects out of 1000 (max. 8388607)
- 118 named destinations out of 1000 (max. 500000)
+ 505 PDF objects out of 1000 (max. 8388607)
+ 119 named destinations out of 1000 (max. 500000)
  57218 words of extra memory for PDF output out of 61914 (max. 10000000)
 

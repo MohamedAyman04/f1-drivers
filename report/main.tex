@@ -27,7 +27,9 @@
 
 \title{\textbf{Formula 1 Podium Prediction}\\[4pt]
 \large CSEN903 Advanced Computer Lab --- Milestone 1 Report}
-\author{Team members: \textit{(add names and IDs)}}
+\author{Team members\\[4pt]
+  \textit{Abdelhamid Sameh (58-1165)} \\ \textit{Mohamed Ayman (58-8189)} \\
+  \textit{Noureldeen Amr (58-1632)} \\ \textit{Noureldin Abdelrahman (58-7007)}}
 \date{October 2026}
 
 \begin{document}
@@ -172,12 +174,14 @@ Step & What it does and its effect \\
 %==============================================================================
 \section{Target, pre-race cutoff and metrics}
 
-Only drivers who started are counted. 13.5\% of starts end on the podium (\fig{fig:target}). The podium rate follows $3/\text{(number of starters)}$, so it changes between eras with the field size.
+Only drivers who started are counted: 13.5\% of starts end on the podium (\fig{fig:target}), so the classes are imbalanced. This is why PR-AUC, not accuracy, is the primary metric (see below).
+The rate follows $3/\text{(starters per race)}$, so it is lower in the large-field 1950s--80s ($\approx$10\%) than today ($\approx$15\%); this era shift is one reason the data is split by season (Section~\ref{sec:split}).
+The only gaps between the two lines are 8 races in 1951--1957 with shared drives: either a podium car is credited to several drivers, or the dropped duplicate row (Section~2.3) held the podium.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{fig_06_podium_rate.png}
-\caption{Podium rate per season and $3/\text{average starters per race}$.}
+\caption{Podium rate per season and $3/\text{average starters per race}$. The lines differ only in 8 shared-drive races (1951--1957).}
 \label{fig:target}
 \end{figure}
 
@@ -214,7 +218,27 @@ Each answer joins several tables. After every join the notebook asserts that the
 \textbf{Qualifying vs.\ grid:} the two can differ because of grid penalties. We use \code{grid}, the slot the car actually started from: the podium is fought from there, and grid exists for every race since 1950, whereas qualifying positions start in 1994.
 \textbf{Missingness:} \code{grid} and \code{positionOrder} have no missing values.
 \textbf{Cutoff:} the front-row condition is known before the start; the podium outcome is what is being measured.
-Circuits are ranked only if they have at least 10 front-row starts (5 races) in \emph{each} era: a circuit used once has 2 front-row starts, so its rate can only be 0\%, 50\% or 100\%. Sixteen circuits pass this threshold (21 at 5, 13 at 15, 7 at 20).
+We only rank a circuit if it has hosted at least 5 races in each era (before 2014 and from 2014). Fewer races than that make the percentage meaningless: a circuit that held one race has only two front-row cars, so its score can only be 0\%, 50\% or 100\%, which is pure luck. \tab{tab:q1funnel} shows how the 77 circuits come down to the 16 that can be ranked: most were raced in only one era, so they cannot show whether their ranking changed.
+
+\begin{table}[H]
+\centering\small
+\caption{Q1: from all circuits to the circuits that can be ranked in both eras.}
+\label{tab:q1funnel}
+\begin{tabularx}{\linewidth}{Xr}
+\toprule
+Step & Circuits \\
+\midrule
+Circuits in the dataset & 77 \\
+\quad Raced only before 2014 (old tracks, e.g.\ AVUS, Pescara, Riverside) & $-45$ \\
+\quad Raced only from 2014 (Baku, Jeddah, Miami, Las Vegas, Losail, Sochi, Algarve, Mugello) & $-8$ \\
+\textbf{Raced in both eras} & \textbf{24} \\
+\quad Fewer than 5 races in one era (Imola, Zandvoort, Paul Ricard, Circuit of the Americas, Hockenheim, Istanbul, N\"urburgring, Sepang) & $-8$ \\
+\textbf{Ranked (at least 5 races in both eras)} & \textbf{16} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Nothing is thrown away from the overall answer: the era-wide rates below use front-row starts at all 77 circuits. The rule only decides which circuits get their own place in the ranking.
 
 \begin{figure}[H]
 \centering
@@ -307,7 +331,7 @@ Period & Team & Starts & Mechanical & Rate \\
 \paragraph{Answer.} Cars became more reliable: \textbf{11.2\% of starts} (2014--2021; CI 10.1--12.3\%) vs.\ \textbf{6.9\%} (2022--2024; CI 5.7--8.4\%) ended with a mechanical failure; the intervals do not overlap. The least reliable constructors were Caterham, Lotus F1 and Toro Rosso in 2014--2021, and Alfa Romeo, Alpine and RB in 2022--2024. Caterham's rate rests on only 34 starts, so its interval is wide.
 
 %==============================================================================
-\section{Modeling table and data split}
+\section{Modeling table and data split}\label{sec:split}
 
 The modeling table has one row per driver who \emph{started} a race in 1950--2024, without the Indianapolis~500: \textbf{24{,}724 rows}, with \code{(raceId, driverId)} unique (asserted). Pit-lane starters are placed one slot behind the last car.
 

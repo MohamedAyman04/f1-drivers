@@ -13,32 +13,32 @@
 \contentsline {section}{\numberline {4}Target, pre-race cutoff and metrics}{7}{section.4}%
 \contentsline {paragraph}{Metric choice.}{7}{section*.16}%
 \contentsline {section}{\numberline {5}Data-engineering questions}{7}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Q1: Which circuits convert a front-row start into a podium most often, and did that change after 2014?}{7}{subsection.5.1}%
-\contentsline {paragraph}{Method.}{7}{section*.17}%
-\contentsline {paragraph}{Answer.}{8}{section*.19}%
-\contentsline {subsection}{\numberline {5.2}Q2: Do drivers podium more often at home, controlling for starting position?}{8}{subsection.5.2}%
-\contentsline {paragraph}{Method.}{8}{section*.20}%
-\contentsline {paragraph}{Answer.}{9}{section*.23}%
+\contentsline {subsection}{\numberline {5.1}Q1: Which circuits convert a front-row start into a podium most often, and did that change after 2014?}{8}{subsection.5.1}%
+\contentsline {paragraph}{Method.}{8}{section*.17}%
+\contentsline {paragraph}{Answer.}{8}{section*.20}%
+\contentsline {subsection}{\numberline {5.2}Q2: Do drivers podium more often at home, controlling for starting position?}{9}{subsection.5.2}%
+\contentsline {paragraph}{Method.}{9}{section*.21}%
+\contentsline {paragraph}{Answer.}{9}{section*.24}%
 \contentsline {subsection}{\numberline {5.3}Q3: Which constructors have the highest mechanical-retirement rate in 2014--2021 vs.\ 2022--2024?}{9}{subsection.5.3}%
-\contentsline {paragraph}{Method.}{9}{section*.24}%
-\contentsline {paragraph}{Answer.}{10}{section*.28}%
+\contentsline {paragraph}{Method.}{9}{section*.25}%
+\contentsline {paragraph}{Answer.}{10}{section*.29}%
 \contentsline {section}{\numberline {6}Modeling table and data split}{10}{section.6}%
-\contentsline {paragraph}{Why split by season.}{10}{section*.30}%
+\contentsline {paragraph}{Why split by season.}{11}{section*.31}%
 \contentsline {section}{\numberline {7}Feature engineering and selection}{11}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Candidate features and their validity at the cutoff}{11}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Exploratory evidence}{11}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Empirical selection: adding one group at a time}{13}{subsection.7.3}%
-\contentsline {paragraph}{Selected features (4):}{13}{section*.36}%
+\contentsline {paragraph}{Selected features (4):}{13}{section*.37}%
 \contentsline {section}{\numberline {8}Preprocessing}{13}{section.8}%
 \contentsline {section}{\numberline {9}Models}{14}{section.9}%
-\contentsline {paragraph}{Tuning (validation only).}{14}{section*.38}%
+\contentsline {paragraph}{Tuning (validation only).}{14}{section*.39}%
 \contentsline {section}{\numberline {10}Results}{15}{section.10}%
-\contentsline {paragraph}{Interpretation.}{16}{section*.44}%
+\contentsline {paragraph}{Interpretation.}{16}{section*.45}%
 \contentsline {section}{\numberline {11}Experiments}{16}{section.11}%
 \contentsline {subsection}{\numberline {11.1}Feature-group ablation}{16}{subsection.11.1}%
 \contentsline {subsection}{\numberline {11.2}Preprocessing-order experiments}{17}{subsection.11.2}%
-\contentsline {paragraph}{Experiment 1}{17}{section*.48}%
-\contentsline {paragraph}{Experiment 2}{17}{section*.49}%
+\contentsline {paragraph}{Experiment 1}{17}{section*.49}%
+\contentsline {paragraph}{Experiment 2}{17}{section*.50}%
 \contentsline {section}{\numberline {12}Explainability (XAI)}{17}{section.12}%
 \contentsline {subsection}{\numberline {12.1}Global: permutation importance}{18}{subsection.12.1}%
 \contentsline {subsection}{\numberline {12.2}Global: SHAP}{18}{subsection.12.2}%
