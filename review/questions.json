@@ -24,8 +24,8 @@
   "n": 4,
   "grp": "A",
   "must": true,
-  "ask": "The project text asks for permutation importance, but our lab manuals and guide notebooks only teach SHAP and LIME. We wrote permutation importance ourselves: shuffle one input column, score the model again, and see how much worse it gets. Is that fine, and how much detail do you want when we explain it?",
-  "why": "We checked all four lab manuals and the three guide notebooks and none of them mentions it. We wrote it by hand because the scikit-learn version doesn't work with our neural network."
+  "ask": "The project text lists permutation importance and SHAP as two separate things. We treat them as two different methods: permutation importance shuffles one input column, scores the model again and measures how much worse it gets, while SHAP splits each prediction into a contribution per feature. Is that how you see it, or does one count for the other? Also, our lab manuals and guide notebooks only teach SHAP and LIME, so we wrote permutation importance ourselves. Is that fine, and how much detail do you want when we explain it?",
+  "why": "We checked all four lab manuals and the three guide notebooks and none of them mentions permutation importance. We wrote it by hand because the scikit-learn version doesn't work with our neural network."
  },
  {
   "n": 5,
@@ -113,16 +113,16 @@
  },
  {
   "n": 17,
-  "grp": "C",
-  "must": false,
-  "ask": "Our notebook starts with a line that installs three packages (shap, lime and missingno), so the internet has to be switched on, for example on Kaggle. Is that okay, and is there a time limit for running the notebook? A full run takes about 14 minutes.",
-  "why": "If the notebook is run somewhere without internet that first line fails, so we want to know what you expect."
+  "grp": "B",
+  "must": true,
+  "ask": "The checklist asks for the “reason for chosen features, with evidence”. Is it enough to show that a feature helps by testing it (for example adding one group of features at a time and checking whether the validation score improves), or do you also want an analytical reason for each feature, such as why it makes sense for predicting a podium?",
+  "why": "The project text says the justification can come from testing different feature sets, as long as the trials stay in the notebook, or from a hypothesis based on the earlier exploration. We do both: plots and correlations for every candidate, then the one-group-at-a-time test. We just want to be sure that testing on its own counts."
  },
  {
   "n": 18,
-  "grp": "C",
+  "grp": "A",
   "must": false,
-  "ask": "Do you expect the report to follow a specific structure or length? And does every plot in the notebook also have to be in the report?",
-  "why": "The project text says the plots and answers must be in both. Our report has all 26 figures and the three answers; we just want to be sure we aren't missing a required format."
+  "ask": "The project text asks us to show the prediction function on “a complete and a partially-missing record”. We read that as an input where some feature values are left out (for example a rookie in his first race, who has no championship standings), which the function fills in with typical values from the training data. Is that what you mean, or should the partially-missing record come from a real row that had missing data in the original dataset?",
+  "why": "Our example only gives the starting grid and leaves the standings out. The function fills them in with the training medians, the same way the models were trained."
  }
 ]
