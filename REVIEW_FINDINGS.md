@@ -1,6 +1,6 @@
 # Review findings
 
-Written 2026-10-14 for the CSEN903 Milestone 1 notebook. Cell numbers are 0-based in the **fixed** notebook on branch `review-fixes` (117 cells). Plan: `REVIEW_PLAN.md`. Out-of-scope audit: `OUT_OF_SCOPE.md`. Independent check: `review/verify.ipynb` (rebuilds the modeling table from the raw CSVs with separate code; its split sizes and PR-AUCs match the notebook to four decimals).
+Written 2026-10-14 for the CSEN903 Milestone 1 notebook. Cell numbers are 0-based in the **fixed** notebook on branch `review-fixes` (112 cells). Plan: `REVIEW_PLAN.md`. Out-of-scope audit: `OUT_OF_SCOPE.md`. Independent check: `review/verify.ipynb` (rebuilds the modeling table from the raw CSVs with separate code; its split sizes and PR-AUCs match the notebook to four decimals).
 
 ## Summary
 
@@ -11,7 +11,7 @@ Written 2026-10-14 for the CSEN903 Milestone 1 notebook. Cell numbers are 0-base
 1. The results hold up. An independent rebuild reproduces the row counts (24,724 before the V1 fix), the split sizes and every model score; the leakage checks found no leakage; Q1–Q3 numbers reproduce.
 2. Real defects, all fixed on `review-fixes`: entries that never raced counted as starters (V1, small effect); the neural network never reached its stopping rule (V4); the ablation was too narrow (V8); wrong statements in the text (N1, N2, the 'within 0.03' claim in the test-results paragraph, the Q1 correlation wording); Q1 used different rows from the rest (V12); grain/missingness/cutoff missing from the notebook answers (X2); metrics not plotted or discussed (§5).
 3. One thing to be honest about in the evaluation: the selected feature set depends on the order of the groups (V9). What is stable is 'driver standings on top of the grid'; the exact extra features are not. The noise in a validation PR-AUC difference is larger than the 0.005 selection rule (the driver-standings gain of +0.045 has a 95% range of 0.008 to 0.080).
-4. One decision waits for the instructor: which model SHAP/LIME should explain (V3, office-hours question 10).
+4. One decision waits for the instructor: which model SHAP/LIME should explain (V3, office-hours question 2).
 
 ## Requirements and checklist traceability
 
@@ -27,19 +27,19 @@ Written 2026-10-14 for the CSEN903 Milestone 1 notebook. Cell numbers are 0-base
 | Q3 mechanical-retirement rate, 2014–2021 vs 2022–2024 | §8.3 | met | Reproduced; sensitivity to the taxonomy added. | Fixed (V11). |
 | Each answer: result, visualisation, short justification of grain, missingness, cutoff | §8 | met after fix | Grain/missingness/cutoff line was missing in the notebook, present in the report. | Fixed (X2). |
 | Feature choices justified with evidence; trials kept in the notebook | §11 | met | Fifths plots, Spearman, forward ladder, order check, noise estimate. | Order dependence documented (V9). |
-| Appropriate train/validation/test split, justified | §9 | met | By season: 1950–2017 / 2018–2021 / 2022–2024; random split would leak across a race. | Office-hours question 11. |
+| Appropriate train/validation/test split, justified | §9 | met | By season: 1950–2017 / 2018–2021 / 2022–2024; random split would leak across a race. | — |
 | At least two statistical models + a shallow network on the same rows and features | §12–13 | met | LR, RF, NN with identical inputs; baseline LR on grid. | — |
-| All metrics for every model on train/validation and on test | c85, c90 | met after fix | Tables had all six; now plotted and discussed, with an 'always no podium' reference. | Fixed (§5). Office-hours question 1. |
-| Thresholds and hyperparameters chosen without the test set | c72, c85 | met | Test is scored once in §14; ablation reads test but decides nothing. | — |
-| Primary / secondary metric choice justified | c41, c86 | met | PR-AUC primary; text corrected (N1). | — |
-| Baseline: simplest reasonable model, compared | §12 | met | LR on grid alone; threshold also tuned on validation. | Office-hours question 7. |
-| At least three modeling attempts compared | §11–§13 | met | Baseline, LR, RF, NN, hyperparameter grids, feature ladders. | Office-hours question 14. |
+| All metrics for every model on train/validation and on test | c82, c85 | met after fix | Tables had all six; now plotted and discussed, with an 'always no podium' reference. | Fixed (§5). Office-hours question 1. |
+| Thresholds and hyperparameters chosen without the test set | c71, c82 | met | Test is scored once in §14; ablation reads test but decides nothing. | — |
+| Primary / secondary metric choice justified | c41, [metrics_text?] | met | PR-AUC primary; text corrected (N1). | — |
+| Baseline: simplest reasonable model, compared | §12 | met | LR on grid alone; threshold also tuned on validation. | Office-hours question 10. |
+| At least three modeling attempts compared | §11–§13 | met | Baseline, LR, RF, NN, hyperparameter grids, feature ladders. | — |
 | Feature-group ablation for each group | §15.1 | met after fix | Previously 2 groups and 2 models, test only. | Fixed (V8). |
-| At least two preprocessing-order experiments | §15.2 | met | Leaky fit and scale/impute order, plus a paired bootstrap. | Office-hours question 13. |
-| Leakage-safe form feature implemented | c62, c63 | met | Built with shift(1); perturbation test on 120 races found no leakage. Not selected by the ladder. | Office-hours question 3. |
+| At least two preprocessing-order experiments | §15.2 | met | Leaky fit and scale/impute order, plus a paired bootstrap. | — |
+| Leakage-safe form feature implemented | c61, c62 | met | Built with shift(1); perturbation test on 120 races found no leakage. Not selected by the ladder. | Office-hours question 7. |
 | Effect of each preprocessing step on distribution/range/values | §10–11.3 | met | Imputation and scaling shown; cleaning steps shown by counts and before/after plots. | — |
 | Global explanations: permutation importance and SHAP; local: LIME and/or SHAP; all plotted and interpreted | §16 | met | Permutation for all four models, SHAP on the forest, LIME and waterfall for a hit and a miss. | Which model to explain: question 10 (V3). |
-| Explanations stated as non-causal | c102, Limitations; report | met | Boxed statement in the report; markdown in the notebook. | — |
+| Explanations stated as non-causal | c97, Limitations; report | met | Boxed statement in the report; markdown in the notebook. | — |
 | Inference function on a complete and a partially missing record | §17 | met | Verstappen (complete) and a round-1 rookie with only grid. | — |
 | Run-all ready, no manual cells, sectioned | whole notebook | met locally | Four full runs on 2026-10-14 completed with 0 errors in 57 code cells (about 14 min each on a 20-core CPU) with identical outputs. | Test on Kaggle before submission. |
 | Report (PDF) with answers, figures, selected features and why valid, limitations | report/main.tex | partly met | Draft complete (names and IDs filled in by the team); placeholders for the Kaggle and GitHub links; numbers re-synced with the fixed notebook; main.pdf is stale until recompiled. | Recompile main.pdf; fill N8. |
@@ -54,7 +54,7 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 - **Area / severity / status:** Cleaning / should fix / fixed
 - **Claimed or found:** Rows with status Withdrew, Did not qualify or 107% Rule, 0 laps, but a grid slot in the data were counted as starters. The notebook text (c25) says withdrawn drivers are non-starters; the code only caught grid 0 with 0 laps.
 - **Evidence:** 79 rows (61 Withdrew, 11 Did not qualify, 7 107% Rule; 77 train, 2 test, none in validation). Re-fitting without them moves PR-AUC by at most 0.004 (RF test +0.0036, RF validation −0.0011, LR ±0.0002), so it is a correctness fix, not a result changer. 3 of them were front-row rows used in Q1. Do not drop all laps == 0 rows: 353 Collision and 224 Accident rows with 0 laps are real starters who crashed at the start.
-- **What was done / to do:** Rule added in c35 (status in Withdrew / Did not qualify / Did not prequalify / 107% Rule and 0 laps); grid_eff now uses the last real starter; counts reprinted. Brief wording is 'one driver entering one race', so this is also office-hours question 18.
+- **What was done / to do:** Rule added in c35 (status in Withdrew / Did not qualify / Did not prequalify / 107% Rule and 0 laps); grid_eff now uses the last real starter; counts reprinted. Brief wording is 'one driver entering one race', so this is also office-hours question 3.
 
 ### V2. Qualifying position vs grid
 
@@ -66,30 +66,30 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 ### V3. XAI explains the forest, the final model is the network
 
 - **Area / severity / status:** XAI / should fix / needs answer
-- **Claimed or found:** SHAP and LIME are run on the random forest (c103); the final model chosen on validation is the neural network (0.727 vs 0.726, a tie).
+- **Claimed or found:** SHAP and LIME are run on the random forest (c98); the final model chosen on validation is the neural network (0.727 vs 0.726, a tie).
 - **Evidence:** The brief does not say which model must be explained. The notebook states why the forest is used (exact TreeExplainer, tie on validation), and permutation importance covers all four models.
-- **What was done / to do:** Office-hours question 10. If the answer is 'explain the final model': either make the forest the final model (tie, and Lab 4 explains forests) or add SHAP (KernelExplainer) / LIME for the network.
+- **What was done / to do:** Office-hours question 2. If the answer is 'explain the model the prediction function uses': either use the forest in the prediction function (a tie, and Lab 4 explains forests) or add SHAP (KernelExplainer) / LIME for the network.
 
 ### V4. Early stopping never really ran
 
 - **Area / severity / status:** Neural network / should fix / fixed
 - **Claimed or found:** The network used a 200-epoch cap; the three sizes ran 200, 200 and 198 epochs, so training was cut by the cap and not by the stopping rule.
 - **Evidence:** In the fixed notebook (cap 1,000) the three sizes stop at epochs 266, 282 and 220 (best epochs 251, 267, 205) with validation PR-AUC 0.728 / 0.725 / 0.726, so early stopping now ends training. Larger learning rate (3e-3) stops earlier at 157. SGD at 0.01 had not converged after 600 epochs.
-- **What was done / to do:** Cap raised to 1,000 epochs (c83); table now shows the best epoch; the loss figure has one panel per size with the best epoch marked. SGD and no-early-stopping variants from Lab 3 were tried in scratch work and not added, to keep run time down.
+- **What was done / to do:** Cap raised to 1,000 epochs (c80); table now shows the best epoch; the loss figure has one panel per size with the best epoch marked. SGD and no-early-stopping variants from Lab 3 were tried in scratch work and not added, to keep run time down.
 
 ### V5. Validation is used for everything
 
 - **Area / severity / status:** Evaluation / note / fixed
 - **Claimed or found:** Validation chooses features, settings, early stopping, the final model and the thresholds, so validation scores are optimistic.
 - **Evidence:** The test set is the honest number: test PR-AUC is 0.006 to 0.028 below validation.
-- **What was done / to do:** Stated in the metrics discussion (c86). Office-hours question 12.
+- **What was done / to do:** Stated in the metrics discussion ([metrics_text?]).
 
 ### V6. Why train PR-AUC is below validation
 
 - **Area / severity / status:** Evaluation / note / verified
 - **Claimed or found:** Claim: old seasons are less predictable.
 - **Evidence:** Confirmed. Forest PR-AUC on the training seasons by decade: 0.50 (1950s), 0.46 (1960s), 0.47 (1970s), 0.47 (1980s), 0.56 (1990s), 0.68 (2000s), 0.73 (2010–2017); on validation it is 0.725. Podium rate also differs (13.3% train vs 15.0% validation and test), but the lift over no-skill is 4.3 (train) vs 4.8 (validation) and 4.8 (test).
-- **What was done / to do:** A decade table was added after the comparison (c87) so the claim is backed by a statistic in the notebook.
+- **What was done / to do:** A decade table was added after the comparison ([decade_code?]) so the claim is backed by a statistic in the notebook.
 
 ### V7. Round-1 rows and rookies get the training median
 
@@ -103,14 +103,14 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 - **Area / severity / status:** Ablation / should fix / fixed
 - **Claimed or found:** Only the 2 kept groups, for 2 models, and the plot showed only test drops.
 - **Evidence:** Now covers the kept groups for logistic regression, forest and network, and each of the 5 groups removed from the all-candidates model (LR and RF), on validation and test. No decision uses the test column.
-- **What was done / to do:** Rewritten in section 15.1 (c93); figure fig_20 has four panels. Office-hours question 5 still decides whether this is the expected scope.
+- **What was done / to do:** Rewritten in section 15.1 ([ablation_code?]); figure fig_20 has four panels. Office-hours questions 5 and 6 decide whether this is the expected scope.
 
 ### V9. The selected feature set depends on the order of the groups
 
 - **Area / severity / status:** Feature selection / should fix / fixed
 - **Claimed or found:** Forward selection adds groups in a fixed order and never retries a dropped group.
 - **Evidence:** All 120 orders lead to 8 different selected sets. Every set contains the driver standings and grid information (grid or grid_rel), the other groups come and go. The noise in a validation PR-AUC difference is larger than MIN_GAIN (0.005): redrawing validation races, the driver-standings gain is +0.045 (95% range 0.008 to 0.080) and the field-size gain +0.002 (0.000 to 0.008). Backward elimination keeps field size + driver standings and drops the grid group (grid is still in grid_rel × field size).
-- **What was done / to do:** Two cells added after the ladder (c74) and the text now says which part of the result is stable (driver standings on top of grid) and which is not (the exact extra features).
+- **What was done / to do:** Two cells added after the ladder ([order_code?]) and the text now says which part of the result is stable (driver standings on top of grid) and which is not (the exact extra features).
 
 ### V10. Home effect
 
@@ -123,8 +123,8 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 
 - **Area / severity / status:** Q3 / note / fixed
 - **Claimed or found:** Unclear statuses (Retired, Puncture, Tyre, wings, ...) count as mechanical.
-- **Evidence:** 21% of 'mechanical' starts in 2014–2024 have an ambiguous status; 'Retired' alone is 50 rows. Strict definition (cell c57): 11.2% → 9.0% (2014–2021) and 6.9% → 5.5% (2022–2024), so the conclusion (cars got more reliable) holds. Team ranking: 2014–2021 top 3 unchanged; 2022–2024 the third place changes from RB (48 starts) to AlphaTauri. Team names are as in the data (Toro Rosso, AlphaTauri, RB are separate teams).
-- **What was done / to do:** Strict-vs-broad cell added to Q3 (c57). Office-hours question 16.
+- **Evidence:** 21% of 'mechanical' starts in 2014–2024 have an ambiguous status; 'Retired' alone is 50 rows. Strict definition (cell [q3_sens?]): 11.2% → 9.0% (2014–2021) and 6.9% → 5.5% (2022–2024), so the conclusion (cars got more reliable) holds. Team ranking: 2014–2021 top 3 unchanged; 2022–2024 the third place changes from RB (48 starts) to AlphaTauri. Team names are as in the data (Toro Rosso, AlphaTauri, RB are separate teams).
+- **What was done / to do:** Strict-vs-broad cell added to Q3 ([q3_sens?]). Office-hours question 11.
 
 ### V12. Q1 recomputation
 
@@ -152,7 +152,7 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 - **Area / severity / status:** Leakage / ok / verified
 - **Claimed or found:** Form uses earlier races only; standings are taken after the previous round.
 - **Evidence:** Perturbation test on 120 races: flipping every podium outcome of a race never changed that race's own form features (0 of 120), and does change later races (133 rows, all later). The driver standings at a raceId already include that race (points equal the cumulative results through that race in 100% of checked rounds, including sprint points from 2021), so joining on the previous round is correct. No duplicate (raceId, driverId) in driver_standings.
-- **What was done / to do:** None. The 150-row check in c63 could be extended to all rows; the perturbation test in review/verify.ipynb already covers it.
+- **What was done / to do:** None. The 150-row check in c62 could be extended to all rows; the perturbation test in review/verify.ipynb already covers it.
 
 ### V16. grid_eff for pit-lane starters
 
@@ -193,7 +193,7 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 
 - **Area / severity / status:** Interpretation / ok / verified
 - **Claimed or found:** Explanations must not be presented as causes.
-- **Evidence:** Present in the notebook (c102, Limitations) and in the report (boxed statement). No sentence says the grid or a feature causes podiums; the phrase 'the fast car is what produces podiums' is about the car.
+- **Evidence:** Present in the notebook (c97, Limitations) and in the report (boxed statement). No sentence says the grid or a feature causes podiums; the phrase 'the fast car is what produces podiums' is about the car.
 - **What was done / to do:** None.
 
 ### N1. Wrong claims in the podium-rate paragraph

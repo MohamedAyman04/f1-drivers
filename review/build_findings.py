@@ -20,7 +20,7 @@ L.append("**What matters most**\n")
 L.append("1. The results hold up. An independent rebuild reproduces the row counts (24,724 before the V1 fix), the split sizes and every model score; the leakage checks found no leakage; Q1–Q3 numbers reproduce.")
 L.append("2. Real defects, all fixed on `review-fixes`: entries that never raced counted as starters (V1, small effect); the neural network never reached its stopping rule (V4); the ablation was too narrow (V8); wrong statements in the text (N1, N2, the 'within 0.03' claim in the test-results paragraph, the Q1 correlation wording); Q1 used different rows from the rest (V12); grain/missingness/cutoff missing from the notebook answers (X2); metrics not plotted or discussed (§5).")
 L.append("3. One thing to be honest about in the evaluation: the selected feature set depends on the order of the groups (V9). What is stable is 'driver standings on top of the grid'; the exact extra features are not. The noise in a validation PR-AUC difference is larger than the 0.005 selection rule (the driver-standings gain of +0.045 has a 95% range of 0.008 to 0.080).")
-L.append("4. One decision waits for the instructor: which model SHAP/LIME should explain (V3, office-hours question 10).\n")
+L.append("4. One decision waits for the instructor: which model SHAP/LIME should explain (V3, office-hours question 2).\n")
 L.append("## Requirements and checklist traceability\n")
 L.append("| Requirement | Where | Status | Evidence | Fix / note |\n|---|---|---|---|---|")
 for r in REQS:
