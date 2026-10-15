@@ -360,3 +360,29 @@ Preprocessing-order significance (paired bootstrap over 2,000 redraws of the val
 cell added to notebook §15.2 on 2026-10-14): leaky fit vs train-only, LR diff −0.00007 (95% CI [−0.00034, +0.00024], p = 0.69),
 RF −0.00040 ([−0.00120, +0.00032], p = 0.29); scale→impute vs impute→scale, LR +0.00002 (p = 0.99),
 RF 0 (p = 1). None is significant.
+
+## D30 — Non-starters kept, XAI for every model, statistical selection evidence, one inference function per model (2026-10-15; supersedes the non-starter rule of D3 and the "SHAP and LIME on the random forest" part of D27/D29)
+
+- **Data rule.** Only entries that did not qualify are removed: no grid slot, 0 laps and status
+  `Did not qualify` / `Did not prequalify` (1,342 rows). The 221 entries with no slot and no lap
+  (mostly `Withdrew`) stay; they get the back-of-grid slot like pit-lane starters and never finish on the
+  podium (0 of 221). The old flag `is_nonstarter` (grid 0 and 0 laps, 1,563 rows) is replaced by
+  `not_qualified`. Modeling rows 24,724 → 24,945 (train 21,966, val 1,620, test 1,359; podium counts
+  unchanged). Podium rate 13.5% → 13.3% of entries. Q2 odds ratio 0.915 → 0.912, Q3 rates
+  11.2/6.9% → 11.3/7.0%, ladder values moved in the third decimal; the selection is unchanged.
+- **XAI.** SHAP (TreeExplainer for the forest, model-agnostic exact explainer with a 100-row
+  background for LR and the network, all in probability units) and LIME now run for logistic
+  regression, random forest and neural network, on the same two validation rows. The baseline has one
+  input and is covered by permutation importance only.
+- **Statistical evidence for the selection** (notebook §11.2b): Spearman ρ with p-values, VIF for all
+  11 candidates and for the selected four, and a paired bootstrap (2,000 redraws of validation races,
+  seed 0) of every ladder step against the last kept set. Driver standings: +0.045 LR
+  (95% [0.007, 0.080], p = 0.014), +0.056 RF ([0.017, 0.093], p = 0.006). Every dropped group has a
+  range that includes 0. The 0.005 rule and the bootstrap agree for every step.
+- **Missing values in test.** 68 of 1,359 test rows (5.0%, all round 1) have missing standings;
+  they are filled with the training medians, none is dropped.
+- **Inference.** `PREDICT[model]` is one function per model (factory `make_predictor`), each with its own
+  validation threshold; `predict_podium` is the final model's function.
+- **Not re-run.** The notebook was edited without executing it. Model metrics, SHAP/LIME numbers, the
+  ablation and the report figures still come from the previous run; the new figures
+  (`fig_22_shap_beeswarm_{lr,rf,nn}`, `fig_25_local_{hit,miss}_{lr,rf,nn}`) appear after Run All.

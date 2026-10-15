@@ -24,6 +24,8 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\fig}[1]{Figure~\ref{#1}}
 \newcommand{\tab}[1]{Table~\ref{#1}}
+% figure written by the notebook: #2 if it exists, else the older #3, else a note
+\newcommand{\optfig}[3][\linewidth]{\IfFileExists{figures/#2}{\includegraphics[width=#1]{#2}}{\IfFileExists{figures/#3}{\includegraphics[width=#1]{#3}}{\fbox{\parbox{#1}{\small\centering\detokenize{#2}\\ is created when the notebook is run.}}}}}
 
 \title{\textbf{Formula 1 Podium Prediction}\\[4pt]
 \large CSEN903 Advanced Computer Lab --- Milestone 1 Report}
@@ -135,7 +137,7 @@ races & sprint and practice session dates/times & $\approx$1{,}050--1{,}110 & 94
 \item \textbf{Duplicates.} 85 \code{(raceId, driverId)} pairs appear more than once (176 rows), all between 1950 and 1978. These are \emph{shared drives}: a driver took over a teammate's car during the race.
 \end{itemize}
 
-\paragraph{Duplicate rule.} We keep the row of the car the driver \textbf{started} in, meaning the row with the lowest real grid slot. Which car a driver starts in is known before the race; how each car finishes is not, so this rule matches the pre-race view of the task. If neither row has a grid slot, the driver never started; the row with the better finish is kept, and the row is excluded from modeling anyway. The alternative rule (keep the best finish) would change only 17 podium labels, all before 1979 (decision log, D3).
+\paragraph{Duplicate rule.} We keep the row of the car the driver \textbf{started} in, meaning the row with the lowest real grid slot. Which car a driver starts in is known before the race; how each car finishes is not, so this rule matches the pre-race view of the task. If neither row has a grid slot, the row with the better finish is kept. The alternative rule (keep the best finish) would change only 17 podium labels, all before 1979 (decision log, D3).
 
 %==============================================================================
 \section{Cleaning}
@@ -155,26 +157,26 @@ Step & What it does and its effect \\
 3. One spelling per value & \code{United States} $\rightarrow$ \code{USA}; \code{Argentinian} $\rightarrow$ \code{Argentine}; double nationalities $\rightarrow$ the first; \code{East German} $\rightarrow$ \code{German}. Every driver gets a \code{home\_country} in the circuits' spelling (100\% coverage asserted), used in Q2. \\
 4. Unused columns & Web links and practice/qualifying/sprint session dates and times dropped. \\
 5. One row per driver-race & Duplicate rule above: 26{,}759 $\rightarrow$ 26{,}668 rows; uniqueness asserted. \\
-6. Flags & 1{,}563 non-starters (grid 0 and 0 laps; excluded from modeling and Q3); 72 pit-lane starters (kept, placed one slot behind the last car on the grid); 381 Indianapolis~500 rows (1950--60, a US oval race rarely entered by F1 regulars; excluded from Q2 and modeling). \\
+6. Flags & 1{,}342 entries that did not qualify (no grid slot, 0 laps, status ``Did not qualify'' or ``Did not prequalify''; the only entries removed from modeling and Q3); 221 further entries with no grid slot and no lap driven, mostly drivers who withdrew (\textbf{kept}: they are in the data, they never finish on the podium); 72 pit-lane starters (kept). Entries without a grid slot are placed one slot behind the last car; 381 Indianapolis~500 rows (1950--60, a US oval race rarely entered by F1 regulars; excluded from Q2 and modeling). \\
 7. Status classes & Every finishing status is classed as finished (15{,}115), mechanical (6{,}770), accident (2{,}771), regulatory (1{,}944), driver (67) or other (1, ``Refuelling''). Unclear reasons (punctures, wing failures, a plain ``Retired'') count as mechanical. Used in Q3. \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\paragraph{Effect of the cleaning.} After cleaning, the former sentinel columns of \code{results} are numeric (\code{str} $\rightarrow$ \code{float64}) and their missing values are visible to pandas (\fig{fig:after}). Removing non-starters brings the number of drivers per race down to the true starting fields, especially before 1990.
+\paragraph{Effect of the cleaning.} After cleaning, the former sentinel columns of \code{results} are numeric (\code{str} $\rightarrow$ \code{float64}) and their missing values are visible to pandas (\fig{fig:after}). Removing the entries that did not qualify brings the number of drivers per race down to the real fields, especially before 1990.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\linewidth]{fig_04_msno_after_results.png}\\[4pt]
 \includegraphics[width=\linewidth]{fig_05_after_cleaning.png}
-\caption{After cleaning. Top: \code{results} missingness with real NaN. Bottom left: drivers per race before and after removing non-starters. Bottom right: Q1 lap times after parsing to seconds (a plausible 60--120\,s range).}
+\caption{After cleaning. Top: \code{results} missingness with real NaN. Bottom left: drivers per race before and after removing the entries that did not qualify. Bottom right: Q1 lap times after parsing to seconds (a plausible 60--120\,s range).}
 \label{fig:after}
 \end{figure}
 
 %==============================================================================
 \section{Target, pre-race cutoff and metrics}
 
-Only drivers who started are counted: 13.5\% of starts end on the podium (\fig{fig:target}), so the classes are imbalanced. This is why PR-AUC, not accuracy, is the primary metric (see below).
+Every driver who qualified is counted, including the few who did not start the race (they never finish on the podium): 13.3\% of entries end on the podium (\fig{fig:target}), so the classes are imbalanced. This is why PR-AUC, not accuracy, is the primary metric (see below).
 The rate follows $3/\text{(starters per race)}$, so it is lower in the large-field 1950s--80s ($\approx$10\%) than today ($\approx$15\%); this era shift is one reason the data is split by season (Section~\ref{sec:split}).
 The only gaps between the two lines are 8 races in 1951--1957 with shared drives: either a podium car is credited to several drivers, or the dropped duplicate row (Section~2.3) held the podium.
 
@@ -255,7 +257,7 @@ The ranking \textbf{changed completely}: the Spearman rank correlation between t
 \subsection{Q2: Do drivers podium more often at home, controlling for starting position?}
 
 \paragraph{Method.} Join \code{results} $\rightarrow$ \code{drivers} $\rightarrow$ \code{races} $\rightarrow$ \code{circuits}. A home race is a race in the driver's \code{home\_country} (cleaning step~3).
-\textbf{Grain:} one start (non-starters and the Indianapolis~500 excluded): 24{,}724 starts, 1{,}944 of them at home (7.9\%).
+\textbf{Grain:} one entry (entries that did not qualify and the Indianapolis~500 excluded): 24{,}945 entries, 1{,}976 of them at home (7.9\%).
 \textbf{Missingness:} every driver has a home country (asserted).
 \textbf{Cutoff:} starting position and home status are known before the start.
 To control for starting position, podium rates are compared \emph{within} starting-position groups (pole, 2--3, 4--6, 7--10, 11+), and the home-minus-away gaps are averaged, weighted by home starts. A logistic regression of podium on home, starting group and era gives the home effect as an odds ratio.
@@ -272,7 +274,7 @@ Pole & 64.2\% & 58.3\% & $-5.9$ pp & 84 & 1{,}040 \\
 2--3 & 50.9\% & 53.7\% & $+2.9$ pp & 147 & 2{,}078 \\
 4--6 & 26.0\% & 26.4\% & $+0.4$ pp & 227 & 3{,}114 \\
 7--10 & 9.2\% & 7.1\% & $-2.1$ pp & 336 & 4{,}117 \\
-11+ & 1.6\% & 1.0\% & $-0.6$ pp & 1{,}150 & 12{,}431 \\
+11+ & 1.6\% & 1.0\% & $-0.6$ pp & 1{,}182 & 12{,}620 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -284,12 +286,12 @@ Pole & 64.2\% & 58.3\% & $-5.9$ pp & 84 & 1{,}040 \\
 \label{fig:q2}
 \end{figure}
 
-\paragraph{Answer.} \textbf{No home advantage.} Starting from the same position, home drivers are 0.70 percentage points \emph{less} likely to finish on the podium (weighted average), and the logistic regression gives an odds ratio of \textbf{0.915}, below 1 (1 = no effect). In every starting group the home and away 95\% intervals overlap, so the small negative gap cannot be distinguished from no effect.
+\paragraph{Answer.} \textbf{No home advantage.} Starting from the same position, home drivers are 0.70 percentage points \emph{less} likely to finish on the podium (weighted average), and the logistic regression gives an odds ratio of \textbf{0.912}, below 1 (1 = no effect). In every starting group the home and away 95\% intervals overlap, so the small negative gap cannot be distinguished from no effect.
 
 \subsection{Q3: Which constructors have the highest mechanical-retirement rate in 2014--2021 vs.\ 2022--2024?}
 
 \paragraph{Method.} Join \code{results} $\rightarrow$ \code{status} (class from cleaning step~7) $\rightarrow$ \code{constructors}.
-\textbf{Grain:} one race start in 2014--2024 (4{,}619 starts). Non-starters are excluded from the denominator because they never raced.
+\textbf{Grain:} one entry in 2014--2024 (4{,}626 entries). Entries that did not qualify are excluded from the denominator because they never took part in a race.
 \textbf{Definition:} mechanical = the race ended because a car component failed; crashes, driver problems and regulatory decisions are excluded. Unclear reasons count as mechanical, which slightly raises all rates.
 \textbf{Missingness:} every observed status has a class (asserted).
 \textbf{Cutoff:} not relevant (a descriptive, post-race question).
@@ -328,12 +330,12 @@ Period & Team & Starts & Mechanical & Rate \\
 \end{tabular}
 \end{table}
 
-\paragraph{Answer.} Cars became more reliable: \textbf{11.2\% of starts} (2014--2021; CI 10.1--12.3\%) vs.\ \textbf{6.9\%} (2022--2024; CI 5.7--8.4\%) ended with a mechanical failure; the intervals do not overlap. The least reliable constructors were Caterham, Lotus F1 and Toro Rosso in 2014--2021, and Alfa Romeo, Alpine and RB in 2022--2024. Caterham's rate rests on only 34 starts, so its interval is wide.
+\paragraph{Answer.} Cars became more reliable: \textbf{11.3\% of entries} (2014--2021; CI 10.2--12.4\%) vs.\ \textbf{7.0\%} (2022--2024; CI 5.7--8.5\%) ended with a mechanical failure; the intervals do not overlap. The least reliable constructors were Caterham, Lotus F1 and Toro Rosso in 2014--2021, and Alfa Romeo, Alpine and RB in 2022--2024. Caterham's rate rests on only 34 starts, so its interval is wide.
 
 %==============================================================================
 \section{Modeling table and data split}\label{sec:split}
 
-The modeling table has one row per driver who \emph{started} a race in 1950--2024, without the Indianapolis~500: \textbf{24{,}724 rows}, with \code{(raceId, driverId)} unique (asserted). Pit-lane starters are placed one slot behind the last car.
+The modeling table has one row per driver who \emph{qualified} for a race in 1950--2024 (including the few who did not start it), without the Indianapolis~500: \textbf{24{,}945 rows}, with \code{(raceId, driverId)} unique (asserted). Pit-lane starters and entries without a grid slot are placed one slot behind the last car.
 
 \begin{table}[H]
 \centering\small
@@ -343,9 +345,9 @@ The modeling table has one row per driver who \emph{started} a race in 1950--202
 \toprule
 Part & Seasons & Rows & Podiums & Rate & Used for \\
 \midrule
-Train & 1950--2017 & 21{,}749 & 2{,}895 & 13.3\% & fitting models, imputer, scaler \\
-Validation & 2018--2021 & 1{,}619 & 243 & 15.0\% & features, settings, thresholds \\
-Test & 2022--2024 & 1{,}356 & 204 & 15.0\% & final scores, used once \\
+Train & 1950--2017 & 21{,}966 & 2{,}895 & 13.2\% & fitting models, imputer, scaler \\
+Validation & 2018--2021 & 1{,}620 & 243 & 15.0\% & features, settings, thresholds \\
+Test & 2022--2024 & 1{,}359 & 204 & 15.0\% & final scores, used once \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -411,12 +413,12 @@ Starting from \code{grid} only, one group is added at a time. Logistic regressio
 Step & LR & RF & Decision \\
 \midrule
 grid only (baseline) & 0.668 & 0.668 & start \\
-+ field size & 0.669 & 0.671 & dropped (gain $<0.005$) \\
-+ driver standings & 0.714 & 0.726 & \textbf{kept} \\
-+ team standings & 0.705 & 0.703 & dropped (worse) \\
-+ recent form & 0.703 & 0.724 & dropped (worse) \\
++ field size & 0.668 & 0.668 & dropped (gain $<0.005$) \\
++ driver standings & 0.714 & 0.724 & \textbf{kept} \\
++ team standings & 0.705 & 0.705 & dropped (worse) \\
++ recent form & 0.703 & 0.726 & dropped (gain $<0.005$) \\
 \midrule
-all 11 candidates together & 0.702 & 0.720 & for comparison \\
+all 11 candidates together & 0.702 & 0.719 & for comparison \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -430,17 +432,74 @@ all 11 candidates together & 0.702 & 0.720 & for comparison \\
 
 \paragraph{Selected features (4):} \code{grid}, \code{drv\_pos}, \code{drv\_pts\_share}, \code{drv\_wins}.
 The driver standings are the only group that adds on top of the grid: how the driver is doing \emph{this season} is the strongest addition to where they start.
-Team standings and recent form make both models worse because they largely repeat the driver standings. Using all 11 candidates at once also scores lower than the selected set.
+Team standings make both models worse, and recent form does not help either (it lowers logistic regression and moves the forest by $+0.001$), because both largely repeat the driver standings. Using all 11 candidates at once also scores lower than the selected set.
 A limitation of this method is that the result can depend on the order of the groups, and a dropped group is not retried; the all-candidates comparison and the ablation (Section~\ref{sec:ablation}) are checks on this.
+
+\subsection{Statistical check of the selection}
+The 0.005 bar is a rule of thumb, so two statistical checks back it.
+
+\paragraph{Redundancy (variance inflation factor).} The VIF of a column is $1/(1-R^2)$, where $R^2$ says how well the \emph{other} columns predict it: 1 means not at all, and above about 5 the column is mostly a copy. \tab{tab:vif} shows that with all 11 candidates present, \code{grid} (62.6) and \code{grid\_rel} (59.3) are copies of each other, and the points shares of the driver (7.1) and the team (7.6) mostly repeat the other standings columns. The selected four have VIFs between 1.6 and 3.5, so each still adds something the others do not. All Spearman $p$-values are below 0.001; with 22{,}000 training rows even $\rho=-0.05$ (\code{field\_size}) is ``significant'', so the size of the correlation and the redundancy, not the $p$-value, decide.
+
+\begin{table}[H]
+\centering\small
+\caption{Spearman correlation with the podium (training rows) and variance inflation factor.}
+\label{tab:vif}
+\begin{tabular}{lrrrc}
+\toprule
+Candidate & Spearman $\rho$ & VIF (all 11) & VIF (selected 4) & Selected \\
+\midrule
+\code{grid} & $-0.449$ & 62.6 & 1.6 & yes \\
+\code{grid\_rel} & $-0.444$ & 59.3 & -- & \\
+\code{drv\_podium\_last5} & $0.434$ & 4.5 & -- & \\
+\code{con\_podium\_last5} & $0.412$ & 4.8 & -- & \\
+\code{drv\_wins} & $0.404$ & 4.1 & 2.1 & yes \\
+\code{drv\_pts\_share} & $0.400$ & 7.1 & 3.5 & yes \\
+\code{drv\_pos} & $-0.400$ & 2.3 & 2.0 & yes \\
+\code{con\_wins} & $0.400$ & 4.6 & -- & \\
+\code{con\_pts\_share} & $0.393$ & 7.6 & -- & \\
+\code{con\_pos} & $-0.383$ & 3.6 & -- & \\
+\code{field\_size} & $-0.052$ & 4.3 & -- & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Each step against chance (paired bootstrap).} The validation races are redrawn 2{,}000 times (whole races, with repeats)~\cite{efron1993}, both versions of the model are rescored on the same rows, and the change in PR-AUC gets a 95\% range and a two-sided $p$-value. \tab{tab:selboot} compares each step with the last kept feature set.
+
+\begin{table}[H]
+\centering\small
+\caption{Feature-selection steps against chance (change in validation PR-AUC, paired bootstrap over validation races).}
+\label{tab:selboot}
+\begin{tabular}{llrrrl}
+\toprule
+Step & Model & Change & 95\% range & $p$ & Decision \\
+\midrule
++ field size & LR & $+0.000$ & $0.000$ to $+0.000$ & 1.00 & dropped \\
+ & RF & $+0.000$ & $-0.000$ to $+0.000$ & 0.41 & dropped \\
+\midrule
++ driver standings & LR & $+0.045$ & $+0.007$ to $+0.080$ & 0.014 & \textbf{kept} \\
+ & RF & $+0.056$ & $+0.017$ to $+0.093$ & 0.006 & \textbf{kept} \\
+\midrule
++ team standings & LR & $-0.008$ & $-0.021$ to $+0.004$ & 0.20 & dropped \\
+ & RF & $-0.019$ & $-0.040$ to $+0.004$ & 0.10 & dropped \\
+\midrule
++ recent form & LR & $-0.011$ & $-0.034$ to $+0.014$ & 0.42 & dropped \\
+ & RF & $+0.001$ & $-0.016$ to $+0.019$ & 0.87 & dropped \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Driver standings are the only step whose range lies above 0 for both models, and the only one above the 0.005 bar. Every dropped group has a range that includes 0, so its change cannot be told apart from noise. The rule and the bootstrap agree for every step.
 
 %==============================================================================
 \section{Preprocessing}\label{sec:prep}
 
 \begin{enumerate}
-\item \textbf{Imputation:} missing values (round~1 standings, rookies) are filled with the \textbf{median} of the training rows (\code{SimpleImputer}). The median is robust to skewed columns such as wins. Fill values: grid 12, \code{drv\_pos} 12, \code{drv\_pts\_share} 0.077, \code{drv\_wins} 0.
+\item \textbf{Imputation:} missing values (round~1 standings, rookies) are filled with the \textbf{median} of the training rows (\code{SimpleImputer}). The median is robust to skewed columns such as wins. Fill values: grid 12, \code{drv\_pos} 12, \code{drv\_pts\_share} 0.075, \code{drv\_wins} 0.
 \item \textbf{Scaling:} \code{StandardScaler} gives each feature mean 0 and standard deviation 1, so large-valued features (grid 1--34, positions up to 102) do not dominate small ones (shares 0--1). Scaling matters for logistic regression and the neural network; the forest is unaffected, but every model receives identical inputs so the comparison is fair.
 \end{enumerate}
 Both steps are fit on the \textbf{training seasons only} and then applied unchanged to validation and test. \fig{fig:scaling} shows the effect: scaling shifts and stretches the values but keeps the shape of the distribution (for example the spike at \code{drv\_pts\_share} = 0, when drivers have no points yet). Training data ends up with mean 0 and std 1; test does not (means between $-0.27$ and $+0.23$), which confirms the scaler was not refit on it.
+
+Missing values are not removed anywhere. Validation and test rows with missing inputs are filled with the same training medians: 68 of the 1{,}359 test rows (5.0\%) have missing standings, all of them round-1 races (22, 22 and 24 rows in 2022, 2023 and 2024), and all are scored.
 
 \begin{figure}[H]
 \centering
@@ -605,7 +664,7 @@ Experiment & Model & Used order & Alternative & Difference & $p$ \\
 \fbox{\parbox{0.92\linewidth}{\textbf{Explanations are not causal effects.} A feature being important to a model means the model \emph{relies on it to make predictions}. It is not evidence that the feature \emph{causes} podium finishes. For example, a front grid slot is mostly a sign of a fast car, and the fast car is what produces podiums. Correlated inputs (the three standings columns) share the credit, and how they share it depends on the method.}}
 \end{center}
 
-The explanations use the \textbf{validation rows} (2018--2021), so the test set stays unseen until final scoring. Inputs are shown in their original units (the scaling is undone for display only). The detailed SHAP and LIME plots use the \textbf{random forest}: it is tied for the best validation PR-AUC, and \code{TreeExplainer} computes exact SHAP values for trees.
+The explanations use the \textbf{validation rows} (2018--2021), so the test set stays unseen until final scoring. Inputs are shown in their original units (the scaling is undone for display only). SHAP and LIME are computed for \textbf{all three trained models} (logistic regression, random forest, neural network); the baseline has a single input, so it appears only in the permutation results. SHAP values are in probability units for every model, so the models can be compared: the forest uses \code{TreeExplainer}, and logistic regression and the network use SHAP's model-agnostic exact explainer with 100 training rows as background (with four inputs it can try every combination of inputs, so the values are exact). The detailed walk-through below uses the random forest.
 
 \subsection{Global: permutation importance}
 Permutation importance~\cite{breiman2001} shuffles one column of the validation rows, which breaks its link to the target while keeping its distribution. The trained model is then rescored without retraining. The drop in validation PR-AUC, averaged over 10 shuffles, measures how much the model relies on that column.
@@ -656,6 +715,19 @@ For each prediction, SHAP~\cite{lundberg2017} splits \emph{prediction $-$ averag
 \textbf{Interpretation.} The grid is first by far (mean $|\text{SHAP}|$ 0.104, about 2.5 times \code{drv\_pos} at 0.041; then \code{drv\_pts\_share} 0.027 and \code{drv\_wins} 0.007). Front grid slots push the probability up by as much as $+0.35$. The dependence plots show the shape: the grid contribution falls steeply from pole ($\approx+0.33$) to 5th ($\approx+0.08$), crosses zero around 6th--8th, and is flat (about $-0.08$) from 10th back, so from the second half of the grid the exact slot barely changes the prediction. Championship position acts as a step: the top five add $+0.07$ to $+0.18$, and from 6th back the effect is small and flat. The points share raises the probability steadily, from about $-0.02$ with no points to $+0.10$ for the leader.
 SHAP and permutation importance rank the forest's features in the same order, although they measure different things: lost ranking quality vs.\ how far an input moves the probability.
 
+\paragraph{The same plots for all three models.}
+\begin{figure}[H]
+\centering
+\optfig[0.32\linewidth]{fig_22_shap_beeswarm_lr.png}{fig_22_shap_beeswarm_lr.png}\hfill
+\optfig[0.32\linewidth]{fig_22_shap_beeswarm_rf.png}{fig_22_shap_beeswarm.png}\hfill
+\optfig[0.32\linewidth]{fig_22_shap_beeswarm_nn.png}{fig_22_shap_beeswarm_nn.png}\\[6pt]
+\optfig[0.7\linewidth]{fig_23_shap_bar.png}{fig_23_shap_bar.png}
+\caption{SHAP on validation rows for logistic regression, random forest and neural network (top), and the mean $|\text{SHAP}|$ of each input for the three models (bottom).}
+\label{fig:shapall}
+\end{figure}
+
+Because the three sets of values share one unit, the bars in the bottom panel are directly comparable. Logistic regression's contribution for an input is a straight line in that input (its coefficient times how far the value is from the average), so it cannot bend; the forest and the network can, as the dependence plots above show for the forest. The three standings inputs overlap, so the credit between them can differ from model to model even when the predictions are similar.
+
 \subsection{Local: SHAP waterfall and LIME}
 Two validation rows were selected by rule rather than by hand: the true podium finisher the forest was most sure about (\emph{hit}) and the one it was least sure about (\emph{miss}). LIME~\cite{ribeiro2016} perturbs the row many times, asks the forest about each copy, and fits a small linear model around the row.
 
@@ -694,14 +766,35 @@ LIME local fit $R^2$ & \multicolumn{3}{c}{0.82} && \multicolumn{3}{c}{0.15} \\
 For the \emph{miss} (Daniil Kvyat, 2019 German GP, started 14th and finished 3rd), every input pushes down. Given what was known before the start, the forest's answer is reasonable: that race was wet and chaotic, an event that pre-race information cannot contain. LIME agrees on every direction, but its local model fits poorly here ($R^2 = 0.15$), so for this row the SHAP values are more trustworthy.
 SHAP divides the difference from the average prediction exactly among the inputs, while LIME's weights come from an approximate local linear model and need not add up.
 
-%==============================================================================
-\section{Inference function}
+\paragraph{The same two rows for all three models.} The two rows were picked with the forest's probabilities and are explained for every model, so the figures differ only because the models differ. Each figure shows the SHAP contributions (left) and the LIME weights (right); red raises the podium probability, blue lowers it.
 
-\code{predict\_podium(record)} takes one driver-race as a dictionary of pre-race features in their normal units. Missing or unknown values are allowed: they are filled with the training medians through the same imputer and scaler as in training. It returns the podium probability and the yes/no decision of the final model (the neural network) at its validation threshold.
+\begin{figure}[H]
+\centering
+\optfig[0.9\linewidth]{fig_25_local_hit_lr.png}{fig_25_local_hit_lr.png}\\[2pt]
+\optfig[0.9\linewidth]{fig_25_local_hit_rf.png}{fig_25_local_hit_rf.png}\\[2pt]
+\optfig[0.9\linewidth]{fig_25_local_hit_nn.png}{fig_25_local_hit_nn.png}
+\caption{Hit (Hamilton, USA 2018): SHAP and LIME for logistic regression, random forest and neural network.}
+\label{fig:localhit}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\optfig[0.9\linewidth]{fig_25_local_miss_lr.png}{fig_25_local_miss_lr.png}\\[2pt]
+\optfig[0.9\linewidth]{fig_25_local_miss_rf.png}{fig_25_local_miss_rf.png}\\[2pt]
+\optfig[0.9\linewidth]{fig_25_local_miss_nn.png}{fig_25_local_miss_nn.png}
+\caption{Miss (Kvyat, Germany 2019): SHAP and LIME for logistic regression, random forest and neural network.}
+\label{fig:localmiss}
+\end{figure}
+
+%==============================================================================
+\section{Inference functions}
+
+There is one inference function \textbf{per model} (\code{PREDICT[model]}, built by one small factory in the notebook). Each takes one driver-race as a dictionary of pre-race features in their normal units. Missing or unknown values are allowed: they are filled with the training medians through the same imputer and scaler as in training, and no row is dropped. It returns that model's podium probability and its yes/no decision at the model's own validation threshold. \code{predict\_podium} is the function of the final model (the neural network).
+The notebook calls all four functions on three records: a complete test row, a record with only \code{grid} known, and a real test row with missing standings (round~1).
 
 \begin{table}[H]
 \centering\small
-\caption{Inference on a complete and a partially-missing record.}
+\caption{Inference of the final model on a complete and a partially-missing record.}
 \label{tab:inference}
 \begin{tabularx}{\linewidth}{p{4.6cm}>{\raggedright\arraybackslash}Xrl}
 \toprule
@@ -727,8 +820,8 @@ Partially missing: a rookie in round 1 & grid 4; standings missing & 0.259 & no 
 
 %==============================================================================
 \section{Conclusion}
-After auditing and cleaning the 14 tables, a leakage-safe table of 24{,}724 starts was built and split by season.
-The data-engineering questions show that front-row starts convert to podiums far more often since 2014 (55.5\% $\rightarrow$ 76.0\%) with a completely reshuffled circuit ranking, that there is no home advantage once starting position is controlled for, and that mechanical retirements fell from 11.2\% to 6.9\% of starts.
+After auditing and cleaning the 14 tables, a leakage-safe table of 24{,}945 entries was built and split by season.
+The data-engineering questions show that front-row starts convert to podiums far more often since 2014 (55.5\% $\rightarrow$ 76.0\%) with a completely reshuffled circuit ranking, that there is no home advantage once starting position is controlled for, and that mechanical retirements fell from 11.3\% to 7.0\% of entries.
 For prediction, the starting grid plus the driver's championship standings before the race are enough: logistic regression, a random forest and a shallow neural network all clearly beat the grid-only baseline (test PR-AUC 0.70--0.72 vs.\ 0.647) and perform about the same.
 Ablation and XAI agree that the grid carries most of the signal, with the season standings adding a consistent but smaller contribution.
 
@@ -737,6 +830,6 @@ Ablation and XAI agree that the grid carries most of the signal, with the season
 
 \appendix
 \section{Reproducibility and decision log}
-The notebook runs top to bottom with \textit{Run All}; on Kaggle the CSV path is detected automatically, and the first cell installs \code{shap}, \code{lime} and \code{missingno}. All random seeds are fixed (42 throughout; 0 for the bootstrap redraws). Every design decision, including the ones superseded during the project, is recorded with its date and evidence in \code{docs/decisions.md}. The $p$-values in \tab{tab:order} are computed in the notebook (Section~15.2) with a paired bootstrap over 2{,}000 redraws of the validation races.
+The notebook runs top to bottom with \textit{Run All}; on Kaggle the CSV path is detected automatically, and the first cell installs \code{shap}, \code{lime} and \code{missingno}. All random seeds are fixed (42 throughout; 0 for the bootstrap redraws). Every design decision, including the ones superseded during the project, is recorded with its date and evidence in \code{docs/decisions.md}. The $p$-values in \tab{tab:order} are computed in the notebook (Section~15.2) and those in \tab{tab:selboot} in Section~11.2b, both with a paired bootstrap over 2{,}000 redraws of the validation races.
 
 \end{document}

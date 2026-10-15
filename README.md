@@ -25,7 +25,7 @@ information available after qualifying and before the race start**.
 | Decision | Outcome |
 |---|---|
 | Dedup (85 shared-drive pairs, all pre-1979) | Keep the car the driver **started** in; fallback best `positionOrder` |
-| `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,566 non-starters excluded |
+| `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,342 entries that did not qualify excluded, 221 non-starters that qualified or withdrew kept |
 | Status taxonomy | `finished/accident/driver/regulatory/other`; everything else (incl. unclear reasons) counts as mechanical (D24) |
 | Qualifying coverage | Qualifying times not used as features (absent pre-1994); `grid` is the qualifying result after penalties. No era/year feature |
 | Indianapolis 500 (1950–60) | Flagged; excluded from home-race analysis **and removed from the modeling table** (M1) |
@@ -79,8 +79,8 @@ so Internet must be **On**. Figures regenerate into `/kaggle/working/figures/`.
 | 9–11 | Modeling table + split, 11 past-only candidates (leakage-checked), imputer/scaler, feature selection |
 | 12–14 | Baseline / LR / RF / shallow NN, tuned on validation; test scored once, confusion matrices |
 | 15 | Feature-group ablation; two preprocessing-order experiments |
-| 16 | XAI: permutation importance (all models), SHAP global + waterfall, LIME |
-| 17–18 | Inference function (complete + partial record); limitations |
+| 16 | XAI: permutation importance (all models), SHAP and LIME for LR, RF and NN |
+| 17–18 | One inference function per model (complete, partial and real test rows); limitations |
 
 Still to do: the PDF report.
 
