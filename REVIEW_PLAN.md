@@ -18,7 +18,7 @@ Everything in this plan except the instructor's answers has now been done. Resul
 | D. Metrics | **Done on the branch.** All six metrics plotted for validation and for train/validation/test, plus discussion and an "always no podium" reference row | notebook §12–14 |
 | Fixes | **Applied on branch `review-fixes`**, rebased onto the team's latest `main` (commit `294ceea`; not merged): V1, V4, V8, V9, V11, V12, N1, N2, X2 and §5. Every edit is a script, so it can be replayed on top of newer teammate changes | `review/apply_fixes.py`, `review/apply_fixes2.py` |
 | Report re-sync (N5) | **Done in `main.tex` and `report/figures/`** on the branch; `main.pdf` must be recompiled (no LaTeX on the machine used) | `report/` |
-| Still open | Office-hours answers to the 21 questions (board), V3 decision, merge `review-fixes`, run on Kaggle, N8 placeholders (team names/IDs, Kaggle link), make the repo accessible | board, `REVIEW_FINDINGS.md` |
+| Still open | Office-hours answers to the 15 questions (board), V3 decision, merge `review-fixes`, run on Kaggle, N8 placeholders (Kaggle and GitHub links in the report; team names and IDs are done), make the repo accessible | board, `REVIEW_FINDINGS.md` |
 
 ## 0. Goals and ground rules
 
@@ -42,35 +42,43 @@ Everything in this plan except the instructor's answers has now been done. Resul
 
 ## 1. Office-hours questions (2026-10-15)
 
-These are worded to ask *whether something is acceptable*, not *what the answer is*. Questions are ordered by how much the answer could change our work. Notes in *italics* are background for us, not part of the question.
+The list was cut from 21 to 15 questions and reworded in plain language on 2026-10-15 (the board has the same list, with space for the answers). Starred (★) questions are the ones not to leave without an answer. The wording below is what we read out; the board also has a short "why we ask".
 
-### A. Ambiguities in the brief (highest priority)
-1. **"All five metrics from Section 4."** The deliverables ask for "all five metrics from Section 4", but the Section 4 table lists three (ROC-AUC, PR-AUC, F1). Is it fine if we report those three plus precision, recall and accuracy, or were five specific metrics intended?
-2. ~~**Q1: qualifying position vs grid.**~~ **Answered (asked before 2026-10-14): use grid positions only.** No change needed beyond stating it in the notebook/report. *(Original question kept for reference:)* The question says to "distinguish qualifying position from grid". Is it enough to explain the difference and use grid, or are we expected to compute the conversion rate both ways and compare? Is it fine if the qualifying-position version only covers the seasons where qualifying data exists (1994+, complete from 2003)?
-   *The notebook currently uses grid only. In 2003+, grid ≠ qualifying position in 27% of rows, and 36 drivers qualified on the front row but started further back. `docs/decisions.md` D5 planned to use both, but D23 (2026-10-09) superseded it with grid only, so this was a decision, not an accident.*
-3. **Form feature.** The checklist says "leakage-safe form feature implemented (using only past races)". Is it fine if the form feature is implemented and leakage-checked, but our feature selection drops it from the final model because it doesn't improve validation scores?
-4. **Qualifying features.** Deliverable 3 mentions "form/standings/grid/qualifying features". Is it fine if we use `grid` (the qualifying result after penalties) as our only qualifying-related feature, and no qualifying lap times, because qualifying times are missing before 1994?
-5. **Ablation scope.** Should the ablation remove each *candidate* feature group, or only the groups in the final model? Should it be done for every model (including the neural network), and should we report the drop on validation, on test, or both?
-6. **Local explanation.** The checklist says "Local Explanation (LIME)", while the brief says "LIME and/or local SHAP". Is having both, for the same rows, the expected level?
+### Unclear in the project text
+1. ★ The project text says to report “all five metrics from Section 4”, but that section only lists three: ROC-AUC, PR-AUC and F1. We report six (those three plus precision, recall and accuracy). Is that fine, or did you have five specific metrics in mind?
+   *Why we ask: We already compute all six, so this only decides what we show in the results table and plots.*
+2. ★ We compare four models: a baseline, logistic regression, a random forest and a neural network. We use SHAP and LIME on the random forest, but our prediction function uses the neural network (it scored best on the validation data, although the forest is almost tied). Is it okay to explain a different model from the one the prediction function uses, or should they be the same model?
+   *Why we ask: SHAP is exact and simple for a random forest, which is how Lab 4 does it. Explaining the neural network would need extra tools the labs don't cover. If you want the same model in both places, we would either explain the network or use the forest in the prediction function.*
+3. ★ The project text says each row is “one driver entering one race”. We only keep drivers who actually started the race, so drivers who entered but never started (didn't qualify, withdrew) are dropped. Is that okay, or should they stay in the data as “no podium”?
+   *Why we ask: About 1,640 of the 26,670 rows (6%) are drivers who never started. Keeping them would lower the podium rate and count cars that never raced.*
+4. ★ The project text asks for permutation importance, but our lab manuals and guide notebooks only teach SHAP and LIME. We wrote permutation importance ourselves: shuffle one input column, score the model again, and see how much worse it gets. Is that fine, and how much detail do you want when we explain it?
+   *Why we ask: We checked all four lab manuals and the three guide notebooks and none of them mentions it. We wrote it by hand because the scikit-learn version doesn't work with our neural network.*
+### Our choices: is this okay?
+5. ★ How we choose features: we start with just the starting grid, then add one group of related features at a time (for example all the driver-standings features) and keep a group only if the validation score improves. Afterwards we run the ablation: we take each group out of the finished model and see how much worse it gets. Is that the order you expect (choose first, then use the ablation to measure each group), or should the ablation be what decides which features we keep?
+   *Why we ask: The project text says features are justified before training and the ablation measures their contribution afterwards, so we read them as two separate steps. If the ablation had to do the choosing it wouldn't work well here: with all 11 features, taking out any single group barely changes the score, because the groups overlap.*
+6. For the ablation, is it enough to take out the groups of our final features (starting grid and driver standings) for each model, or do you also want every candidate group removed? And should we show the results on the validation data, the test data, or both?
+   *Why we ask: Right now we do all of it: the final features for all three models, and all 11 candidates for logistic regression and the forest, shown on validation and test. We only want to know whether that is more than needed. The test results are never used to make a decision.*
+7. ★ The checklist asks for a “form” feature: how well a driver or team has done in its last few races. We use the share of the last 5 races that ended on the podium, using only past races. We built it and checked there is no leakage, but it didn't make the models better, so it isn't in our final features. Is that fine?
+   *Why we ask: We would rather not force a feature in just to tick a box. The code, the leakage check and the test of whether it helps are all in the notebook.*
+8. ★ You said to show each attempt in its own cell or section, so the before and after is visible. For choosing features we try all the options in one loop and show one table with a row per attempt (the hyperparameter search works the same way). Is a table like that enough, or do you want every attempt as a separate cell?
+   *Why we ask: Separate cells would make the notebook a lot longer. The table shows every attempt with its score, so nothing is hidden, but we want to be sure that counts.*
+9. The checklist asks for the “effect of the step on data distribution, range and values”. We show before and after for the cleaning steps, for filling in missing values and for scaling. Is that enough, or do you want it for every step, including the ones that build the features?
+   *Why we ask: Showing it for every step would add many plots, so we want to know where to stop.*
+10. Our baseline is a logistic regression that only uses the starting grid. The other models score about 0.06 to 0.07 higher on our main metric (PR-AUC about 0.71 to 0.73, against 0.65 to 0.67 for the baseline). Is that a good enough baseline, and is that the size of improvement you would expect?
+   *Why we ask: The starting grid already explains a lot of who finishes on the podium, so there isn't much room left to improve.*
+11. For the mechanical-retirement question, we count any retirement that isn't clearly a crash, a driver problem or a rule decision as mechanical. That includes vague reasons like “Retired” or “Puncture” (about a fifth of the cases we count). Is that okay if we explain the rule, or should we leave the unclear ones out?
+   *Why we ask: We checked it both ways. Leaving the unclear ones out lowers the rates (11.2% to 9.0%, and 6.9% to 5.5%), but cars still got more reliable, so the answer doesn't change.*
+12. We use a few things the labs didn't teach, for example confidence intervals for the rates, joining tables with pandas, and a bootstrap test for the preprocessing experiments. Is that fine as long as we can explain each one and why we used it?
+   *Why we ask: The full list is in our out-of-scope file. We would rather not drop useful methods, but we want to know what you expect.*
+13. In the evaluation, how deep should our explanations go: the idea in simple words, or the maths as well (for example how SHAP values are calculated, or how a neural network learns)?
+   *Why we ask: This decides how much of the extra material we need to study in depth.*
+### Practical
+14. Our notebook starts with a line that installs three packages (shap, lime and missingno), so the internet has to be switched on, for example on Kaggle. Is that okay, and is there a time limit for running the notebook? A full run takes about 14 minutes.
+   *Why we ask: If the notebook is run somewhere without internet that first line fails, so we want to know what you expect.*
+15. Do you expect the report to follow a specific structure or length? And does every plot in the notebook also have to be in the report?
+   *Why we ask: The project text says the plots and answers must be in both. Our report has all 26 figures and the three answers; we just want to be sure we aren't missing a required format.*
 
-### B. Methodology choices: "is it fine if we…"
-7. **Baseline.** Are the models expected to improve on the baseline by a lot? *Ours: validation PR-AUC 0.668 (baseline) vs 0.714–0.727 (models); test 0.647 vs 0.699–0.718. That is about +0.05 to +0.07.* Is logistic regression on grid alone a reasonable baseline, or would you expect a simpler rule baseline too (e.g. "podium if grid ≤ 3")?
-8. **Similar models.** Is it fine if the three models perform about the same (within ~0.02), and we say so honestly instead of claiming one is clearly better?
-9. **Choosing the final model on validation.** Is it fine to pick the final model by validation score even when a different model scores higher on test?
-10. **XAI on a different model.** *(The brief doesn't say which model to explain, so we ask instead of changing it; see V3.)* Is it fine to run SHAP and LIME on the random forest when the final model is the neural network? Or should the explanations be for the final model?
-11. **Split.** Is it fine to split by season (train 1950–2017, validation 2018–2021, test 2022–2024) and not use the random `train_test_split` from the labs? Is training on very old seasons (1950s–80s) acceptable, or would you expect us to restrict to a modern era?
-12. **One validation set for everything.** Is it fine to use the same validation seasons for early stopping, hyperparameter choice and threshold choice?
-13. **Experiments with no effect.** Is it fine if our preprocessing-order experiments show almost no difference (≤ 0.0004 PR-AUC), as long as we explain why? Or should we choose experiments where the order visibly matters?
-14. **"At least three modeling attempts."** Does a hyperparameter grid (several C values, several forest depths, three NN sizes) count toward this?
-15. **Tools beyond the labs.** Is it fine to use methods not covered in the labs (e.g. Wilson confidence intervals, odds ratios, Spearman correlation, sklearn `Pipeline`/`SimpleImputer`, `class_weight="balanced"`, choosing the threshold with `precision_recall_curve`), as long as we can explain and justify them? Should they be marked as such in the notebook?
-16. **Mechanical retirements.** Is it fine to count unclear statuses (e.g. "Retired", "Puncture") as mechanical, as long as we document the rule? Or should we exclude unclear ones, or show both definitions?
-17. **Home race.** Is it fine to define a home race by the driver's nationality (not where they live)? Is comparing 95% intervals enough for Q2, or is a formal significance test expected?
-18. **Who counts as a starter.** The brief's unit of analysis is "one driver *entering* one race". Is it fine to drop non-starters (did not qualify, withdrew) from the modeling table and from the Q2/Q3 rates, or should entrants who never started stay in the table with podium = 0?
-
-### C. Deliverables and evaluation logistics
-19. **Report.** Is there an expected structure or length for the PDF report? Should *every* notebook plot also be in the report ("all plots… included in both")?
-20. **Kaggle.** Is it fine for the first cell to `%pip install` packages (so Internet must be on)? Is there a runtime limit? *Our full run takes ~20 min.*
-21. **Evaluation depth.** How deep should our explanations go: intuition, or the math as well (e.g. how Shapley values are computed, backpropagation, the Wilson formula)?
+**Dropped** (we can answer these ourselves, or the project text already answers them): qualifying position vs grid (the instructor already said grid only), qualifying features, LIME vs local SHAP (the project text says "LIME and/or local SHAP"), whether to use the same validation data for everything, whether to split by season (we justify it in the notebook), experiments with no effect, whether a hyperparameter grid counts as modeling attempts (the project text says hyperparameter variants count), home-race definition, and choosing the model on validation.
 
 ---
 
@@ -139,12 +147,12 @@ Starting assessment from reading the notebook (each one to be confirmed):
 | All metrics, every model, on train/val/test | c80, c83 | Met in tables; **not all plotted or discussed** (§5) |
 | Thresholds and hyperparameters chosen without the test set | c75, c80 | Met; check ablation/experiments don't feed decisions (V8) |
 | Primary/secondary metric choice justified | c41 | Met |
-| Feature-group ablation for each group | c86 | **Partly met: only the 2 kept groups, LR/RF only → will fix (V8)**; Office Q5 only decides val vs test reporting |
-| ≥ 2 preprocessing-order experiments | c89–94 | Met (both show ~0 effect, Office Q13) |
+| Feature-group ablation for each group | c86 | **Partly met: only the 2 kept groups, LR/RF only → will fix (V8)**; Office Q5–Q6 decide the scope |
+| ≥ 2 preprocessing-order experiments | c89–94 | Met (both show ~0 effect) |
 | Checklist: "effect of the step on data distribution/range/values" | c73 | Met for imputation+scaling; check other steps (dedup, non-starter removal) |
-| Leakage-safe form feature | c59–60 | Implemented and checked, **not selected** (Office Q3) |
+| Leakage-safe form feature | c59–60 | Implemented and checked, **not selected** (Office Q7) |
 | Prediction model: "how it works" and "its limitations" | c74, c77, c81 | Brief; expand per model |
-| Permutation importance + SHAP global; LIME/local SHAP; all interpreted | c97–106 | Met; **explains RF, final model is NN**: the brief doesn't specify the model, so ask (Office Q10, V3) |
+| Permutation importance + SHAP global; LIME/local SHAP; all interpreted | c97–106 | Met; **explains RF, final model is NN**: the brief doesn't specify the model, so ask (Office Q2, V3) |
 | Non-causal statement | c95, c109 | Met; it must also be in the report |
 | Inference function: complete and partly missing record | c106 | Met |
 | ≥ 3 modeling attempts; baseline | c75–78 | Met |
@@ -159,13 +167,13 @@ Starting assessment from reading the notebook (each one to be confirmed):
 Work in `review/verify.ipynb`. For every section: (1) recompute the key numbers independently (different code path, not copy-paste); (2) check each number quoted in the markdown against the actual output; (3) ask "is this step logical for this task?"
 
 ### C.1 Issues already seen (confirmed with a quick check on 2026-10-14)
-- **V1 (should fix, confirmed 2026-10-14).** The notebook text (c23, c25) says drivers who "did not qualify or withdrew" are non-starters, and `PLAN.md` (line 260) meant to exclude Withdrew from race starts, but the code (c35) only catches `grid == 0 & laps == 0`. 61 rows with status `Withdrew`, `grid > 0` and `laps == 0` are therefore counted as **starters** (59 in train, 2 in test). The same holds for 11 `Did not qualify` and 7 `107% Rule` rows (1954–1997) that carry a grid slot and 0 laps; a few `Disqualified` (4), `Excluded` (1), `Not restarted` (1) and `Safety` (2) rows with 0 laps are ambiguous. Together about 87 of 24,724 modeling rows (0.35%). This affects the target denominator, `field_size`, `grid_eff` (V16) and the Q2/Q3 rates. Impact is small and the fix is cheap: add the clear cases (`Withdrew`, `Did not qualify`, `107% Rule` with `laps == 0`) to the non-starters, state the rule in c25/c35, and measure the effect. Do **not** drop all `laps == 0` rows: 353 `Collision` and 224 `Accident` rows with 0 laps are real starters who crashed at the start. Note the brief defines the unit as "one driver *entering* one race"; ask in Office Q18.
-- ~~**V2.** Q1 never uses qualifying position.~~ **Closed:** the instructor said to use grid only (Office Q2).
+- **V1 (should fix, confirmed 2026-10-14).** The notebook text (c23, c25) says drivers who "did not qualify or withdrew" are non-starters, and `PLAN.md` (line 260) meant to exclude Withdrew from race starts, but the code (c35) only catches `grid == 0 & laps == 0`. 61 rows with status `Withdrew`, `grid > 0` and `laps == 0` are therefore counted as **starters** (59 in train, 2 in test). The same holds for 11 `Did not qualify` and 7 `107% Rule` rows (1954–1997) that carry a grid slot and 0 laps; a few `Disqualified` (4), `Excluded` (1), `Not restarted` (1) and `Safety` (2) rows with 0 laps are ambiguous. Together about 87 of 24,724 modeling rows (0.35%). This affects the target denominator, `field_size`, `grid_eff` (V16) and the Q2/Q3 rates. Impact is small and the fix is cheap: add the clear cases (`Withdrew`, `Did not qualify`, `107% Rule` with `laps == 0`) to the non-starters, state the rule in c25/c35, and measure the effect. Do **not** drop all `laps == 0` rows: 353 `Collision` and 224 `Accident` rows with 0 laps are real starters who crashed at the start. Note the brief defines the unit as "one driver *entering* one race"; ask in Office Q3.
+- ~~**V2.** Q1 never uses qualifying position.~~ **Closed:** the instructor said to use grid only (asked earlier).
 
 ### C.2 Things to check
 | ID | Area | Check |
 |---|---|---|
-| V3 | XAI | Final model = NN (best val PR-AUC 0.727 vs RF 0.726, a tie) but SHAP/LIME explain the RF. **The brief doesn't say which model must be explained → question, not a fix (Office Q10).** Options once answered: make RF the final model (a tie, and it's explainable with TreeExplainer, as in Lab 4), or add SHAP/LIME for the NN. Either way, the notebook must state *why* the explained model was chosen. |
+| V3 | XAI | Final model = NN (best val PR-AUC 0.727 vs RF 0.726, a tie) but SHAP/LIME explain the RF. **The brief doesn't say which model must be explained → question, not a fix (Office Q2).** Options once answered: make RF the final model (a tie, and it's explainable with TreeExplainer, as in Lab 4), or add SHAP/LIME for the NN. Either way, the notebook must state *why* the explained model was chosen. |
 | V4 | NN | **Will fix.** Early stopping (monitor `val_loss`, patience 15) practically never fired: the three sizes ran 200, 200 and 198 of 200 epochs ("val loss still creeping down"). Re-run with more epochs to see where it stops; compare with the lab's `monitor="val_accuracy"`; add a training curve for each size; also try the lab-style variants (SGD vs Adam, with/without early stopping), which are in scope. |
 | V5 | Evaluation | Validation is used for early stopping, model choice **and** threshold, so validation scores are optimistic. Say so; test is the honest number. |
 | V6 | Evaluation | Claim: "train PR-AUC < val because old seasons are less predictable." Verify: compute train PR-AUC per decade; and compare podium rate per split, since PR-AUC's baseline equals the positive rate and that differs between splits (c57: train 13.3%, val 15.0%, test 15.0%). |
@@ -194,11 +202,11 @@ Work in `review/verify.ipynb`. For every section: (1) recompute the key numbers 
 |---|---|---|---|
 | N1 | c41 | "PR-AUC evaluates ranking … **regardless of shifts in field size**" is wrong: PR-AUC's no-skill level *equals* the positive rate, so it moves with field size. ROC-AUC is the one that doesn't depend on prevalence. Also says **13.7%** podium rate; the output (c40) and report say **13.5%**. Other numbers in c41 are off too: "grids often exceeded 26–30 starters" in the 1980s–90s (actual average 24–25, maximum 27–28 starters) and "podium rate dropped to ~10–11%" (actual ~12% per decade, 11.5–14.2% per season). | should fix |
 | N2 | c39 | Sprint text: "over 99% of races had no sprint" → actually **98.4%** (18 of 1,125). "~96% of training seasons (1950–2020)" → training is **1950–2017**, so 100% predate sprints. The "secondary / improved modern-era model" paragraph describes a model that doesn't exist; examiners may ask why it wasn't built. Reword as future work or move to Limitations. | should fix |
-| N3 | notebook vs report | **Resolved by commit `2057b24`:** the report no longer cites labs (no "Lab N" left in `main.tex`); it now has a bibliography (`references.bib`: Wilson, Breiman, Efron, SHAP, LIME, sklearn, dataset). Still decide after Office Q15 whether to mark non-lab tools as such; `PLAN.md` required tagging them **[beyond labs]**. | resolved |
+| N3 | notebook vs report | **Resolved by commit `2057b24`:** the report no longer cites labs (no "Lab N" left in `main.tex`); it now has a bibliography (`references.bib`: Wilson, Breiman, Efron, SHAP, LIME, sklearn, dataset). Still decide after Office Q12 whether to mark non-lab tools as such; `PLAN.md` required tagging them **[beyond labs]**. | resolved |
 | N4 | notebook c92–c94, report table "Preprocessing-order experiments" | **Resolved by commit `2057b24`:** the paired bootstrap (2,000 redraws of validation races, `default_rng(0)`) is now in the notebook, and its output matches the report and `docs/decisions.md` D29 (LR −0.0001, p = 0.69; RF −0.0004, p = 0.29; scale→impute p = 0.99 / 1.00). Still to do: bootstrap, p-values and confidence intervals of a difference are not in the labs, so they are on the out-of-scope list; re-check these numbers after any re-run. | resolved |
 | N5 | report | Every report number is hand-copied from notebook outputs. Fixes V1, V4, V8 and §5 change them (e.g. 24,724 rows, 1,563 non-starters, all metric tables, fig 17, fig 20). Re-sync the report and re-copy `notebooks/_working_local/figures/` → `report/figures/` after the final run. Extend V18 (text vs output) to `main.tex`. | after fixes |
 | N6 | `README.md`, `docs/decisions.md` D4 | Say **1,566** non-starters; the notebook output (c35) and report say **1,563** (1,566 is the count before deduplication). | note |
-| N7 | c36 comment | "~80 individual mechanical failure terms": **checked, fine** (77 statuses fall into the mechanical fallback out of 139). Note that "Retired" is the 2nd-largest 'mechanical' status since 2014 (50 rows, after Engine 81) although its cause is unknown (V11, Office Q16). | resolved |
+| N7 | c36 comment | "~80 individual mechanical failure terms": **checked, fine** (77 statuses fall into the mechanical fallback out of 139). Note that "Retired" is the 2nd-largest 'mechanical' status since 2014 (50 rows, after Engine 81) although its cause is unknown (V11, Office Q11). | resolved |
 | N8 | report | Placeholders: team names and IDs, Kaggle link, GitHub link. | before submission |
 
 **Done when:** every V-item has a finding with evidence and a severity, and each blocker/should-fix item has an agreed fix.
