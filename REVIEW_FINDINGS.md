@@ -32,7 +32,7 @@ Written 2026-10-14 for the CSEN903 Milestone 1 notebook. Cell numbers are 0-base
 | All metrics for every model on train/validation and on test | c85, c90 | met after fix | Tables had all six; now plotted and discussed, with an 'always no podium' reference. | Fixed (§5). Office-hours question 1. |
 | Thresholds and hyperparameters chosen without the test set | c72, c85 | met | Test is scored once in §14; ablation reads test but decides nothing. | — |
 | Primary / secondary metric choice justified | c41, c86 | met | PR-AUC primary; text corrected (N1). | — |
-| Baseline: simplest reasonable model, compared | §12 | met | LR on grid alone; threshold also tuned on validation. | Office-hours question 10. |
+| Baseline: simplest reasonable model, compared | §12 | met | LR on grid alone; threshold also tuned on validation. | Office-hours question 13. |
 | At least three modeling attempts compared | §11–§13 | met | Baseline, LR, RF, NN, hyperparameter grids, feature ladders. | — |
 | Feature-group ablation for each group | §15.1 | met after fix | Previously 2 groups and 2 models, test only. | Fixed (V8). |
 | At least two preprocessing-order experiments | §15.2 | met | Leaky fit and scale/impute order, plus a paired bootstrap. | — |
@@ -66,9 +66,9 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 ### V3. XAI explains the forest, the final model is the network
 
 - **Area / severity / status:** XAI / should fix / needs answer
-- **Claimed or found:** SHAP and LIME are run on the random forest (c103); the final model chosen on validation is the neural network (0.727 vs 0.726, a tie).
+- **Claimed or found:** SHAP and LIME are run on the random forest (c103); the model used by the prediction function (chosen on validation) is the neural network (0.728 vs 0.725, a tie). Lab 4's graded task explains a neural network with SHAP (beeswarm, force, waterfall) and LIME, so explaining the network is probably expected.
 - **Evidence:** The brief does not say which model must be explained. The notebook states why the forest is used (exact TreeExplainer, tie on validation), and permutation importance covers all four models.
-- **What was done / to do:** Office-hours question 2. If the answer is 'explain the model the prediction function uses': either use the forest in the prediction function (a tie, and Lab 4 explains forests) or add SHAP (KernelExplainer) / LIME for the network.
+- **What was done / to do:** Office-hours question 2. Likely next step whatever the answer: add SHAP (shap.Explainer on the network's predict function, or KernelExplainer) and LIME for the neural network too. The lab guide notebook shows no code for this, only the forest with TreeExplainer.
 
 ### V4. Early stopping never really ran
 
@@ -124,7 +124,7 @@ Severity: **should fix** / **note** / **ok**. Status: fixed on the branch, verif
 - **Area / severity / status:** Q3 / note / fixed
 - **Claimed or found:** Unclear statuses (Retired, Puncture, Tyre, wings, ...) count as mechanical.
 - **Evidence:** 21% of 'mechanical' starts in 2014–2024 have an ambiguous status; 'Retired' alone is 50 rows. Strict definition (cell c57): 11.2% → 9.0% (2014–2021) and 6.9% → 5.5% (2022–2024), so the conclusion (cars got more reliable) holds. Team ranking: 2014–2021 top 3 unchanged; 2022–2024 the third place changes from RB (48 starts) to AlphaTauri. Team names are as in the data (Toro Rosso, AlphaTauri, RB are separate teams).
-- **What was done / to do:** Strict-vs-broad cell added to Q3 (c57). Office-hours question 11.
+- **What was done / to do:** Strict-vs-broad cell added to Q3 (c57). Office-hours question 14.
 
 ### V12. Q1 recomputation
 
