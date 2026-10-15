@@ -1020,7 +1020,7 @@
   "where": "c102, c103, c115",
   "kind": "concept",
   "req": false,
-  "what": "The brief does not name the model to explain.",
+  "what": "The brief does not name the model to explain. Lab 4's graded task explains a neural network with SHAP and LIME, so the network is probably expected too.",
   "why": "See office-hours question 2.",
   "alt": "None.",
   "pri": "H",

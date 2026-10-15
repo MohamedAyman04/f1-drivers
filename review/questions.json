@@ -10,8 +10,8 @@
   "n": 2,
   "grp": "A",
   "must": true,
-  "ask": "We compare four models: a baseline, logistic regression, a random forest and a neural network. We use SHAP and LIME on the random forest, but our prediction function uses the neural network (it scored best on the validation data, although the forest is almost tied). Is it okay to explain a different model from the one the prediction function uses, or should they be the same model?",
-  "why": "SHAP is exact and simple for a random forest, which is how Lab 4 does it. Explaining the neural network would need extra tools the labs don't cover. If you want the same model in both places, we would either explain the network or use the forest in the prediction function."
+  "ask": "The project text doesn't say which model to explain with SHAP and LIME, or which model the prediction function should use. At the moment permutation importance covers all four models, SHAP and LIME cover the random forest, and the prediction function uses the neural network. Do you want SHAP and LIME for every model (the Lab 4 graded task does it for a neural network), or is one model enough? And should the prediction function use a particular model?",
+  "why": "We can do SHAP and LIME on the neural network as well. It just takes more work and more runtime, so we would like to know what is expected before we add it."
  },
  {
   "n": 3,
@@ -63,42 +63,63 @@
   "why": "Showing it for every step would add many plots, so we want to know where to stop."
  },
  {
-  "n": 10,
+  "grp": "B",
+  "must": true,
+  "ask": "The project text asks for “at least two preprocessing-order experiments”. We read that as: change the order of the preprocessing steps and see whether the results change. Ours are (1) fitting the imputer and scaler on all the data before splitting, versus on the training data only, and (2) filling in missing values and then scaling, versus scaling and then filling in. Is that what you mean?",
+  "why": "Both of ours show almost no difference in the scores. We explain why in the notebook (most rows are training rows, and scaling doesn't change which values are missing), but we want to be sure this is the kind of experiment you meant.",
+  "n": 10
+ },
+ {
+  "grp": "B",
+  "must": false,
+  "ask": "The checklist says “plotting the effect of the features” under feature selection. We read that as plots showing how each feature relates to a podium (for example the podium rate for low versus high values of a feature), plus a plot of how the validation score changes as we add feature groups. Is that what you mean?",
+  "why": "This step comes before the final models, so we weren't sure what “effect” refers to.",
+  "n": 11
+ },
+ {
+  "grp": "B",
+  "must": false,
+  "ask": "Is it okay to try several different splits (for example different cut-off seasons for validation and test) and compare the results, as long as we choose the final split without looking at the test data?",
+  "why": "The project text asks for a justified split, and we use one split by season. Trying others could show how stable our results are, but we don't want it to look like we picked the split that makes the test score look best.",
+  "n": 12
+ },
+ {
+  "n": 13,
   "grp": "B",
   "must": false,
   "ask": "Our baseline is a logistic regression that only uses the starting grid. The other models score about 0.06 to 0.07 higher on our main metric (PR-AUC about 0.71 to 0.73, against 0.65 to 0.67 for the baseline). Is that a good enough baseline, and is that the size of improvement you would expect?",
   "why": "The starting grid already explains a lot of who finishes on the podium, so there isn't much room left to improve."
  },
  {
-  "n": 11,
+  "n": 14,
   "grp": "B",
   "must": false,
   "ask": "For the mechanical-retirement question, we count any retirement that isn't clearly a crash, a driver problem or a rule decision as mechanical. That includes vague reasons like “Retired” or “Puncture” (about a fifth of the cases we count). Is that okay if we explain the rule, or should we leave the unclear ones out?",
   "why": "We checked it both ways. Leaving the unclear ones out lowers the rates (11.2% to 9.0%, and 6.9% to 5.5%), but cars still got more reliable, so the answer doesn't change."
  },
  {
-  "n": 12,
+  "n": 15,
   "grp": "B",
   "must": false,
   "ask": "We use a few things the labs didn't teach, for example confidence intervals for the rates, joining tables with pandas, and a bootstrap test for the preprocessing experiments. Is that fine as long as we can explain each one and why we used it?",
   "why": "The full list is in our out-of-scope file. We would rather not drop useful methods, but we want to know what you expect."
  },
  {
-  "n": 13,
+  "n": 16,
   "grp": "B",
   "must": false,
   "ask": "In the evaluation, how deep should our explanations go: the idea in simple words, or the maths as well (for example how SHAP values are calculated, or how a neural network learns)?",
   "why": "This decides how much of the extra material we need to study in depth."
  },
  {
-  "n": 14,
+  "n": 17,
   "grp": "C",
   "must": false,
   "ask": "Our notebook starts with a line that installs three packages (shap, lime and missingno), so the internet has to be switched on, for example on Kaggle. Is that okay, and is there a time limit for running the notebook? A full run takes about 14 minutes.",
   "why": "If the notebook is run somewhere without internet that first line fails, so we want to know what you expect."
  },
  {
-  "n": 15,
+  "n": 18,
   "grp": "C",
   "must": false,
   "ask": "Do you expect the report to follow a specific structure or length? And does every plot in the notebook also have to be in the report?",
