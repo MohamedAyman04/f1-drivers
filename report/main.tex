@@ -46,7 +46,7 @@ Kaggle: \textit{(add link)} \quad GitHub: \textit{(add link)}
 \begin{abstract}
 \noindent
 We predict, for every driver in every Formula~1 race from 1950 to 2024, whether the driver finishes on the podium (\code{positionOrder} $\le 3$), using only information available after qualifying and before the start.
-The raw relational tables are audited and cleaned on copies (160{,}076 \verb|\N| sentinels converted, 85 duplicated driver-race pairs resolved, keys verified), three data-engineering questions are answered with multi-hop joins, and a leakage-safe modeling table of 24{,}724 starts is built.
+The raw relational tables are audited and cleaned on copies (160{,}076 \verb|\N| sentinels converted, 85 duplicated driver-race pairs resolved, keys verified), three data-engineering questions are answered with multi-hop joins, and a leakage-safe modeling table of 24{,}945 entries is built.
 Feature groups are selected by adding one group at a time on a season-based validation split, which keeps the starting grid and the driver's championship standings after the previous round.
 A logistic regression, a random forest and a shallow neural network all beat a grid-only baseline: test PR-AUC 0.708, 0.718 and 0.699 against 0.647.
 Permutation importance, SHAP and LIME show that the models rely mostly on the starting grid; these explanations describe the models, not causes.
