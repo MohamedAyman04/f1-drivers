@@ -1,5 +1,7 @@
 # Decision log (moved out of the notebook; D1–D16, then team-meeting decisions M1–)
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 Evidence lives in `notebooks/f1_podium_prediction.ipynb`. Dates are 2026-10-03 unless noted.
 
 ## #26 — Features chosen by adding one group at a time (2026-10-11; supersedes the M3 feature list and `field_size`/`grid_rel` in M1)

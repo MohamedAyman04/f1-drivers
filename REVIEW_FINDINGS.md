@@ -1,5 +1,7 @@
 # Review findings
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 Written 2026-10-14 for the CSEN903 Milestone 1 notebook. Cell numbers are 0-based in the **fixed** notebook on branch `review-fixes` (117 cells). Plan: `REVIEW_PLAN.md`. Out-of-scope audit: `OUT_OF_SCOPE.md`. Independent check: `review/verify.ipynb` (rebuilds the modeling table from the raw CSVs with separate code; its split sizes and PR-AUCs match the notebook to four decimals).
 
 ## Summary

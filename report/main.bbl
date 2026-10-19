@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{agresti1998}
+Alan Agresti and Brent~A. Coull.
+\newblock Approximate is better than ``exact'' for interval estimation of
+  binomial proportions.
+\newblock {\em The American Statistician}, 52(2):119--126, 1998.
+
 \bibitem{breiman2001}
 Leo Breiman.
 \newblock Random forests.

@@ -1,5 +1,7 @@
 # Out-of-scope audit: what the notebook uses that Labs 1–4 do not teach
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 Built on 2026-10-14. Cell numbers (0-based) are those of the **fixed notebook on branch `review-fixes`** (115 cells); the audit was done on the notebook at commit `1925b7f` (110 cells) and the numbers were remapped automatically (`review/remap.py`), with the constructs added by the fixes appended. `README.md` and `report/main.tex` were swept too.
 
 **Scope used:** the 4 lab PDFs (`labs/`) and the 3 guide notebooks (`guide_notebooks/`), nothing else. The project brief does not make something in scope; items it requires are tagged *required by brief* so we know we will be asked about them.

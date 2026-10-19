@@ -1,5 +1,7 @@
 # Phase 3 answers (moved out of the notebook §13)
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 Joins: `clean["results"]` ⨝ `clean["races"]` ⨝ `clean["circuits"]`
 (Q1) / ⨝ `clean["drivers"]` (Q2) / ⨝ `clean["status"]` + `clean["constructors"]` (Q3).
 Every merge asserts the row count is unchanged (grain preserved). Rates use Wilson 95% CIs

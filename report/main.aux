@@ -1,7 +1,21 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\providecommand\HyField@AuxAddToFields[1]{}
-\providecommand\HyField@AuxAddToCoFields[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
 \citation{f1dataset}
 \citation{sklearn}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Task and dataset}{3}{section.1}\protected@file@percent }
@@ -9,158 +23,162 @@
 \@writefile{toc}{\contentsline {paragraph}{Dataset.}{3}{section*.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Tools.}{3}{section*.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Exploratory data analysis before cleaning}{3}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}First look}{3}{subsection.2.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Columns with the most \texttt  {\textbackslash N} sentinels. In total there are 160{,}076 sentinel cells in 30 columns, of which \texttt  {isnull()} detects only 68 (empty q2/q3 strings).}}{3}{table.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}First look and sentinels}{3}{subsection.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Columns with the most \texttt  {\textbackslash N} sentinels.\relax }}{3}{table.caption.5}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:sentinels}{{1}{3}{Columns with the most \texttt {\textbackslash N} sentinels. In total there are 160{,}076 sentinel cells in 30 columns, of which \code {isnull()} detects only 68 (empty q2/q3 strings)}{table.caption.5}{}}
+\newlabel{tab:sentinels}{{1}{3}{Columns with the most \texttt {\textbackslash N} sentinels.\relax }{table.caption.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Where and when values are missing}{3}{subsection.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Missingness before cleaning (white = missing). In \texttt  {results}, missing values are concentrated in the columns describing how the race ended.}}{4}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:msno-before}{{1}{4}{Missingness before cleaning (white = missing). In \code {results}, missing values are concentrated in the columns describing how the race ended}{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Share of missing values per season. The \texttt  {qualifying} table starts in 1994; Q2/Q3 times are empty for every entry until 2003 and partly empty afterwards (only the faster drivers reach Q2/Q3: 28\%/55\% missing in 2014, 25\%/51\% in 2024). Fastest-lap times are missing for every season before the mid-2000s.}}{4}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:coverage}{{2}{4}{Share of missing values per season. The \code {qualifying} table starts in 1994; Q2/Q3 times are empty for every entry until 2003 and partly empty afterwards (only the faster drivers reach Q2/Q3: 28\%/55\% missing in 2014, 25\%/51\% in 2024). Fastest-lap times are missing for every season before the mid-2000s}{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {paragraph}{Findings that drive later decisions.}{4}{section*.8}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Left: starting grid slot, with a spike at 0 (no real slot). Right: entries per race, which include drivers who did not start.}}{5}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:grid}{{3}{5}{Left: starting grid slot, with a spike at 0 (no real slot). Right: entries per race, which include drivers who did not start}{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Key checks and the one-row-per-driver-per-race rule}{5}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Duplicate rule.}{5}{section*.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Missing values before cleaning (white = missing). In \texttt  {results} they sit in the columns that describe how a race ended.\relax }}{4}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:msno-before}{{1}{4}{Missing values before cleaning (white = missing). In \code {results} they sit in the columns that describe how a race ended.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Share of missing values per season (blank = no rows that season). Even after 2006, Q2/Q3 are partly empty because only the faster drivers reach them (28\%/55\% missing in 2014, 25\%/51\% in 2024).\relax }}{4}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:coverage}{{2}{4}{Share of missing values per season (blank = no rows that season). Even after 2006, Q2/Q3 are partly empty because only the faster drivers reach them (28\%/55\% missing in 2014, 25\%/51\% in 2024).\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Spelling, grid slots and field sizes}{4}{subsection.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Left: starting grid slot, with a spike at 0. Right: entries per race, including drivers who never started.\relax }}{4}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:grid}{{3}{4}{Left: starting grid slot, with a spike at 0. Right: entries per race, including drivers who never started.\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Keys and duplicates}{5}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Duplicate rule.}{5}{section*.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Cleaning}{5}{section.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Cleaning steps and their effect.}}{6}{table.caption.11}\protected@file@percent }
-\newlabel{tab:cleaning}{{2}{6}{Cleaning steps and their effect}{table.caption.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Cleaning steps and their effect \textit  {(notebook \S  6)}.\relax }}{5}{table.caption.10}\protected@file@percent }
+\newlabel{tab:cleaning}{{2}{5}{Cleaning steps and their effect \nb {6}.\relax }{table.caption.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Evidence for the rules \textit  {(notebook \S  6.1)}.}{5}{section*.11}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Effect of the cleaning.}{6}{section*.12}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces After cleaning. Top: \texttt  {results} missingness with real NaN. Bottom left: drivers per race before and after removing the entries that did not qualify. Bottom right: Q1 lap times after parsing to seconds (a plausible 60--120\,s range).}}{7}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:after}{{4}{7}{After cleaning. Top: \code {results} missingness with real NaN. Bottom left: drivers per race before and after removing the entries that did not qualify. Bottom right: Q1 lap times after parsing to seconds (a plausible 60--120\,s range)}{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Target, pre-race cutoff and metrics}{7}{section.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Podium rate per season and $3/\text  {average starters per race}$. The lines differ only in 8 shared-drive races (1951--1957).}}{7}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:target}{{5}{7}{Podium rate per season and $3/\text {average starters per race}$. The lines differ only in 8 shared-drive races (1951--1957)}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces After cleaning. Top: missing cells per table before and after (log scale). Bottom: grid slots, drivers per race before and after removing non-qualifiers, and Q1 lap times after parsing to seconds.\relax }}{6}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:after}{{4}{6}{After cleaning. Top: missing cells per table before and after (log scale). Bottom: grid slots, drivers per race before and after removing non-qualifiers, and Q1 lap times after parsing to seconds.\relax }{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Target, pre-race cutoff and metrics}{6}{section.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Podium rate per season and $3/\text  {average starters per race}$. The lines part only in a few 1950s races with shared drives.\relax }}{6}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:target}{{5}{6}{Podium rate per season and $3/\text {average starters per race}$. The lines part only in a few 1950s races with shared drives.\relax }{figure.caption.14}{}}
 \citation{wilson1927}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces The pre-race cutoff.}}{8}{table.caption.15}\protected@file@percent }
-\newlabel{tab:cutoff}{{3}{8}{The pre-race cutoff}{table.caption.15}{}}
-\@writefile{toc}{\contentsline {paragraph}{Metric choice.}{8}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Data-engineering questions}{8}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Q1: Which circuits convert a front-row start into a podium most often, and did that change after 2014?}{8}{subsection.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Method.}{8}{section*.17}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Q1: from all circuits to the circuits that can be ranked in both eras.}}{8}{table.caption.18}\protected@file@percent }
-\newlabel{tab:q1funnel}{{4}{8}{Q1: from all circuits to the circuits that can be ranked in both eras}{table.caption.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Q1: front-row conversion rate per circuit, before 2014 vs.\ 2014+ (bars = 95\% intervals, dashed = all circuits), and the same values as a heatmap.}}{9}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:q1}{{6}{9}{Q1: front-row conversion rate per circuit, before 2014 vs.\ 2014+ (bars = 95\% intervals, dashed = all circuits), and the same values as a heatmap}{figure.caption.19}{}}
-\@writefile{toc}{\contentsline {paragraph}{Answer.}{9}{section*.20}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Q2: Do drivers podium more often at home, controlling for starting position?}{9}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Method.}{9}{section*.21}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Q2: podium rate by starting group, home vs.\ away.}}{9}{table.caption.22}\protected@file@percent }
-\newlabel{tab:q2}{{5}{9}{Q2: podium rate by starting group, home vs.\ away}{table.caption.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Q2: podium rate by starting position, home vs.\ away (bars = 95\% intervals).}}{10}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:q2}{{7}{10}{Q2: podium rate by starting position, home vs.\ away (bars = 95\% intervals)}{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {paragraph}{Answer.}{10}{section*.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Q3: Which constructors have the highest mechanical-retirement rate in 2014--2021 vs.\ 2022--2024?}{10}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Method.}{10}{section*.25}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Q3: mechanical retirement rate per team and period (bars = 95\% intervals, dashed = period average).}}{10}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:q3}{{8}{10}{Q3: mechanical retirement rate per team and period (bars = 95\% intervals, dashed = period average)}{figure.caption.26}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Q3: how race starts ended in each period.}}{11}{figure.caption.27}\protected@file@percent }
-\newlabel{fig:q3b}{{9}{11}{Q3: how race starts ended in each period}{figure.caption.27}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Q3: highest mechanical-retirement rates per period.}}{11}{table.caption.28}\protected@file@percent }
-\newlabel{tab:q3}{{6}{11}{Q3: highest mechanical-retirement rates per period}{table.caption.28}{}}
-\@writefile{toc}{\contentsline {paragraph}{Answer.}{11}{section*.29}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Modeling table and data split}{11}{section.6}\protected@file@percent }
-\newlabel{sec:split}{{6}{11}{Modeling table and data split}{section.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Season-based split.}}{11}{table.caption.30}\protected@file@percent }
-\newlabel{tab:split}{{7}{11}{Season-based split}{table.caption.30}{}}
-\@writefile{toc}{\contentsline {paragraph}{Why split by season.}{11}{section*.31}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Feature engineering and selection}{12}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Candidate features and their validity at the cutoff}{12}{subsection.7.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Candidate features (11 in 5 groups). All use only information available before the race.}}{12}{table.caption.32}\protected@file@percent }
-\newlabel{tab:candidates}{{8}{12}{Candidate features (11 in 5 groups). All use only information available before the race}{table.caption.32}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Exploratory evidence}{12}{subsection.7.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Podium rate in each fifth of every candidate (training seasons). Dashed = overall rate; grey = missing value.}}{13}{figure.caption.33}\protected@file@percent }
-\newlabel{fig:fifths}{{10}{13}{Podium rate in each fifth of every candidate (training seasons). Dashed = overall rate; grey = missing value}{figure.caption.33}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Spearman correlation between candidates (training seasons).}}{13}{figure.caption.34}\protected@file@percent }
-\newlabel{fig:corr}{{11}{13}{Spearman correlation between candidates (training seasons)}{figure.caption.34}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Empirical selection: adding one group at a time}{14}{subsection.7.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Feature-selection trials (validation PR-AUC).}}{14}{table.caption.35}\protected@file@percent }
-\newlabel{tab:ladder}{{9}{14}{Feature-selection trials (validation PR-AUC)}{table.caption.35}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Validation PR-AUC as groups are added (filled = kept, empty = dropped).}}{14}{figure.caption.36}\protected@file@percent }
-\newlabel{fig:ladder}{{12}{14}{Validation PR-AUC as groups are added (filled = kept, empty = dropped)}{figure.caption.36}{}}
-\@writefile{toc}{\contentsline {paragraph}{Selected features (4):}{14}{section*.37}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Statistical check of the selection}{14}{subsection.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Redundancy (variance inflation factor).}{14}{section*.38}\protected@file@percent }
+\citation{agresti1998}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces The pre-race cutoff.\relax }}{7}{table.caption.15}\protected@file@percent }
+\newlabel{tab:cutoff}{{3}{7}{The pre-race cutoff.\relax }{table.caption.15}{}}
+\@writefile{toc}{\contentsline {paragraph}{Sprints.}{7}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Metric choice.}{7}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Data-engineering questions}{7}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Q1: Which circuits convert a front-row start into a podium most often, and did that change after 2014?}{7}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Method.}{7}{section*.18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Q1: front-row conversion per circuit, before 2014 and from 2014 (bars = 95\% intervals, dashed = all circuits), and the same rates as a heatmap.\relax }}{8}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:q1}{{6}{8}{Q1: front-row conversion per circuit, before 2014 and from 2014 (bars = 95\% intervals, dashed = all circuits), and the same rates as a heatmap.\relax }{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {paragraph}{Answer.}{8}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Q2: Do drivers podium more often at home, for the same starting position?}{8}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Method.}{8}{section*.21}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Q2: podium rate by starting group, home vs.\ away.\relax }}{8}{table.caption.22}\protected@file@percent }
+\newlabel{tab:q2}{{4}{8}{Q2: podium rate by starting group, home vs.\ away.\relax }{table.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Q2: podium rate by starting position, home vs.\ away (bars = 95\% intervals).\relax }}{9}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:q2}{{7}{9}{Q2: podium rate by starting position, home vs.\ away (bars = 95\% intervals).\relax }{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {paragraph}{Answer.}{9}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Q3: Which constructors have the highest mechanical-retirement rate in 2014--2021 vs.\ 2022--2024?}{9}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Method.}{9}{section*.25}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Q3: mechanical retirement rate per team and period (bars = 95\% intervals, dashed = period average).\relax }}{9}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:q3}{{8}{9}{Q3: mechanical retirement rate per team and period (bars = 95\% intervals, dashed = period average).\relax }{figure.caption.26}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Q3: highest mechanical-retirement rates per period.\relax }}{10}{table.caption.27}\protected@file@percent }
+\newlabel{tab:q3}{{5}{10}{Q3: highest mechanical-retirement rates per period.\relax }{table.caption.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Q3: how race starts ended in each period.\relax }}{10}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:q3b}{{9}{10}{Q3: how race starts ended in each period.\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {paragraph}{Answer.}{10}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Modeling table and data split}{10}{section.6}\protected@file@percent }
+\newlabel{sec:split}{{6}{10}{Modeling table and data split}{section.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Season-based split \textit  {(notebook \S  9)}.\relax }}{10}{table.caption.30}\protected@file@percent }
+\newlabel{tab:split}{{6}{10}{Season-based split \nb {9}.\relax }{table.caption.30}{}}
+\@writefile{toc}{\contentsline {paragraph}{Why split by season.}{10}{section*.31}\protected@file@percent }
 \citation{efron1993}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Spearman correlation with the podium (training rows) and variance inflation factor.}}{15}{table.caption.39}\protected@file@percent }
-\newlabel{tab:vif}{{10}{15}{Spearman correlation with the podium (training rows) and variance inflation factor}{table.caption.39}{}}
-\@writefile{toc}{\contentsline {paragraph}{Each step against chance (paired bootstrap).}{15}{section*.40}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Feature-selection steps against chance (change in validation PR-AUC, paired bootstrap over validation races).}}{15}{table.caption.41}\protected@file@percent }
-\newlabel{tab:selboot}{{11}{15}{Feature-selection steps against chance (change in validation PR-AUC, paired bootstrap over validation races)}{table.caption.41}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Feature engineering and selection}{11}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Candidate features and why they are valid at the cutoff}{11}{subsection.7.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Candidate features (11 in 5 groups). All use only information from before the race.\relax }}{11}{table.caption.32}\protected@file@percent }
+\newlabel{tab:candidates}{{7}{11}{Candidate features (11 in 5 groups). All use only information from before the race.\relax }{table.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Engineered features on all rows: raw points and the points share per decade (the share always runs from 0 to 1), championship positions, and driver form.\relax }}{11}{figure.caption.33}\protected@file@percent }
+\newlabel{fig:engineered}{{10}{11}{Engineered features on all rows: raw points and the points share per decade (the share always runs from 0 to 1), championship positions, and driver form.\relax }{figure.caption.33}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}How many races should recent form look back?}{11}{subsection.7.2}\protected@file@percent }
+\newlabel{sec:window}{{7.2}{11}{How many races should recent form look back?}{subsection.7.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Form window: Spearman correlation of each form feature with the podium (train), validation PR-AUC of a logistic regression on grid + both form features, and its gap to the best window with the 95\% bootstrap range \textit  {(notebook \S  9.1)}.\relax }}{12}{table.caption.34}\protected@file@percent }
+\newlabel{tab:window}{{8}{12}{Form window: Spearman correlation of each form feature with the podium (train), validation PR-AUC of a logistic regression on grid + both form features, and its gap to the best window with the 95\% bootstrap range \nb {9.1}.\relax }{table.caption.34}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Standings and leakage checks}{12}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Exploratory evidence}{12}{subsection.7.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Podium rate per value group of each candidate (train). Dashed = overall rate; grey = missing value.\relax }}{13}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:fifths}{{11}{13}{Podium rate per value group of each candidate (train). Dashed = overall rate; grey = missing value.\relax }{figure.caption.35}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Spearman correlation between the candidates and the podium (train; last row and column = podium).\relax }}{13}{figure.caption.36}\protected@file@percent }
+\newlabel{fig:corr}{{12}{13}{Spearman correlation between the candidates and the podium (train; last row and column = podium).\relax }{figure.caption.36}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Empirical selection: adding one group at a time}{14}{subsection.7.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Feature-selection steps (validation PR-AUC) \textit  {(notebook \S  11.2)}.\relax }}{14}{table.caption.37}\protected@file@percent }
+\newlabel{tab:ladder}{{9}{14}{Feature-selection steps (validation PR-AUC) \nb {11.2}.\relax }{table.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Validation PR-AUC as groups are added (filled = kept, open = dropped).\relax }}{14}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:ladder}{{13}{14}{Validation PR-AUC as groups are added (filled = kept, open = dropped).\relax }{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {paragraph}{Selected features (4):}{14}{section*.39}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Statistical check of the selection}{14}{subsection.7.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Redundancy.}{14}{section*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Each step against chance.}{15}{section*.41}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Change in validation PR-AUC for each step, with its 95\% bootstrap range \textit  {(notebook \S  11.2b)}.\relax }}{15}{table.caption.42}\protected@file@percent }
+\newlabel{tab:selboot}{{10}{15}{Change in validation PR-AUC for each step, with its 95\% bootstrap range \nb {11.2b}.\relax }{table.caption.42}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Preprocessing}{15}{section.8}\protected@file@percent }
 \newlabel{sec:prep}{{8}{15}{Preprocessing}{section.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces The training columns with gaps; solid = median (the fill value), dashed = mean.\relax }}{15}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:median}{{14}{15}{The training columns with gaps; solid = median (the fill value), dashed = mean.\relax }{figure.caption.43}{}}
 \citation{breiman2001}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces \texttt  {drv\_pts\_share} before and after imputation and scaling (training rows).}}{16}{figure.caption.42}\protected@file@percent }
-\newlabel{fig:scaling}{{13}{16}{\code {drv\_pts\_share} before and after imputation and scaling (training rows)}{figure.caption.42}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces The four chosen features on train, raw (top) and after imputing and scaling (bottom).\relax }}{16}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:scaling}{{15}{16}{The four chosen features on train, raw (top) and after imputing and scaling (bottom).\relax }{figure.caption.44}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {9}Models}{16}{section.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Tuning (validation only).}{16}{section*.43}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Tuning results (validation PR-AUC). Best settings in bold.}}{16}{table.caption.44}\protected@file@percent }
-\newlabel{tab:tuning}{{12}{16}{Tuning results (validation PR-AUC). Best settings in bold}{table.caption.44}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Neural network: training and validation loss per epoch.}}{17}{figure.caption.45}\protected@file@percent }
-\newlabel{fig:nnloss}{{14}{17}{Neural network: training and validation loss per epoch}{figure.caption.45}{}}
+\@writefile{toc}{\contentsline {paragraph}{Tuning (validation only).}{16}{section*.45}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Tuning (validation PR-AUC). Chosen settings in bold.\relax }}{16}{table.caption.46}\protected@file@percent }
+\newlabel{tab:tuning}{{11}{16}{Tuning (validation PR-AUC). Chosen settings in bold.\relax }{table.caption.46}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Neural-network settings (validation).\relax }}{17}{table.caption.47}\protected@file@percent }
+\newlabel{tab:nn}{{12}{17}{Neural-network settings (validation).\relax }{table.caption.47}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Network (16): training and validation loss per epoch; dashed = the epoch whose weights are kept.\relax }}{17}{figure.caption.48}\protected@file@percent }
+\newlabel{fig:nnloss}{{16}{17}{Network (16): training and validation loss per epoch; dashed = the epoch whose weights are kept.\relax }{figure.caption.48}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {10}Results}{17}{section.10}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces All metrics on train, validation and the unseen test set. Thresholds were chosen on validation.}}{17}{table.caption.46}\protected@file@percent }
-\newlabel{tab:results}{{13}{17}{All metrics on train, validation and the unseen test set. Thresholds were chosen on validation}{table.caption.46}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Left: validation PR-AUC, ROC-AUC and F1. Right: PR-AUC on train, validation and test.}}{17}{figure.caption.47}\protected@file@percent }
-\newlabel{fig:results}{{15}{17}{Left: validation PR-AUC, ROC-AUC and F1. Right: PR-AUC on train, validation and test}{figure.caption.47}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Confusion matrices on the test seasons (204 podiums among 1{,}356 starts).}}{18}{figure.caption.48}\protected@file@percent }
-\newlabel{fig:cm}{{16}{18}{Confusion matrices on the test seasons (204 podiums among 1{,}356 starts)}{figure.caption.48}{}}
-\@writefile{toc}{\contentsline {paragraph}{Interpretation.}{18}{section*.49}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces All metrics on train, validation and the unseen test seasons. Thresholds were chosen on validation \textit  {(notebook \S  14)}.\relax }}{17}{table.caption.49}\protected@file@percent }
+\newlabel{tab:results}{{13}{17}{All metrics on train, validation and the unseen test seasons. Thresholds were chosen on validation \nb {14}.\relax }{table.caption.49}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Left: validation PR-AUC, ROC-AUC and F1. Right: PR-AUC on train, validation and test.\relax }}{18}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:results}{{17}{18}{Left: validation PR-AUC, ROC-AUC and F1. Right: PR-AUC on train, validation and test.\relax }{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Confusion matrices on the test seasons (rows = actual, columns = predicted).\relax }}{18}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:cm}{{18}{18}{Confusion matrices on the test seasons (rows = actual, columns = predicted).\relax }{figure.caption.51}{}}
+\@writefile{toc}{\contentsline {paragraph}{Reading the results.}{18}{section*.52}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {11}Experiments}{18}{section.11}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Feature-group ablation}{18}{subsection.11.1}\protected@file@percent }
 \newlabel{sec:ablation}{{11.1}{18}{Feature-group ablation}{subsection.11.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Drop in PR-AUC when a feature group is removed.}}{18}{table.caption.50}\protected@file@percent }
-\newlabel{tab:ablation}{{14}{18}{Drop in PR-AUC when a feature group is removed}{table.caption.50}{}}
-\citation{efron1993}
-\citation{efron1993}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Feature-group ablation (drop in test PR-AUC).}}{19}{figure.caption.51}\protected@file@percent }
-\newlabel{fig:ablation}{{17}{19}{Feature-group ablation (drop in test PR-AUC)}{figure.caption.51}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Preprocessing-order experiments}{19}{subsection.11.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces Preprocessing-order experiments (validation PR-AUC). $p$-values from a paired bootstrap~\cite  {efron1993} over 2{,}000 redraws of the validation races.}}{19}{table.caption.52}\protected@file@percent }
-\newlabel{tab:order}{{15}{19}{Preprocessing-order experiments (validation PR-AUC). $p$-values from a paired bootstrap~\cite {efron1993} over 2{,}000 redraws of the validation races}{table.caption.52}{}}
-\@writefile{toc}{\contentsline {paragraph}{Experiment 1}{19}{section*.53}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Experiment 2}{19}{section*.54}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12}Explainability (XAI)}{19}{section.12}\protected@file@percent }
-\citation{breiman2001}
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Drop in PR-AUC when a group is removed (validation / test). Negative = better without it.\relax }}{19}{table.caption.53}\protected@file@percent }
+\newlabel{tab:ablation}{{14}{19}{Drop in PR-AUC when a group is removed (validation / test). Negative = better without it.\relax }{table.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Drop in validation PR-AUC per removed group; left from the selected features, right from all 11 candidates.\relax }}{19}{figure.caption.54}\protected@file@percent }
+\newlabel{fig:ablation}{{19}{19}{Drop in validation PR-AUC per removed group; left from the selected features, right from all 11 candidates.\relax }{figure.caption.54}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Preprocessing experiments}{19}{subsection.11.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces Preprocessing experiments (validation PR-AUC) \textit  {(notebook \S  15.2)}.\relax }}{19}{table.caption.55}\protected@file@percent }
+\newlabel{tab:order}{{15}{19}{Preprocessing experiments (validation PR-AUC) \nb {15.2}.\relax }{table.caption.55}{}}
 \citation{lundberg2017}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}Global: permutation importance}{20}{subsection.12.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {16}{\ignorespaces Permutation importance: mean drop in validation PR-AUC.}}{20}{table.caption.55}\protected@file@percent }
-\newlabel{tab:perm}{{16}{20}{Permutation importance: mean drop in validation PR-AUC}{table.caption.55}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Permutation importance for all models (bars = 1 standard deviation over 10 shuffles).}}{20}{figure.caption.56}\protected@file@percent }
-\newlabel{fig:perm}{{18}{20}{Permutation importance for all models (bars = 1 standard deviation over 10 shuffles)}{figure.caption.56}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Global: SHAP}{20}{subsection.12.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces SHAP for the random forest on validation rows. Left: one dot per driver-race (colour = feature value; right = raises the podium probability). Right: mean $|\text  {SHAP}|$ per feature.}}{21}{figure.caption.57}\protected@file@percent }
-\newlabel{fig:shap}{{19}{21}{SHAP for the random forest on validation rows. Left: one dot per driver-race (colour = feature value; right = raises the podium probability). Right: mean $|\text {SHAP}|$ per feature}{figure.caption.57}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces SHAP dependence plots for the three most important features.}}{21}{figure.caption.58}\protected@file@percent }
-\newlabel{fig:dep}{{20}{21}{SHAP dependence plots for the three most important features}{figure.caption.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Why not the window with the best validation score?}{20}{subsection.11.3}\protected@file@percent }
+\newlabel{sec:formtest}{{11.3}{20}{Why not the window with the best validation score?}{subsection.11.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {16}{\ignorespaces The window model (LR on grid + form) on validation and test; test is only reported.\relax }}{20}{table.caption.56}\protected@file@percent }
+\newlabel{tab:formtest}{{16}{20}{The window model (LR on grid + form) on validation and test; test is only reported.\relax }{table.caption.56}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Team form of Ferrari, Mercedes and Red Bull from 2018, with 75 and 20 races, and the real podium rate of each season (dashed); grey line = first race of 2022.\relax }}{20}{figure.caption.57}\protected@file@percent }
+\newlabel{fig:formtest}{{20}{20}{Team form of Ferrari, Mercedes and Red Bull from 2018, with 75 and 20 races, and the real podium rate of each season (dashed); grey line = first race of 2022.\relax }{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Explainability (XAI)}{20}{section.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Setup \textit  {(notebook \S  16)}.}{20}{section*.58}\protected@file@percent }
 \citation{ribeiro2016}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces SHAP on validation rows for logistic regression, random forest and neural network (top), and the mean $|\text  {SHAP}|$ of each input for the three models (bottom).}}{22}{figure.caption.60}\protected@file@percent }
-\newlabel{fig:shapall}{{21}{22}{SHAP on validation rows for logistic regression, random forest and neural network (top), and the mean $|\text {SHAP}|$ of each input for the three models (bottom)}{figure.caption.60}{}}
-\@writefile{toc}{\contentsline {paragraph}{The same plots for all three models.}{22}{figure.caption.60}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}Local: SHAP waterfall and LIME}{22}{subsection.12.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Local explanations for one confident hit and one miss.}}{23}{figure.caption.61}\protected@file@percent }
-\newlabel{fig:local}{{22}{23}{Local explanations for one confident hit and one miss}{figure.caption.61}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {17}{\ignorespaces SHAP contributions and LIME weights for the two rows.}}{23}{table.caption.62}\protected@file@percent }
-\newlabel{tab:local}{{17}{23}{SHAP contributions and LIME weights for the two rows}{table.caption.62}{}}
-\@writefile{toc}{\contentsline {paragraph}{The same two rows for all three models.}{23}{section*.63}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Hit (Hamilton, USA 2018): SHAP and LIME for logistic regression, random forest and neural network.}}{24}{figure.caption.64}\protected@file@percent }
-\newlabel{fig:localhit}{{23}{24}{Hit (Hamilton, USA 2018): SHAP and LIME for logistic regression, random forest and neural network}{figure.caption.64}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Miss (Kvyat, Germany 2019): SHAP and LIME for logistic regression, random forest and neural network.}}{24}{figure.caption.65}\protected@file@percent }
-\newlabel{fig:localmiss}{{24}{24}{Miss (Kvyat, Germany 2019): SHAP and LIME for logistic regression, random forest and neural network}{figure.caption.65}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}Global: SHAP summary plots}{21}{subsection.12.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces SHAP summary plots on 300 validation rows: logistic regression and network (top), forest with the permutation explainer and with \texttt  {TreeExplainer} (bottom). One dot per driver-race; right = higher podium probability; colour = the input's value (red high, blue low).\relax }}{21}{figure.caption.59}\protected@file@percent }
+\newlabel{fig:shap}{{21}{21}{SHAP summary plots on 300 validation rows: logistic regression and network (top), forest with the permutation explainer and with \code {TreeExplainer} (bottom). One dot per driver-race; right = higher podium probability; colour = the input's value (red high, blue low).\relax }{figure.caption.59}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {17}{\ignorespaces Average size of each input's SHAP value (probability units), 300 validation rows.\relax }}{21}{table.caption.60}\protected@file@percent }
+\newlabel{tab:shap}{{17}{21}{Average size of each input's SHAP value (probability units), 300 validation rows.\relax }{table.caption.60}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Local: SHAP force plots and LIME}{21}{subsection.12.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Hit: Sebastian Vettel, 2018 Bahrain GP. Top: SHAP force plots for logistic regression, forest and network (red pushes up, blue down, from the base value to $f(x)$). Bottom: LIME for the same three (green = towards podium, red = against).\relax }}{22}{figure.caption.61}\protected@file@percent }
+\newlabel{fig:localhit}{{22}{22}{Hit: Sebastian Vettel, 2018 Bahrain GP. Top: SHAP force plots for logistic regression, forest and network (red pushes up, blue down, from the base value to $f(x)$). Bottom: LIME for the same three (green = towards podium, red = against).\relax }{figure.caption.61}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Miss: Sebastian Vettel, 2019 German GP. Same layout as Figure\nobreakspace  {}\ref  {fig:localhit}.\relax }}{23}{figure.caption.62}\protected@file@percent }
+\newlabel{fig:localmiss}{{23}{23}{Miss: Sebastian Vettel, 2019 German GP. Same layout as \fig {fig:localhit}.\relax }{figure.caption.62}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {18}{\ignorespaces SHAP values and LIME weights for the forest, and each model's probability.\relax }}{23}{table.caption.63}\protected@file@percent }
+\newlabel{tab:local}{{18}{23}{SHAP values and LIME weights for the forest, and each model's probability.\relax }{table.caption.63}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {13}Inference functions}{24}{section.13}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {18}{\ignorespaces Inference of the final model on a complete and a partially-missing record.}}{24}{table.caption.66}\protected@file@percent }
-\newlabel{tab:inference}{{18}{24}{Inference of the final model on a complete and a partially-missing record}{table.caption.66}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {19}{\ignorespaces Inference on a complete record, a partially-missing record and a real test row with missing standings ($P(\text  {podium})$, yes if above the model's threshold).\relax }}{24}{table.caption.64}\protected@file@percent }
+\newlabel{tab:inference}{{19}{24}{Inference on a complete record, a partially-missing record and a real test row with missing standings ($P(\text {podium})$, yes if above the model's threshold).\relax }{table.caption.64}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {14}Limitations}{24}{section.14}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{references}
-\bibcite{breiman2001}{1}
-\bibcite{efron1993}{2}
-\bibcite{lundberg2017}{3}
-\bibcite{sklearn}{4}
-\bibcite{f1dataset}{5}
-\bibcite{ribeiro2016}{6}
-\bibcite{wilson1927}{7}
+\bibcite{agresti1998}{1}
+\bibcite{breiman2001}{2}
+\bibcite{efron1993}{3}
+\bibcite{lundberg2017}{4}
+\bibcite{sklearn}{5}
+\bibcite{f1dataset}{6}
+\bibcite{ribeiro2016}{7}
+\bibcite{wilson1927}{8}
 \@writefile{toc}{\contentsline {section}{\numberline {15}Conclusion}{25}{section.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Reproducibility and decision log}{25}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Reproducibility and methods}{25}{appendix.A}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {20}{\ignorespaces Methods used and where they come from.\relax }}{26}{table.caption.66}\protected@file@percent }
+\newlabel{tab:methods}{{20}{26}{Methods used and where they come from.\relax }{table.caption.66}{}}
 \gdef \@abspage@last{26}

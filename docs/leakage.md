@@ -1,5 +1,7 @@
 # Leakage spec (moved out of the notebook §11)
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 Prediction cutoff: **after qualifying, before race start**. Anything from the current race
 known only once the race is running (or over) is leakage. Enforced by the `RESULTS_ROLES` /
 `FORBIDDEN` audit cell in §11.

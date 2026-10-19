@@ -1,5 +1,7 @@
 # Review Plan: Milestone 1 notebook (`notebooks/f1_podium_prediction.ipynb`)
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 Created 2026-10-14. Deadline: **18 Oct 2026, 23:59** (Kaggle link + GitHub repo + PDF report).
 
 Cell references like `c75` are **0-based cell indices** in the notebook as of commit `1925b7f` (pulled 2026-10-14; cell 0 = the title cell, 110 cells). Commit `2057b24` added 2 cells (a bootstrap section at c92–c94), so every reference from the old c93 onward was moved by +2 on 2026-10-14. Recheck them after pulling new commits.

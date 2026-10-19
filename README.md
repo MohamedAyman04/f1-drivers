@@ -13,25 +13,26 @@ information available after qualifying and before the race start**.
 | Item | Value |
 |---|---|
 | Unit of analysis | One driver entering one race — `(raceId, driverId)` |
-| Target | `podium = positionOrder ≤ 3` (binary, ~13.5% of starts) |
+| Target | `podium = positionOrder ≤ 3` (binary, 13.3% of entries) |
 | Prediction cutoff | After qualifying, before lights out (no race outcomes as features) |
 | Modeling window | 1950–2024, `grid` as the only position feature, Indy 500 removed (decision M1) |
 | Split (temporal, by season) | Train 1950–2017 / Validation 2018–2021 / Test 2022–2024 (decision M2) |
 | Primary metric | PR-AUC (ROC-AUC + F1@val-threshold secondary) |
 | Deliverable | One standalone notebook that runs end-to-end with Run All (Kaggle + local) |
 
-## Key decisions (evidence in notebook, full log in `docs/decisions.md`)
+## Key decisions (evidence in the notebook and `report/main.pdf`; `docs/decisions.md` is the older working log)
 
 | Decision | Outcome |
 |---|---|
 | Dedup (85 shared-drive pairs, all pre-1979) | Keep the car the driver **started** in; fallback best `positionOrder` |
-| `grid = 0` (1,638 rows) | 72 pit-lane starts kept with flag; 1,342 entries that did not qualify excluded, 221 non-starters that qualified or withdrew kept |
-| Status taxonomy | `finished/accident/driver/regulatory/other`; everything else (incl. unclear reasons) counts as mechanical (D24) |
+| `grid = 0` (1,638 rows) | 72 pit-lane starts kept (placed behind the last car); 1,354 entries that did not qualify excluded; 221 entries that qualified but did not start kept |
+| Status taxonomy | `finished/accident/driver/regulatory`; everything else is mechanical; 9 unclear statuses flagged and checked separately in Q3 |
 | Qualifying coverage | Qualifying times not used as features (absent pre-1994); `grid` is the qualifying result after penalties. No era/year feature |
 | Indianapolis 500 (1950–60) | Flagged; excluded from home-race analysis **and removed from the modeling table** (M1) |
 | Features | Chosen by adding one group at a time from 11 candidates (kept if validation PR-AUC rises ≥ 0.005 for LR and RF, D28/D29): `grid` + driver standings after the previous round (`drv_pos`, `drv_pts_share`, `drv_wins`) |
+| Recent form | Window = shortest one validation cannot tell apart from the best (race bootstrap): 20 races; not selected as a feature |
 | Preprocessing | `SimpleImputer(median)` + `StandardScaler`, fit on train only |
-| Final model | Shallow NN (best validation PR-AUC 0.727, tied with RF 0.726). Test PR-AUC: RF 0.718, LR 0.708, NN 0.699, grid-only baseline 0.647 |
+| Models | Logistic regression, random forest, shallow NN (16), all reported and explained alike (no single final model). Test PR-AUC: RF 0.720, LR 0.708, NN 0.706, grid-only baseline 0.647 |
 
 ## Data
 
@@ -78,11 +79,11 @@ so Internet must be **On**. Figures regenerate into `/kaggle/working/figures/`.
 | 8 | Data-engineering questions Q1–Q3 (multi-hop joins, Wilson intervals, logistic regression) |
 | 9–11 | Modeling table + split, 11 past-only candidates (leakage-checked), imputer/scaler, feature selection |
 | 12–14 | Baseline / LR / RF / shallow NN, tuned on validation; test scored once, confusion matrices |
-| 15 | Feature-group ablation; two preprocessing-order experiments |
-| 16 | XAI: permutation importance (all models), SHAP and LIME for LR, RF and NN |
-| 17–18 | One inference function per model (complete, partial and real test rows); limitations |
+| 15 | Feature-group ablation; preprocessing-order and imputation experiments; form window on test |
+| 16 | XAI: SHAP (permutation explainer, plus TreeExplainer for RF) and LIME for LR, RF and NN |
+| 17–19 | One inference function per model (complete, partial and real test rows); limitations; methods used |
 
-Still to do: the PDF report.
+Report: `report/main.pdf` (source `report/main.tex`). Kaggle: https://www.kaggle.com/code/nooredeenamr/notebook03d3448a5a
 
 ## Toolkit
 

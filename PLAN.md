@@ -1,5 +1,7 @@
 # CSEN903 Milestone 1: F1 Podium Prediction Companion. Project Plan
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 > **Grounded in the course labs.** Tools and methods come from Lab 1 (Data Wrangling & Visualization), Lab 2 (ML Foundations), Lab 3 (Neural Networks with TensorFlow/Keras) and Lab 4 (Explainable AI). See §0.3 for the mapping. Anything beyond the labs is marked **[beyond labs]** with a reason.
 >
 > **Living plan.** This plan does not fix every choice up front. Each phase has **Decision Gates**: a check to run, the evidence (plot or statistic) it produces, and a rule mapping each possible outcome to an action. Record every gate outcome in the **Decision Log** (§12) so the notebook, the report and the oral evaluation can trace each choice back to its evidence.

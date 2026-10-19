@@ -1,5 +1,7 @@
 # Method notes (moved out of the notebook)
 
+> **Old working document (kept for history).** Written during the project; numbers, cell references and some decisions (e.g. a "final model") are out of date. The final work is `notebooks/f1_podium_prediction.ipynb` and `report/main.pdf`.
+
 ## Sentinel registry (Gates 1.B / 2.1)
 
 CSVs are loaded with `dtype=str, keep_default_na=False` so pandas never silently coerces:
