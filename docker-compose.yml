@@ -10,6 +10,20 @@ services:
     volumes:
       - neo4j_data:/data
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p password123 'RETURN 1'"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  kg-builder:
+    build: .
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    volumes:
+      - ./data/raw:/app/data/raw:ro
+    restart: "no"
 
 volumes:
   neo4j_data:

@@ -1,0 +1,2 @@
+# --- Knowledge graph (Milestone 2) ---
+neo4j>=5
