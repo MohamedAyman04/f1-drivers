@@ -161,7 +161,7 @@ def required_int(value: str | None, field: str) -> int:
 
 
 def read_rows(path: Path) -> Iterator[dict[str, str]]:
-    with path.open("r", encoding="utf-8", newline="") as handle:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
         yield from csv.DictReader(handle)
 
 
@@ -327,7 +327,8 @@ def find_config() -> Path:
 
 def read_config(path: Path) -> dict[str, str]:
     config: dict[str, str] = {}
-    with path.open("r", encoding="utf-8") as handle:
+    # utf-8-sig: a config saved by Windows Notepad as "UTF-8 with BOM" must still parse URI
+    with path.open("r", encoding="utf-8-sig") as handle:
         for line in handle:
             line = line.strip()
             if not line or line.startswith("#") or "=" not in line:
