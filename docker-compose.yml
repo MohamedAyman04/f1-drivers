@@ -22,7 +22,9 @@ services:
       neo4j:
         condition: service_healthy
     volumes:
-      - ./data/raw:/app/data/raw:ro
+      # ":z" relabels the host directory for SELinux (Fedora/RHEL), without it
+      # the container gets EACCES on the CSVs even though they are readable.
+      - ./data/raw:/app/data/raw:ro,z
     restart: "no"
 
 volumes:
