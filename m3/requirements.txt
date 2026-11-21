@@ -1,0 +1,5 @@
+# Milestone 3, part 1 (intent + entities). Install torch from the CPU index first:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+sentence-transformers>=6.0
+numpy
+matplotlib

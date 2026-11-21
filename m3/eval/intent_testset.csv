@@ -1,0 +1,67 @@
+question,intent,prev_intent,note
+What was Sergio Perez's points tally in the 2023 season?,driver_performance,,
+Has Lando Norris ever won at Silverstone?,driver_performance,,
+On average where did Alonso finish at the Hungaroring?,driver_performance,,average finish at circuit
+Count Max Verstappen's career podium finishes,driver_performance,,ambiguous surname resolved by full name
+How did Schumacher do in terms of victories in 2004?,driver_performance,,ambiguous surname narrowed by season
+Give me George Russell's wins and points from 2022,driver_performance,,
+How many points did he score in 2019?,driver_performance,driver_performance,follow-up names intent
+What was Ferrari's points haul in 2018?,constructor_performance,,
+How many times did Williams cars retire between 2014 and 2021?,constructor_performance,,reliability over period
+Which share of McLaren's starts ended with the car classified in 2015?,constructor_performance,,
+Did redbull win more races than mercedes amg in 2021?,constructor_performance,,compact aliases
+Tally of Sauber race victories over its history,constructor_performance,,
+How dependable were Haas machines from 2016 to 2020?,constructor_performance,,
+Between Hamilton and Russell who was quicker on Sunday more often?,head_to_head,,
+Charles Leclerc against Carlos Sainz: who finished higher more times?,head_to_head,,
+Ocon or Alonso at Alpine - who had the better record?,head_to_head,,
+Did Button outscore Hamilton when they were teammates?,head_to_head,,
+How did Albon fare against Verstappen at Red Bull?,head_to_head,,
+Who finished higher more often in 2021: Bottas or Hamilton?,head_to_head,,
+Who took victory at the 2021 Brazilian Grand Prix?,race_facts,,
+List the podium of the 2012 European GP,race_facts,,
+In what city is the Albert Park circuit?,race_facts,,circuit location
+How many Grands Prix has Spa hosted over the years?,race_facts,,races held at circuit
+Who finished third at the 2017 Mexican Grand Prix?,race_facts,,
+Which events have been staged at Imola?,race_facts,,
+And in 2018?,race_facts,race_facts,follow-up keeps intent
+Who started first at the 2022 Belgian Grand Prix?,qualifying_grid,,
+How many times did Charles Leclerc qualify on pole in 2022?,qualifying_grid,,
+Biggest climber from his starting slot at the 2021 Brazilian GP?,qualifying_grid,,grid vs finish gains
+How often did Norris make it into the final qualifying session in 2023?,qualifying_grid,,Q3 appearances
+Where did Hamilton line up on the grid for the 2020 Turkish GP?,qualifying_grid,,
+Which drivers dropped the most spots relative to their grid slot in Monaco 2019?,qualifying_grid,,
+Quickest stop recorded at the 2021 Italian Grand Prix?,pit_stops,,
+How many times did Gasly come into the pits in the 2023 Dutch GP?,pit_stops,,
+What's the typical number of pit visits per driver in 2019?,pit_stops,,average stops
+Slowest service in the pit lane at the 2022 Monaco GP?,pit_stops,,
+How many stops did the drivers make on average at Silverstone in 2021?,pit_stops,,
+Which driver collected the title in 2008?,season_history,,
+Who topped the points table in 2010?,season_history,,championship leader
+How many different drivers took part in 2022?,season_history,,drivers per season
+Who moved to a new team ahead of 2019?,season_history,,team changes
+How many rounds made up the 1998 season?,season_history,,
+Which drivers swapped constructors from 2023 to 2024?,season_history,,
+What country does Oscar Piastri represent?,driver_profile,,
+What is Fernando Alonso's date of birth?,driver_profile,,
+List every team Kimi Raikkonen has raced for,driver_profile,,
+Which race was Max Verstappen's first in Formula 1?,driver_profile,,debut
+What number does Lando Norris run on his car?,driver_profile,,
+Who is Yuki Tsunoda?,driver_profile,,
+Is Lewis Hamilton going to make the podium at the 2024 British Grand Prix?,podium_prediction,,
+Estimate the probability that Sainz finishes top three in Mexico 2024,podium_prediction,,
+Leclerc starts P2 at Monaco 2024 and is 3rd in the standings - will he be on the podium?,podium_prediction,,pre-race info
+What would the model say about Russell in Las Vegas 2024 from pole?,podium_prediction,,
+Odds of Perez getting a podium at Baku 2023?,podium_prediction,,
+Forecast whether Norris lands a top-three finish at Zandvoort 2024,podium_prediction,,
+How much does Max Verstappen earn per year?,out_of_scope,,unanswerable F1
+What soft tyre strategy did Ferrari use at Monza 2019?,out_of_scope,,unanswerable F1
+Who won the Tour de France in 2020?,out_of_scope,,non-F1
+How do I make pancakes?,out_of_scope,,non-F1
+What's Lewis Hamilton's favourite food?,out_of_scope,,unanswerable F1
+Fastest lap time ever recorded at Suzuka?,out_of_scope,,unanswerable F1
+What is the tallest mountain in Africa?,out_of_scope,driver_performance,OOS while cache is set
+Was there a safety car in the 2016 Brazilian Grand Prix?,out_of_scope,,unanswerable F1
+What about Norris?,driver_performance,driver_performance,follow-up replaces driver
+2021?,constructor_performance,constructor_performance,bare year follow-up
+And for Mercedes?,constructor_performance,constructor_performance,follow-up replaces team
