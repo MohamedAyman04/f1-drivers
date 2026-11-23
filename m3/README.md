@@ -1,31 +1,49 @@
-# Milestone 3 — Part 1: intent classification and entity extraction
+# Milestone 3 — Parts 1 & 2: Intent Classification, Entity Extraction, Graph Retrieval & Podium Prediction
 
 ```bash
 .venv/Scripts/python -m pip install -r m3/requirements.txt   # torch CPU wheel: --index-url https://download.pytorch.org/whl/cpu
-python m3/entities.py        # extractor self-checks
-python m3/intents.py         # rule-classifier self-checks
-python m3/eval_intents.py    # both classifiers on the labelled sets -> m3/eval/results/
+python m3/entities.py        # Part 1: extractor self-checks
+python m3/intents.py         # Part 1: rule-classifier self-checks
+python m3/eval_intents.py    # Part 1: both classifiers on the labelled sets -> m3/eval/results/
+python m3/retrieval.py       # Part 2: Neo4j graph retrieval & session cache self-checks
+python m3/podium.py          # Part 2: saved Milestone 1 podium model + live SHAP/LIME self-checks
+python m3/eval_retrieval.py  # Part 2: 60 QA items + M1->M2 integration + 8 podium cases -> m3/eval/results/
 ```
 
 | File | What |
 |---|---|
 | `m3/intents.py` | label set + example phrasings, `RuleClassifier`, `EmbeddingClassifier`, `HybridClassifier`, `DEPLOYED` |
 | `m3/entities.py` | gazetteer from `data/raw/*.csv`, `extract()`, `clarification()`, `resolve_choice()`, `merge()`, `mask()` |
+| `m3/retrieval.py` | `INTENT_CATALOG`, 30 parameterised `CYPHER_TEMPLATES`, `GraphRetriever`, `filter_active_entities()`, `PipelineSession` |
+| `m3/podium.py` | `PodiumPredictor` (loads `artifacts/m1_podium_bundle.joblib` & `artifacts/pre_race_features.csv`, live SHAP/LIME, pre-race KG Cypher context) |
 | `m3/eval/intent_testset.csv` | 66 labelled questions (≥5 per intent, follow-ups, ambiguous names, OOS) |
 | `m3/eval/intent_heldout.csv` | 22 more, written before the improvement round (generalisation check); two items later reworded to pass the near-copy check |
-| `m3/eval/results/` | `intent_report.md` (accuracy, confusion matrices, errors, sweep) + 3 confusion PNGs |
+| `m3/eval/qa_testset.json` | 60 QA retrieval test items (44 core across all 10 intents, follow-ups, ambiguous surnames, empty results, OOS) |
+| `m3/eval/podium_cases.json` | 8 podium prediction & explanation test cases (6 driver-and-race cases + 2 manual-input validation refusals) |
+| `m3/eval/results/` | `intent_report.md` + 3 confusion PNGs; `retrieval_report.md` + `qualitative_sheet_40_items.csv` + `member2_eval_results.json` |
 
 ## API for the rest of the pipeline
 
 ```python
 from m3.intents import DEPLOYED
 from m3.entities import extract, clarification, resolve_choice, merge
+from m3.retrieval import GraphRetriever, PipelineSession, filter_active_entities
+from m3.podium import PodiumPredictor
 
+# Option A: Stateful end-to-end session helper (Member 1 + Member 2 connected)
+predictor = PodiumPredictor()                      # loads saved Milestone 1 bundle from artifacts/
+session = PipelineSession(predictor=predictor)     # loads DEPLOYED() classifier + GraphRetriever()
+turn = session.step(msg)                           # handles follow-ups, disambiguation replies, retrieval, and podium prediction
+
+# Option B: Step-by-step call
 clf = DEPLOYED()                                   # load once (embedding model ~90 MB, cached by HF)
+retriever = GraphRetriever()
 intent = clf.classify(msg, prev=cache_intent)      # Intent(label, status, scores, reason)
 ex = extract(msg)                                  # Extraction(entities, ambiguous, spans)
 entities = merge(cache_entities, ex.entities)      # follow-up: replace only the slots the message names
+entities = filter_active_entities(intent.label, entities, ex, is_follow_up_turn=(intent.status == "follow_up"), text=msg)
 ask = clarification(intent.label, ex, entities)    # str -> ask the user; None -> run the template
+result = retriever.retrieve(intent.label, entities, question_text=msg, current_ex=ex, is_follow_up_turn=(intent.status == "follow_up"))
 ```
 
 * `intent.status`: `ok`, `follow_up` (cached intent kept), `out_of_scope` (refuse, no trace), `clarify` (`label is None`: ask the user to rephrase).

@@ -1,0 +1,4734 @@
+{
+  "section2_constraints": {
+    "total_intents": 10,
+    "m1_labels_aligned": true,
+    "retrieval_intents": 8,
+    "categories_covered": [
+      "Constructor performance",
+      "Driver performance",
+      "Driver profile (extra type)",
+      "Head-to-head",
+      "Pit stops and strategy",
+      "Qualifying and grid",
+      "Race and circuit facts",
+      "Season and history"
+    ],
+    "multi_hop_intents_count": 8,
+    "multi_entity_intents_count": 7,
+    "new_relative_to_m2_count": 7,
+    "total_cypher_templates": 30
+  },
+  "qa_evaluation": {
+    "total_items": 60,
+    "passed_items": 60,
+    "pass_rate": 1.0,
+    "items": [
+      {
+        "id": "QA-01",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Driver performance",
+        "question": "How many podiums did Charles Leclerc get in 2022?",
+        "entities_passed": {
+          "driver": "Charles Leclerc",
+          "year": 2022
+        },
+        "template_executed": "driver_season_or_career_stats",
+        "cypher_params": {
+          "driverId": 844,
+          "year": 2022,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Charles Leclerc",
+            "First_Season": 2022,
+            "Last_Season": 2022,
+            "Entries": 22,
+            "Starts": 22,
+            "Points": 291.0,
+            "Wins": 3,
+            "Podiums": 11,
+            "Points_Finishes": 19,
+            "Retirements": 3,
+            "Best_Finish": 1,
+            "Avg_Finish": 5.5
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Charles Leclerc'})"
+        ]
+      },
+      {
+        "id": "QA-02",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Driver performance",
+        "question": "How many points and wins did Max Verstappen score in the 2023 season?",
+        "entities_passed": {
+          "driver": "Max Verstappen",
+          "year": 2023
+        },
+        "template_executed": "driver_season_or_career_stats",
+        "cypher_params": {
+          "driverId": 830,
+          "year": 2023,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Max Verstappen",
+            "First_Season": 2023,
+            "Last_Season": 2023,
+            "Entries": 22,
+            "Starts": 22,
+            "Points": 530.0,
+            "Wins": 19,
+            "Podiums": 21,
+            "Points_Finishes": 22,
+            "Retirements": 0,
+            "Best_Finish": 1,
+            "Avg_Finish": 1.27
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})"
+        ]
+      },
+      {
+        "id": "QA-03",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Driver performance",
+        "question": "What are Fernando Alonso's career Grand Prix wins, podiums, and points?",
+        "entities_passed": {
+          "driver": "Fernando Alonso"
+        },
+        "template_executed": "driver_season_or_career_stats",
+        "cypher_params": {
+          "driverId": 4,
+          "year": null,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Fernando Alonso",
+            "First_Season": 2001,
+            "Last_Season": 2024,
+            "Entries": 404,
+            "Starts": 402,
+            "Points": 2329.0,
+            "Wins": 32,
+            "Podiums": 106,
+            "Points_Finishes": 264,
+            "Retirements": 79,
+            "Best_Finish": 1,
+            "Avg_Finish": 8.49
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Fernando Alonso'})"
+        ]
+      },
+      {
+        "id": "QA-04",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Driver performance",
+        "question": "Return each driver's total Grand Prix points and wins in the 2021 season.",
+        "entities_passed": {
+          "year": 2021
+        },
+        "template_executed": "season_driver_leaderboard",
+        "cypher_params": {
+          "year": 2021
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 21,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Max Verstappen",
+            "Points": 388.5,
+            "Wins": 10,
+            "Podiums": 18,
+            "Races_Entered": 22
+          },
+          {
+            "Driver": "Lewis Hamilton",
+            "Points": 385.5,
+            "Wins": 8,
+            "Podiums": 17,
+            "Races_Entered": 22
+          },
+          {
+            "Driver": "Valtteri Bottas",
+            "Points": 219.0,
+            "Wins": 1,
+            "Podiums": 11,
+            "Races_Entered": 22
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})",
+          "(Result {name: 'Result #2'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})",
+          "(Result {name: 'Result #3'})-[:BY_DRIVER]->(Driver {name: 'Valtteri Bottas'})"
+        ]
+      },
+      {
+        "id": "QA-05",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Driver performance",
+        "question": "How many wins did Lewis Hamilton have at Silverstone before 2020?",
+        "entities_passed": {
+          "driver": "Lewis Hamilton",
+          "circuit": "Silverstone",
+          "before_year": 2020
+        },
+        "template_executed": "driver_at_circuit_stats",
+        "cypher_params": {
+          "driverId": 1,
+          "circuitId": 9,
+          "year": null,
+          "start_year": null,
+          "end_year": null,
+          "before_year": 2020,
+          "before_date": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Lewis Hamilton",
+            "Circuit": "Silverstone Circuit",
+            "Starts": 13,
+            "Wins": 6,
+            "Podiums": 9,
+            "Best_Finish": 1,
+            "Avg_Finish": 3.46,
+            "Points": 206.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})"
+        ]
+      },
+      {
+        "id": "QA-06",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Driver performance",
+        "question": "What is Charles Leclerc's average finishing position and best finish at Monaco?",
+        "entities_passed": {
+          "driver": "Charles Leclerc",
+          "circuit": "Monaco"
+        },
+        "template_executed": "driver_at_circuit_stats",
+        "cypher_params": {
+          "driverId": 844,
+          "circuitId": 6,
+          "year": null,
+          "start_year": null,
+          "end_year": null,
+          "before_year": null,
+          "before_date": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Charles Leclerc",
+            "Circuit": "Circuit de Monaco",
+            "Starts": 6,
+            "Wins": 1,
+            "Podiums": 1,
+            "Best_Finish": 1,
+            "Avg_Finish": 11.5,
+            "Points": 45.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Charles Leclerc'})"
+        ]
+      },
+      {
+        "id": "QA-07",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Driver performance",
+        "question": "How many wins and podiums has Max Verstappen achieved at Spa-Francorchamps?",
+        "entities_passed": {
+          "driver": "Max Verstappen",
+          "circuit": "Spa-Francorchamps"
+        },
+        "template_executed": "driver_at_circuit_stats",
+        "cypher_params": {
+          "driverId": 830,
+          "circuitId": 13,
+          "year": null,
+          "start_year": null,
+          "end_year": null,
+          "before_year": null,
+          "before_date": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Max Verstappen",
+            "Circuit": "Circuit de Spa-Francorchamps",
+            "Starts": 10,
+            "Wins": 3,
+            "Podiums": 5,
+            "Best_Finish": 1,
+            "Avg_Finish": 7.1,
+            "Points": 109.5
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})"
+        ]
+      },
+      {
+        "id": "QA-08",
+        "group": "core_40",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Driver performance",
+        "question": "At Circuit de Monaco before 2020, which drivers with at least 5 starts had the best average finish?",
+        "entities_passed": {
+          "circuit": "Monaco",
+          "before_year": 2020,
+          "min_starts": 5
+        },
+        "template_executed": "circuit_top_drivers_by_avg_finish",
+        "cypher_params": {
+          "circuitId": 6,
+          "year": null,
+          "start_year": null,
+          "end_year": null,
+          "before_year": 2020,
+          "min_starts": 5
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 15,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Ayrton Senna",
+            "Circuit": "Circuit de Monaco",
+            "Starts": 10,
+            "Avg_Finish": 3.8,
+            "Wins": 6,
+            "Podiums": 8
+          },
+          {
+            "Driver": "Lewis Hamilton",
+            "Circuit": "Circuit de Monaco",
+            "Starts": 13,
+            "Avg_Finish": 4.0,
+            "Wins": 3,
+            "Podiums": 7
+          },
+          {
+            "Driver": "Phil Hill",
+            "Circuit": "Circuit de Monaco",
+            "Starts": 5,
+            "Avg_Finish": 4.2,
+            "Wins": 0,
+            "Podiums": 3
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Ayrton Senna'})",
+          "(Result {name: 'Result #2'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})",
+          "(Result {name: 'Result #3'})-[:BY_DRIVER]->(Driver {name: 'Phil Hill'})"
+        ]
+      },
+      {
+        "id": "QA-09",
+        "group": "core_40",
+        "intent": "constructor_performance",
+        "sub_intent": "constructor_performance_and_reliability",
+        "category": "Constructor performance",
+        "question": "How reliable was Williams between 2014 and 2021?",
+        "entities_passed": {
+          "constructor": "Williams",
+          "start_year": 2014,
+          "end_year": 2021
+        },
+        "template_executed": "constructor_period_performance",
+        "cypher_params": {
+          "constructorIds": [
+            3
+          ],
+          "circuitId": null,
+          "year": null,
+          "start_year": 2014,
+          "end_year": 2021
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "Williams",
+            "Start_Season": 2014,
+            "End_Season": 2021,
+            "Entries": 320,
+            "Starts": 319,
+            "Classified": 266,
+            "Retirements": 53,
+            "Reliability": 0.8313,
+            "Classified_Start_Share": 0.8339,
+            "Points": 829.0,
+            "Wins": 0,
+            "Podiums": 16
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Williams'})"
+        ]
+      },
+      {
+        "id": "QA-10",
+        "group": "core_40",
+        "intent": "constructor_performance",
+        "sub_intent": "constructor_performance_and_reliability",
+        "category": "Constructor performance",
+        "question": "What was Ferrari's reliability rate, wins, and total points in the 2022 season?",
+        "entities_passed": {
+          "constructor": "Ferrari",
+          "year": 2022
+        },
+        "template_executed": "constructor_period_performance",
+        "cypher_params": {
+          "constructorIds": [
+            6
+          ],
+          "circuitId": null,
+          "year": 2022,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "Ferrari",
+            "Start_Season": 2022,
+            "End_Season": 2022,
+            "Entries": 44,
+            "Starts": 44,
+            "Classified": 35,
+            "Retirements": 9,
+            "Reliability": 0.7955,
+            "Classified_Start_Share": 0.7955,
+            "Points": 519.0,
+            "Wins": 4,
+            "Podiums": 20
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Ferrari'})"
+        ]
+      },
+      {
+        "id": "QA-11",
+        "group": "core_40",
+        "intent": "constructor_performance",
+        "sub_intent": "constructor_performance_and_reliability",
+        "category": "Constructor performance",
+        "question": "How many wins, podiums, and classified finishes did Red Bull get between 2022 and 2024?",
+        "entities_passed": {
+          "constructor": "Red Bull",
+          "start_year": 2022,
+          "end_year": 2024
+        },
+        "template_executed": "constructor_period_performance",
+        "cypher_params": {
+          "constructorIds": [
+            9
+          ],
+          "circuitId": null,
+          "year": null,
+          "start_year": 2022,
+          "end_year": 2024
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "Red Bull",
+            "Start_Season": 2022,
+            "End_Season": 2024,
+            "Entries": 136,
+            "Starts": 136,
+            "Classified": 123,
+            "Retirements": 13,
+            "Reliability": 0.9044,
+            "Classified_Start_Share": 0.9044,
+            "Points": 2051.0,
+            "Wins": 47,
+            "Podiums": 76
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Red Bull'})"
+        ]
+      },
+      {
+        "id": "QA-12",
+        "group": "core_40",
+        "intent": "constructor_performance",
+        "sub_intent": "constructor_performance_and_reliability",
+        "category": "Constructor performance",
+        "question": "For 2014 to 2021, rank constructors with at least 100 entries by their classified finish reliability.",
+        "entities_passed": {
+          "start_year": 2014,
+          "end_year": 2021,
+          "min_entries": 100
+        },
+        "template_executed": "all_constructors_reliability_ranking",
+        "cypher_params": {
+          "year": null,
+          "start_year": 2014,
+          "end_year": 2021,
+          "min_entries": 100
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 11,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "Mercedes",
+            "Entries": 320,
+            "Classified": 298,
+            "Reliability": 0.93125,
+            "Points": 5408.5,
+            "Wins": 111
+          },
+          {
+            "Constructor": "Alfa Romeo",
+            "Entries": 120,
+            "Classified": 109,
+            "Reliability": 0.908333,
+            "Points": 78.0,
+            "Wins": 0
+          },
+          {
+            "Constructor": "Ferrari",
+            "Entries": 320,
+            "Classified": 277,
+            "Reliability": 0.865625,
+            "Points": 3092.5,
+            "Wins": 17
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Mercedes'})",
+          "(Result {name: 'Result #2'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Alfa Romeo'})",
+          "(Result {name: 'Result #3'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Ferrari'})"
+        ]
+      },
+      {
+        "id": "QA-13",
+        "group": "core_40",
+        "intent": "head_to_head",
+        "sub_intent": "teammate_head_to_head",
+        "category": "Head-to-head",
+        "question": "Who finished ahead more often, Lando Norris or Daniel Ricciardo at McLaren?",
+        "entities_passed": {
+          "driver1": "Lando Norris",
+          "driver2": "Daniel Ricciardo",
+          "constructor": "McLaren"
+        },
+        "template_executed": "teammate_race_head_to_head",
+        "cypher_params": {
+          "driver1Id": 846,
+          "driver2Id": 817,
+          "constructorId": 1,
+          "year": null,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "McLaren",
+            "Driver_1": "Lando Norris",
+            "Driver_2": "Daniel Ricciardo",
+            "Shared_Races": 44,
+            "Driver_1_Ahead": 32,
+            "Driver_2_Ahead": 12,
+            "Driver_1_Points": 276.0,
+            "Driver_2_Points": 148.0,
+            "Driver_1_Wins": 0,
+            "Driver_2_Wins": 1,
+            "Driver_1_Podiums": 5,
+            "Driver_2_Podiums": 1
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Lando Norris'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Daniel Ricciardo'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'McLaren'})"
+        ]
+      },
+      {
+        "id": "QA-14",
+        "group": "core_40",
+        "intent": "head_to_head",
+        "sub_intent": "teammate_head_to_head",
+        "category": "Head-to-head",
+        "question": "Compare Lewis Hamilton and Valtteri Bottas in races where they drove for the same constructor.",
+        "entities_passed": {
+          "driver1": "Lewis Hamilton",
+          "driver2": "Valtteri Bottas"
+        },
+        "template_executed": "teammate_race_head_to_head",
+        "cypher_params": {
+          "driver1Id": 1,
+          "driver2Id": 822,
+          "constructorId": null,
+          "year": null,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "Mercedes",
+            "Driver_1": "Lewis Hamilton",
+            "Driver_2": "Valtteri Bottas",
+            "Shared_Races": 100,
+            "Driver_1_Ahead": 75,
+            "Driver_2_Ahead": 25,
+            "Driver_1_Points": 1916.5,
+            "Driver_2_Points": 1316.0,
+            "Driver_1_Wins": 50,
+            "Driver_2_Wins": 10,
+            "Driver_1_Podiums": 78,
+            "Driver_2_Podiums": 58
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Valtteri Bottas'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Mercedes'})"
+        ]
+      },
+      {
+        "id": "QA-15",
+        "group": "core_40",
+        "intent": "head_to_head",
+        "sub_intent": "teammate_head_to_head",
+        "category": "Head-to-head",
+        "question": "How did Charles Leclerc and Carlos Sainz compare in shared races at Ferrari?",
+        "entities_passed": {
+          "driver1": "Charles Leclerc",
+          "driver2": "Carlos Sainz",
+          "constructor": "Ferrari"
+        },
+        "template_executed": "teammate_race_head_to_head",
+        "cypher_params": {
+          "driver1Id": 844,
+          "driver2Id": 832,
+          "constructorId": 6,
+          "year": null,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "Ferrari",
+            "Driver_1": "Charles Leclerc",
+            "Driver_2": "Carlos Sainz",
+            "Shared_Races": 89,
+            "Driver_1_Ahead": 53,
+            "Driver_2_Ahead": 36,
+            "Driver_1_Points": 946.0,
+            "Driver_2_Points": 831.5,
+            "Driver_1_Wins": 6,
+            "Driver_2_Wins": 4,
+            "Driver_1_Podiums": 30,
+            "Driver_2_Podiums": 25
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Charles Leclerc'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Carlos Sainz'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Ferrari'})"
+        ]
+      },
+      {
+        "id": "QA-16",
+        "group": "core_40",
+        "intent": "head_to_head",
+        "sub_intent": "teammate_head_to_head",
+        "category": "Head-to-head",
+        "question": "Between Max Verstappen and Sergio Pérez at Red Bull, how many times did each finish ahead?",
+        "entities_passed": {
+          "driver1": "Max Verstappen",
+          "driver2": "Sergio Pérez",
+          "constructor": "Red Bull"
+        },
+        "template_executed": "teammate_race_head_to_head",
+        "cypher_params": {
+          "driver1Id": 830,
+          "driver2Id": 815,
+          "constructorId": 9,
+          "year": null,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "Red Bull",
+            "Driver_1": "Max Verstappen",
+            "Driver_2": "Sergio Pérez",
+            "Shared_Races": 90,
+            "Driver_1_Ahead": 79,
+            "Driver_2_Ahead": 11,
+            "Driver_1_Points": 1750.5,
+            "Driver_2_Points": 879.0,
+            "Driver_1_Wins": 53,
+            "Driver_2_Wins": 5,
+            "Driver_1_Podiums": 70,
+            "Driver_2_Podiums": 29
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Sergio Pérez'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Red Bull'})"
+        ]
+      },
+      {
+        "id": "QA-17",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "race_results_and_podium",
+        "category": "Race and circuit facts",
+        "question": "Who won the 2019 German Grand Prix and who joined them on the podium?",
+        "entities_passed": {
+          "year": 2019,
+          "race_name": "German Grand Prix"
+        },
+        "template_executed": "race_podium_and_results",
+        "cypher_params": {
+          "raceId": 1020,
+          "top_n": 3
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 3,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2019,
+            "Grand_Prix": "German Grand Prix",
+            "Circuit": "Hockenheimring",
+            "Location": "Hockenheim",
+            "Country": "Germany",
+            "Position": 1,
+            "Driver": "Max Verstappen",
+            "Constructor": "Red Bull",
+            "Grid": 2,
+            "Points": 26.0,
+            "Time_Or_Status": "1:44:31.275"
+          },
+          {
+            "Season": 2019,
+            "Grand_Prix": "German Grand Prix",
+            "Circuit": "Hockenheimring",
+            "Location": "Hockenheim",
+            "Country": "Germany",
+            "Position": 2,
+            "Driver": "Sebastian Vettel",
+            "Constructor": "Ferrari",
+            "Grid": 20,
+            "Points": 18.0,
+            "Time_Or_Status": "+7.333"
+          },
+          {
+            "Season": 2019,
+            "Grand_Prix": "German Grand Prix",
+            "Circuit": "Hockenheimring",
+            "Location": "Hockenheim",
+            "Country": "Germany",
+            "Position": 3,
+            "Driver": "Daniil Kvyat",
+            "Constructor": "Toro Rosso",
+            "Grid": 14,
+            "Points": 15.0,
+            "Time_Or_Status": "+8.305"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'German Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Hockenheimring'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Red Bull'})"
+        ]
+      },
+      {
+        "id": "QA-18",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "race_results_and_podium",
+        "category": "Race and circuit facts",
+        "question": "Who finished on the podium at the 2021 Italian Grand Prix?",
+        "entities_passed": {
+          "year": 2021,
+          "race_name": "Italian Grand Prix"
+        },
+        "template_executed": "race_podium_and_results",
+        "cypher_params": {
+          "raceId": 1065,
+          "top_n": 3
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 3,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2021,
+            "Grand_Prix": "Italian Grand Prix",
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Location": "Monza",
+            "Country": "Italy",
+            "Position": 1,
+            "Driver": "Daniel Ricciardo",
+            "Constructor": "McLaren",
+            "Grid": 2,
+            "Points": 26.0,
+            "Time_Or_Status": "1:21:54.365"
+          },
+          {
+            "Season": 2021,
+            "Grand_Prix": "Italian Grand Prix",
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Location": "Monza",
+            "Country": "Italy",
+            "Position": 2,
+            "Driver": "Lando Norris",
+            "Constructor": "McLaren",
+            "Grid": 3,
+            "Points": 18.0,
+            "Time_Or_Status": "+1.747"
+          },
+          {
+            "Season": 2021,
+            "Grand_Prix": "Italian Grand Prix",
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Location": "Monza",
+            "Country": "Italy",
+            "Position": 3,
+            "Driver": "Valtteri Bottas",
+            "Constructor": "Mercedes",
+            "Grid": 19,
+            "Points": 15.0,
+            "Time_Or_Status": "+4.921"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'Italian Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Autodromo Nazionale di Monza'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Daniel Ricciardo'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'McLaren'})"
+        ]
+      },
+      {
+        "id": "QA-19",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "race_results_and_podium",
+        "category": "Race and circuit facts",
+        "question": "What were the top 3 finishers at the 2023 Monaco Grand Prix?",
+        "entities_passed": {
+          "year": 2023,
+          "race_name": "Monaco Grand Prix"
+        },
+        "template_executed": "race_podium_and_results",
+        "cypher_params": {
+          "raceId": 1104,
+          "top_n": 3
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 3,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2023,
+            "Grand_Prix": "Monaco Grand Prix",
+            "Circuit": "Circuit de Monaco",
+            "Location": "Monte-Carlo",
+            "Country": "Monaco",
+            "Position": 1,
+            "Driver": "Max Verstappen",
+            "Constructor": "Red Bull",
+            "Grid": 1,
+            "Points": 25.0,
+            "Time_Or_Status": "1:48:51.980"
+          },
+          {
+            "Season": 2023,
+            "Grand_Prix": "Monaco Grand Prix",
+            "Circuit": "Circuit de Monaco",
+            "Location": "Monte-Carlo",
+            "Country": "Monaco",
+            "Position": 2,
+            "Driver": "Fernando Alonso",
+            "Constructor": "Aston Martin",
+            "Grid": 2,
+            "Points": 18.0,
+            "Time_Or_Status": "+27.921"
+          },
+          {
+            "Season": 2023,
+            "Grand_Prix": "Monaco Grand Prix",
+            "Circuit": "Circuit de Monaco",
+            "Location": "Monte-Carlo",
+            "Country": "Monaco",
+            "Position": 3,
+            "Driver": "Esteban Ocon",
+            "Constructor": "Alpine F1 Team",
+            "Grid": 3,
+            "Points": 15.0,
+            "Time_Or_Status": "+36.990"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'Monaco Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Circuit de Monaco'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Red Bull'})"
+        ]
+      },
+      {
+        "id": "QA-20",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "race_results_and_podium",
+        "category": "Race and circuit facts",
+        "question": "Who won the race at Silverstone in 2024?",
+        "entities_passed": {
+          "year": 2024,
+          "circuit": "Silverstone"
+        },
+        "template_executed": "race_podium_and_results",
+        "cypher_params": {
+          "raceId": 1132,
+          "top_n": 3
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 3,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2024,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Location": "Silverstone",
+            "Country": "UK",
+            "Position": 1,
+            "Driver": "Lewis Hamilton",
+            "Constructor": "Mercedes",
+            "Grid": 2,
+            "Points": 25.0,
+            "Time_Or_Status": "1:22:27.059"
+          },
+          {
+            "Season": 2024,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Location": "Silverstone",
+            "Country": "UK",
+            "Position": 2,
+            "Driver": "Max Verstappen",
+            "Constructor": "Red Bull",
+            "Grid": 4,
+            "Points": 18.0,
+            "Time_Or_Status": "+1.465"
+          },
+          {
+            "Season": 2024,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Location": "Silverstone",
+            "Country": "UK",
+            "Position": 3,
+            "Driver": "Lando Norris",
+            "Constructor": "McLaren",
+            "Grid": 3,
+            "Points": 15.0,
+            "Time_Or_Status": "+7.547"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'British Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Silverstone Circuit'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Mercedes'})"
+        ]
+      },
+      {
+        "id": "QA-21",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "circuit_info_and_history",
+        "category": "Race and circuit facts",
+        "question": "Where is the Spa-Francorchamps circuit located and how many races has it hosted?",
+        "entities_passed": {
+          "circuit": "Spa-Francorchamps"
+        },
+        "template_executed": "circuit_profile_and_history",
+        "cypher_params": {
+          "circuitId": 13,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Circuit": "Circuit de Spa-Francorchamps",
+            "Location": "Spa",
+            "Country": "Belgium",
+            "Latitude": 50.4372,
+            "Longitude": 5.97139,
+            "Altitude_m": 401,
+            "Races_Hosted": 57,
+            "First_Held": 1950,
+            "Last_Held": 2024,
+            "Events_Staged": [
+              "Belgian Grand Prix"
+            ]
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-22",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "circuit_info_and_history",
+        "category": "Race and circuit facts",
+        "question": "How many Formula 1 Grands Prix have been held at Monza and what is its location?",
+        "entities_passed": {
+          "circuit": "Monza"
+        },
+        "template_executed": "circuit_profile_and_history",
+        "cypher_params": {
+          "circuitId": 14,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Location": "Monza",
+            "Country": "Italy",
+            "Latitude": 45.6156,
+            "Longitude": 9.28111,
+            "Altitude_m": 162,
+            "Races_Hosted": 74,
+            "First_Held": 1950,
+            "Last_Held": 2024,
+            "Events_Staged": [
+              "Italian Grand Prix"
+            ]
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-23",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "circuit_info_and_history",
+        "category": "Race and circuit facts",
+        "question": "Which circuits are located in Italy and how many Grands Prix did each host?",
+        "entities_passed": {
+          "country": "Italy"
+        },
+        "template_executed": "circuits_by_country",
+        "cypher_params": {
+          "country": "Italy"
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 4,
+        "gold_facts_at_eval_time": [
+          {
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Location": "Monza",
+            "Country": "Italy",
+            "Altitude_m": 162,
+            "Races_Hosted": 74,
+            "First_Held": 1950,
+            "Last_Held": 2024
+          },
+          {
+            "Circuit": "Autodromo Enzo e Dino Ferrari",
+            "Location": "Imola",
+            "Country": "Italy",
+            "Altitude_m": 37,
+            "Races_Hosted": 31,
+            "First_Held": 1980,
+            "Last_Held": 2024
+          },
+          {
+            "Circuit": "Autodromo Internazionale del Mugello",
+            "Location": "Mugello",
+            "Country": "Italy",
+            "Altitude_m": 255,
+            "Races_Hosted": 1,
+            "First_Held": 2020,
+            "Last_Held": 2020
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-24",
+        "group": "core_40",
+        "intent": "race_facts",
+        "sub_intent": "circuit_info_and_history",
+        "category": "Race and circuit facts",
+        "question": "What is the city, country, and altitude of Autódromo Hermanos Rodríguez?",
+        "entities_passed": {
+          "circuit": "Autódromo Hermanos Rodríguez"
+        },
+        "template_executed": "circuit_profile_and_history",
+        "cypher_params": {
+          "circuitId": 32,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Circuit": "Autódromo Hermanos Rodríguez",
+            "Location": "Mexico City",
+            "Country": "Mexico",
+            "Latitude": 19.4042,
+            "Longitude": -99.0907,
+            "Altitude_m": 2227,
+            "Races_Hosted": 24,
+            "First_Held": 1963,
+            "Last_Held": 2024,
+            "Events_Staged": [
+              "Mexico City Grand Prix",
+              "Mexican Grand Prix"
+            ]
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-25",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "qualifying_poles_and_results",
+        "category": "Qualifying and grid",
+        "question": "Who took pole position at the 2023 Monaco Grand Prix and what was their Q3 time?",
+        "entities_passed": {
+          "year": 2023,
+          "race_name": "Monaco Grand Prix"
+        },
+        "template_executed": "qualifying_race_results",
+        "cypher_params": {
+          "raceId": 1104,
+          "driverId": null,
+          "top_n": 10
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 10,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2023,
+            "Grand_Prix": "Monaco Grand Prix",
+            "Circuit": "Circuit de Monaco",
+            "Driver": "Max Verstappen",
+            "Constructor": "Red Bull",
+            "Qualifying_Position": 1,
+            "Grid_Position": 1,
+            "Finish_Position": 1,
+            "Q1_Time": "1:12.386",
+            "Q2_Time": "1:11.908",
+            "Q3_Time": "1:11.365"
+          },
+          {
+            "Season": 2023,
+            "Grand_Prix": "Monaco Grand Prix",
+            "Circuit": "Circuit de Monaco",
+            "Driver": "Fernando Alonso",
+            "Constructor": "Aston Martin",
+            "Qualifying_Position": 2,
+            "Grid_Position": 2,
+            "Finish_Position": 2,
+            "Q1_Time": "1:12.886",
+            "Q2_Time": "1:12.107",
+            "Q3_Time": "1:11.449"
+          },
+          {
+            "Season": 2023,
+            "Grand_Prix": "Monaco Grand Prix",
+            "Circuit": "Circuit de Monaco",
+            "Driver": "Charles Leclerc",
+            "Constructor": "Ferrari",
+            "Qualifying_Position": 3,
+            "Grid_Position": 6,
+            "Finish_Position": 6,
+            "Q1_Time": "1:12.912",
+            "Q2_Time": "1:12.103",
+            "Q3_Time": "1:11.471"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'Monaco Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Circuit de Monaco'})",
+          "(Qualifying {name: 'Qualifying #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})",
+          "(Qualifying {name: 'Qualifying #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Red Bull'})"
+        ]
+      },
+      {
+        "id": "QA-26",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "qualifying_poles_and_results",
+        "category": "Qualifying and grid",
+        "question": "How many pole positions and Q3 appearances did Charles Leclerc get in 2022?",
+        "entities_passed": {
+          "driver": "Charles Leclerc",
+          "year": 2022
+        },
+        "template_executed": "driver_qualifying_stats",
+        "cypher_params": {
+          "driverId": 844,
+          "year": 2022,
+          "start_year": null,
+          "end_year": null,
+          "circuitId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Charles Leclerc",
+            "Races_Entered": 22,
+            "Grid_Poles": 9,
+            "Front_Row_Starts": 14,
+            "Qualifying_Sessions": 22,
+            "Qualifying_Poles": 9,
+            "Front_Row_Qualifying": 15,
+            "Q3_Appearances": 20,
+            "Avg_Qualifying_Position": 3.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Qualifying {name: 'Qualifying #1'})-[:BY_DRIVER]->(Driver {name: 'Charles Leclerc'})"
+        ]
+      },
+      {
+        "id": "QA-27",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "qualifying_poles_and_results",
+        "category": "Qualifying and grid",
+        "question": "How many pole positions and front-row qualifying starts did Max Verstappen achieve in 2023?",
+        "entities_passed": {
+          "driver": "Max Verstappen",
+          "year": 2023
+        },
+        "template_executed": "driver_qualifying_stats",
+        "cypher_params": {
+          "driverId": 830,
+          "year": 2023,
+          "start_year": null,
+          "end_year": null,
+          "circuitId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Max Verstappen",
+            "Races_Entered": 22,
+            "Grid_Poles": 12,
+            "Front_Row_Starts": 16,
+            "Qualifying_Sessions": 22,
+            "Qualifying_Poles": 13,
+            "Front_Row_Qualifying": 16,
+            "Q3_Appearances": 19,
+            "Avg_Qualifying_Position": 3.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Qualifying {name: 'Qualifying #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})"
+        ]
+      },
+      {
+        "id": "QA-28",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "qualifying_poles_and_results",
+        "category": "Qualifying and grid",
+        "question": "What was the top 5 qualifying classification at the 2021 British Grand Prix?",
+        "entities_passed": {
+          "year": 2021,
+          "race_name": "British Grand Prix"
+        },
+        "template_executed": "qualifying_race_results",
+        "cypher_params": {
+          "raceId": 1061,
+          "driverId": null,
+          "top_n": 10
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 10,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2021,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Driver": "Lewis Hamilton",
+            "Constructor": "Mercedes",
+            "Qualifying_Position": 1,
+            "Grid_Position": 2,
+            "Finish_Position": 1,
+            "Q1_Time": "1:26.786",
+            "Q2_Time": "1:26.023",
+            "Q3_Time": "1:26.134"
+          },
+          {
+            "Season": 2021,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Driver": "Max Verstappen",
+            "Constructor": "Red Bull",
+            "Qualifying_Position": 2,
+            "Grid_Position": 1,
+            "Finish_Position": 20,
+            "Q1_Time": "1:26.751",
+            "Q2_Time": "1:26.315",
+            "Q3_Time": "1:26.209"
+          },
+          {
+            "Season": 2021,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Driver": "Valtteri Bottas",
+            "Constructor": "Mercedes",
+            "Qualifying_Position": 3,
+            "Grid_Position": 3,
+            "Finish_Position": 3,
+            "Q1_Time": "1:27.487",
+            "Q2_Time": "1:26.764",
+            "Q3_Time": "1:26.328"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'British Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Silverstone Circuit'})",
+          "(Qualifying {name: 'Qualifying #1'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})",
+          "(Qualifying {name: 'Qualifying #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Mercedes'})"
+        ]
+      },
+      {
+        "id": "QA-29",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "grid_vs_finish_gains",
+        "category": "Qualifying and grid",
+        "question": "Which driver gained the most places from the grid at Monza in 2021?",
+        "entities_passed": {
+          "year": 2021,
+          "circuit": "Monza"
+        },
+        "template_executed": "race_grid_to_finish_gains",
+        "cypher_params": {
+          "raceId": 1065,
+          "driverId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 10,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2021,
+            "Grand_Prix": "Italian Grand Prix",
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Driver": "Valtteri Bottas",
+            "Constructor": "Mercedes",
+            "Grid_Position": 19,
+            "Finish_Position": 3,
+            "Places_Gained": 16,
+            "Status": "Finished"
+          },
+          {
+            "Season": 2021,
+            "Grand_Prix": "Italian Grand Prix",
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Driver": "George Russell",
+            "Constructor": "Williams",
+            "Grid_Position": 14,
+            "Finish_Position": 9,
+            "Places_Gained": 5,
+            "Status": "Finished"
+          },
+          {
+            "Season": 2021,
+            "Grand_Prix": "Italian Grand Prix",
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Driver": "Sergio Pérez",
+            "Constructor": "Red Bull",
+            "Grid_Position": 8,
+            "Finish_Position": 5,
+            "Places_Gained": 3,
+            "Status": "Finished"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'Italian Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Autodromo Nazionale di Monza'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Valtteri Bottas'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Mercedes'})"
+        ]
+      },
+      {
+        "id": "QA-30",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "grid_vs_finish_gains",
+        "category": "Qualifying and grid",
+        "question": "Who gained the most positions from their starting grid slot at the 2022 Belgian Grand Prix?",
+        "entities_passed": {
+          "year": 2022,
+          "race_name": "Belgian Grand Prix"
+        },
+        "template_executed": "race_grid_to_finish_gains",
+        "cypher_params": {
+          "raceId": 1087,
+          "driverId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 10,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2022,
+            "Grand_Prix": "Belgian Grand Prix",
+            "Circuit": "Circuit de Spa-Francorchamps",
+            "Driver": "Max Verstappen",
+            "Constructor": "Red Bull",
+            "Grid_Position": 14,
+            "Finish_Position": 1,
+            "Places_Gained": 13,
+            "Status": "Finished"
+          },
+          {
+            "Season": 2022,
+            "Grand_Prix": "Belgian Grand Prix",
+            "Circuit": "Circuit de Spa-Francorchamps",
+            "Driver": "Charles Leclerc",
+            "Constructor": "Ferrari",
+            "Grid_Position": 15,
+            "Finish_Position": 6,
+            "Places_Gained": 9,
+            "Status": "Finished"
+          },
+          {
+            "Season": 2022,
+            "Grand_Prix": "Belgian Grand Prix",
+            "Circuit": "Circuit de Spa-Francorchamps",
+            "Driver": "Esteban Ocon",
+            "Constructor": "Alpine F1 Team",
+            "Grid_Position": 16,
+            "Finish_Position": 7,
+            "Places_Gained": 9,
+            "Status": "Finished"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'Belgian Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Circuit de Spa-Francorchamps'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Red Bull'})"
+        ]
+      },
+      {
+        "id": "QA-31",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "grid_vs_finish_gains",
+        "category": "Qualifying and grid",
+        "question": "How many places did Lewis Hamilton gain from the grid at the 2021 São Paulo Grand Prix?",
+        "entities_passed": {
+          "year": 2021,
+          "race_name": "São Paulo Grand Prix",
+          "driver": "Lewis Hamilton"
+        },
+        "template_executed": "race_grid_to_finish_gains",
+        "cypher_params": {
+          "raceId": 1071,
+          "driverId": 1
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2021,
+            "Grand_Prix": "São Paulo Grand Prix",
+            "Circuit": "Autódromo José Carlos Pace",
+            "Driver": "Lewis Hamilton",
+            "Constructor": "Mercedes",
+            "Grid_Position": 10,
+            "Finish_Position": 1,
+            "Places_Gained": 9,
+            "Status": "Finished"
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'São Paulo Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Autódromo José Carlos Pace'})",
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})",
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'Mercedes'})"
+        ]
+      },
+      {
+        "id": "QA-32",
+        "group": "core_40",
+        "intent": "qualifying_grid",
+        "sub_intent": "grid_vs_finish_gains",
+        "category": "Qualifying and grid",
+        "question": "What is the front-row to podium conversion rate at Suzuka from 2014 to 2024?",
+        "entities_passed": {
+          "circuit": "Suzuka",
+          "start_year": 2014,
+          "end_year": 2024
+        },
+        "template_executed": "circuit_front_row_to_podium_conversion",
+        "cypher_params": {
+          "circuitId": 22,
+          "year": null,
+          "start_year": 2014,
+          "end_year": 2024
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Circuit": "Suzuka Circuit",
+            "Front_Row_Starts": 18,
+            "Podium_Finishes": 16,
+            "Wins_From_Front_Row": 8,
+            "Front_Row_Podium_Rate": 0.8889
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-33",
+        "group": "core_40",
+        "intent": "pit_stops",
+        "sub_intent": "pit_stop_strategy",
+        "category": "Pit stops and strategy",
+        "question": "What was the fastest pit stop at the 2023 Qatar Grand Prix?",
+        "entities_passed": {
+          "year": 2023,
+          "race_name": "Qatar Grand Prix"
+        },
+        "template_executed": "race_fastest_pit_stops",
+        "cypher_params": {
+          "raceId": 1115,
+          "driverId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 10,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2023,
+            "Grand_Prix": "Qatar Grand Prix",
+            "Circuit": "Losail International Circuit",
+            "Driver": "Oscar Piastri",
+            "Stop_Number": 3,
+            "Lap": 43,
+            "Duration_Text": "27.489",
+            "Duration_ms": 27489,
+            "Duration_Seconds": 27.489
+          },
+          {
+            "Season": 2023,
+            "Grand_Prix": "Qatar Grand Prix",
+            "Circuit": "Losail International Circuit",
+            "Driver": "Charles Leclerc",
+            "Stop_Number": 3,
+            "Lap": 43,
+            "Duration_Text": "27.513",
+            "Duration_ms": 27513,
+            "Duration_Seconds": 27.513
+          },
+          {
+            "Season": 2023,
+            "Grand_Prix": "Qatar Grand Prix",
+            "Circuit": "Losail International Circuit",
+            "Driver": "Yuki Tsunoda",
+            "Stop_Number": 2,
+            "Lap": 22,
+            "Duration_Text": "27.596",
+            "Duration_ms": 27596,
+            "Duration_Seconds": 27.596
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'Qatar Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Losail International Circuit'})",
+          "(PitStop {name: 'PitStop #1'})-[:BY_DRIVER]->(Driver {name: 'Oscar Piastri'})",
+          "(PitStop {name: 'PitStop #1'})-[:FOR_RACE]->(Race {name: '2023 Qatar Grand Prix'})"
+        ]
+      },
+      {
+        "id": "QA-34",
+        "group": "core_40",
+        "intent": "pit_stops",
+        "sub_intent": "pit_stop_strategy",
+        "category": "Pit stops and strategy",
+        "question": "Who had the fastest pit stop at the 2022 British Grand Prix?",
+        "entities_passed": {
+          "year": 2022,
+          "race_name": "British Grand Prix"
+        },
+        "template_executed": "race_fastest_pit_stops",
+        "cypher_params": {
+          "raceId": 1083,
+          "driverId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 10,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2022,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Driver": "Sergio Pérez",
+            "Stop_Number": 3,
+            "Lap": 39,
+            "Duration_Text": "28.155",
+            "Duration_ms": 28155,
+            "Duration_Seconds": 28.155
+          },
+          {
+            "Season": 2022,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Driver": "Carlos Sainz",
+            "Stop_Number": 3,
+            "Lap": 39,
+            "Duration_Text": "28.435",
+            "Duration_ms": 28435,
+            "Duration_Seconds": 28.435
+          },
+          {
+            "Season": 2022,
+            "Grand_Prix": "British Grand Prix",
+            "Circuit": "Silverstone Circuit",
+            "Driver": "Nicholas Latifi",
+            "Stop_Number": 3,
+            "Lap": 39,
+            "Duration_Text": "28.438",
+            "Duration_ms": 28438,
+            "Duration_Seconds": 28.438
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Race {name: 'British Grand Prix'})-[:AT_CIRCUIT]->(Circuit {name: 'Silverstone Circuit'})",
+          "(PitStop {name: 'PitStop #1'})-[:BY_DRIVER]->(Driver {name: 'Sergio Pérez'})",
+          "(PitStop {name: 'PitStop #1'})-[:FOR_RACE]->(Race {name: '2022 British Grand Prix'})"
+        ]
+      },
+      {
+        "id": "QA-35",
+        "group": "core_40",
+        "intent": "pit_stops",
+        "sub_intent": "pit_stop_strategy",
+        "category": "Pit stops and strategy",
+        "question": "What was Max Verstappen's fastest pit stop duration and total pit stops in 2023?",
+        "entities_passed": {
+          "driver": "Max Verstappen",
+          "year": 2023
+        },
+        "template_executed": "driver_season_pit_stop_stats",
+        "cypher_params": {
+          "driverId": 830,
+          "year": 2023,
+          "start_year": null,
+          "end_year": null,
+          "circuitId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Max Verstappen",
+            "Total_Pit_Stops": 48,
+            "Races_With_Pit_Stops": 22,
+            "Avg_Stops_Per_Race": 2.18,
+            "Fastest_Stop_Seconds": 16.369,
+            "Longest_Stop_Seconds": 2483.382,
+            "Avg_Stop_Seconds": 202.277
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(PitStop {name: 'PitStop #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})"
+        ]
+      },
+      {
+        "id": "QA-36",
+        "group": "core_40",
+        "intent": "pit_stops",
+        "sub_intent": "pit_stop_strategy",
+        "category": "Pit stops and strategy",
+        "question": "What were Lando Norris's pit stop statistics in the 2024 season?",
+        "entities_passed": {
+          "driver": "Lando Norris",
+          "year": 2024
+        },
+        "template_executed": "driver_season_pit_stop_stats",
+        "cypher_params": {
+          "driverId": 846,
+          "year": 2024,
+          "start_year": null,
+          "end_year": null,
+          "circuitId": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Lando Norris",
+            "Total_Pit_Stops": 41,
+            "Races_With_Pit_Stops": 24,
+            "Avg_Stops_Per_Race": 1.71,
+            "Fastest_Stop_Seconds": 17.653,
+            "Longest_Stop_Seconds": 2365.538,
+            "Avg_Stop_Seconds": 152.75
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(PitStop {name: 'PitStop #1'})-[:BY_DRIVER]->(Driver {name: 'Lando Norris'})"
+        ]
+      },
+      {
+        "id": "QA-37",
+        "group": "core_40",
+        "intent": "season_history",
+        "sub_intent": "season_history_and_transfers",
+        "category": "Season and history",
+        "question": "Which drivers changed teams between 2020 and 2021?",
+        "entities_passed": {
+          "year1": 2020,
+          "year2": 2021
+        },
+        "template_executed": "driver_team_changes_between_seasons",
+        "cypher_params": {
+          "year1": 2020,
+          "year2": 2021
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Season_1": 2020,
+            "Season_2": 2021,
+            "Drivers_Changed": 6,
+            "Drivers": [
+              "Carlos Sainz",
+              "Daniel Ricciardo",
+              "Esteban Ocon",
+              "Lance Stroll",
+              "Sebastian Vettel",
+              "Sergio Pérez"
+            ],
+            "Transfers": [
+              "Carlos Sainz (McLaren -> Ferrari)",
+              "Daniel Ricciardo (Renault -> McLaren)",
+              "Esteban Ocon (Renault -> Alpine F1 Team)",
+              "Lance Stroll (Racing Point -> Aston Martin)",
+              "Sebastian Vettel (Ferrari -> Aston Martin)",
+              "Sergio Pérez (Racing Point -> Red Bull)"
+            ]
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-38",
+        "group": "core_40",
+        "intent": "season_history",
+        "sub_intent": "season_history_and_transfers",
+        "category": "Season and history",
+        "question": "Which drivers changed their primary constructor between 2022 and 2023?",
+        "entities_passed": {
+          "year1": 2022,
+          "year2": 2023
+        },
+        "template_executed": "driver_team_changes_between_seasons",
+        "cypher_params": {
+          "year1": 2022,
+          "year2": 2023
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Season_1": 2022,
+            "Season_2": 2023,
+            "Drivers_Changed": 5,
+            "Drivers": [
+              "Daniel Ricciardo",
+              "Fernando Alonso",
+              "Nico Hülkenberg",
+              "Nyck de Vries",
+              "Pierre Gasly"
+            ],
+            "Transfers": [
+              "Daniel Ricciardo (McLaren -> AlphaTauri)",
+              "Fernando Alonso (Alpine F1 Team -> Aston Martin)",
+              "Nico Hülkenberg (Aston Martin -> Haas F1 Team)",
+              "Nyck de Vries (Williams -> AlphaTauri)",
+              "Pierre Gasly (AlphaTauri -> Alpine F1 Team)"
+            ]
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-39",
+        "group": "core_40",
+        "intent": "season_history",
+        "sub_intent": "season_history_and_transfers",
+        "category": "Season and history",
+        "question": "Who topped the points table in 2010 and how many drivers competed?",
+        "entities_passed": {
+          "year": 2010
+        },
+        "template_executed": "season_overview_and_leader",
+        "cypher_params": {
+          "year": 2010
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2010,
+            "Total_Races": 19,
+            "Total_Drivers": 27,
+            "Total_Constructors": 12,
+            "Points_Leader": "Sebastian Vettel",
+            "Leader_Points": 256.0,
+            "Leader_Wins": 5,
+            "Top_5_Standings": [
+              "Sebastian Vettel (256.0 pts, 5 wins)",
+              "Fernando Alonso (252.0 pts, 5 wins)",
+              "Mark Webber (242.0 pts, 4 wins)",
+              "Lewis Hamilton (240.0 pts, 3 wins)",
+              "Jenson Button (214.0 pts, 2 wins)"
+            ]
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-40",
+        "group": "core_40",
+        "intent": "season_history",
+        "sub_intent": "season_history_and_transfers",
+        "category": "Season and history",
+        "question": "How many races, drivers, and constructors were in the 2024 Formula 1 season?",
+        "entities_passed": {
+          "year": 2024
+        },
+        "template_executed": "season_overview_and_leader",
+        "cypher_params": {
+          "year": 2024
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Season": 2024,
+            "Total_Races": 24,
+            "Total_Drivers": 24,
+            "Total_Constructors": 10,
+            "Points_Leader": "Max Verstappen",
+            "Leader_Points": 399.0,
+            "Leader_Wins": 9,
+            "Top_5_Standings": [
+              "Max Verstappen (399.0 pts, 9 wins)",
+              "Lando Norris (344.0 pts, 4 wins)",
+              "Charles Leclerc (327.0 pts, 3 wins)",
+              "Oscar Piastri (265.0 pts, 2 wins)",
+              "Carlos Sainz (262.0 pts, 2 wins)"
+            ]
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-41",
+        "group": "core_extra_profile",
+        "intent": "driver_profile",
+        "sub_intent": "driver_profile",
+        "category": "Driver profile (extra type)",
+        "question": "What country does Oscar Piastri represent?",
+        "entities_passed": {
+          "driver": "Oscar Piastri"
+        },
+        "template_executed": "driver_profile_and_career_summary",
+        "cypher_params": {
+          "driverId": 857
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Oscar Piastri",
+            "Nationality": "Australian",
+            "Date_Of_Birth": "2001-04-06",
+            "Car_Number": 81,
+            "Code": "PIA",
+            "Driver_Ref": "piastri",
+            "Teams_Driven_For": [
+              "McLaren"
+            ],
+            "Debut_Season": 2023,
+            "Latest_Season": 2024,
+            "Seasons_Competed": 2,
+            "First_Grand_Prix": "2023 Bahrain Grand Prix",
+            "First_Race_Date": "2023-03-05",
+            "Total_Entries": 46,
+            "Career_Wins": 2,
+            "Career_Podiums": 10,
+            "Career_Points": 347.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Oscar Piastri'})"
+        ]
+      },
+      {
+        "id": "QA-42",
+        "group": "core_extra_profile",
+        "intent": "driver_profile",
+        "sub_intent": "driver_profile",
+        "category": "Driver profile (extra type)",
+        "question": "What is Fernando Alonso's date of birth?",
+        "entities_passed": {
+          "driver": "Fernando Alonso"
+        },
+        "template_executed": "driver_profile_and_career_summary",
+        "cypher_params": {
+          "driverId": 4
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Fernando Alonso",
+            "Nationality": "Spanish",
+            "Date_Of_Birth": "1981-07-29",
+            "Car_Number": 14,
+            "Code": "ALO",
+            "Driver_Ref": "alonso",
+            "Teams_Driven_For": [
+              "Minardi",
+              "Renault",
+              "McLaren",
+              "Ferrari",
+              "Alpine F1 Team",
+              "Aston Martin"
+            ],
+            "Debut_Season": 2001,
+            "Latest_Season": 2024,
+            "Seasons_Competed": 21,
+            "First_Grand_Prix": "2001 Australian Grand Prix",
+            "First_Race_Date": "2001-03-04",
+            "Total_Entries": 404,
+            "Career_Wins": 32,
+            "Career_Podiums": 106,
+            "Career_Points": 2329.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Fernando Alonso'})"
+        ]
+      },
+      {
+        "id": "QA-43",
+        "group": "core_extra_profile",
+        "intent": "driver_profile",
+        "sub_intent": "driver_profile",
+        "category": "Driver profile (extra type)",
+        "question": "List every team Kimi Raikkonen has raced for.",
+        "entities_passed": {
+          "driver": "Kimi Räikkönen"
+        },
+        "template_executed": "driver_profile_and_career_summary",
+        "cypher_params": {
+          "driverId": 8
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Kimi Räikkönen",
+            "Nationality": "Finnish",
+            "Date_Of_Birth": "1979-10-17",
+            "Car_Number": 7,
+            "Code": "RAI",
+            "Driver_Ref": "raikkonen",
+            "Teams_Driven_For": [
+              "Sauber",
+              "McLaren",
+              "Ferrari",
+              "Lotus F1",
+              "Alfa Romeo"
+            ],
+            "Debut_Season": 2001,
+            "Latest_Season": 2021,
+            "Seasons_Competed": 19,
+            "First_Grand_Prix": "2001 Australian Grand Prix",
+            "First_Race_Date": "2001-03-04",
+            "Total_Entries": 352,
+            "Career_Wins": 21,
+            "Career_Podiums": 103,
+            "Career_Points": 1873.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Kimi Räikkönen'})"
+        ]
+      },
+      {
+        "id": "QA-44",
+        "group": "core_extra_profile",
+        "intent": "driver_profile",
+        "sub_intent": "driver_profile",
+        "category": "Driver profile (extra type)",
+        "question": "Which race was Max Verstappen's first in Formula 1?",
+        "entities_passed": {
+          "driver": "Max Verstappen"
+        },
+        "template_executed": "driver_profile_and_career_summary",
+        "cypher_params": {
+          "driverId": 830
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Max Verstappen",
+            "Nationality": "Dutch",
+            "Date_Of_Birth": "1997-09-30",
+            "Car_Number": 33,
+            "Code": "VER",
+            "Driver_Ref": "max_verstappen",
+            "Teams_Driven_For": [
+              "Toro Rosso",
+              "Red Bull"
+            ],
+            "Debut_Season": 2015,
+            "Latest_Season": 2024,
+            "Seasons_Competed": 10,
+            "First_Grand_Prix": "2015 Australian Grand Prix",
+            "First_Race_Date": "2015-03-15",
+            "Total_Entries": 209,
+            "Career_Wins": 63,
+            "Career_Podiums": 112,
+            "Career_Points": 2912.5
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Max Verstappen'})"
+        ]
+      },
+      {
+        "id": "QA-45",
+        "group": "follow_up",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Follow-up (replace season, keep driver Charles Leclerc)",
+        "question": "And in 2023?",
+        "entities_passed": {
+          "driver": "Charles Leclerc",
+          "year": 2023
+        },
+        "template_executed": "driver_season_or_career_stats",
+        "cypher_params": {
+          "driverId": 844,
+          "year": 2023,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Charles Leclerc",
+            "First_Season": 2023,
+            "Last_Season": 2023,
+            "Entries": 22,
+            "Starts": 22,
+            "Points": 185.0,
+            "Wins": 0,
+            "Podiums": 6,
+            "Points_Finishes": 16,
+            "Retirements": 5,
+            "Best_Finish": 2,
+            "Avg_Finish": 8.23
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Charles Leclerc'})"
+        ]
+      },
+      {
+        "id": "QA-46",
+        "group": "follow_up",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Follow-up (replace driver with Norris, keep season 2023)",
+        "question": "What about Norris?",
+        "entities_passed": {
+          "driver": "Lando Norris",
+          "year": 2023
+        },
+        "template_executed": "driver_season_or_career_stats",
+        "cypher_params": {
+          "driverId": 846,
+          "year": 2023,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Lando Norris",
+            "First_Season": 2023,
+            "Last_Season": 2023,
+            "Entries": 22,
+            "Starts": 22,
+            "Points": 184.0,
+            "Wins": 0,
+            "Podiums": 7,
+            "Points_Finishes": 16,
+            "Retirements": 1,
+            "Best_Finish": 2,
+            "Avg_Finish": 8.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Lando Norris'})"
+        ]
+      },
+      {
+        "id": "QA-47",
+        "group": "follow_up",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Follow-up (replace circuit with Monza, keep driver Hamilton & before_year 2020)",
+        "question": "What about at Monza?",
+        "entities_passed": {
+          "driver": "Lewis Hamilton",
+          "circuit": "Monza",
+          "before_year": 2020
+        },
+        "template_executed": "driver_at_circuit_stats",
+        "cypher_params": {
+          "driverId": 1,
+          "circuitId": 14,
+          "year": null,
+          "start_year": null,
+          "end_year": null,
+          "before_year": 2020,
+          "before_date": null
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Driver": "Lewis Hamilton",
+            "Circuit": "Autodromo Nazionale di Monza",
+            "Starts": 13,
+            "Wins": 5,
+            "Podiums": 8,
+            "Best_Finish": 1,
+            "Avg_Finish": 5.15,
+            "Points": 183.0
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:BY_DRIVER]->(Driver {name: 'Lewis Hamilton'})"
+        ]
+      },
+      {
+        "id": "QA-48",
+        "group": "follow_up",
+        "intent": "constructor_performance",
+        "sub_intent": "constructor_performance_and_reliability",
+        "category": "Follow-up (replace constructor with McLaren, keep period 2014-2021)",
+        "question": "And for McLaren?",
+        "entities_passed": {
+          "constructor": "McLaren",
+          "start_year": 2014,
+          "end_year": 2021
+        },
+        "template_executed": "constructor_period_performance",
+        "cypher_params": {
+          "constructorIds": [
+            1
+          ],
+          "circuitId": null,
+          "year": null,
+          "start_year": 2014,
+          "end_year": 2021
+        },
+        "expected_outcome": "rows",
+        "passed": true,
+        "row_count": 1,
+        "gold_facts_at_eval_time": [
+          {
+            "Constructor": "McLaren",
+            "Start_Season": 2014,
+            "End_Season": 2021,
+            "Entries": 320,
+            "Starts": 318,
+            "Classified": 248,
+            "Retirements": 70,
+            "Reliability": 0.775,
+            "Classified_Start_Share": 0.7799,
+            "Points": 997.0,
+            "Wins": 1,
+            "Podiums": 10
+          }
+        ],
+        "message_or_prompt": null,
+        "is_graphical": true,
+        "relationship_statements_sample": [
+          "(Result {name: 'Result #1'})-[:FOR_CONSTRUCTOR]->(Constructor {name: 'McLaren'})"
+        ]
+      },
+      {
+        "id": "QA-49",
+        "group": "ambiguous_entity",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Ambiguous driver surname",
+        "question": "How many wins and podiums did Schumacher get in his career?",
+        "entities_passed": {
+          "driver": "Schumacher"
+        },
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "ambiguity",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "\"Schumacher\" matches more than one driver: Ralf Schumacher, Michael Schumacher, Mick Schumacher. Which one do you mean?",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-50",
+        "group": "ambiguous_entity",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Ambiguous driver surname",
+        "question": "How many times did Verstappen finish on the podium at Monza?",
+        "entities_passed": {
+          "driver": "Verstappen",
+          "circuit": "Monza"
+        },
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "ambiguity",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "\"Verstappen\" matches more than one driver: Jos Verstappen, Max Verstappen. Which one do you mean?",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-51",
+        "group": "ambiguous_entity",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Ambiguous driver surname",
+        "question": "How many wins did Rosberg achieve at Monaco?",
+        "entities_passed": {
+          "driver": "Rosberg",
+          "circuit": "Monaco"
+        },
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "ambiguity",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "\"Rosberg\" matches more than one driver: Nico Rosberg, Keke Rosberg. Which one do you mean?",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-52",
+        "group": "ambiguous_entity",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Ambiguous driver surname",
+        "question": "How many career Grand Prix points did Hill score?",
+        "entities_passed": {
+          "driver": "Hill"
+        },
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "ambiguity",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "\"Hill\" matches more than one driver: Damon Hill, Graham Hill, Phil Hill. Which one do you mean?",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-53",
+        "group": "empty_result",
+        "intent": "driver_performance",
+        "sub_intent": "driver_season_career_performance",
+        "category": "Empty result (valid driver and season, 0 rows)",
+        "question": "How many Grand Prix points did Lewis Hamilton score in 1955?",
+        "entities_passed": {
+          "driver": "Lewis Hamilton",
+          "year": 1955
+        },
+        "template_executed": "driver_season_or_career_stats",
+        "cypher_params": {
+          "driverId": 1,
+          "year": 1955,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "empty",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "The knowledge graph has no data for that question.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-54",
+        "group": "empty_result",
+        "intent": "driver_performance",
+        "sub_intent": "driver_circuit_performance",
+        "category": "Empty result (valid driver and circuit, 0 starts)",
+        "question": "How many wins did Max Verstappen have at Pescara?",
+        "entities_passed": {
+          "driver": "Max Verstappen",
+          "circuit": "Pescara"
+        },
+        "template_executed": "driver_at_circuit_stats",
+        "cypher_params": {
+          "driverId": 830,
+          "circuitId": 65,
+          "year": null,
+          "start_year": null,
+          "end_year": null,
+          "before_year": null,
+          "before_date": null
+        },
+        "expected_outcome": "empty",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "The knowledge graph has no data for that question.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-55",
+        "group": "empty_result",
+        "intent": "head_to_head",
+        "sub_intent": "teammate_head_to_head",
+        "category": "Empty result (drivers never shared a constructor)",
+        "question": "Who finished ahead more often as teammates, Lando Norris or Juan Fangio?",
+        "entities_passed": {
+          "driver1": "Lando Norris",
+          "driver2": "Juan Fangio"
+        },
+        "template_executed": "teammate_race_head_to_head",
+        "cypher_params": {
+          "driver1Id": 846,
+          "driver2Id": 579,
+          "constructorId": null,
+          "year": null,
+          "start_year": null,
+          "end_year": null
+        },
+        "expected_outcome": "empty",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "The knowledge graph has no data for that question.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-56",
+        "group": "empty_result",
+        "intent": "season_history",
+        "sub_intent": "season_history_and_transfers",
+        "category": "Empty result (no overlapping drivers between 1950 and 2024)",
+        "question": "Which drivers changed their primary constructor between 1950 and 2024?",
+        "entities_passed": {
+          "year1": 1950,
+          "year2": 2024
+        },
+        "template_executed": "driver_team_changes_between_seasons",
+        "cypher_params": {
+          "year1": 1950,
+          "year2": 2024
+        },
+        "expected_outcome": "empty",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "The knowledge graph has no data for that question.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-57",
+        "group": "out_of_scope",
+        "intent": "out_of_scope",
+        "sub_intent": "out_of_scope",
+        "category": "Out of scope (F1 financial/contract data not in KG)",
+        "question": "What was Lewis Hamilton's annual salary at Mercedes in 2023?",
+        "entities_passed": {},
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "out_of_scope",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "I do not have the knowledge in the Formula 1 Knowledge Graph to answer that question. The graph covers Grand Prix drivers, constructors, circuits, seasons, races, results, qualifying, and pit stops (1950–2024), excluding sprint results, telemetry, salaries, weather, tyres, or non-F1 topics.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-58",
+        "group": "out_of_scope",
+        "intent": "out_of_scope",
+        "sub_intent": "out_of_scope",
+        "category": "Out of scope (In-race tire telemetry/temperatures not in KG)",
+        "question": "What was Max Verstappen's rear tire surface temperature on lap 15 of the 2023 Qatar Grand Prix?",
+        "entities_passed": {},
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "out_of_scope",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "I do not have the knowledge in the Formula 1 Knowledge Graph to answer that question. The graph covers Grand Prix drivers, constructors, circuits, seasons, races, results, qualifying, and pit stops (1950–2024), excluding sprint results, telemetry, salaries, weather, tyres, or non-F1 topics.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-59",
+        "group": "out_of_scope",
+        "intent": "out_of_scope",
+        "sub_intent": "out_of_scope",
+        "category": "Out of scope (Sprint race results excluded from KG schema)",
+        "question": "How many sprint race points did Oscar Piastri score in the 2023 F1 sprint shootouts?",
+        "entities_passed": {},
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "out_of_scope",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "I do not have the knowledge in the Formula 1 Knowledge Graph to answer that question. The graph covers Grand Prix drivers, constructors, circuits, seasons, races, results, qualifying, and pit stops (1950–2024), excluding sprint results, telemetry, salaries, weather, tyres, or non-F1 topics.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      },
+      {
+        "id": "QA-60",
+        "group": "out_of_scope",
+        "intent": "out_of_scope",
+        "sub_intent": "out_of_scope",
+        "category": "Out of scope (Non-F1 general knowledge)",
+        "question": "Which country won the 2022 FIFA World Cup final in Lusail?",
+        "entities_passed": {},
+        "template_executed": "none",
+        "cypher_params": {},
+        "expected_outcome": "out_of_scope",
+        "passed": true,
+        "row_count": 0,
+        "gold_facts_at_eval_time": null,
+        "message_or_prompt": "I do not have the knowledge in the Formula 1 Knowledge Graph to answer that question. The graph covers Grand Prix drivers, constructors, circuits, seasons, races, results, qualifying, and pit stops (1950–2024), excluding sprint results, telemetry, salaries, weather, tyres, or non-F1 topics.",
+        "is_graphical": false,
+        "relationship_statements_sample": []
+      }
+    ]
+  },
+  "m1_m2_integration_testset": {
+    "dataset": "intent_testset.csv",
+    "total_questions": 66,
+    "retrieval_executed": 48,
+    "podium_scored": 6,
+    "clarification_triggered": 4,
+    "out_of_scope_refused": 8,
+    "records": [
+      {
+        "index": 1,
+        "question": "What was Sergio Perez's points tally in the 2023 season?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_season_or_career_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Sergio Pérez",
+          "First_Season": 2023,
+          "Last_Season": 2023,
+          "Entries": 22,
+          "Starts": 22,
+          "Points": 260.0,
+          "Wins": 2,
+          "Podiums": 9,
+          "Points_Finishes": 19,
+          "Retirements": 2,
+          "Best_Finish": 1,
+          "Avg_Finish": 5.86
+        }
+      },
+      {
+        "index": 2,
+        "question": "Has Lando Norris ever won at Silverstone?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_at_circuit_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Lando Norris",
+          "Circuit": "Silverstone Circuit",
+          "Starts": 7,
+          "Wins": 0,
+          "Podiums": 2,
+          "Best_Finish": 2,
+          "Avg_Finish": 5.71,
+          "Points": 65.0
+        }
+      },
+      {
+        "index": 3,
+        "question": "On average where did Alonso finish at the Hungaroring?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_at_circuit_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Fernando Alonso",
+          "Circuit": "Hungaroring",
+          "Starts": 21,
+          "Wins": 1,
+          "Podiums": 5,
+          "Best_Finish": 1,
+          "Avg_Finish": 7.05,
+          "Points": 143.0
+        }
+      },
+      {
+        "index": 4,
+        "question": "Count Max Verstappen's career podium finishes",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_season_or_career_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Max Verstappen",
+          "First_Season": 2015,
+          "Last_Season": 2024,
+          "Entries": 209,
+          "Starts": 209,
+          "Points": 2912.5,
+          "Wins": 63,
+          "Podiums": 112,
+          "Points_Finishes": 172,
+          "Retirements": 32,
+          "Best_Finish": 1,
+          "Avg_Finish": 5.65
+        }
+      },
+      {
+        "index": 5,
+        "question": "How did Schumacher do in terms of victories in 2004?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "clarification_prompt",
+        "clarification": "\"Schumacher\" matches more than one driver: Ralf Schumacher, Michael Schumacher. Which one do you mean?"
+      },
+      {
+        "index": 6,
+        "question": "Give me George Russell's wins and points from 2022",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_season_or_career_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "George Russell",
+          "First_Season": 2022,
+          "Last_Season": 2022,
+          "Entries": 22,
+          "Starts": 22,
+          "Points": 262.0,
+          "Wins": 1,
+          "Podiums": 8,
+          "Points_Finishes": 20,
+          "Retirements": 1,
+          "Best_Finish": 1,
+          "Avg_Finish": 5.0
+        }
+      },
+      {
+        "index": 7,
+        "question": "How many points did he score in 2019?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_season_or_career_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "George Russell",
+          "First_Season": 2019,
+          "Last_Season": 2019,
+          "Entries": 21,
+          "Starts": 21,
+          "Points": 0.0,
+          "Wins": 0,
+          "Podiums": 0,
+          "Points_Finishes": 0,
+          "Retirements": 2,
+          "Best_Finish": 11,
+          "Avg_Finish": 15.81
+        }
+      },
+      {
+        "index": 8,
+        "question": "What was Ferrari's points haul in 2018?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Ferrari",
+          "Start_Season": 2018,
+          "End_Season": 2018,
+          "Entries": 42,
+          "Starts": 42,
+          "Classified": 37,
+          "Retirements": 5,
+          "Reliability": 0.881,
+          "Classified_Start_Share": 0.881,
+          "Points": 571.0,
+          "Wins": 6,
+          "Podiums": 24
+        }
+      },
+      {
+        "index": 9,
+        "question": "How many times did Williams cars retire between 2014 and 2021?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Williams",
+          "Start_Season": 2014,
+          "End_Season": 2021,
+          "Entries": 320,
+          "Starts": 319,
+          "Classified": 266,
+          "Retirements": 53,
+          "Reliability": 0.8313,
+          "Classified_Start_Share": 0.8339,
+          "Points": 829.0,
+          "Wins": 0,
+          "Podiums": 16
+        }
+      },
+      {
+        "index": 10,
+        "question": "Which share of McLaren's starts ended with the car classified in 2015?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "McLaren",
+          "Start_Season": 2015,
+          "End_Season": 2015,
+          "Entries": 38,
+          "Starts": 37,
+          "Classified": 24,
+          "Retirements": 13,
+          "Reliability": 0.6316,
+          "Classified_Start_Share": 0.6486,
+          "Points": 27.0,
+          "Wins": 0,
+          "Podiums": 0
+        }
+      },
+      {
+        "index": 11,
+        "question": "Did redbull win more races than mercedes amg in 2021?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 2,
+        "sample_row": {
+          "Constructor": "Red Bull",
+          "Start_Season": 2021,
+          "End_Season": 2021,
+          "Entries": 44,
+          "Starts": 44,
+          "Classified": 38,
+          "Retirements": 6,
+          "Reliability": 0.8636,
+          "Classified_Start_Share": 0.8636,
+          "Points": 578.5,
+          "Wins": 11,
+          "Podiums": 23
+        }
+      },
+      {
+        "index": 12,
+        "question": "Tally of Sauber race victories over its history",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Sauber",
+          "Start_Season": 1993,
+          "End_Season": 2024,
+          "Entries": 837,
+          "Starts": 833,
+          "Classified": 562,
+          "Retirements": 271,
+          "Reliability": 0.6714,
+          "Classified_Start_Share": 0.6747,
+          "Points": 561.0,
+          "Wins": 0,
+          "Podiums": 10
+        }
+      },
+      {
+        "index": 13,
+        "question": "How dependable were Haas machines from 2016 to 2020?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Haas F1 Team",
+          "Start_Season": 2016,
+          "End_Season": 2020,
+          "Entries": 200,
+          "Starts": 197,
+          "Classified": 153,
+          "Retirements": 44,
+          "Reliability": 0.765,
+          "Classified_Start_Share": 0.7766,
+          "Points": 200.0,
+          "Wins": 0,
+          "Podiums": 0
+        }
+      },
+      {
+        "index": 14,
+        "question": "Between Hamilton and Russell who was quicker on Sunday more often?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "clarification_prompt",
+        "clarification": "\"Hamilton\" matches more than one driver: Lewis Hamilton, Duncan Hamilton. Which one do you mean?"
+      },
+      {
+        "index": 15,
+        "question": "Charles Leclerc against Carlos Sainz: who finished higher more times?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "teammate_race_head_to_head",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Ferrari",
+          "Driver_1": "Charles Leclerc",
+          "Driver_2": "Carlos Sainz",
+          "Shared_Races": 89,
+          "Driver_1_Ahead": 53,
+          "Driver_2_Ahead": 36,
+          "Driver_1_Points": 946.0,
+          "Driver_2_Points": 831.5,
+          "Driver_1_Wins": 6,
+          "Driver_2_Wins": 4,
+          "Driver_1_Podiums": 30,
+          "Driver_2_Podiums": 25
+        }
+      },
+      {
+        "index": 16,
+        "question": "Ocon or Alonso at Alpine - who had the better record?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "teammate_race_head_to_head",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Alpine F1 Team",
+          "Driver_1": "Esteban Ocon",
+          "Driver_2": "Fernando Alonso",
+          "Shared_Races": 44,
+          "Driver_1_Ahead": 23,
+          "Driver_2_Ahead": 21,
+          "Driver_1_Points": 163.0,
+          "Driver_2_Points": 162.0,
+          "Driver_1_Wins": 1,
+          "Driver_2_Wins": 0,
+          "Driver_1_Podiums": 1,
+          "Driver_2_Podiums": 1
+        }
+      },
+      {
+        "index": 17,
+        "question": "Did Button outscore Hamilton when they were teammates?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "clarification_prompt",
+        "clarification": "\"Hamilton\" matches more than one driver: Lewis Hamilton, Duncan Hamilton. Which one do you mean?"
+      },
+      {
+        "index": 18,
+        "question": "How did Albon fare against Verstappen at Red Bull?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "teammate_race_head_to_head",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Red Bull",
+          "Driver_1": "Alexander Albon",
+          "Driver_2": "Max Verstappen",
+          "Shared_Races": 26,
+          "Driver_1_Ahead": 9,
+          "Driver_2_Ahead": 17,
+          "Driver_1_Points": 181.0,
+          "Driver_2_Points": 311.0,
+          "Driver_1_Wins": 0,
+          "Driver_2_Wins": 3,
+          "Driver_1_Podiums": 2,
+          "Driver_2_Podiums": 15
+        }
+      },
+      {
+        "index": 19,
+        "question": "Who finished higher more often in 2021: Bottas or Hamilton?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "teammate_race_head_to_head",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Mercedes",
+          "Driver_1": "Valtteri Bottas",
+          "Driver_2": "Lewis Hamilton",
+          "Shared_Races": 22,
+          "Driver_1_Ahead": 4,
+          "Driver_2_Ahead": 18,
+          "Driver_1_Points": 219.0,
+          "Driver_2_Points": 385.5,
+          "Driver_1_Wins": 1,
+          "Driver_2_Wins": 8,
+          "Driver_1_Podiums": 11,
+          "Driver_2_Podiums": 17
+        }
+      },
+      {
+        "index": 20,
+        "question": "Who took victory at the 2021 Brazilian Grand Prix?",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_podium_and_results",
+        "row_count": 3,
+        "sample_row": {
+          "Season": 2021,
+          "Grand_Prix": "São Paulo Grand Prix",
+          "Circuit": "Autódromo José Carlos Pace",
+          "Location": "São Paulo",
+          "Country": "Brazil",
+          "Position": 1,
+          "Driver": "Lewis Hamilton",
+          "Constructor": "Mercedes",
+          "Grid": 10,
+          "Points": 25.0,
+          "Time_Or_Status": "1:32:22.851"
+        }
+      },
+      {
+        "index": 21,
+        "question": "List the podium of the 2012 European GP",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_podium_and_results",
+        "row_count": 3,
+        "sample_row": {
+          "Season": 2012,
+          "Grand_Prix": "European Grand Prix",
+          "Circuit": "Valencia Street Circuit",
+          "Location": "Valencia",
+          "Country": "Spain",
+          "Position": 1,
+          "Driver": "Fernando Alonso",
+          "Constructor": "Ferrari",
+          "Grid": 11,
+          "Points": 25.0,
+          "Time_Or_Status": "1:44:16.649"
+        }
+      },
+      {
+        "index": 22,
+        "question": "In what city is the Albert Park circuit?",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "circuit_profile_and_history",
+        "row_count": 1,
+        "sample_row": {
+          "Circuit": "Albert Park Grand Prix Circuit",
+          "Location": "Melbourne",
+          "Country": "Australia",
+          "Latitude": -37.8497,
+          "Longitude": 144.968,
+          "Altitude_m": 10,
+          "Races_Hosted": 27,
+          "First_Held": 1996,
+          "Last_Held": 2024,
+          "Events_Staged": [
+            "Australian Grand Prix"
+          ]
+        }
+      },
+      {
+        "index": 23,
+        "question": "How many Grands Prix has Spa hosted over the years?",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "circuit_profile_and_history",
+        "row_count": 1,
+        "sample_row": {
+          "Circuit": "Circuit de Spa-Francorchamps",
+          "Location": "Spa",
+          "Country": "Belgium",
+          "Latitude": 50.4372,
+          "Longitude": 5.97139,
+          "Altitude_m": 401,
+          "Races_Hosted": 57,
+          "First_Held": 1950,
+          "Last_Held": 2024,
+          "Events_Staged": [
+            "Belgian Grand Prix"
+          ]
+        }
+      },
+      {
+        "index": 24,
+        "question": "Who finished third at the 2017 Mexican Grand Prix?",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_podium_and_results",
+        "row_count": 3,
+        "sample_row": {
+          "Season": 2017,
+          "Grand_Prix": "Mexican Grand Prix",
+          "Circuit": "Autódromo Hermanos Rodríguez",
+          "Location": "Mexico City",
+          "Country": "Mexico",
+          "Position": 1,
+          "Driver": "Max Verstappen",
+          "Constructor": "Red Bull",
+          "Grid": 2,
+          "Points": 25.0,
+          "Time_Or_Status": "1:36:26.552"
+        }
+      },
+      {
+        "index": 25,
+        "question": "Which events have been staged at Imola?",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "circuit_profile_and_history",
+        "row_count": 1,
+        "sample_row": {
+          "Circuit": "Autodromo Enzo e Dino Ferrari",
+          "Location": "Imola",
+          "Country": "Italy",
+          "Latitude": 44.3439,
+          "Longitude": 11.7167,
+          "Altitude_m": 37,
+          "Races_Hosted": 31,
+          "First_Held": 1980,
+          "Last_Held": 2024,
+          "Events_Staged": [
+            "Emilia Romagna Grand Prix",
+            "San Marino Grand Prix",
+            "Italian Grand Prix"
+          ]
+        }
+      },
+      {
+        "index": 26,
+        "question": "And in 2018?",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "empty_result_handled",
+        "template_id": "race_podium_and_results",
+        "row_count": 0,
+        "sample_row": "The knowledge graph has no data for that question."
+      },
+      {
+        "index": 27,
+        "question": "Who started first at the 2022 Belgian Grand Prix?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "qualifying_race_results",
+        "row_count": 10,
+        "sample_row": {
+          "Season": 2022,
+          "Grand_Prix": "Belgian Grand Prix",
+          "Circuit": "Circuit de Spa-Francorchamps",
+          "Driver": "Max Verstappen",
+          "Constructor": "Red Bull",
+          "Qualifying_Position": 1,
+          "Grid_Position": 14,
+          "Finish_Position": 1,
+          "Q1_Time": "1:44.581",
+          "Q2_Time": "1:44.723",
+          "Q3_Time": "1:43.665"
+        }
+      },
+      {
+        "index": 28,
+        "question": "How many times did Charles Leclerc qualify on pole in 2022?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_qualifying_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Charles Leclerc",
+          "Races_Entered": 22,
+          "Grid_Poles": 9,
+          "Front_Row_Starts": 14,
+          "Qualifying_Sessions": 22,
+          "Qualifying_Poles": 9,
+          "Front_Row_Qualifying": 15,
+          "Q3_Appearances": 20,
+          "Avg_Qualifying_Position": 3.0
+        }
+      },
+      {
+        "index": 29,
+        "question": "Biggest climber from his starting slot at the 2021 Brazilian GP?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_grid_to_finish_gains",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2021,
+          "Grand_Prix": "São Paulo Grand Prix",
+          "Circuit": "Autódromo José Carlos Pace",
+          "Driver": "Charles Leclerc",
+          "Constructor": "Ferrari",
+          "Grid_Position": 6,
+          "Finish_Position": 5,
+          "Places_Gained": 1,
+          "Status": "Finished"
+        }
+      },
+      {
+        "index": 30,
+        "question": "How often did Norris make it into the final qualifying session in 2023?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_qualifying_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Lando Norris",
+          "Races_Entered": 22,
+          "Grid_Poles": 0,
+          "Front_Row_Starts": 3,
+          "Qualifying_Sessions": 22,
+          "Qualifying_Poles": 0,
+          "Front_Row_Qualifying": 3,
+          "Q3_Appearances": 15,
+          "Avg_Qualifying_Position": 8.14
+        }
+      },
+      {
+        "index": 31,
+        "question": "Where did Hamilton line up on the grid for the 2020 Turkish GP?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "qualifying_race_results",
+        "row_count": 10,
+        "sample_row": {
+          "Season": 2020,
+          "Grand_Prix": "Turkish Grand Prix",
+          "Circuit": "Istanbul Park",
+          "Driver": "Lance Stroll",
+          "Constructor": "Racing Point",
+          "Qualifying_Position": null,
+          "Grid_Position": 1,
+          "Finish_Position": 9,
+          "Q1_Time": null,
+          "Q2_Time": null,
+          "Q3_Time": null
+        }
+      },
+      {
+        "index": 32,
+        "question": "Which drivers dropped the most spots relative to their grid slot in Monaco 2019?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_grid_to_finish_losses",
+        "row_count": 10,
+        "sample_row": {
+          "Season": 2019,
+          "Grand_Prix": "Monaco Grand Prix",
+          "Circuit": "Circuit de Monaco",
+          "Driver": "Kevin Magnussen",
+          "Constructor": "Haas F1 Team",
+          "Grid_Position": 5,
+          "Finish_Position": 14,
+          "Places_Lost": 9,
+          "Status": "+1 Lap"
+        }
+      },
+      {
+        "index": 33,
+        "question": "Quickest stop recorded at the 2021 Italian Grand Prix?",
+        "gold_intent": "pit_stops",
+        "predicted_intent": "pit_stops",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_fastest_pit_stops",
+        "row_count": 10,
+        "sample_row": {
+          "Season": 2021,
+          "Grand_Prix": "Italian Grand Prix",
+          "Circuit": "Autodromo Nazionale di Monza",
+          "Driver": "Daniel Ricciardo",
+          "Stop_Number": 1,
+          "Lap": 22,
+          "Duration_Text": "23.812",
+          "Duration_ms": 23812,
+          "Duration_Seconds": 23.812
+        }
+      },
+      {
+        "index": 34,
+        "question": "How many times did Gasly come into the pits in the 2023 Dutch GP?",
+        "gold_intent": "pit_stops",
+        "predicted_intent": "pit_stops",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_fastest_pit_stops",
+        "row_count": 5,
+        "sample_row": {
+          "Season": 2023,
+          "Grand_Prix": "Dutch Grand Prix",
+          "Circuit": "Circuit Park Zandvoort",
+          "Driver": "Pierre Gasly",
+          "Stop_Number": 2,
+          "Lap": 11,
+          "Duration_Text": "19.518",
+          "Duration_ms": 19518,
+          "Duration_Seconds": 19.518
+        }
+      },
+      {
+        "index": 35,
+        "question": "What's the typical number of pit visits per driver in 2019?",
+        "gold_intent": "pit_stops",
+        "predicted_intent": "pit_stops",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "season_pit_stop_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2019,
+          "Races_With_Data": 21,
+          "Drivers_With_Stops": 20,
+          "Total_Pit_Stops": 650,
+          "Avg_Stops_Per_Driver_Per_Race": 1.59,
+          "Season_Fastest_Stop_Seconds": 15.069
+        }
+      },
+      {
+        "index": 36,
+        "question": "Slowest service in the pit lane at the 2022 Monaco GP?",
+        "gold_intent": "pit_stops",
+        "predicted_intent": "pit_stops",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_slowest_pit_stops",
+        "row_count": 10,
+        "sample_row": {
+          "Season": 2022,
+          "Grand_Prix": "Monaco Grand Prix",
+          "Circuit": "Circuit de Monaco",
+          "Driver": "Valtteri Bottas",
+          "Stop_Number": 2,
+          "Lap": 30,
+          "Duration_Text": "19:46.699",
+          "Duration_ms": 1186699,
+          "Duration_Seconds": 1186.699
+        }
+      },
+      {
+        "index": 37,
+        "question": "How many stops did the drivers make on average at Silverstone in 2021?",
+        "gold_intent": "pit_stops",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_pit_stop_averages",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2021,
+          "Grand_Prix": "British Grand Prix",
+          "Circuit": "Silverstone Circuit",
+          "Drivers_Who_Pitted": 19,
+          "Total_Pit_Stops": 41,
+          "Avg_Stops_Per_Driver": 2.16,
+          "Fastest_Stop_Seconds": 27.543,
+          "Slowest_Stop_Seconds": 2077.164
+        }
+      },
+      {
+        "index": 38,
+        "question": "Which driver collected the title in 2008?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "season_overview_and_leader",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2008,
+          "Total_Races": 18,
+          "Total_Drivers": 22,
+          "Total_Constructors": 11,
+          "Points_Leader": "Lewis Hamilton",
+          "Leader_Points": 98.0,
+          "Leader_Wins": 5,
+          "Top_5_Standings": [
+            "Lewis Hamilton (98.0 pts, 5 wins)",
+            "Felipe Massa (97.0 pts, 6 wins)",
+            "Kimi Räikkönen (75.0 pts, 2 wins)",
+            "Robert Kubica (75.0 pts, 1 wins)",
+            "Fernando Alonso (61.0 pts, 2 wins)"
+          ]
+        }
+      },
+      {
+        "index": 39,
+        "question": "Who topped the points table in 2010?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "season_overview_and_leader",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2010,
+          "Total_Races": 19,
+          "Total_Drivers": 27,
+          "Total_Constructors": 12,
+          "Points_Leader": "Sebastian Vettel",
+          "Leader_Points": 256.0,
+          "Leader_Wins": 5,
+          "Top_5_Standings": [
+            "Sebastian Vettel (256.0 pts, 5 wins)",
+            "Fernando Alonso (252.0 pts, 5 wins)",
+            "Mark Webber (242.0 pts, 4 wins)",
+            "Lewis Hamilton (240.0 pts, 3 wins)",
+            "Jenson Button (214.0 pts, 2 wins)"
+          ]
+        }
+      },
+      {
+        "index": 40,
+        "question": "How many different drivers took part in 2022?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "season_overview_and_leader",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2022,
+          "Total_Races": 22,
+          "Total_Drivers": 22,
+          "Total_Constructors": 10,
+          "Points_Leader": "Max Verstappen",
+          "Leader_Points": 433.0,
+          "Leader_Wins": 15,
+          "Top_5_Standings": [
+            "Max Verstappen (433.0 pts, 15 wins)",
+            "Charles Leclerc (291.0 pts, 3 wins)",
+            "Sergio Pérez (291.0 pts, 2 wins)",
+            "George Russell (262.0 pts, 1 wins)",
+            "Lewis Hamilton (233.0 pts, 0 wins)"
+          ]
+        }
+      },
+      {
+        "index": 41,
+        "question": "Who moved to a new team ahead of 2019?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_team_changes_between_seasons",
+        "row_count": 1,
+        "sample_row": {
+          "Season_1": 2018,
+          "Season_2": 2019,
+          "Drivers_Changed": 7,
+          "Drivers": [
+            "Carlos Sainz",
+            "Charles Leclerc",
+            "Daniel Ricciardo",
+            "Kimi Räikkönen",
+            "Lance Stroll",
+            "Pierre Gasly",
+            "Sergio Pérez"
+          ],
+          "Transfers": [
+            "Carlos Sainz (Renault -> McLaren)",
+            "Charles Leclerc (Sauber -> Ferrari)",
+            "Daniel Ricciardo (Red Bull -> Renault)",
+            "Kimi Räikkönen (Ferrari -> Alfa Romeo)",
+            "Lance Stroll (Williams -> Racing Point)",
+            "Pierre Gasly (Toro Rosso -> Red Bull)",
+            "Sergio Pérez (Force India -> Racing Point)"
+          ]
+        }
+      },
+      {
+        "index": 42,
+        "question": "How many rounds made up the 1998 season?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "season_overview_and_leader",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 1998,
+          "Total_Races": 16,
+          "Total_Drivers": 23,
+          "Total_Constructors": 11,
+          "Points_Leader": "Mika Häkkinen",
+          "Leader_Points": 100.0,
+          "Leader_Wins": 8,
+          "Top_5_Standings": [
+            "Mika Häkkinen (100.0 pts, 8 wins)",
+            "Michael Schumacher (86.0 pts, 6 wins)",
+            "David Coulthard (56.0 pts, 1 wins)",
+            "Eddie Irvine (47.0 pts, 0 wins)",
+            "Jacques Villeneuve (21.0 pts, 0 wins)"
+          ]
+        }
+      },
+      {
+        "index": 43,
+        "question": "Which drivers swapped constructors from 2023 to 2024?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_team_changes_between_seasons",
+        "row_count": 1,
+        "sample_row": {
+          "Season_1": 2023,
+          "Season_2": 2024,
+          "Drivers_Changed": 5,
+          "Drivers": [
+            "Daniel Ricciardo",
+            "Guanyu Zhou",
+            "Liam Lawson",
+            "Valtteri Bottas",
+            "Yuki Tsunoda"
+          ],
+          "Transfers": [
+            "Daniel Ricciardo (AlphaTauri -> RB F1 Team)",
+            "Guanyu Zhou (Alfa Romeo -> Sauber)",
+            "Liam Lawson (AlphaTauri -> RB F1 Team)",
+            "Valtteri Bottas (Alfa Romeo -> Sauber)",
+            "Yuki Tsunoda (AlphaTauri -> RB F1 Team)"
+          ]
+        }
+      },
+      {
+        "index": 44,
+        "question": "What country does Oscar Piastri represent?",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Oscar Piastri",
+          "Nationality": "Australian",
+          "Date_Of_Birth": "2001-04-06",
+          "Car_Number": 81,
+          "Code": "PIA",
+          "Driver_Ref": "piastri",
+          "Teams_Driven_For": [
+            "McLaren"
+          ],
+          "Debut_Season": 2023,
+          "Latest_Season": 2024,
+          "Seasons_Competed": 2,
+          "First_Grand_Prix": "2023 Bahrain Grand Prix",
+          "First_Race_Date": "2023-03-05",
+          "Total_Entries": 46,
+          "Career_Wins": 2,
+          "Career_Podiums": 10,
+          "Career_Points": 347.0
+        }
+      },
+      {
+        "index": 45,
+        "question": "What is Fernando Alonso's date of birth?",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Fernando Alonso",
+          "Nationality": "Spanish",
+          "Date_Of_Birth": "1981-07-29",
+          "Car_Number": 14,
+          "Code": "ALO",
+          "Driver_Ref": "alonso",
+          "Teams_Driven_For": [
+            "Minardi",
+            "Renault",
+            "McLaren",
+            "Ferrari",
+            "Alpine F1 Team",
+            "Aston Martin"
+          ],
+          "Debut_Season": 2001,
+          "Latest_Season": 2024,
+          "Seasons_Competed": 21,
+          "First_Grand_Prix": "2001 Australian Grand Prix",
+          "First_Race_Date": "2001-03-04",
+          "Total_Entries": 404,
+          "Career_Wins": 32,
+          "Career_Podiums": 106,
+          "Career_Points": 2329.0
+        }
+      },
+      {
+        "index": 46,
+        "question": "List every team Kimi Raikkonen has raced for",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Kimi Räikkönen",
+          "Nationality": "Finnish",
+          "Date_Of_Birth": "1979-10-17",
+          "Car_Number": 7,
+          "Code": "RAI",
+          "Driver_Ref": "raikkonen",
+          "Teams_Driven_For": [
+            "Sauber",
+            "McLaren",
+            "Ferrari",
+            "Lotus F1",
+            "Alfa Romeo"
+          ],
+          "Debut_Season": 2001,
+          "Latest_Season": 2021,
+          "Seasons_Competed": 19,
+          "First_Grand_Prix": "2001 Australian Grand Prix",
+          "First_Race_Date": "2001-03-04",
+          "Total_Entries": 352,
+          "Career_Wins": 21,
+          "Career_Podiums": 103,
+          "Career_Points": 1873.0
+        }
+      },
+      {
+        "index": 47,
+        "question": "Which race was Max Verstappen's first in Formula 1?",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Max Verstappen",
+          "Nationality": "Dutch",
+          "Date_Of_Birth": "1997-09-30",
+          "Car_Number": 33,
+          "Code": "VER",
+          "Driver_Ref": "max_verstappen",
+          "Teams_Driven_For": [
+            "Toro Rosso",
+            "Red Bull"
+          ],
+          "Debut_Season": 2015,
+          "Latest_Season": 2024,
+          "Seasons_Competed": 10,
+          "First_Grand_Prix": "2015 Australian Grand Prix",
+          "First_Race_Date": "2015-03-15",
+          "Total_Entries": 209,
+          "Career_Wins": 63,
+          "Career_Podiums": 112,
+          "Career_Points": 2912.5
+        }
+      },
+      {
+        "index": 48,
+        "question": "What number does Lando Norris run on his car?",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Lando Norris",
+          "Nationality": "British",
+          "Date_Of_Birth": "1999-11-13",
+          "Car_Number": 4,
+          "Code": "NOR",
+          "Driver_Ref": "norris",
+          "Teams_Driven_For": [
+            "McLaren"
+          ],
+          "Debut_Season": 2019,
+          "Latest_Season": 2024,
+          "Seasons_Competed": 6,
+          "First_Grand_Prix": "2019 Australian Grand Prix",
+          "First_Race_Date": "2019-03-17",
+          "Total_Entries": 128,
+          "Career_Wins": 4,
+          "Career_Podiums": 26,
+          "Career_Points": 950.0
+        }
+      },
+      {
+        "index": 49,
+        "question": "Who is Yuki Tsunoda?",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Yuki Tsunoda",
+          "Nationality": "Japanese",
+          "Date_Of_Birth": "2000-05-11",
+          "Car_Number": 22,
+          "Code": "TSU",
+          "Driver_Ref": "tsunoda",
+          "Teams_Driven_For": [
+            "AlphaTauri",
+            "RB F1 Team"
+          ],
+          "Debut_Season": 2021,
+          "Latest_Season": 2024,
+          "Seasons_Competed": 4,
+          "First_Grand_Prix": "2021 Bahrain Grand Prix",
+          "First_Race_Date": "2021-03-28",
+          "Total_Entries": 90,
+          "Career_Wins": 0,
+          "Career_Podiums": 0,
+          "Career_Points": 87.0
+        }
+      },
+      {
+        "index": 50,
+        "question": "Is Lewis Hamilton going to make the podium at the 2024 British Grand Prix?",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.3863,
+        "predicted_podium": false
+      },
+      {
+        "index": 51,
+        "question": "Estimate the probability that Sainz finishes top three in Mexico 2024",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.5992,
+        "predicted_podium": true
+      },
+      {
+        "index": 52,
+        "question": "Leclerc starts P2 at Monaco 2024 and is 3rd in the standings - will he be on the podium?",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.5805,
+        "predicted_podium": true
+      },
+      {
+        "index": 53,
+        "question": "What would the model say about Russell in Las Vegas 2024 from pole?",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.538,
+        "predicted_podium": true
+      },
+      {
+        "index": 54,
+        "question": "Odds of Perez getting a podium at Baku 2023?",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.5348,
+        "predicted_podium": true
+      },
+      {
+        "index": 55,
+        "question": "Forecast whether Norris lands a top-three finish at Zandvoort 2024",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.6173,
+        "predicted_podium": true
+      },
+      {
+        "index": 56,
+        "question": "How much does Max Verstappen earn per year?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 57,
+        "question": "What soft tyre strategy did Ferrari use at Monza 2019?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 58,
+        "question": "Who won the Tour de France in 2020?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 59,
+        "question": "How do I make pancakes?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 60,
+        "question": "What's Lewis Hamilton's favourite food?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 61,
+        "question": "Fastest lap time ever recorded at Suzuka?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 62,
+        "question": "What is the tallest mountain in Africa?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 63,
+        "question": "Was there a safety car in the 2016 Brazilian Grand Prix?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "out_of_scope",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 64,
+        "question": "What about Norris?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_at_circuit_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Lando Norris",
+          "Circuit": "Circuit Park Zandvoort",
+          "Starts": 1,
+          "Wins": 1,
+          "Podiums": 1,
+          "Best_Finish": 1,
+          "Avg_Finish": 1.0,
+          "Points": 26.0
+        }
+      },
+      {
+        "index": 65,
+        "question": "2021?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "clarification_prompt",
+        "clarification": "Which team (constructor) do you mean?"
+      },
+      {
+        "index": 66,
+        "question": "And for Mercedes?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Mercedes",
+          "Start_Season": 2021,
+          "End_Season": 2021,
+          "Entries": 2,
+          "Starts": 2,
+          "Classified": 2,
+          "Retirements": 0,
+          "Reliability": 1.0,
+          "Classified_Start_Share": 1.0,
+          "Points": 34.0,
+          "Wins": 0,
+          "Podiums": 2
+        }
+      }
+    ]
+  },
+  "m1_m2_integration_heldout": {
+    "dataset": "intent_heldout.csv",
+    "total_questions": 22,
+    "retrieval_executed": 18,
+    "podium_scored": 2,
+    "clarification_triggered": 0,
+    "out_of_scope_refused": 2,
+    "records": [
+      {
+        "index": 1,
+        "question": "Number of Grand Prix victories for Nico Rosberg in 2016?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_season_or_career_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Nico Rosberg",
+          "First_Season": 2016,
+          "Last_Season": 2016,
+          "Entries": 21,
+          "Starts": 21,
+          "Points": 385.0,
+          "Wins": 9,
+          "Podiums": 16,
+          "Points_Finishes": 20,
+          "Retirements": 1,
+          "Best_Finish": 1,
+          "Avg_Finish": 3.19
+        }
+      },
+      {
+        "index": 2,
+        "question": "What's Daniel Ricciardo's typical finishing spot at Monaco?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_at_circuit_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Daniel Ricciardo",
+          "Circuit": "Circuit de Monaco",
+          "Starts": 11,
+          "Wins": 1,
+          "Podiums": 4,
+          "Best_Finish": 1,
+          "Avg_Finish": 8.64,
+          "Points": 85.0
+        }
+      },
+      {
+        "index": 3,
+        "question": "Which season brought Alpine the most points?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_by_season_performance",
+        "row_count": 4,
+        "sample_row": {
+          "Constructor": "Alpine F1 Team",
+          "Season": 2022,
+          "Entries": 44,
+          "Classified": 36,
+          "Reliability": 0.8182,
+          "Points": 170.0,
+          "Wins": 0,
+          "Podiums": 0
+        }
+      },
+      {
+        "index": 4,
+        "question": "How often did Ferrari cars fail to finish in 2020?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Ferrari",
+          "Start_Season": 2020,
+          "End_Season": 2020,
+          "Entries": 34,
+          "Starts": 34,
+          "Classified": 28,
+          "Retirements": 6,
+          "Reliability": 0.8235,
+          "Classified_Start_Share": 0.8235,
+          "Points": 131.0,
+          "Wins": 0,
+          "Podiums": 3
+        }
+      },
+      {
+        "index": 5,
+        "question": "Was Piastri or Norris stronger in 2024?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "teammate_race_head_to_head",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "McLaren",
+          "Driver_1": "Oscar Piastri",
+          "Driver_2": "Lando Norris",
+          "Shared_Races": 24,
+          "Driver_1_Ahead": 8,
+          "Driver_2_Ahead": 16,
+          "Driver_1_Points": 265.0,
+          "Driver_2_Points": 344.0,
+          "Driver_1_Wins": 2,
+          "Driver_2_Wins": 4,
+          "Driver_1_Podiums": 8,
+          "Driver_2_Podiums": 13
+        }
+      },
+      {
+        "index": 6,
+        "question": "Raikkonen against Vettel at Ferrari - who came out ahead?",
+        "gold_intent": "head_to_head",
+        "predicted_intent": "head_to_head",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "teammate_race_head_to_head",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Ferrari",
+          "Driver_1": "Kimi Räikkönen",
+          "Driver_2": "Sebastian Vettel",
+          "Shared_Races": 81,
+          "Driver_1_Ahead": 23,
+          "Driver_2_Ahead": 58,
+          "Driver_1_Points": 792.0,
+          "Driver_2_Points": 1127.0,
+          "Driver_1_Wins": 1,
+          "Driver_2_Wins": 13,
+          "Driver_1_Podiums": 26,
+          "Driver_2_Podiums": 45
+        }
+      },
+      {
+        "index": 7,
+        "question": "Who stood on the top step at the 2005 Japanese GP?",
+        "gold_intent": "race_facts",
+        "predicted_intent": null,
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_podium_and_results",
+        "row_count": 3,
+        "sample_row": {
+          "Season": 2005,
+          "Grand_Prix": "Japanese Grand Prix",
+          "Circuit": "Suzuka Circuit",
+          "Location": "Suzuka",
+          "Country": "Japan",
+          "Position": 1,
+          "Driver": "Kimi Räikkönen",
+          "Constructor": "McLaren",
+          "Grid": 17,
+          "Points": 10.0,
+          "Time_Or_Status": "1:29:02.212"
+        }
+      },
+      {
+        "index": 8,
+        "question": "What country hosts the Yas Marina circuit?",
+        "gold_intent": "race_facts",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "circuit_profile_and_history",
+        "row_count": 1,
+        "sample_row": {
+          "Circuit": "Yas Marina Circuit",
+          "Location": "Abu Dhabi",
+          "Country": "UAE",
+          "Latitude": 24.4672,
+          "Longitude": 54.6031,
+          "Altitude_m": 3,
+          "Races_Hosted": 16,
+          "First_Held": 2009,
+          "Last_Held": 2024,
+          "Events_Staged": [
+            "Abu Dhabi Grand Prix"
+          ]
+        }
+      },
+      {
+        "index": 9,
+        "question": "Which drivers qualified in the top ten at Suzuka 2019?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "qualifying_race_results",
+        "row_count": 10,
+        "sample_row": {
+          "Season": 2019,
+          "Grand_Prix": "Japanese Grand Prix",
+          "Circuit": "Suzuka Circuit",
+          "Driver": "Sebastian Vettel",
+          "Constructor": "Ferrari",
+          "Qualifying_Position": 1,
+          "Grid_Position": 1,
+          "Finish_Position": 2,
+          "Q1_Time": "1:28.988",
+          "Q2_Time": "1:28.174",
+          "Q3_Time": "1:27.064"
+        }
+      },
+      {
+        "index": 10,
+        "question": "How many front-row starts did Bottas have in 2017?",
+        "gold_intent": "qualifying_grid",
+        "predicted_intent": "qualifying_grid",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_qualifying_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Valtteri Bottas",
+          "Races_Entered": 20,
+          "Grid_Poles": 4,
+          "Front_Row_Starts": 5,
+          "Qualifying_Sessions": 20,
+          "Qualifying_Poles": 4,
+          "Front_Row_Qualifying": 6,
+          "Q3_Appearances": 20,
+          "Avg_Qualifying_Position": 3.0
+        }
+      },
+      {
+        "index": 11,
+        "question": "Longest stop of the 2021 Monaco GP?",
+        "gold_intent": "pit_stops",
+        "predicted_intent": "pit_stops",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_slowest_pit_stops",
+        "row_count": 10,
+        "sample_row": {
+          "Season": 2021,
+          "Grand_Prix": "Monaco Grand Prix",
+          "Circuit": "Circuit de Monaco",
+          "Driver": "Nikita Mazepin",
+          "Stop_Number": 1,
+          "Lap": 34,
+          "Duration_Text": "25.202",
+          "Duration_ms": 25202,
+          "Duration_Seconds": 25.202
+        }
+      },
+      {
+        "index": 12,
+        "question": "Did Ricciardo stop once or twice at Baku 2018?",
+        "gold_intent": "pit_stops",
+        "predicted_intent": "pit_stops",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "race_fastest_pit_stops",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2018,
+          "Grand_Prix": "Azerbaijan Grand Prix",
+          "Circuit": "Baku City Circuit",
+          "Driver": "Daniel Ricciardo",
+          "Stop_Number": 1,
+          "Lap": 37,
+          "Duration_Text": "19.925",
+          "Duration_ms": 19925,
+          "Duration_Seconds": 19.925
+        }
+      },
+      {
+        "index": 13,
+        "question": "Who was crowned champion in 1994?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "season_overview_and_leader",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 1994,
+          "Total_Races": 16,
+          "Total_Drivers": 46,
+          "Total_Constructors": 14,
+          "Points_Leader": "Michael Schumacher",
+          "Leader_Points": 92.0,
+          "Leader_Wins": 8,
+          "Top_5_Standings": [
+            "Michael Schumacher (92.0 pts, 8 wins)",
+            "Damon Hill (91.0 pts, 6 wins)",
+            "Gerhard Berger (41.0 pts, 1 wins)",
+            "Mika Häkkinen (26.0 pts, 0 wins)",
+            "Jean Alesi (24.0 pts, 0 wins)"
+          ]
+        }
+      },
+      {
+        "index": 14,
+        "question": "How many drivers lined up during the 2003 season?",
+        "gold_intent": "season_history",
+        "predicted_intent": "season_history",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "season_overview_and_leader",
+        "row_count": 1,
+        "sample_row": {
+          "Season": 2003,
+          "Total_Races": 16,
+          "Total_Drivers": 24,
+          "Total_Constructors": 10,
+          "Points_Leader": "Michael Schumacher",
+          "Leader_Points": 93.0,
+          "Leader_Wins": 6,
+          "Top_5_Standings": [
+            "Michael Schumacher (93.0 pts, 6 wins)",
+            "Kimi Räikkönen (91.0 pts, 1 wins)",
+            "Juan Pablo Montoya (82.0 pts, 2 wins)",
+            "Rubens Barrichello (65.0 pts, 2 wins)",
+            "Ralf Schumacher (58.0 pts, 2 wins)"
+          ]
+        }
+      },
+      {
+        "index": 15,
+        "question": "How old is Fernando Alonso?",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "driver_profile",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Fernando Alonso",
+          "Nationality": "Spanish",
+          "Date_Of_Birth": "1981-07-29",
+          "Car_Number": 14,
+          "Code": "ALO",
+          "Driver_Ref": "alonso",
+          "Teams_Driven_For": [
+            "Minardi",
+            "Renault",
+            "McLaren",
+            "Ferrari",
+            "Alpine F1 Team",
+            "Aston Martin"
+          ],
+          "Debut_Season": 2001,
+          "Latest_Season": 2024,
+          "Seasons_Competed": 21,
+          "First_Grand_Prix": "2001 Australian Grand Prix",
+          "First_Race_Date": "2001-03-04",
+          "Total_Entries": 404,
+          "Career_Wins": 32,
+          "Career_Podiums": 106,
+          "Career_Points": 2329.0
+        }
+      },
+      {
+        "index": 16,
+        "question": "Which country is Kevin Magnussen from?",
+        "gold_intent": "driver_profile",
+        "predicted_intent": "race_facts",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_profile_and_career_summary",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Kevin Magnussen",
+          "Nationality": "Danish",
+          "Date_Of_Birth": "1992-10-05",
+          "Car_Number": 20,
+          "Code": "MAG",
+          "Driver_Ref": "kevin_magnussen",
+          "Teams_Driven_For": [
+            "McLaren",
+            "Renault",
+            "Haas F1 Team"
+          ],
+          "Debut_Season": 2014,
+          "Latest_Season": 2024,
+          "Seasons_Competed": 10,
+          "First_Grand_Prix": "2014 Australian Grand Prix",
+          "First_Race_Date": "2014-03-16",
+          "Total_Entries": 186,
+          "Career_Wins": 0,
+          "Career_Podiums": 1,
+          "Career_Points": 196.0
+        }
+      },
+      {
+        "index": 17,
+        "question": "Would Russell reach the podium at the 2024 Austrian GP starting fourth?",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.2657,
+        "predicted_podium": false
+      },
+      {
+        "index": 18,
+        "question": "Give me a podium prediction for Sainz at Australia 2024",
+        "gold_intent": "podium_prediction",
+        "predicted_intent": "podium_prediction",
+        "stage_outcome": "podium_predicted",
+        "podium_probability": 0.3541,
+        "predicted_podium": false
+      },
+      {
+        "index": 19,
+        "question": "Who will win the next election?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 20,
+        "question": "How much fuel does an F1 car carry?",
+        "gold_intent": "out_of_scope",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "out_of_scope_refused"
+      },
+      {
+        "index": 21,
+        "question": "And 2017?",
+        "gold_intent": "driver_performance",
+        "predicted_intent": "driver_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "driver_at_circuit_stats",
+        "row_count": 1,
+        "sample_row": {
+          "Driver": "Carlos Sainz",
+          "Circuit": "Albert Park Grand Prix Circuit",
+          "Starts": 1,
+          "Wins": 0,
+          "Podiums": 0,
+          "Best_Finish": 8,
+          "Avg_Finish": 8.0,
+          "Points": 4.0
+        }
+      },
+      {
+        "index": 22,
+        "question": "What about Red Bull?",
+        "gold_intent": "constructor_performance",
+        "predicted_intent": "constructor_performance",
+        "stage_outcome": "rows_retrieved",
+        "template_id": "constructor_period_performance",
+        "row_count": 1,
+        "sample_row": {
+          "Constructor": "Red Bull",
+          "Start_Season": 2017,
+          "End_Season": 2017,
+          "Entries": 2,
+          "Starts": 2,
+          "Classified": 1,
+          "Retirements": 1,
+          "Reliability": 0.5,
+          "Classified_Start_Share": 0.5,
+          "Points": 10.0,
+          "Wins": 0,
+          "Podiums": 0
+        }
+      }
+    ]
+  },
+  "podium_evaluation": {
+    "total_cases": 8,
+    "passed_cases": 8,
+    "pass_rate": 1.0,
+    "cases": [
+      {
+        "id": "POD-01",
+        "scenario": "Predicted Podium (Championship Leader on Pole - True Positive)",
+        "user_query": "Predict Max Verstappen at the 2024 Saudi Arabian Grand Prix.",
+        "passed": true,
+        "driver": "Max Verstappen",
+        "race": "2024 Saudi Arabian Grand Prix",
+        "race_date_cutoff": "2024-03-09",
+        "feature_values": {
+          "grid": 1.0,
+          "drv_pos": 1.0,
+          "drv_pts_share": 1.0,
+          "drv_wins": 1.0
+        },
+        "grayed_defaults": [],
+        "podium_probability": 0.6441,
+        "threshold": 0.432,
+        "predicted_podium": true,
+        "actual_outcome": {
+          "positionOrder": 1,
+          "podium": true,
+          "status": "Finished"
+        },
+        "shap_base_value": 0.1418,
+        "shap_contributions": {
+          "grid": 0.3422,
+          "drv_pos": 0.0792,
+          "drv_pts_share": 0.0757,
+          "drv_wins": 0.0052
+        },
+        "shap_additivity_check": true,
+        "lime_contributions": {
+          "grid": 0.2657,
+          "drv_pos": 0.0749,
+          "drv_pts_share": 0.0578,
+          "drv_wins": 0.0243
+        },
+        "lime_r2_score": 0.826,
+        "pre_race_driver_circuit_facts": {
+          "Driver": "Max Verstappen",
+          "Circuit": "Jeddah Corniche Circuit",
+          "Prior_Circuit_Starts": 3,
+          "Prior_Circuit_Wins": 1,
+          "Prior_Circuit_Podiums": 3,
+          "Prior_Circuit_Best_Finish": 1,
+          "Prior_Circuit_Avg_Finish": 1.67
+        },
+        "pre_race_constructor_facts": {
+          "Constructor": "Red Bull",
+          "Prior_Constructor_Entries_Recent": 90,
+          "Prior_Constructor_Classified": 83,
+          "Prior_Constructor_Reliability": 0.9222,
+          "Prior_Constructor_Podiums": 60,
+          "Prior_Constructor_Wins": 39
+        },
+        "explanation_fidelity_ok": true,
+        "non_causal_language_ok": true,
+        "grounded_explanation": "For **Max Verstappen** entering **the 2024 Saudi Arabian Grand Prix**, the saved Milestone 1 **Random forest** estimates a podium probability of **64.4%** (`0.644`), which sits at or above the Milestone 1 decision threshold of **43.2%** (`0.432`) and yields a prediction of a **Podium finish** (starting from an average baseline podium rate of **14.2%**).\n\n**Features pushing the model's probability up:** The model places positive weight on starting grid slot P1 (`grid` = 1) (+34.2 percentage points, `SHAP = +0.3422`, `LIME = +0.2657`); and pre-race championship rank P1 (`drv_pos` = 1) (+7.9 percentage points, `SHAP = +0.0792`, `LIME = +0.0749`); and pre-race share of the championship leader's points (`drv_pts_share` = 1.000) (+7.6 percentage points, `SHAP = +0.0757`, `LIME = +0.0578`); and prior season wins entering the round (`drv_wins` = 1) (+0.5 percentage points, `SHAP = +0.0052`, `LIME = +0.0243`).\n\n**Features pushing the model's probability down:** None of the four pre-race inputs pulled the score downward for this entry.\n\n**Model reliance vs. global Milestone 1 patterns:** Globally across validation races in Milestone 1, the model relies most heavily on starting grid position (`grid` mean `|SHAP| = 0.1055`), followed by prior championship position (`drv_pos` = `0.0316`), points share (`drv_pts_share` = `0.0252`), and prior season wins (`drv_wins` = `0.0068`). These SHAP and LIME values reflect statistical patterns that the model relies on to weight each pre-race input.\n\n**Supporting Pre-Race Knowledge Graph Facts:** Prior to `2024-03-09`, **Max Verstappen** had **3** Grand Prix starts at **Jeddah Corniche Circuit** in the Knowledge Graph, recording **1** wins, **3** podiums, a best finish of **P1**, and an average finish of **1.67**. Over recent seasons strictly before `2024-03-09`, constructor **Red Bull** logged **83** classified finishes out of **90** race entries (a pre-race reliability rate of **92.2%**) with **60** podiums and **39** wins.\n\n**Recorded Historical Outcome:** In the actual race, Max Verstappen finished **P1** (Podium, status: *Finished*)."
+      },
+      {
+        "id": "POD-02",
+        "scenario": "Predicted Podium (Round 1 Pole Sitter with Median-Imputed Prior Standings - True Positive)",
+        "user_query": "Predict Charles Leclerc at the 2022 Bahrain Grand Prix.",
+        "passed": true,
+        "driver": "Charles Leclerc",
+        "race": "2022 Bahrain Grand Prix",
+        "race_date_cutoff": "2022-03-20",
+        "feature_values": {
+          "grid": 1.0,
+          "drv_pos": 12.0,
+          "drv_pts_share": 0.07550019950977598,
+          "drv_wins": 0.0
+        },
+        "grayed_defaults": [
+          "drv_pos",
+          "drv_pts_share",
+          "drv_wins"
+        ],
+        "podium_probability": 0.4767,
+        "threshold": 0.432,
+        "predicted_podium": true,
+        "actual_outcome": {
+          "positionOrder": 1,
+          "podium": true,
+          "status": "Finished"
+        },
+        "shap_base_value": 0.1418,
+        "shap_contributions": {
+          "grid": 0.3362,
+          "drv_pos": 0.0042,
+          "drv_pts_share": -0.0033,
+          "drv_wins": -0.0022
+        },
+        "shap_additivity_check": true,
+        "lime_contributions": {
+          "grid": 0.2626,
+          "drv_pos": -0.0149,
+          "drv_pts_share": -0.0265,
+          "drv_wins": -0.0199
+        },
+        "lime_r2_score": 0.761,
+        "pre_race_driver_circuit_facts": {
+          "Driver": "Charles Leclerc",
+          "Circuit": "Bahrain International Circuit",
+          "Prior_Circuit_Starts": 5,
+          "Prior_Circuit_Wins": 0,
+          "Prior_Circuit_Podiums": 1,
+          "Prior_Circuit_Best_Finish": 3,
+          "Prior_Circuit_Avg_Finish": 10.2
+        },
+        "pre_race_constructor_facts": {
+          "Constructor": "Ferrari",
+          "Prior_Constructor_Entries_Recent": 78,
+          "Prior_Constructor_Classified": 70,
+          "Prior_Constructor_Reliability": 0.8974,
+          "Prior_Constructor_Podiums": 8,
+          "Prior_Constructor_Wins": 0
+        },
+        "explanation_fidelity_ok": true,
+        "non_causal_language_ok": true,
+        "grounded_explanation": "For **Charles Leclerc** entering **the 2022 Bahrain Grand Prix**, the saved Milestone 1 **Random forest** estimates a podium probability of **47.7%** (`0.477`), which sits at or above the Milestone 1 decision threshold of **43.2%** (`0.432`) and yields a prediction of a **Podium finish** (starting from an average baseline podium rate of **14.2%**).\n\n*(Note: `drv_pos` = 12, `drv_pts_share` = 0.0755, `drv_wins` = 0 were not present prior to this round and were filled with the Milestone 1 training medians.)*\n\n**Features pushing the model's probability up:** The model places positive weight on starting grid slot P1 (`grid` = 1) (+33.6 percentage points, `SHAP = +0.3362`, `LIME = +0.2626`); and pre-race championship rank P12 (`drv_pos` = 12) (+0.4 percentage points, `SHAP = +0.0042`, `LIME = -0.0149`).\n\n**Features pushing the model's probability down:** The score is pulled downward in the model by pre-race share of the championship leader's points (`drv_pts_share` = 0.076) (-0.3 percentage points, `SHAP = -0.0033`, `LIME = -0.0265`); and prior season wins entering the round (`drv_wins` = 0) (-0.2 percentage points, `SHAP = -0.0022`, `LIME = -0.0199`).\n\n**Model reliance vs. global Milestone 1 patterns:** Globally across validation races in Milestone 1, the model relies most heavily on starting grid position (`grid` mean `|SHAP| = 0.1055`), followed by prior championship position (`drv_pos` = `0.0316`), points share (`drv_pts_share` = `0.0252`), and prior season wins (`drv_wins` = `0.0068`). These SHAP and LIME values reflect statistical patterns that the model relies on to weight each pre-race input.\n\n**Supporting Pre-Race Knowledge Graph Facts:** Prior to `2022-03-20`, **Charles Leclerc** had **5** Grand Prix starts at **Bahrain International Circuit** in the Knowledge Graph, recording **0** wins, **1** podiums, a best finish of **P3**, and an average finish of **10.2**. Over recent seasons strictly before `2022-03-20`, constructor **Ferrari** logged **70** classified finishes out of **78** race entries (a pre-race reliability rate of **89.7%**) with **8** podiums and **0** wins.\n\n**Recorded Historical Outcome:** In the actual race, Charles Leclerc finished **P1** (Podium, status: *Finished*)."
+      },
+      {
+        "id": "POD-03",
+        "scenario": "Predicted Podium (Front-Row Starter with Strong Championship Share - True Positive)",
+        "user_query": "Predict Fernando Alonso at the 2023 Monaco Grand Prix.",
+        "passed": true,
+        "driver": "Fernando Alonso",
+        "race": "2023 Monaco Grand Prix",
+        "race_date_cutoff": "2023-05-28",
+        "feature_values": {
+          "grid": 2.0,
+          "drv_pos": 3.0,
+          "drv_pts_share": 0.6302521008403361,
+          "drv_wins": 0.0
+        },
+        "grayed_defaults": [],
+        "podium_probability": 0.5603,
+        "threshold": 0.432,
+        "predicted_podium": true,
+        "actual_outcome": {
+          "positionOrder": 2,
+          "podium": true,
+          "status": "Finished"
+        },
+        "shap_base_value": 0.1418,
+        "shap_contributions": {
+          "grid": 0.3136,
+          "drv_pos": 0.0566,
+          "drv_pts_share": 0.0501,
+          "drv_wins": -0.0017
+        },
+        "shap_additivity_check": true,
+        "lime_contributions": {
+          "grid": 0.2642,
+          "drv_pos": 0.0687,
+          "drv_pts_share": 0.0532,
+          "drv_wins": -0.0223
+        },
+        "lime_r2_score": 0.822,
+        "pre_race_driver_circuit_facts": {
+          "Driver": "Fernando Alonso",
+          "Circuit": "Circuit de Monaco",
+          "Prior_Circuit_Starts": 18,
+          "Prior_Circuit_Wins": 2,
+          "Prior_Circuit_Podiums": 4,
+          "Prior_Circuit_Best_Finish": 1,
+          "Prior_Circuit_Avg_Finish": 7.72
+        },
+        "pre_race_constructor_facts": {
+          "Constructor": "Aston Martin",
+          "Prior_Constructor_Entries_Recent": 98,
+          "Prior_Constructor_Classified": 83,
+          "Prior_Constructor_Reliability": 0.8469,
+          "Prior_Constructor_Podiums": 5,
+          "Prior_Constructor_Wins": 0
+        },
+        "explanation_fidelity_ok": true,
+        "non_causal_language_ok": true,
+        "grounded_explanation": "For **Fernando Alonso** entering **the 2023 Monaco Grand Prix**, the saved Milestone 1 **Random forest** estimates a podium probability of **56.0%** (`0.560`), which sits at or above the Milestone 1 decision threshold of **43.2%** (`0.432`) and yields a prediction of a **Podium finish** (starting from an average baseline podium rate of **14.2%**).\n\n**Features pushing the model's probability up:** The model places positive weight on starting grid slot P2 (`grid` = 2) (+31.4 percentage points, `SHAP = +0.3136`, `LIME = +0.2642`); and pre-race championship rank P3 (`drv_pos` = 3) (+5.7 percentage points, `SHAP = +0.0566`, `LIME = +0.0687`); and pre-race share of the championship leader's points (`drv_pts_share` = 0.630) (+5.0 percentage points, `SHAP = +0.0501`, `LIME = +0.0532`).\n\n**Features pushing the model's probability down:** The score is pulled downward in the model by prior season wins entering the round (`drv_wins` = 0) (-0.2 percentage points, `SHAP = -0.0017`, `LIME = -0.0223`).\n\n**Model reliance vs. global Milestone 1 patterns:** Globally across validation races in Milestone 1, the model relies most heavily on starting grid position (`grid` mean `|SHAP| = 0.1055`), followed by prior championship position (`drv_pos` = `0.0316`), points share (`drv_pts_share` = `0.0252`), and prior season wins (`drv_wins` = `0.0068`). These SHAP and LIME values reflect statistical patterns that the model relies on to weight each pre-race input.\n\n**Supporting Pre-Race Knowledge Graph Facts:** Prior to `2023-05-28`, **Fernando Alonso** had **18** Grand Prix starts at **Circuit de Monaco** in the Knowledge Graph, recording **2** wins, **4** podiums, a best finish of **P1**, and an average finish of **7.72**. Over recent seasons strictly before `2023-05-28`, constructor **Aston Martin** logged **83** classified finishes out of **98** race entries (a pre-race reliability rate of **84.7%**) with **5** podiums and **0** wins.\n\n**Recorded Historical Outcome:** In the actual race, Fernando Alonso finished **P2** (Podium, status: *Finished*)."
+      },
+      {
+        "id": "POD-04",
+        "scenario": "Predicted Non-Podium (Surprise Podium Winner Starting P5 with 0 Prior Season Wins - False Negative)",
+        "user_query": "Predict Norris at the 2024 Miami Grand Prix.",
+        "passed": true,
+        "driver": "Lando Norris",
+        "race": "2024 Miami Grand Prix",
+        "race_date_cutoff": "2024-05-05",
+        "feature_values": {
+          "grid": 5.0,
+          "drv_pos": 5.0,
+          "drv_pts_share": 0.5272727272727272,
+          "drv_wins": 0.0
+        },
+        "grayed_defaults": [],
+        "podium_probability": 0.2701,
+        "threshold": 0.432,
+        "predicted_podium": false,
+        "actual_outcome": {
+          "positionOrder": 1,
+          "podium": true,
+          "status": "Finished"
+        },
+        "shap_base_value": 0.1418,
+        "shap_contributions": {
+          "grid": 0.0775,
+          "drv_pos": 0.0425,
+          "drv_pts_share": 0.0104,
+          "drv_wins": -0.0021
+        },
+        "shap_additivity_check": true,
+        "lime_contributions": {
+          "grid": 0.2642,
+          "drv_pos": 0.0718,
+          "drv_pts_share": 0.0583,
+          "drv_wins": -0.0232
+        },
+        "lime_r2_score": 0.822,
+        "pre_race_driver_circuit_facts": {
+          "Driver": "Lando Norris",
+          "Circuit": "Miami International Autodrome",
+          "Prior_Circuit_Starts": 2,
+          "Prior_Circuit_Wins": 0,
+          "Prior_Circuit_Podiums": 0,
+          "Prior_Circuit_Best_Finish": 17,
+          "Prior_Circuit_Avg_Finish": 18.0
+        },
+        "pre_race_constructor_facts": {
+          "Constructor": "McLaren",
+          "Prior_Constructor_Entries_Recent": 98,
+          "Prior_Constructor_Classified": 89,
+          "Prior_Constructor_Reliability": 0.9082,
+          "Prior_Constructor_Podiums": 12,
+          "Prior_Constructor_Wins": 0
+        },
+        "explanation_fidelity_ok": true,
+        "non_causal_language_ok": true,
+        "grounded_explanation": "For **Lando Norris** entering **the 2024 Miami Grand Prix**, the saved Milestone 1 **Random forest** estimates a podium probability of **27.0%** (`0.270`), which sits below the Milestone 1 decision threshold of **43.2%** (`0.432`) and yields a prediction of **Not finishing on the podium** (starting from an average baseline podium rate of **14.2%**).\n\n**Features pushing the model's probability up:** The model places positive weight on starting grid slot P5 (`grid` = 5) (+7.8 percentage points, `SHAP = +0.0775`, `LIME = +0.2642`); and pre-race championship rank P5 (`drv_pos` = 5) (+4.2 percentage points, `SHAP = +0.0425`, `LIME = +0.0718`); and pre-race share of the championship leader's points (`drv_pts_share` = 0.527) (+1.0 percentage points, `SHAP = +0.0104`, `LIME = +0.0583`).\n\n**Features pushing the model's probability down:** The score is pulled downward in the model by prior season wins entering the round (`drv_wins` = 0) (-0.2 percentage points, `SHAP = -0.0021`, `LIME = -0.0232`).\n\n**Model reliance vs. global Milestone 1 patterns:** Globally across validation races in Milestone 1, the model relies most heavily on starting grid position (`grid` mean `|SHAP| = 0.1055`), followed by prior championship position (`drv_pos` = `0.0316`), points share (`drv_pts_share` = `0.0252`), and prior season wins (`drv_wins` = `0.0068`). These SHAP and LIME values reflect statistical patterns that the model relies on to weight each pre-race input.\n\n**Supporting Pre-Race Knowledge Graph Facts:** Prior to `2024-05-05`, **Lando Norris** had **2** Grand Prix starts at **Miami International Autodrome** in the Knowledge Graph, recording **0** wins, **0** podiums, a best finish of **P17**, and an average finish of **18.0**. Over recent seasons strictly before `2024-05-05`, constructor **McLaren** logged **89** classified finishes out of **98** race entries (a pre-race reliability rate of **90.8%**) with **12** podiums and **0** wins.\n\n**Recorded Historical Outcome:** In the actual race, Lando Norris finished **P1** (Podium, status: *Finished*)."
+      },
+      {
+        "id": "POD-05",
+        "scenario": "Predicted Non-Podium (Midfield Haas Starter P6 - True Negative)",
+        "user_query": "Predict Nico Hülkenberg at the 2024 British Grand Prix.",
+        "passed": true,
+        "driver": "Nico Hülkenberg",
+        "race": "2024 British Grand Prix",
+        "race_date_cutoff": "2024-07-07",
+        "feature_values": {
+          "grid": 6.0,
+          "drv_pos": 12.0,
+          "drv_pts_share": 0.0590717299578059,
+          "drv_wins": 0.0
+        },
+        "grayed_defaults": [],
+        "podium_probability": 0.1192,
+        "threshold": 0.432,
+        "predicted_podium": false,
+        "actual_outcome": {
+          "positionOrder": 6,
+          "podium": false,
+          "status": "Finished"
+        },
+        "shap_base_value": 0.1418,
+        "shap_contributions": {
+          "grid": 0.0231,
+          "drv_pos": -0.0165,
+          "drv_pts_share": -0.0263,
+          "drv_wins": -0.003
+        },
+        "shap_additivity_check": true,
+        "lime_contributions": {
+          "grid": 0.2644,
+          "drv_pos": -0.015,
+          "drv_pts_share": -0.026,
+          "drv_wins": -0.0196
+        },
+        "lime_r2_score": 0.768,
+        "pre_race_driver_circuit_facts": {
+          "Driver": "Nico Hülkenberg",
+          "Circuit": "Silverstone Circuit",
+          "Prior_Circuit_Starts": 12,
+          "Prior_Circuit_Wins": 0,
+          "Prior_Circuit_Podiums": 0,
+          "Prior_Circuit_Best_Finish": 6,
+          "Prior_Circuit_Avg_Finish": 9.67
+        },
+        "pre_race_constructor_facts": {
+          "Constructor": "Haas F1 Team",
+          "Prior_Constructor_Entries_Recent": 110,
+          "Prior_Constructor_Classified": 93,
+          "Prior_Constructor_Reliability": 0.8455,
+          "Prior_Constructor_Podiums": 0,
+          "Prior_Constructor_Wins": 0
+        },
+        "explanation_fidelity_ok": true,
+        "non_causal_language_ok": true,
+        "grounded_explanation": "For **Nico Hülkenberg** entering **the 2024 British Grand Prix**, the saved Milestone 1 **Random forest** estimates a podium probability of **11.9%** (`0.119`), which sits below the Milestone 1 decision threshold of **43.2%** (`0.432`) and yields a prediction of **Not finishing on the podium** (starting from an average baseline podium rate of **14.2%**).\n\n**Features pushing the model's probability up:** The model places positive weight on starting grid slot P6 (`grid` = 6) (+2.3 percentage points, `SHAP = +0.0231`, `LIME = +0.2644`).\n\n**Features pushing the model's probability down:** The score is pulled downward in the model by pre-race share of the championship leader's points (`drv_pts_share` = 0.059) (-2.6 percentage points, `SHAP = -0.0263`, `LIME = -0.0260`); and pre-race championship rank P12 (`drv_pos` = 12) (-1.7 percentage points, `SHAP = -0.0165`, `LIME = -0.0150`); and prior season wins entering the round (`drv_wins` = 0) (-0.3 percentage points, `SHAP = -0.0030`, `LIME = -0.0196`).\n\n**Model reliance vs. global Milestone 1 patterns:** Globally across validation races in Milestone 1, the model relies most heavily on starting grid position (`grid` mean `|SHAP| = 0.1055`), followed by prior championship position (`drv_pos` = `0.0316`), points share (`drv_pts_share` = `0.0252`), and prior season wins (`drv_wins` = `0.0068`). These SHAP and LIME values reflect statistical patterns that the model relies on to weight each pre-race input.\n\n**Supporting Pre-Race Knowledge Graph Facts:** Prior to `2024-07-07`, **Nico Hülkenberg** had **12** Grand Prix starts at **Silverstone Circuit** in the Knowledge Graph, recording **0** wins, **0** podiums, a best finish of **P6**, and an average finish of **9.67**. Over recent seasons strictly before `2024-07-07`, constructor **Haas F1 Team** logged **93** classified finishes out of **110** race entries (a pre-race reliability rate of **84.5%**) with **0** podiums and **0** wins.\n\n**Recorded Historical Outcome:** In the actual race, Nico Hülkenberg finished **P6** (Not Podium, status: *Finished*)."
+      },
+      {
+        "id": "POD-06",
+        "scenario": "Predicted Non-Podium (P10 Starter with 0 Prior Points - True Negative)",
+        "user_query": "Predict Pierre Gasly at the 2024 Monaco Grand Prix.",
+        "passed": true,
+        "driver": "Pierre Gasly",
+        "race": "2024 Monaco Grand Prix",
+        "race_date_cutoff": "2024-05-26",
+        "feature_values": {
+          "grid": 10.0,
+          "drv_pos": 19.0,
+          "drv_pts_share": 0.0,
+          "drv_wins": 0.0
+        },
+        "grayed_defaults": [],
+        "podium_probability": 0.0217,
+        "threshold": 0.432,
+        "predicted_podium": false,
+        "actual_outcome": {
+          "positionOrder": 10,
+          "podium": false,
+          "status": "+1 Lap"
+        },
+        "shap_base_value": 0.1418,
+        "shap_contributions": {
+          "grid": -0.0677,
+          "drv_pos": -0.0285,
+          "drv_pts_share": -0.0215,
+          "drv_wins": -0.0024
+        },
+        "shap_additivity_check": true,
+        "lime_contributions": {
+          "grid": -0.0541,
+          "drv_pos": -0.0325,
+          "drv_pts_share": -0.0171,
+          "drv_wins": -0.0183
+        },
+        "lime_r2_score": 0.057,
+        "pre_race_driver_circuit_facts": {
+          "Driver": "Pierre Gasly",
+          "Circuit": "Circuit de Monaco",
+          "Prior_Circuit_Starts": 5,
+          "Prior_Circuit_Wins": 0,
+          "Prior_Circuit_Podiums": 0,
+          "Prior_Circuit_Best_Finish": 5,
+          "Prior_Circuit_Avg_Finish": 7.2
+        },
+        "pre_race_constructor_facts": {
+          "Constructor": "Alpine F1 Team",
+          "Prior_Constructor_Entries_Recent": 102,
+          "Prior_Constructor_Classified": 83,
+          "Prior_Constructor_Reliability": 0.8137,
+          "Prior_Constructor_Podiums": 2,
+          "Prior_Constructor_Wins": 0
+        },
+        "explanation_fidelity_ok": true,
+        "non_causal_language_ok": true,
+        "grounded_explanation": "For **Pierre Gasly** entering **the 2024 Monaco Grand Prix**, the saved Milestone 1 **Random forest** estimates a podium probability of **2.2%** (`0.022`), which sits below the Milestone 1 decision threshold of **43.2%** (`0.432`) and yields a prediction of **Not finishing on the podium** (starting from an average baseline podium rate of **14.2%**).\n\n**Features pushing the model's probability up:** None of the four pre-race inputs moved the score above the baseline average for this row.\n\n**Features pushing the model's probability down:** The score is pulled downward in the model by starting grid slot P10 (`grid` = 10) (-6.8 percentage points, `SHAP = -0.0677`, `LIME = -0.0541`); and pre-race championship rank P19 (`drv_pos` = 19) (-2.9 percentage points, `SHAP = -0.0285`, `LIME = -0.0325`); and pre-race share of the championship leader's points (`drv_pts_share` = 0.000) (-2.1 percentage points, `SHAP = -0.0215`, `LIME = -0.0171`); and prior season wins entering the round (`drv_wins` = 0) (-0.2 percentage points, `SHAP = -0.0024`, `LIME = -0.0183`).\n\n**Model reliance vs. global Milestone 1 patterns:** Globally across validation races in Milestone 1, the model relies most heavily on starting grid position (`grid` mean `|SHAP| = 0.1055`), followed by prior championship position (`drv_pos` = `0.0316`), points share (`drv_pts_share` = `0.0252`), and prior season wins (`drv_wins` = `0.0068`). These SHAP and LIME values reflect statistical patterns that the model relies on to weight each pre-race input.\n\n**Supporting Pre-Race Knowledge Graph Facts:** Prior to `2024-05-26`, **Pierre Gasly** had **5** Grand Prix starts at **Circuit de Monaco** in the Knowledge Graph, recording **0** wins, **0** podiums, a best finish of **P5**, and an average finish of **7.2**. Over recent seasons strictly before `2024-05-26`, constructor **Alpine F1 Team** logged **83** classified finishes out of **102** race entries (a pre-race reliability rate of **81.4%**) with **2** podiums and **0** wins.\n\n**Recorded Historical Outcome:** In the actual race, Pierre Gasly finished **P10** (Not Podium, status: *+1 Lap*)."
+      },
+      {
+        "id": "POD-07",
+        "scenario": "Manual Input Validation Refusal (Out-of-Range Grid and Points Share)",
+        "passed": true,
+        "is_valid": false,
+        "refusal_message": "Input validation refused: Value 42 for 'Starting Grid Position (grid)' is outside the valid range [1, 34] (Minimum starting slot is 1 (pole); maximum field size in championship F1 races (excluding Indy 500) is 34 cars.). | Value 1.35 for 'Share of Championship Leader's Points Before Race (drv_pts_share)' is outside the valid range [0.0, 1.0] (Normalized ratio points / max(points) at round - 1 is mathematically bounded in [0.0, 1.0] across all scoring eras.)."
+      },
+      {
+        "id": "POD-08",
+        "scenario": "Manual Input Validation Refusal (Missing Required Feature drv_pos)",
+        "passed": true,
+        "is_valid": false,
+        "refusal_message": "Input validation refused: Missing required feature 'Driver Championship Position Before Race (drv_pos)'. Valid range: [1, 108] (championship rank (1 = leader))."
+      }
+    ]
+  }
+}

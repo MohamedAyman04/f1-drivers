@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "description": "Milestone 3 Driver-and-Race Podium Prediction & Explanation Test Cases (Member 2, integrated with Member 1 entity extraction).",
+    "total_cases": 8
+  },
+  "cases": [
+    {
+      "id": "POD-01",
+      "scenario": "Predicted Podium (Championship Leader on Pole - True Positive)",
+      "user_query": "Predict Max Verstappen at the 2024 Saudi Arabian Grand Prix.",
+      "entities": {"driver": "Max Verstappen", "year": 2024, "race_name": "Saudi Arabian Grand Prix"},
+      "expected_predicted_podium": true
+    },
+    {
+      "id": "POD-02",
+      "scenario": "Predicted Podium (Round 1 Pole Sitter with Median-Imputed Prior Standings - True Positive)",
+      "user_query": "Predict Charles Leclerc at the 2022 Bahrain Grand Prix.",
+      "entities": {"driver": "Charles Leclerc", "year": 2022, "race_name": "Bahrain Grand Prix"},
+      "expected_predicted_podium": true
+    },
+    {
+      "id": "POD-03",
+      "scenario": "Predicted Podium (Front-Row Starter with Strong Championship Share - True Positive)",
+      "user_query": "Predict Fernando Alonso at the 2023 Monaco Grand Prix.",
+      "entities": {"driver": "Fernando Alonso", "year": 2023, "race_name": "Monaco Grand Prix"},
+      "expected_predicted_podium": true
+    },
+    {
+      "id": "POD-04",
+      "scenario": "Predicted Non-Podium (Surprise Podium Winner Starting P5 with 0 Prior Season Wins - False Negative)",
+      "user_query": "Predict Norris at the 2024 Miami Grand Prix.",
+      "entities": {"driver": "Lando Norris", "year": 2024, "race_name": "Miami Grand Prix"},
+      "expected_predicted_podium": false
+    },
+    {
+      "id": "POD-05",
+      "scenario": "Predicted Non-Podium (Midfield Haas Starter P6 - True Negative)",
+      "user_query": "Predict Nico Hülkenberg at the 2024 British Grand Prix.",
+      "entities": {"driver": "Nico Hülkenberg", "year": 2024, "race_name": "British Grand Prix"},
+      "expected_predicted_podium": false
+    },
+    {
+      "id": "POD-06",
+      "scenario": "Predicted Non-Podium (P10 Starter with 0 Prior Points - True Negative)",
+      "user_query": "Predict Pierre Gasly at the 2024 Monaco Grand Prix.",
+      "entities": {"driver": "Pierre Gasly", "year": 2024, "race_name": "Monaco Grand Prix"},
+      "expected_predicted_podium": false
+    },
+    {
+      "id": "POD-07",
+      "scenario": "Manual Input Validation Refusal (Out-of-Range Grid and Points Share)",
+      "user_query": "Manual form input with grid=42, drv_pos=1, drv_pts_share=1.35, drv_wins=0",
+      "manual_inputs": {"grid": 42, "drv_pos": 1, "drv_pts_share": 1.35, "drv_wins": 0},
+      "strict_manual_validation": true,
+      "expected_valid": false
+    },
+    {
+      "id": "POD-08",
+      "scenario": "Manual Input Validation Refusal (Missing Required Feature drv_pos)",
+      "user_query": "Manual form input with grid=3, drv_pos=null, drv_pts_share=0.5, drv_wins=1",
+      "manual_inputs": {"grid": 3, "drv_pos": null, "drv_pts_share": 0.5, "drv_wins": 1},
+      "strict_manual_validation": true,
+      "expected_valid": false
+    }
+  ]
+}
