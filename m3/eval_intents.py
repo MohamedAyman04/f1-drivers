@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from entities import mask  # noqa: E402
 from intents import INTENTS, LABELS, EmbeddingClassifier, HybridClassifier, RuleClassifier  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
@@ -30,8 +31,17 @@ COLS = LABELS + ["clarify"]
 def load(name="intent_testset.csv"):
     with (HERE / "eval" / name).open(encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
-    examples = {x.lower() for d in INTENTS.values() for x in d["examples"]}
-    assert not [r for r in rows if r["question"].lower() in examples], "test item copies an example"
+    # Brief: test questions must be phrased differently from the classifier examples. Compare
+    # masked word sets within the same intent, so "What is X's nationality?" vs "What nationality is Y?"
+    # counts as a copy.
+    examples = [(lab, x, set(mask(x).split())) for lab, d in INTENTS.items() for x in d["examples"]]
+    copies = []
+    for r in rows:
+        q = set(mask(r["question"]).split())
+        for lab, x, w in examples:
+            if lab == r["intent"] and len(q & w) / len(q | w) >= 0.7:
+                copies.append(f"{r['question']!r} ~ {x!r}")
+    assert not copies, "test items too close to examples:\n" + "\n".join(copies)
     counts = Counter(r["intent"] for r in rows)
     assert name != "intent_testset.csv" or (len(rows) >= 50 and all(counts[lab] >= 4 for lab in LABELS)), counts
     return rows

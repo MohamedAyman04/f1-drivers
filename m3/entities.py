@@ -23,12 +23,8 @@ from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "raw"
 
-# Surname-only match picks one driver without asking only if that driver has at
-# least this many times the race entries of every other driver with the surname
-# (Lewis 356 vs Duncan Hamilton 5). Max vs Jos Verstappen, Michael vs Ralf
-# Schumacher stay ambiguous. The choice is reported in Extraction.assumed.
-# ponytail: entry-count prior; a per-session "you meant X" memory would be nicer.
-DOMINANCE_RATIO = 5
+# A name shared by several entities is narrowed only by facts in the message (season,
+# team); if more than one candidate is left the user is asked, never guessed for.
 
 # Words that appear in questions and must never be read as a name.
 STOP = set("""
@@ -45,6 +41,9 @@ walker ward wolf ram era shadow duncan
 """.split())
 
 ORDINAL = r"(\d{1,2})(?:st|nd|rd|th)?"
+WORD_ORD = {w: i for i, w in enumerate("first second third fourth fifth sixth seventh eighth ninth tenth "
+                                        "eleventh twelfth thirteenth fourteenth fifteenth sixteenth "
+                                        "seventeenth eighteenth nineteenth twentieth".split(), 1)}
 
 
 def norm(text: str) -> str:
@@ -65,7 +64,6 @@ class Gazetteer:
     alias: dict[str, set[tuple[str, int]]]      # normalised alias -> {(type, id)}
     names: dict[tuple[str, int], str]           # (type, id) -> display name
     years: dict[tuple[str, int], set[int]]      # (type, id) -> seasons active
-    entries: dict[int, int]                     # driverId -> race entries
     teams: dict[int, set[int]]                  # driverId -> constructorIds raced for
     gp_names: dict[int, str]                    # fake id -> Grand Prix name
     year_min: int
@@ -89,7 +87,7 @@ CIRCUIT_GENERIC = {"circuit", "international", "grand", "prix", "autodromo", "de
 @lru_cache(maxsize=1)
 def gazetteer() -> Gazetteer:
     alias: dict[str, set] = defaultdict(set)
-    names, years, entries, teams = {}, defaultdict(set), defaultdict(int), defaultdict(set)
+    names, years, teams = {}, defaultdict(set), defaultdict(set)
 
     def add(a: str, key: tuple[str, int]) -> None:
         a = norm(a)
@@ -111,7 +109,6 @@ def gazetteer() -> Gazetteer:
         did, cid = int(r["driverId"]), int(r["constructorId"])
         years[("driver", did)].add(y)
         years[("constructor", cid)].add(y)
-        entries[did] += 1
         teams[did].add(cid)
 
     constructor_aliases = set()
@@ -150,7 +147,7 @@ def gazetteer() -> Gazetteer:
         add(a, ("grand_prix", gp_ids[n]))
 
     all_years = set(race_year.values())
-    return Gazetteer(dict(alias), names, dict(years), dict(entries), dict(teams), gp_names,
+    return Gazetteer(dict(alias), names, dict(years), dict(teams), gp_names,
                      min(all_years), max(all_years))
 
 
@@ -158,7 +155,6 @@ def gazetteer() -> Gazetteer:
 class Extraction:
     entities: dict
     ambiguous: list = field(default_factory=list)   # [{'mention','type','candidates':[{id,name}]}]
-    assumed: list = field(default_factory=list)     # human-readable notes on tie-breaks
     spans: list = field(default_factory=list)       # [(start_tok, end_tok, type)] for masking
 
 
@@ -199,6 +195,10 @@ def _prediction_fields(text: str) -> dict:
         or re.search(rf"\b{ORDINAL}\s+on the grid\b", t)
     if m:
         out["grid"] = int(m.group(1))
+    else:
+        m = re.search(r"(?:start(?:s|ing)?|qualif(?:ied|ies|ying)|lin(?:es|ing) up)\s+(?:in\s+)?(" + "|".join(WORD_ORD) + r")\b", t)
+        if m:
+            out["grid"] = WORD_ORD[m.group(1)]
     m = re.search(rf"\bp?{ORDINAL}\s+in the (?:drivers'?\s+)?(?:championship|standings)\b", t)
     if m:
         out["champ_pos"] = int(m.group(1))
@@ -220,7 +220,7 @@ def extract(text: str) -> Extraction:
     window = set(range(season_range[0], season_range[1] + 1)) if season_range else ({season} if season else None)
 
     found: dict[str, list] = defaultdict(list)
-    ambiguous, assumed, spans = [], [], []
+    ambiguous, spans = [], []
     i = 0
     while i < len(tokens):
         for n in range(min(6, len(tokens) - i), 0, -1):
@@ -228,8 +228,8 @@ def extract(text: str) -> Extraction:
             keys = g.alias.get(mention)
             if not keys:
                 continue
-            # Prefer the type that is not a driver when a mention is shared across types
-            # only through a full alias ("monaco" circuit vs nothing); otherwise group by type.
+            # A mention shared across types (4 aliases, e.g. "villeneuve" driver/circuit) is read
+            # by this priority; within one type, several candidates are narrowed or asked about.
             by_type = defaultdict(list)
             for k in keys:
                 by_type[k[0]].append(k)
@@ -238,13 +238,6 @@ def extract(text: str) -> Extraction:
             if len(cands) > 1 and window:                      # narrow by season
                 active = [k for k in cands if g.years.get(k, set()) & window]
                 cands = active or cands
-            if len(cands) > 1 and typ == "driver":
-                cands.sort(key=lambda k: -g.entries.get(k[1], 0))
-                top, rest = g.entries.get(cands[0][1], 0), g.entries.get(cands[1][1], 0)
-                if top >= DOMINANCE_RATIO * max(rest, 1):
-                    assumed.append(f'"{mention}" read as {g.names[cands[0]]} '
-                                   f"({top} race entries vs {rest} for the next driver with that name)")
-                    cands = cands[:1]
             if len(cands) > 1:
                 ambiguous.append({"mention": mention, "type": typ, "candidates": [
                     {"id": k[1], "name": g.names.get(k) or g.gp_names[k[1]]} for k in sorted(cands)]})
@@ -277,7 +270,7 @@ def extract(text: str) -> Extraction:
         "season_range": season_range,
         **_prediction_fields(text),
     }
-    return Extraction(entities, ambiguous, assumed, spans)
+    return Extraction(entities, ambiguous, spans)
 
 
 def mask(text: str) -> str:
@@ -352,10 +345,15 @@ def resolve_choice(reply: str, candidates: list[dict]) -> dict | None:
     return None
 
 
+PREDICTION_FIELDS = ("grid", "champ_pos", "wins", "points")
+
+
 def merge(cache: dict | None, new: dict) -> dict:
     """Follow-up merge: keep cached slots, replace only the slots the new message names.
     A season replaces a range and vice versa ("And in 2020?" after "2014-2021")."""
-    out = dict(cache or {})
+    # Pre-race numbers (grid, standings) belong to one message only: a "pole" in an earlier
+    # question must not pre-fill a later prediction form.
+    out = {k: v for k, v in (cache or {}).items() if k not in PREDICTION_FIELDS}
     for k, v in new.items():
         if v in (None, [], {}):
             continue
@@ -364,6 +362,10 @@ def merge(cache: dict | None, new: dict) -> dict:
             out["season_range"] = None
         elif k == "season_range":
             out["season"] = None
+        elif k == "grand_prix":           # the venue is one slot: a GP replaces a cached circuit
+            out["circuits"] = []
+        elif k == "circuits":
+            out["grand_prix"] = None
     for k in ("drivers", "constructors", "circuits"):
         out.setdefault(k, [])
     out.setdefault("grand_prix", None)
@@ -377,8 +379,9 @@ if __name__ == "__main__":
         return [d["id"] for d in ex.entities[k]]
 
     ex = extract("How many wins did Hamilton have at Silverstone before 2020?")
-    assert ids(ex, "drivers") == [1] and ids(ex, "circuits") == [9], ex
-    assert ex.entities["season_range"] == [1950, 2019] and ex.assumed
+    assert ids(ex, "circuits") == [9] and ex.entities["season_range"] == [1950, 2019], ex
+    assert [c["name"] for c in ex.ambiguous[0]["candidates"]] == ["Lewis Hamilton", "Duncan Hamilton"]
+    assert ids(extract("How many wins did Hamilton have at Silverstone in 2019?"), "drivers") == [1]
     ex = extract("How many points did Schumacher score?")
     assert ex.ambiguous and len(ex.ambiguous[0]["candidates"]) == 3
     assert "Schumacher" in clarification("driver_performance", ex)
@@ -415,6 +418,10 @@ if __name__ == "__main__":
     f = extract("And in 2020?")
     assert clarification("driver_performance", f, merge(c, f.entities)) is None
     assert clarification("out_of_scope", extract("capital of France")) is None
+    assert "grid" not in merge(merge({}, extract("Leclerc on pole in 2022").entities), extract("Predict Leclerc").entities)
+    venue = merge({"circuits": [{"id": 9, "name": "Silverstone Circuit"}], "season": 2019}, extract("the German GP").entities)
+    assert venue["circuits"] == [] and venue["grand_prix"] == "German Grand Prix"
+    assert extract("Russell at Austria 2024 starting fourth").entities["grid"] == 4
     m = merge(c, extract("What about Norris?").entities)
     assert m["season"] == 2019 and m["drivers"][0]["name"] == "Lando Norris"
     cands = extract("Schumacher").ambiguous[0]["candidates"]

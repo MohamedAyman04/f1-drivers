@@ -36,7 +36,7 @@ INTENTS: dict[str, dict] = {
                        "in a season, a range of seasons, at a circuit, or over a career.",
         "examples": [
             "How many podiums did Leclerc get in 2022?",
-            "How many points did Hamilton score in 2019?",
+            "Hamilton's points total for the 2019 season",
             "How many races did Alonso win in his career?",
             "What is Verstappen's average finishing position at Zandvoort?",
             "How many wins did Hamilton have at Silverstone before 2020?",
@@ -46,9 +46,6 @@ INTENTS: dict[str, dict] = {
             "How often did Bottas finish in the points in 2018?",
             "Senna victories at Monaco",
             "Give me Piastri's podium count for 2024",
-            "How did Webber do in 2010?",
-            "What did he score in 2018?",
-            "Leclerc win tally in 2019",
         ],
     },
     "constructor_performance": {
@@ -65,8 +62,6 @@ INTENTS: dict[str, dict] = {
             "How many mechanical failures did Haas suffer in 2019?",
             "How many victories has Ferrari taken at Monza?",
             "Which constructor finished the most races in 2020?",
-            "How often did Toro Rosso cars break down in 2015?",
-            "Did Ferrari win more than McLaren in 2007?",
         ],
     },
     "head_to_head": {
@@ -82,8 +77,6 @@ INTENTS: dict[str, dict] = {
             "How many times did Alonso finish in front of Massa?",
             "Russell versus Hamilton in shared races",
             "Who had the upper hand, Gasly or Ocon?",
-            "Button against Perez, who did better?",
-            "Who was faster on race day, Massa or Raikkonen?",
         ],
     },
     "race_facts": {
@@ -115,9 +108,6 @@ INTENTS: dict[str, dict] = {
             "What was Leclerc's qualifying position in Baku 2021?",
             "Which driver lost the most positions during the 2020 Austrian GP?",
             "How many poles did Ferrari get in 2022?",
-            "Who started first at the 2019 Austrian GP?",
-            "Who climbed the most positions from the start in Baku 2017?",
-            "How often did Ocon reach the last qualifying session in 2021?",
         ],
     },
     "pit_stops": {
@@ -132,7 +122,6 @@ INTENTS: dict[str, dict] = {
             "On which lap did Leclerc pit in the 2022 Monaco Grand Prix?",
             "Who made the most pit stops in the 2019 German GP?",
             "Was it a one-stop or two-stop race for Norris at Silverstone 2023?",
-            "Average number of stops at Monza in 2019",
         ],
     },
     "season_history": {
@@ -148,10 +137,6 @@ INTENTS: dict[str, dict] = {
             "Which rookies made their debut in 2019?",
             "Final drivers' standings for 2012",
             "Who switched constructors before the 2022 season?",
-            "Who claimed the title in 2005?",
-            "How many rounds were there in 2010?",
-            "Which drivers joined a different team for 2018?",
-            "Who was top of the table in 2017?",
         ],
     },
     "driver_profile": {
@@ -349,7 +334,6 @@ class RuleClassifier:
     def scores(self, text: str) -> dict[str, float]:
         t = norm(text)
         s = {lab: sum(w for p, w in pats if re.search(p, t)) for lab, pats in RULES.items()}
-        s["out_of_scope"] = sum(w for p, w in OOS_PATTERNS if re.search(p, t))
         return s
 
     def classify(self, text: str, prev: str | None = None) -> Intent:
@@ -358,8 +342,6 @@ class RuleClassifier:
             return g
         s = self.scores(text)
         if not any(s.values()):
-            if prev:
-                return Intent(prev, "follow_up", s, "no intent keyword; kept cached intent")
             return Intent(None, "clarify", s, "no intent keyword matched")
         # Entity-count cues break ties between families that share words.
         e = extract(text).entities
@@ -376,7 +358,7 @@ class RuleClassifier:
         (best, b), (_, b2) = ranked[0], ranked[1]
         if b == b2:
             return Intent(None, "clarify", s, f"tie between {ranked[0][0]} and {ranked[1][0]}")
-        return Intent(best, "out_of_scope" if best == "out_of_scope" else "ok", s)
+        return Intent(best, "ok", s)
 
 
 # ---------------------------------------------------------------- embedding similarity
@@ -456,6 +438,8 @@ if __name__ == "__main__":
     assert r.classify("How many wins did Hamilton have at Silverstone before 2020?").label == "driver_performance"
     assert r.classify("And in 2020?", prev="driver_performance").status == "follow_up"
     assert r.classify("What about Norris?", prev="head_to_head").label == "head_to_head"
+    # A new question with no rule keyword is not a follow-up: rules defer (hybrid -> embedding).
+    assert r.classify("Who stood on the top step at the 2005 Japanese GP?", prev="driver_performance").status == "clarify"
     assert r.classify("What's the capital of Peru?", prev="race_facts").label == "out_of_scope"
     assert r.classify("Hamilton's salary in 2020").label == "out_of_scope"
     assert r.classify("Predict Norris at the 2024 Miami Grand Prix").label == "podium_prediction"

@@ -12,7 +12,7 @@ python m3/eval_intents.py    # both classifiers on the labelled sets -> m3/eval/
 | `m3/intents.py` | label set + example phrasings, `RuleClassifier`, `EmbeddingClassifier`, `HybridClassifier`, `DEPLOYED` |
 | `m3/entities.py` | gazetteer from `data/raw/*.csv`, `extract()`, `clarification()`, `resolve_choice()`, `merge()`, `mask()` |
 | `m3/eval/intent_testset.csv` | 66 labelled questions (≥5 per intent, follow-ups, ambiguous names, OOS) |
-| `m3/eval/intent_heldout.csv` | 22 more, written before the improvement round (generalisation check) |
+| `m3/eval/intent_heldout.csv` | 22 more, written before the improvement round (generalisation check); two items later reworded to pass the near-copy check |
 | `m3/eval/results/` | `intent_report.md` (accuracy, confusion matrices, errors, sweep) + 3 confusion PNGs |
 
 ## API for the rest of the pipeline
@@ -23,14 +23,14 @@ from m3.entities import extract, clarification, resolve_choice, merge
 
 clf = DEPLOYED()                                   # load once (embedding model ~90 MB, cached by HF)
 intent = clf.classify(msg, prev=cache_intent)      # Intent(label, status, scores, reason)
-ex = extract(msg)                                  # Extraction(entities, ambiguous, assumed, spans)
+ex = extract(msg)                                  # Extraction(entities, ambiguous, spans)
 entities = merge(cache_entities, ex.entities)      # follow-up: replace only the slots the message names
 ask = clarification(intent.label, ex, entities)    # str -> ask the user; None -> run the template
 ```
 
 * `intent.status`: `ok`, `follow_up` (cached intent kept), `out_of_scope` (refuse, no trace), `clarify` (`label is None`: ask the user to rephrase).
-* `entities`: `drivers`/`constructors`/`circuits` are lists of `{id, name}` with the graph's `driverId`/`constructorId`/`circuitId`; `grand_prix` is the race name exactly as in `Race.name`; `season` (int) or `season_range` ([from, to], inclusive). A race is `grand_prix` + `season`, or `circuit` + `season`. Prediction messages may also carry `grid`, `champ_pos`, `wins` and `points`.
-* `ex.ambiguous` → `clarification()` lists the candidates; pass the user's reply to `resolve_choice(reply, candidates)`. `ex.assumed` holds notes like *"hamilton" read as Lewis Hamilton (356 entries vs 5)*; show them in the trace.
+* `entities`: `drivers`/`constructors`/`circuits` are lists of `{id, name}` with the graph's `driverId`/`constructorId`/`circuitId`; `grand_prix` is the race name exactly as in `Race.name`; `season` (int) or `season_range` ([from, to], inclusive). A race is `grand_prix` + `season`, or `circuit` + `season`. Prediction messages may also carry `grid`, `champ_pos`, `wins` and `points`; these belong to that message only and are never carried over by `merge`.
+* `ex.ambiguous` → `clarification()` lists the candidates; pass the user's reply to `resolve_choice(reply, candidates)`.
 
 ## Intents (10)
 
@@ -53,35 +53,44 @@ ask = clarification(intent.label, ex, entities)    # str -> ask the user; None -
 
 **Rule-based.** Weighted regexes per intent (keywords plus paraphrase families such as "fare against", "finished higher", "took victory", "dropped … spots"), plus entity-count cues: two drivers push toward head_to_head; a team and no driver push toward constructor_performance. A tie or no keyword means it asks the user to rephrase.
 
-**Embedding similarity.** `sentence-transformers/all-MiniLM-L6-v2` (22M parameters, 384-dimensional, CPU, no API key). It's trained for sentence similarity, so it suits short paraphrased questions. The ~100 example phrasings are embedded once at start-up. A message goes to the intent of its nearest example by cosine similarity. If the best score is below **0.45**, or within **0.03** of the second-best intent, it asks the user to rephrase. Both thresholds were fixed before evaluation; the sweep in the report is a sensitivity check, not tuning. Names and years are **masked** before embedding ("how many wins did *driver* have at *circuit* in *year*"), so similarity reflects the question's shape rather than who it's about.
+**Embedding similarity.** `sentence-transformers/all-MiniLM-L6-v2` (22M parameters, 384-dimensional, CPU, no API key). It's trained for sentence similarity, so it suits short paraphrased questions. The 96 example phrasings are embedded once at start-up. A message goes to the intent of its nearest example by cosine similarity. If the best score is below **0.45**, or within **0.03** of the second-best intent, it asks the user to rephrase. Both thresholds were fixed before evaluation; the sweep in the report is a sensitivity check, not tuning. Names and years are **masked** before embedding ("how many wins did *driver* have at *circuit* in *year*"), so similarity reflects the question's shape rather than who it's about.
 
 **Shared rules (identical in both classifiers):**
-- **Follow-ups.** If, after masking, a message has nothing left but filler ("And in 2020?", "What about Norris?", "2021?"), it names no new intent, so the cached one is kept.
+- **Follow-ups.** If, after masking, a message has nothing left but filler ("And in 2020?", "What about Norris?", "2021?"), it names no new intent, so the cached one is kept. This is the *only* follow-up rule; a new question that merely lacks a rule keyword is not treated as a follow-up (the hybrid then asks the embedding classifier).
 - **Out of scope.** Decided only by rules: either no F1 entity or term at all, or an explicit topic the graph has no data for. **Similarity alone never marks a message out of scope.** When the nearest example is OOS but no rule confirms it, the classifier asks the user to rephrase.
 
 ## Results and the deployed classifier
 
 | Classifier | Test (66) first run | Test final | Rephrase rate | Held-out (22) first run | Held-out final |
 |---|---|---|---|---|---|
-| rule-based | 71.2% | 97.0% | 1.5% | 59.1% | 72.7% |
-| embedding (masked) | 74.2% | 84.8% | 9.1% | 63.6% | 63.6% |
-| **hybrid: rules, embedding fallback** | — | **98.5%** | 0.0% | — | **81.8%** |
+| rule-based | 71.2% | 97.0% | 1.5% | 59.1% | 68.2% |
+| embedding (masked) | 74.2% | 81.8% | 9.1% | 63.6% | 63.6% |
+| **hybrid: rules, embedding fallback** | — | **98.5%** | 0.0% | — | **77.3%** |
 
-Confusion matrices: `m3/eval/results/confusion_*.png`. Ablation: the embedding classifier **without masking** scores 59.1% on the first run and 68.2% on the final run, against 74.2% and 84.8% with masking.
+"First run" held-out numbers are on the set before two items were reworded (see the review note below). Confusion matrices: `m3/eval/results/confusion_*.png`. Ablation: the embedding classifier **without masking** scores 59.1% on the first run and 66.7% on the final run, against 74.2% and 81.8% with masking.
 
 **Deployed: the hybrid.** Rules decide when they match; the embedding classifier only handles messages the rules can't decide.
-- The test-set figures for the rules are optimistic, because the improvement round added paraphrase patterns for the families that failed there. The held-out set is the honest comparison: rules 72.7%, embedding 63.6%, hybrid 81.8%.
+- The test-set figures for the rules are optimistic, because the improvement round added paraphrase patterns for the families that failed there. The held-out set is the honest comparison: rules 68.2%, embedding 63.6%, hybrid 77.3%.
 - Rules are precise when they match. Their errors are mostly "no keyword", which is exactly where the embedding classifier generalises, so the fallback recovers those without adding wrong labels.
-- Most of the embedding classifier's own errors are the margin rule asking to rephrase between related intents (driver_performance vs head_to_head, pit_stops vs driver_performance). The sweep shows margin 0 would reach 92.4%, but the margin is a required safety check, so it stays.
+- Most of the embedding classifier's own errors are the margin rule asking to rephrase between related intents (driver_performance vs head_to_head, pit_stops vs driver_performance). The sweep shows margin 0 would reach 87.9%, but the margin is a required safety check, so it stays.
 - Both parts are local and deterministic: no API key, no network after the first model download, milliseconds per message.
 
 ## Improvements made (before → after)
 
 1. **Masking entities before embedding:** 59.1% → 74.2% (first run). Without it, "Hamilton" pulled questions toward whichever examples mentioned Hamilton.
 2. **Out-of-scope decided by rules in a shared gate.** The first embedding run sent "What's Lewis Hamilton's favourite food?" to driver_profile and "safety car in the 2016 Brazilian GP" to race_facts. The fix makes an explicit unanswerable topic decide out of scope for both classifiers, and also adds other sports (Tour de France) to the non-F1 list.
-3. **Paraphrase families in the rules** ("against / fare / finished higher", "dependable / retire", "started first / starting slot / climber", "topped the table", "represent", "going to … podium", "forecast / estimate / the model"). Prediction cues also got a higher weight, because future tense has to beat the fact keywords it appears with ("podium at the … GP"). Rules: 71.2% → 97.0% on the test set and 59.1% → 72.7% on the held-out set.
-4. **Ten more embedding examples** (pronouns, informal phrasing) for the weakest intents: 74.2% → 84.8% on the test set. Held-out stayed at 63.6%.
-5. **Entity disambiguation without guessing.** A surname shared by several drivers is first narrowed by season ("Schumacher in 2021" → Mick) and by a team named in the message ("Verstappen at Red Bull" → Max). If several still remain, the user is asked ("Schumacher" → Michael, Ralf or Mick). The only automatic choice is when one driver has at least 5× the race entries of every namesake (Lewis vs Duncan Hamilton), and that choice is reported in `assumed`.
+3. **Paraphrase families in the rules** ("against / fare / finished higher", "dependable / retire", "started first / starting slot / climber", "topped the table", "represent", "going to … podium", "forecast / estimate / the model"). Prediction cues also got a higher weight, because future tense has to beat the fact keywords it appears with ("podium at the … GP"). Rules: 71.2% → 97.0% on the test set and 59.1% → 68.2% on the held-out set.
+4. **Entity disambiguation without guessing.** A name shared by several drivers is narrowed only by facts in the message: the season ("Schumacher in 2021" → Mick) and a team ("Verstappen at Red Bull" → Max). If several candidates remain, the user is asked ("Schumacher" → Michael, Ralf or Mick; "Hamilton" with no season → Lewis or Duncan).
+
+### Review corrections (after the first commit)
+
+A review against the brief found these mistakes, now fixed:
+
+- **Test leakage into the classifier examples.** The improvement round had added 15 embedding examples modelled on test-set failures, two of them near-verbatim ("Who started first at the … GP?"). That breaks the brief's rule that test questions are phrased differently from the examples and inflated the embedding score. All 15 were removed (embedding test 84.8% → 81.8%, hybrid held-out 81.8% → 77.3%). The eval script now *enforces* the rule: a test question whose masked word set overlaps an example of the same intent by ≥ 70% (Jaccard) fails the run. It caught one example mirroring the brief's follow-up "How many points did he score in 2019?" (example reworded) and two held-out items (reworded).
+- **Guessing on shared surnames.** A "5× more race entries" rule picked Lewis over Duncan Hamilton automatically. The brief says to ask, so the rule was removed.
+- **Inconsistent follow-ups.** The rule classifier also kept the cached intent when a *new* question had no keyword; the embedding classifier did not. That rule hid new questions and blocked the hybrid's fallback. Follow-ups are now decided only by the shared gate.
+- **Stale cache slots.** `merge` carried a `grid: 1` from "qualify on pole" into a later prediction form, and kept an old circuit after a new Grand Prix was named. Pre-race fields are now per message, and Grand Prix / circuit are one venue slot.
+- Word ordinals ("starting fourth") are now read as a grid slot; dead out-of-scope scoring code and a misleading comment were removed.
 
 Honesty note: I read the held-out errors after the first improvement round. The prediction-weight change in (3) fixed a test-set error that has the same root cause as one held-out item, so that held-out item isn't fully independent.
 
@@ -100,6 +109,8 @@ Honesty note: I read the held-out errors after the first improvement round. The 
 ## Remaining limitations
 
 - The held-out set still fails on two out-of-scope questions that use F1-sounding words but no listed topic ("Who will **win** the next election?", "How much **fuel** does an F1 car carry?"). The generic words "win" and "F1" count as F1 signal, and no rule names elections or fuel. An LLM check or a larger OOS example bank would be needed to catch these without hurting in-domain recall.
-- The rules are a hand-maintained list. New phrasings ("top step", "stronger") fall through to the embedding classifier, which often asks to rephrase instead of answering.
+- The rules are a hand-maintained list. New phrasings ("top step", "stronger") fall through to the embedding classifier, which often asks to rephrase instead of answering. Rules can also be misled by a strong keyword in the wrong family: "**Number** of Grand Prix victories for Rosberg" goes to driver_profile (car *number*), "Which **country** is Magnussen from?" goes to race_facts (circuit location).
+- Four aliases name both a driver and a circuit ("Villeneuve", "Gilles Villeneuve", "Rodriguez", "Galvez"); they are read as the driver. "Circuit Gilles Villeneuve" in full still matches the circuit.
+- Strict disambiguation means "Hamilton" or "Verstappen" without a season or team always triggers a question.
 - A follow-up that only names one driver replaces the whole driver list. In a head-to-head, "What about Bottas?" therefore leaves one driver, and the user gets asked for the second.
 - There's no fuzzy matching for typos ("Verstapen") and no relative time ("last season").
