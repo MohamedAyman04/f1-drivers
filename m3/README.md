@@ -30,6 +30,7 @@ ask = clarification(intent.label, ex, entities)    # str -> ask the user; None -
 
 * `intent.status`: `ok`, `follow_up` (cached intent kept), `out_of_scope` (refuse, no trace), `clarify` (`label is None`: ask the user to rephrase).
 * `entities`: `drivers`/`constructors`/`circuits` are lists of `{id, name}` with the graph's `driverId`/`constructorId`/`circuitId`; `grand_prix` is the race name exactly as in `Race.name`; `season` (int) or `season_range` ([from, to], inclusive). A race is `grand_prix` + `season`, or `circuit` + `season`. Prediction messages may also carry `grid`, `champ_pos`, `wins` and `points`; these belong to that message only and are never carried over by `merge`.
+* **Cache contract (agreed design):** `merge` keeps every cached slot and replaces only the slots the new message names, as the brief requires (so "How many points did **he** score in 2019?" reuses the cached driver). The merged dict can therefore hold slots left over from an earlier question, for example a Silverstone circuit still cached when the user asks "How many times did Leclerc qualify on pole in 2022?". **Each template must read only the slots its intent needs** (the "Entities required" column below, plus that intent's optional filters) and must not filter on every non-empty slot.
 * `ex.ambiguous` → `clarification()` lists the candidates; pass the user's reply to `resolve_choice(reply, candidates)`.
 
 ## Intents (10)
